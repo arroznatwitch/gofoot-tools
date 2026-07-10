@@ -177,7 +177,7 @@
             display: inline-block;
         }
         .status-completo { background-color: rgba(0, 205, 78, 0.12); color: #00cd4e; border: 1px solid rgba(0,205,78,0.3); }
-        .status-incompleto { background-color: rgba(230, 129, 0, 0.12); color: #e1a300; border: 1px solid rgba(230,129,0,0.35); }
+        .status-incompleto { background-color: rgba(248, 81, 73, 0.12); color: #ff7b72; border: 1px solid rgba(248, 81, 73, 0.4); }
 
         .btn-delete, .btn-edit {
             background: none;
@@ -343,6 +343,7 @@
                         <th>Nação</th>
                         <th>Clube</th>
                         <th>Idade</th>
+                        <th>Pé</th>
                         <th>Posição</th>
                         <th>Geral</th>
                         <th>Técnica</th>
@@ -350,6 +351,7 @@
                         <th>Defesa</th>
                         <th>Físico</th>
                         <th>Mental</th>
+                        <th>Valor de Mercado</th>
                         <th>Status</th>
                         <th></th>
                     </tr>
@@ -363,6 +365,7 @@
         <div class="bottom-bar">
             <button class="btn btn-danger" onclick="limparTabela()">Limpar tabela</button>
             <button class="btn btn-primary" onclick="exportarDados()">Exportar completos (.json)</button>
+            <button class="btn" style="background-color: #d29922; color: white; border: none;" onclick="exportarDadosFiltrados()">Exportar filtrados (.json)</button>
             <button class="btn" style="background-color: #1f6feb; color: white; border: none;" onclick="document.getElementById('importInput').click()">Importar (.json)</button>
             <input type="file" id="importInput" style="display: none;" accept=".json" onchange="importarDados(event)">
         </div>
@@ -375,16 +378,24 @@
                 <div class="form-group"><label>Nome</label><input type="text" id="addNome" class="form-control" required></div>
                 <div class="form-group">
                     <label>Nação</label>
-                    <select id="addNat" class="form-control" required>
+                    <select id="addNat" class="form-control">
                         <option value="">A carregar países...</option>
                     </select>
                     <div class="hint-text">Lista carregada via API de países (restcountries.com).</div>
                 </div>
-                <div class="form-group"><label>Clube</label><input type="text" id="addClube" class="form-control" required></div>
+                <div class="form-group"><label>Clube</label><input type="text" id="addClube" class="form-control"></div>
                 <div class="form-row">
                     <div class="form-group"><label>Idade</label><input type="number" id="addIdade" class="form-control" required></div>
-                    <div class="form-group"><label>Posições (Ex: ST, LW, AMC)</label><input type="text" id="addPos" class="form-control" placeholder="Ex: ST, LW, AMC" required></div>
+                    <div class="form-group">
+                        <label>Pé Preferido</label>
+                        <select id="addPe" class="form-control" required>
+                            <option value="Direito">Direito</option>
+                            <option value="Esquerdo">Esquerdo</option>
+                            <option value="Ambidestro">Ambidestro</option>
+                        </select>
+                    </div>
                 </div>
+                <div class="form-group"><label>Posições (Ex: ST, LW, AMC)</label><input type="text" id="addPos" class="form-control" placeholder="Ex: ST, LW, AMC" required></div>
                 <div class="form-row">
                     <div class="form-group"><label>Técnica (1 a 99)</label><input type="number" id="addTec" class="form-control" min="1" max="99" required></div>
                     <div class="form-group"><label>Ataque (1 a 99)</label><input type="number" id="addAta" class="form-control" min="1" max="99" required></div>
@@ -394,6 +405,7 @@
                     <div class="form-group"><label>Físico (1 a 99)</label><input type="number" id="addFis" class="form-control" min="1" max="99" required></div>
                 </div>
                 <div class="form-group"><label>Mental (1 a 99)</label><input type="number" id="addMen" class="form-control" min="1" max="99" required></div>
+                <div class="form-group"><label>Valor de Mercado</label><input type="text" id="addValor" class="form-control" placeholder="Ex: €85M, 10M"></div>
 
                 <input type="hidden" id="editandoId" value="">
 
@@ -409,9 +421,6 @@
     <script src="fm_players.js"></script>
 
     <script>
-        // ------------------------------------------------------------------
-        // Estado global
-        // ------------------------------------------------------------------
         let listaJogadores = (window.FM_PLAYERS_DATA || []).map(marcarStatus);
         let listaFiltrada = listaJogadores.slice();
         let paginaAtual = 1;
@@ -424,7 +433,6 @@
         let mapaEdicoes = {};
         try { mapaEdicoes = JSON.parse(localStorage.getItem(CHAVE_EDITS) || "{}"); } catch (e) { mapaEdicoes = {}; }
 
-        // Categorias de "Best Rating" (FM) -> bucket usado no cálculo de Geral
         const TAG_CATEGORIA = {
             GK: "gk",
             CB: "def", FB: "def", WB: "def",
@@ -438,11 +446,25 @@
 
         function marcarStatus(j) {
             j._id = proximoId++;
-            j.completo = !!(j.tec && j.ata && j.def && j.fis && j.men);
+            
+            // VERIFICAÇÃO INTEGRAL DE TODOS OS CAMPOS DO JOGADOR
+            j.completo = !!(
+                j.n && j.n.trim() !== "" &&
+                j.nat && j.nat.trim() !== "" && j.nat !== "-" &&
+                j.c && j.c.trim() !== "" && j.c !== "Sem clube" && j.c !== "-" &&
+                j.a && 
+                j.pe && j.pe !== "-" &&
+                j.p && j.p.trim() !== "" &&
+                j.tec && j.ata && j.def && j.fis && j.men &&
+                j.v && j.v !== "-" && j.v.trim() !== ""
+            );
+
             j._nLower = (j.n || "").toLowerCase();
             j._natLower = (j.nat || "").toLowerCase();
             j._cLower = (j.c || "").toLowerCase();
             j._pLower = (j.p || "").toLowerCase();
+            if (!j.pe) j.pe = "-";
+            if (!j.v) j.v = "-";
             return j;
         }
 
@@ -458,9 +480,6 @@
             });
         });
 
-        // ------------------------------------------------------------------
-        // Persistência automática (localStorage)
-        // ------------------------------------------------------------------
         function carregarJogadoresManuais() {
             try {
                 const salvos = JSON.parse(localStorage.getItem(CHAVE_MANUAIS) || "[]");
@@ -468,7 +487,7 @@
                     j._manual = true;
                     listaJogadores.push(marcarStatus(j));
                 });
-            } catch (e) { /* localStorage vazio ou corrompido, ignora */ }
+            } catch (e) { }
         }
 
         function salvarJogadoresManuaisNoStorage() {
@@ -477,7 +496,7 @@
         }
 
         function salvarEdicaoNoStorage(j) {
-            mapaEdicoes[gerarIdentidade(j)] = { tec: j.tec, ata: j.ata, def: j.def, fis: j.fis, men: j.men };
+            mapaEdicoes[gerarIdentidade(j)] = { tec: j.tec, ata: j.ata, def: j.def, fis: j.fis, men: j.men, pe: j.pe, v: j.v };
             localStorage.setItem(CHAVE_EDITS, JSON.stringify(mapaEdicoes));
         }
 
@@ -485,14 +504,11 @@
             const salva = mapaEdicoes[gerarIdentidade(j)];
             if (salva) {
                 j.tec = salva.tec; j.ata = salva.ata; j.def = salva.def;
-                j.fis = salva.fis; j.men = salva.men;
+                j.fis = salva.fis; j.men = salva.men; j.pe = salva.pe || "-"; j.v = salva.v || "-";
             }
             return j;
         }
 
-        // ------------------------------------------------------------------
-        // API de Países (restcountries.com)
-        // ------------------------------------------------------------------
         function carregarPaises() {
             const select = document.getElementById("addNat");
             fetch("https://restcountries.com/v3.1/all?fields=name,translations")
@@ -510,7 +526,6 @@
                     input.placeholder = "Digite a nação manualmente";
                     input.style.marginTop = "8px";
                     select.after(input);
-                    select.required = false;
                 });
         }
 
@@ -518,12 +533,9 @@
             const select = document.getElementById("addNat");
             const fallback = document.getElementById("addNatFallback");
             if (fallback && fallback.value.trim()) return fallback.value.trim();
-            return select.value;
+            return select.value || "-";
         }
 
-        // ------------------------------------------------------------------
-        // Overall dinâmico
-        // ------------------------------------------------------------------
         function obterClasseCor(nota) {
             if (!nota) return "score-fifa-red";
             if (nota >= 80) return "score-fifa-green";
@@ -539,7 +551,6 @@
             const fis = parseInt(j.fis) || 0;
             const men = parseInt(j.men) || 0;
 
-            // Jogadores vindos do CSV já têm categoria derivada do "Best Rating" da FM.
             const categoria = j.catg || null;
             const posicoes = (j.p || "").toLowerCase();
 
@@ -551,13 +562,9 @@
             if (ehAtacante) return Math.round(((tec * 3) + (ata * 3) + (fis * 2) + (men * 2)) / 10);
             if (ehDefesa) return Math.round(((def * 3) + (fis * 3) + (men * 2) + tec + ata) / 10);
 
-            // Meio-campo (padrão)
             return Math.round(((tec * 3) + (men * 3) + (ata * 2) + def + fis) / 10);
         }
 
-        // ------------------------------------------------------------------
-        // Filtros, busca e paginação (otimizado para grandes volumes)
-        // ------------------------------------------------------------------
         function aplicarFiltros() {
             const termo = document.getElementById("searchInput").value.toLowerCase().trim();
             const soIncompletos = document.getElementById("soIncompletos").checked;
@@ -613,7 +620,7 @@
             const tbody = document.getElementById("playerTableBody");
 
             if (dados.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="13" style="text-align:center; color:#8b949e; padding: 24px;">Nenhum jogador encontrado.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="15" style="text-align:center; color:#8b949e; padding: 24px;">Nenhum jogador encontrado.</td></tr>`;
                 return;
             }
 
@@ -624,9 +631,10 @@
                 return `
                     <tr>
                         <td style="font-weight: 600;">${j.n || "-"}</td>
-                        <td style="color: #8b949e;">${j.nat ? j.nat.toUpperCase() : "-"}</td>
+                        <td style="color: #8b949e;">${j.nat && j.nat !== "-" ? j.nat.toUpperCase() : "-"}</td>
                         <td>${j.c || "-"}</td>
                         <td>${j.a || "-"}</td>
+                        <td style="color: #8b949e; font-size: 13px;">${j.pe || "-"}</td>
                         <td style="text-transform: uppercase; font-size: 13px; color: #8b949e;">${j.p || "-"}</td>
                         <td class="badge-score ${obterClasseCor(j.ov)}">${j.ov || "-"}</td>
                         <td class="badge-score ${obterClasseCor(j.tec)}">${j.tec || "-"}</td>
@@ -634,6 +642,7 @@
                         <td class="badge-score ${obterClasseCor(j.def)}">${j.def || "-"}</td>
                         <td class="badge-score ${obterClasseCor(j.fis)}">${j.fis || "-"}</td>
                         <td class="badge-score ${obterClasseCor(j.men)}">${j.men || "-"}</td>
+                        <td style="font-weight: 500; color: #58a6ff;">${j.v || "-"}</td>
                         <td><span class="status-badge ${statusClass}">${statusTxt}</span></td>
                         <td>
                             <button class="btn-edit" onclick="abrirModal(${j._id})" title="Editar">✎</button>
@@ -645,9 +654,6 @@
             tbody.innerHTML = linhas;
         }
 
-        // ------------------------------------------------------------------
-        // Modal: adicionar / editar
-        // ------------------------------------------------------------------
         function abrirModal(id) {
             const modal = document.getElementById("playerModal");
             const titulo = document.getElementById("modalTitulo");
@@ -661,21 +667,23 @@
                 titulo.textContent = "Editar Jogador";
                 btnSalvar.textContent = "Guardar Alterações";
                 document.getElementById("addNome").value = j.n || "";
-                document.getElementById("addClube").value = j.c || "";
+                document.getElementById("addClube").value = j.c && j.c !== "-" ? j.c : "";
                 document.getElementById("addIdade").value = j.a || "";
+                document.getElementById("addPe").value = j.pe && j.pe !== "-" ? j.pe : "Direito";
                 document.getElementById("addPos").value = j.p || "";
                 document.getElementById("addTec").value = j.tec || "";
                 document.getElementById("addAta").value = j.ata || "";
                 document.getElementById("addDef").value = j.def || "";
                 document.getElementById("addFis").value = j.fis || "";
                 document.getElementById("addMen").value = j.men || "";
+                document.getElementById("addValor").value = j.v && j.v !== "-" ? j.v : "";
 
                 const select = document.getElementById("addNat");
                 const fallback = document.getElementById("addNatFallback");
                 if ([...select.options].some(o => o.value === j.nat)) {
                     select.value = j.nat;
                 } else if (fallback) {
-                    fallback.value = j.nat || "";
+                    fallback.value = j.nat && j.nat !== "-" ? j.nat : "";
                 }
             } else {
                 titulo.textContent = "Adicionar Novo Jogador";
@@ -698,14 +706,16 @@
             const dadosForm = {
                 n: document.getElementById("addNome").value,
                 nat: obterNacaoSelecionada(),
-                c: document.getElementById("addClube").value,
+                c: document.getElementById("addClube").value.trim() || "-",
                 a: parseInt(document.getElementById("addIdade").value),
+                pe: document.getElementById("addPe").value,
                 p: document.getElementById("addPos").value.toLowerCase().replace(/\s/g, ""),
                 tec: parseInt(document.getElementById("addTec").value),
                 ata: parseInt(document.getElementById("addAta").value),
                 def: parseInt(document.getElementById("addDef").value),
                 fis: parseInt(document.getElementById("addFis").value),
-                men: parseInt(document.getElementById("addMen").value)
+                men: parseInt(document.getElementById("addMen").value),
+                v: document.getElementById("addValor").value.trim() || "-"
             };
 
             if (idEditando) {
@@ -739,16 +749,13 @@
         }
 
         function limparTabela() {
-            if (confirm("Tem certeza que deseja apagar todos os jogadores exibidos? (Jogadores editados/salvos guardados no navegador não serão apagados e voltarão a preencher-se ao reimportar o mesmo .csv)")) {
+            if (confirm("Tem certeza que deseja apagar todos os jogadores exibidos?")) {
                 listaJogadores = [];
                 salvarJogadoresManuaisNoStorage();
                 aplicarFiltros();
             }
         }
 
-        // ------------------------------------------------------------------
-        // Importação de CSV (base de dados grande, otimizada com PapaParse + worker)
-        // ------------------------------------------------------------------
         function importarCsv(event) {
             const arquivo = event.target.files[0];
             if (!arquivo) return;
@@ -776,11 +783,13 @@
 
                         const jogador = {
                             n: linha.Name,
-                            nat: linha.Nation || "",
-                            c: linha.Club && linha.Club !== "-" ? linha.Club : "Sem clube",
+                            nat: linha.Nation || "-",
+                            c: linha.Club && linha.Club !== "-" ? linha.Club : "-",
                             a: parseInt(linha.Age) || null,
                             p: linha.Position || "",
                             catg: TAG_CATEGORIA[tag] || null,
+                            pe: "-",
+                            v: "-",
                             tec: null, ata: null, def: null, fis: null, men: null
                         };
 
@@ -803,13 +812,10 @@
             event.target.value = "";
         }
 
-        // ------------------------------------------------------------------
-        // Exportar / Importar .js (apenas jogadores completos, formato compatível)
-        // ------------------------------------------------------------------
         function exportarDados() {
             const completos = listaJogadores.filter(j => j.completo);
             if (completos.length === 0) {
-                alert("Não há jogadores completos para exportar. Edite pelo menos um jogador com todos os atributos preenchidos.");
+                alert("Não há jogadores completos para exportar.");
                 return;
             }
 
@@ -825,6 +831,35 @@
             const link = document.createElement("a");
             link.href = url;
             link.download = "fm_players.json";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        }
+
+        function exportarDadosFiltrados() {
+            const filtradosCompletos = listaFiltrada.filter(j => j.completo);
+            
+            if (filtradosCompletos.length === 0) {
+                alert("Não há jogadores COMPLETOS exibidos no filtro atual para exportar.");
+                return;
+            }
+
+            const listaPronta = filtradosCompletos.map(j => {
+                const { _id, _nLower, _natLower, _cLower, _pLower, _manual, catg, completo, ...limpo } = j;
+                limpo.ov = calcularOverallDinamico(j);
+                return limpo;
+            });
+
+            const conteudoJSON = JSON.stringify(listaPronta, null, 4);
+            const blob = new Blob([conteudoJSON], { type: "application/json;charset=utf-8" });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement("a");
+            link.href = url;
+            
+            const termoBusca = document.getElementById("searchInput").value.trim().toLowerCase().replace(/[^a-z0-9]/g, '_');
+            link.download = termoBusca ? `fm_players_filtrado_${termoBusca}.json` : "fm_players_filtrado.json";
+            
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
