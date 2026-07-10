@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Jogadores</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="welcome-box">
+            Essa ferramenta foi criada para a criação de patchs para o jogo GoFoot.
+        </div>
+
+        <div class="top-bar">
+            <input type="text" id="searchInput" class="search-box" placeholder="Pesquisar jogador, nação, clube ou posição...">
+            <button class="btn" onclick="abrirModal()">+ Adicionar Jogador</button>
+            <button class="btn btn-info" onclick="document.getElementById('csvInput').click()">Importar Jogadores(.csv)</button>
+            <input type="file" id="csvInput" style="display: none;" accept=".csv" onchange="importarCsv(event)">
+        </div>
+
+        <div class="filter-bar">
+            <label><input type="checkbox" id="soIncompletos" onchange="aplicarFiltros()"> Mostrar apenas incompletos</label>
+            <span class="stats-pill" id="statTotal">Total: 0</span>
+            <span class="stats-pill" id="statCompletos">Completos: 0</span>
+            <span class="stats-pill" id="statIncompletos">Incompletos: 0</span>
+        </div>
+
+        <div class="table-container">
+            <div class="loading-overlay" id="loadingOverlay">
+                <div class="spinner"></div>
+                <div id="loadingText">Importando base de dados...</div>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Jogador</th>
+                        <th>Nação</th>
+                        <th>Clube</th>
+                        <th>Idade</th>
+                        <th>Pé</th>
+                        <th>Posição</th>
+                        <th>Geral</th>
+                        <th>Técnica</th>
+                        <th>Ataque</th>
+                        <th>Defesa</th>
+                        <th>Físico</th>
+                        <th>Mental</th>
+                        <th>Valor de Mercado</th>
+                        <th>Status</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="playerTableBody"></tbody>
+            </table>
+        </div>
+
+        <div class="pagination-bar" id="paginationBar"></div>
+
+        <div class="bottom-bar">
+            <button class="btn btn-danger" onclick="limparTabela()">Limpar tabela</button>
+            <button class="btn btn-primary" onclick="exportarDados()">Exportar todos (.json)</button>
+            <button class="btn" style="background-color: #d29922; color: white; border: none;" onclick="exportarDadosFiltrados()">Exportar filtrados (.json)</button>
+            <button class="btn" style="background-color: #1f6feb; color: white; border: none;" onclick="document.getElementById('importInput').click()">Importar (.json)</button>
+            <input type="file" id="importInput" style="display: none;" accept=".json" onchange="importarDados(event)">
+        </div>
+    </div>
+
+    <div id="playerModal" class="modal">
+        <div class="modal-content">
+            <h3 id="modalTitulo">Adicionar Novo Jogador</h3>
+            <form id="playerForm" onsubmit="salvarJogador(event)">
+                <div class="form-group"><label>Nome</label><input type="text" id="addNome" class="form-control" required></div>
+                <div class="form-group">
+                    <label>Nação</label>
+                    <select id="addNat" class="form-control">
+                        <option value="">A carregar países...</option>
+                    </select>
+                </div>
+                <div class="form-group"><label>Clube</label><input type="text" id="addClube" class="form-control"></div>
+                <div class="form-row">
+                    <div class="form-group"><label>Idade</label><input type="number" id="addIdade" class="form-control" required></div>
+                    <div class="form-group">
+                        <label>Pé Preferido</label>
+                        <select id="addPe" class="form-control" required>
+                            <option value="Direito">Direito</option>
+                            <option value="Esquerdo">Esquerdo</option>
+                            <option value="Ambidestro">Ambidestro</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group"><label>Posições (Ex: ST, LW, AMC)</label><input type="text" id="addPos" class="form-control" placeholder="Ex: ST, LW, AMC" required></div>
+                <div class="form-row">
+                    <div class="form-group"><label>Técnica (1 a 99)</label><input type="number" id="addTec" class="form-control" min="1" max="99" required></div>
+                    <div class="form-group"><label>Ataque (1 a 99)</label><input type="number" id="addAta" class="form-control" min="1" max="99" required></div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group"><label>Defesa (1 a 99)</label><input type="number" id="addDef" class="form-control" min="1" max="99" required></div>
+                    <div class="form-group"><label>Físico (1 a 99)</label><input type="number" id="addFis" class="form-control" min="1" max="99" required></div>
+                </div>
+                <div class="form-group"><label>Mental (1 a 99)</label><input type="number" id="addMen" class="form-control" min="1" max="99" required></div>
+                <div class="form-group"><label>Valor de Mercado</label><input type="text" id="addValor" class="form-control" placeholder="Ex: €85M, 10M"></div>
+
+                <input type="hidden" id="editandoId" value="">
+
+                <div class="modal-actions">
+                    <button type="button" class="btn" onclick="fecharModal()">Cancelar</button>
+                    <button type="submit" class="btn btn-primary" id="btnSalvarModal">Salvar Jogador</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+    <script src="fm_players.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
