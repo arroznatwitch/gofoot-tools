@@ -364,7 +364,7 @@
 
         <div class="bottom-bar">
             <button class="btn btn-danger" onclick="limparTabela()">Limpar tabela</button>
-            <button class="btn btn-primary" onclick="exportarDados()">Exportar completos (.json)</button>
+            <button class="btn btn-primary" onclick="exportarDados()">Exportar todos (.json)</button>
             <button class="btn" style="background-color: #d29922; color: white; border: none;" onclick="exportarDadosFiltrados()">Exportar filtrados (.json)</button>
             <button class="btn" style="background-color: #1f6feb; color: white; border: none;" onclick="document.getElementById('importInput').click()">Importar (.json)</button>
             <input type="file" id="importInput" style="display: none;" accept=".json" onchange="importarDados(event)">
@@ -377,13 +377,13 @@
             <form id="playerForm" onsubmit="salvarJogador(event)">
                 <div class="form-group"><label>Nome</label><input type="text" id="addNome" class="form-control" required></div>
                 <div class="form-group">
-                    <label>Nação</label>
+                    <label>Nação </label>
                     <select id="addNat" class="form-control">
                         <option value="">A carregar países...</option>
                     </select>
                     <div class="hint-text">Lista carregada via API de países (restcountries.com).</div>
                 </div>
-                <div class="form-group"><label>Clube</label><input type="text" id="addClube" class="form-control"></div>
+                <div class="form-group"><label>Clube </label><input type="text" id="addClube" class="form-control"></div>
                 <div class="form-row">
                     <div class="form-group"><label>Idade</label><input type="number" id="addIdade" class="form-control" required></div>
                     <div class="form-group">
@@ -405,7 +405,7 @@
                     <div class="form-group"><label>Físico (1 a 99)</label><input type="number" id="addFis" class="form-control" min="1" max="99" required></div>
                 </div>
                 <div class="form-group"><label>Mental (1 a 99)</label><input type="number" id="addMen" class="form-control" min="1" max="99" required></div>
-                <div class="form-group"><label>Valor de Mercado</label><input type="text" id="addValor" class="form-control" placeholder="Ex: €85M, 10M"></div>
+                <div class="form-group"><label>Valor de Mercado </label><input type="text" id="addValor" class="form-control" placeholder="Ex: €85M, 10M"></div>
 
                 <input type="hidden" id="editandoId" value="">
 
@@ -543,7 +543,6 @@
             if (nota >= 50) return "score-fifa-yellow";
             return "score-fifa-red";
         }
-
         function calcularOverallDinamico(j) {
             const tec = parseInt(j.tec) || 0;
             const ata = parseInt(j.ata) || 0;
@@ -551,12 +550,12 @@
             const fis = parseInt(j.fis) || 0;
             const men = parseInt(j.men) || 0;
 
-            const categoria = j.catg || null;
-            const posicoes = (j.p || "").toLowerCase();
+            const category = j.catg || null;
+            const positions = (j.p || "").toLowerCase();
 
-            const ehGoleiro = categoria === "gk" || posicoes.includes("gk") || posicoes.includes("gr");
-            const ehAtacante = categoria === "atk" || posicoes.includes("st") || posicoes.includes("lw") || posicoes.includes("rw") || posicoes.includes("cf") || posicoes.includes("fwd");
-            const ehDefesa = categoria === "def" || posicoes.includes("cb") || posicoes.includes("lb") || posicoes.includes("rb") || posicoes.includes("lwb") || posicoes.includes("rwb");
+            const ehGoleiro = category === "gk" || positions.includes("gk") || positions.includes("gr");
+            const ehAtacante = category === "atk" || positions.includes("st") || positions.includes("lw") || positions.includes("rw") || positions.includes("cf") || positions.includes("fwd");
+            const ehDefesa = category === "def" || positions.includes("cb") || positions.includes("lb") || positions.includes("rb") || positions.includes("lwb") || positions.includes("rwb");
 
             if (ehGoleiro) return Math.round(((def * 3) + (fis * 3) + (men * 3) + tec) / 10);
             if (ehAtacante) return Math.round(((tec * 3) + (ata * 3) + (fis * 2) + (men * 2)) / 10);
@@ -813,13 +812,12 @@
         }
 
         function exportarDados() {
-            const completos = listaJogadores.filter(j => j.completo);
-            if (completos.length === 0) {
-                alert("Não há jogadores completos para exportar.");
+            if (listaJogadores.length === 0) {
+                alert("Não há jogadores para exportar.");
                 return;
             }
 
-            const listaPronta = completos.map(j => {
+            const listaPronta = listaJogadores.map(j => {
                 const { _id, _nLower, _natLower, _cLower, _pLower, _manual, catg, completo, ...limpo } = j;
                 limpo.ov = calcularOverallDinamico(j);
                 return limpo;
@@ -838,14 +836,12 @@
         }
 
         function exportarDadosFiltrados() {
-            const filtradosCompletos = listaFiltrada.filter(j => j.completo);
-            
-            if (filtradosCompletos.length === 0) {
-                alert("Não há jogadores COMPLETOS exibidos no filtro atual para exportar.");
+            if (listaFiltrada.length === 0) {
+                alert("Não há jogadores exibidos no filtro atual para exportar.");
                 return;
             }
 
-            const listaPronta = filtradosCompletos.map(j => {
+            const listaPronta = listaFiltrada.map(j => {
                 const { _id, _nLower, _natLower, _cLower, _pLower, _manual, catg, completo, ...limpo } = j;
                 limpo.ov = calcularOverallDinamico(j);
                 return limpo;
