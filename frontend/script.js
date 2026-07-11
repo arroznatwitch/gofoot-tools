@@ -210,9 +210,14 @@ const OVER_WEIGHTS = {
 
 // Determina o grupo de posição (G/Z/L/V/M/PD/PE/CA) a partir apenas da
 // primeira posição que o jogo/CSV entrega para o jogador.
+const GRUPOS_VALIDOS = ["G", "Z", "L", "V", "M", "PD", "PE", "CA"];
+
 function posicaoGrupo(j) {
     const primeira = (j.p || "").split(",")[0].trim().toUpperCase();
     if (!primeira) return null;
+
+    // Já vem como grupo canónico (ex: reimportação de um export nosso) — usa direto.
+    if (GRUPOS_VALIDOS.includes(primeira)) return primeira;
 
     // Códigos curtos (estilo EA FC: gk, cb, lb, rb, lwb, rwb, cdm, cm, lm, rm, cam, lw, rw, cf, st)
     const EA_MAP = {
@@ -556,6 +561,45 @@ function importarCsv(event) {
 }
 
 const PE_LETRA = { "Direito": "D", "Esquerdo": "E", "Ambidestro": "A" };
+const PE_LETRA_INVERSO = { "D": "Direito", "E": "Esquerdo", "A": "Ambidestro" };
+
+// Converte um jogador vindo de um export no formato do GoFoot (nome, idade,
+// TEC/ATA/..., posicao como letra) de volta para o formato interno do painel
+// (n, a, tec/ata/..., p). Se já vier no formato interno, devolve como está.
+// Nota: o export do GoFoot não guarda o clube (não faz parte do formato do
+// jogo), por isso essa informação perde-se numa reimportação.
+function converterImportGoFoot(j) {
+    if (j.n !== undefined && j.p !== undefined) return j; // já é formato interno
+
+    const interno = {
+        n: j.nome || "",
+        nat: j.nacionalidade || "-",
+        c: "-",
+        a: j.idade || null,
+        pe: PE_LETRA_INVERSO[j.pe] || "-",
+        p: j.posicao || "",
+        v: (j.valor !== null && j.valor !== undefined) ? j.valor : "-",
+        tal: j.TAL ?? null,
+    };
+
+    if (j.posicao === "G") {
+        interno.ref = j.REF ?? null;
+        interno.pos_gk = j.POS ?? null;
+        interno.aer = j.AER ?? null;
+        interno.sai = j.SAI ?? null;
+        interno.men = j.MEN ?? null;
+        interno.tec = null; interno.ata = null; interno.def = null; interno.fis = null;
+    } else {
+        interno.tec = j.TEC ?? null;
+        interno.ata = j.ATA ?? null;
+        interno.def = j.DEF ?? null;
+        interno.fis = j.FIS ?? null;
+        interno.men = j.MEN ?? null;
+        interno.ref = null; interno.pos_gk = null; interno.aer = null; interno.sai = null;
+    }
+
+    return interno;
+}
 
 // Monta o objeto exatamente no formato de import do jogo GoFoot.
 // Só os campos que o painel realmente controla saem preenchidos; tudo o resto
@@ -655,8 +699,10 @@ function importarDados(event) {
     const leitor = new FileReader();
     leitor.onload = function (e) {
         try {
-            const dadosCarregados = JSON.parse(e.target.result);
-            if (!Array.isArray(dadosCarregados)) throw new Error("formato inválido");
+            const bruto = JSON.parse(e.target.result);
+            if (!Array.isArray(bruto)) throw new Error("formato inválido");
+
+            const dadosCarregados = bruto.map(converterImportGoFoot);
 
             dadosCarregados.forEach(j => {
                 j._manual = true;
@@ -667,7 +713,7 @@ function importarDados(event) {
             listaJogadores = listaJogadores.concat(dadosCarregados);
             salvarJogadoresManuaisNoStorage();
             aplicarFiltros();
-            alert(`Sucesso! ${dadosCarregados.length} jogadores importados para o painel.`);
+            alert(`Sucesso! ${dadosCarregados.length} jogadores importados para o painel. (Nota: o clube não vem guardado no export do GoFoot, por isso fica em branco — tens de o preencher outra vez se precisares.)`);
         } catch (erro) {
             alert("Não foi possível ler o ficheiro .json. Certifique-se de que é um export compatível.");
         }
