@@ -563,18 +563,34 @@ function importarCsv(event) {
 const PE_LETRA = { "Direito": "D", "Esquerdo": "E", "Ambidestro": "A" };
 const PE_LETRA_INVERSO = { "D": "Direito", "E": "Esquerdo", "A": "Ambidestro" };
 
+// Nome do clube -> slug (minúsculas, sem acentos/espaços) para usar como team_id.
+function slugifyClube(nomeClube) {
+    if (!nomeClube || nomeClube === "-") return null;
+    return nomeClube
+        .normalize("NFD").replace(/[̀-ͯ]/g, "")
+        .toLowerCase()
+        .trim()
+        .replace(/[^a-z0-9]+/g, "_")
+        .replace(/^_+|_+$/g, "");
+}
+
+// Slug -> nome legível (aproximado; não recupera capitalização exacta de
+// clubes com nomes irregulares tipo "AC Milan", mas serve para o essencial).
+function deslugifyClube(slug) {
+    if (!slug) return "-";
+    return slug.split("_").map(p => p.charAt(0).toUpperCase() + p.slice(1)).join(" ");
+}
+
 // Converte um jogador vindo de um export no formato do GoFoot (nome, idade,
 // TEC/ATA/..., posicao como letra) de volta para o formato interno do painel
 // (n, a, tec/ata/..., p). Se já vier no formato interno, devolve como está.
-// Nota: o export do GoFoot não guarda o clube (não faz parte do formato do
-// jogo), por isso essa informação perde-se numa reimportação.
 function converterImportGoFoot(j) {
     if (j.n !== undefined && j.p !== undefined) return j; // já é formato interno
 
     const interno = {
         n: j.nome || "",
         nat: j.nacionalidade || "-",
-        c: "-",
+        c: deslugifyClube(j.team_id),
         a: j.idade || null,
         pe: PE_LETRA_INVERSO[j.pe] || "-",
         p: j.posicao || "",
@@ -619,7 +635,7 @@ function montarExportGoFoot(j) {
         TAL: j.tal ?? null,
         salario: null,
         valor: (j.v !== null && j.v !== undefined && j.v !== "-" && !isNaN(j.v)) ? Number(j.v) : null,
-        team_id: null,
+        team_id: slugifyClube(j.c),
         energia: 100,
         lesionado: null,
         diasLesao: null,
@@ -662,7 +678,10 @@ function montarExportGoFoot(j) {
 }
 
 function baixarJSON(lista, nomeArquivo) {
-    const conteudoJSON = JSON.stringify(lista, null, 4);
+    // Sem indentação: para listas grandes (dezenas/centenas de milhares de
+    // jogadores) a indentação sozinha pode multiplicar o tamanho do ficheiro
+    // por 3-4x, o que dificulta reimportar depois.
+    const conteudoJSON = JSON.stringify(lista);
     const blob = new Blob([conteudoJSON], { type: "application/json;charset=utf-8" });
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
@@ -696,27 +715,38 @@ function importarDados(event) {
     const arquivo = event.target.files[0];
     if (!arquivo) return;
 
+    const overlay = document.getElementById("loadingOverlay");
+    const texto = document.getElementById("loadingText");
+    overlay.style.display = "flex";
+    texto.textContent = "Importando ficheiro .json...";
+
     const leitor = new FileReader();
     leitor.onload = function (e) {
-        try {
-            const bruto = JSON.parse(e.target.result);
-            if (!Array.isArray(bruto)) throw new Error("formato inválido");
+        // setTimeout dá tempo ao overlay de aparecer antes do parse pesado bloquear a aba
+        setTimeout(() => {
+            try {
+                const bruto = JSON.parse(e.target.result);
+                if (!Array.isArray(bruto)) throw new Error("o ficheiro não contém uma lista de jogadores");
 
-            const dadosCarregados = bruto.map(converterImportGoFoot);
+                // Nota: ao contrário do "Adicionar Jogador" manual, uma importação em massa
+                // não é gravada jogador-a-jogador no localStorage — para milhares de
+                // jogadores isso excederia a quota do browser (uns 5-10MB) e ficaria cada
+                // vez mais lento. Fica só na sessão atual; exporta de novo para guardar.
+                const dadosCarregados = bruto.map(converterImportGoFoot).map(marcarStatus);
 
-            dadosCarregados.forEach(j => {
-                j._manual = true;
-                marcarStatus(j);
-                salvarEdicaoNoStorage(j);
-            });
-
-            listaJogadores = listaJogadores.concat(dadosCarregados);
-            salvarJogadoresManuaisNoStorage();
-            aplicarFiltros();
-            alert(`Sucesso! ${dadosCarregados.length} jogadores importados para o painel. (Nota: o clube não vem guardado no export do GoFoot, por isso fica em branco — tens de o preencher outra vez se precisares.)`);
-        } catch (erro) {
-            alert("Não foi possível ler o ficheiro .json. Certifique-se de que é um export compatível.");
-        }
+                listaJogadores = listaJogadores.filter(j => j._manual).concat(dadosCarregados);
+                aplicarFiltros();
+                overlay.style.display = "none";
+                alert(`Sucesso! ${dadosCarregados.length.toLocaleString("pt-PT")} jogadores importados para o painel.`);
+            } catch (erro) {
+                overlay.style.display = "none";
+                alert("Não foi possível ler o ficheiro .json: " + erro.message);
+            }
+        }, 50);
+    };
+    leitor.onerror = function () {
+        overlay.style.display = "none";
+        alert("Erro ao ler o ficheiro — pode ser demasiado grande para o browser conseguir abrir.");
     };
     leitor.readAsText(arquivo);
     event.target.value = "";
