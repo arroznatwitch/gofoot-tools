@@ -32,28 +32,60 @@
                 <div class="spinner"></div>
                 <div id="loadingText">Importando base de dados...</div>
             </div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Jogador</th>
-                        <th>Nação</th>
-                        <th>Clube</th>
-                        <th>Idade</th>
-                        <th>Pé</th>
-                        <th>Posição</th>
-                        <th>Geral</th>
-                        <th>Técnica</th>
-                        <th>Ataque</th>
-                        <th>Defesa</th>
-                        <th>Físico</th>
-                        <th>Mental</th>
-                        <th>Valor de Mercado</th>
-                        <th>Status</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody id="playerTableBody"></tbody>
-            </table>
+
+            <div id="wrapLinha">
+                <h3 class="table-titulo">Jogadores de Linha</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Jogador</th>
+                            <th>Nação</th>
+                            <th>Clube</th>
+                            <th>Idade</th>
+                            <th>Pé</th>
+                            <th>Posição</th>
+                            <th>Geral</th>
+                            <th>Técnica</th>
+                            <th>Ataque</th>
+                            <th>Defesa</th>
+                            <th>Físico</th>
+                            <th>Mental</th>
+                            <th>Talento</th>
+                            <th>Valor de Mercado</th>
+                            <th>Status</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="playerTableBody"></tbody>
+                </table>
+            </div>
+
+            <div id="wrapGoleiro" style="margin-top:24px;">
+                <h3 class="table-titulo">Guarda-Redes</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Jogador</th>
+                            <th>Nação</th>
+                            <th>Clube</th>
+                            <th>Idade</th>
+                            <th>Pé</th>
+                            <th>Posição</th>
+                            <th>Geral</th>
+                            <th>Reflexos</th>
+                            <th>Posicionamento</th>
+                            <th>Jogo Aéreo</th>
+                            <th>Saída de Bola</th>
+                            <th>Mental</th>
+                            <th>Talento</th>
+                            <th>Valor de Mercado</th>
+                            <th>Status</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="gkTableBody"></tbody>
+                </table>
+            </div>
         </div>
 
         <div class="pagination-bar" id="paginationBar"></div>
@@ -90,17 +122,35 @@
                         </select>
                     </div>
                 </div>
-                <div class="form-group"><label>Posições (Ex: ST, LW, AMC)</label><input type="text" id="addPos" class="form-control" placeholder="Ex: ST, LW, AMC" required></div>
-                <div class="form-row">
-                    <div class="form-group"><label>Técnica (1 a 99)</label><input type="number" id="addTec" class="form-control" min="1" max="99" required></div>
-                    <div class="form-group"><label>Ataque (1 a 99)</label><input type="number" id="addAta" class="form-control" min="1" max="99" required></div>
+                <div class="form-group"><label>Posições (Ex: ST, LW, AMC ou GK)</label><input type="text" id="addPos" class="form-control" placeholder="Ex: ST, LW, AMC" required oninput="atualizarCamposPorPosicao()"></div>
+
+                <div id="camposLinha">
+                    <div class="form-row">
+                        <div class="form-group"><label>Técnica (1 a 99)</label><input type="number" id="addTec" class="form-control" min="1" max="99"></div>
+                        <div class="form-group"><label>Ataque (1 a 99)</label><input type="number" id="addAta" class="form-control" min="1" max="99"></div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group"><label>Defesa (1 a 99)</label><input type="number" id="addDef" class="form-control" min="1" max="99"></div>
+                        <div class="form-group"><label>Físico (1 a 99)</label><input type="number" id="addFis" class="form-control" min="1" max="99"></div>
+                    </div>
                 </div>
-                <div class="form-row">
-                    <div class="form-group"><label>Defesa (1 a 99)</label><input type="number" id="addDef" class="form-control" min="1" max="99" required></div>
-                    <div class="form-group"><label>Físico (1 a 99)</label><input type="number" id="addFis" class="form-control" min="1" max="99" required></div>
+
+                <div id="camposGoleiro" style="display:none;">
+                    <div class="form-row">
+                        <div class="form-group"><label>Reflexos (1 a 99)</label><input type="number" id="addRef" class="form-control" min="1" max="99"></div>
+                        <div class="form-group"><label>Posicionamento (1 a 99)</label><input type="number" id="addPosGk" class="form-control" min="1" max="99"></div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group"><label>Jogo Aéreo (1 a 99)</label><input type="number" id="addAer" class="form-control" min="1" max="99"></div>
+                        <div class="form-group"><label>Saída de Bola (1 a 99)</label><input type="number" id="addSai" class="form-control" min="1" max="99"></div>
+                    </div>
                 </div>
-                <div class="form-group"><label>Mental (1 a 99)</label><input type="number" id="addMen" class="form-control" min="1" max="99" required></div>
-                <div class="form-group"><label>Valor de Mercado</label><input type="text" id="addValor" class="form-control" placeholder="Ex: €85M, 10M"></div>
+
+                <div class="form-row">
+                    <div class="form-group"><label>Mental (1 a 99)</label><input type="number" id="addMen" class="form-control" min="1" max="99" required></div>
+                    <div class="form-group"><label>Talento / Potencial (1 a 99)</label><input type="number" id="addTalento" class="form-control" min="1" max="99" required></div>
+                </div>
+                <div class="form-group"><label>Valor de Mercado (€)</label><input type="number" id="addValor" class="form-control" min="0" placeholder="Ex: 85000000" required></div>
 
                 <input type="hidden" id="editandoId" value="">
 

@@ -127,6 +127,14 @@
             position: relative;
         }
 
+        .table-titulo {
+            color: #8b949e;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin: 0 0 8px;
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
