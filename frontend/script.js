@@ -28,7 +28,7 @@ const ISO_NACOES = {
     "thailand":"th","tailândia":"th","tunisia":"tn","tunísia":"tn","turkiye":"tr","turkey":"tr","turquia":"tr",
     "ukraine":"ua","ucrânia":"ua","united arab emirates":"ae","emirados árabes unidos":"ae",
     "united states":"us","estados unidos":"us","uruguay":"uy","uruguai":"uy","uzbekistan":"uz","uzbequistão":"uz",
-    "venezuela":"ve","wales":"gb-wls","gales":"gb-wls","algeria":"dz","argélia":"dz","angola":"ao","albania":"al","albânia":"al",
+    "venezuela":"ve","wales":"gb-wls","gales":"gb-wls","país de gales":"gb-wls","algeria":"dz","argélia":"dz","angola":"ao","albania":"al","albânia":"al",
     "afghanistan":"af","afeganistão":"af","azerbaijan":"az","azerbaijão":"az","sierra leone":"sl","serra leoa":"sl",
     "burkina faso":"bf","gabon":"ga","gabão":"ga","zambia":"zm","zâmbia":"zm","zimbabwe":"zw","curacao":"cw","curaçao":"cw",
 };
@@ -198,6 +198,10 @@ function carregarPaises() {
             }).filter(Boolean);
 
             if (nomes.length < 50) throw new Error("Resposta da API incompleta");
+
+            // A API só lista estados soberanos, então as nações constituintes do
+            // Reino Unido (comuns nos jogos de futebol) não aparecem — adiciona-as à mão.
+            nomes.push("Escócia", "País de Gales", "Irlanda do Norte", "Inglaterra");
 
             nomes.sort((a, b) => a.localeCompare(b, "pt"));
             select.innerHTML = '<option value="">Selecione um país</option>' +
