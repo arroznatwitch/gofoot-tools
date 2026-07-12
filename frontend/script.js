@@ -363,6 +363,15 @@ function irParaPagina(n) {
     renderizarPagina();
 }
 
+// Só para exibição na tabela — o valor real (j.v) fica sempre em número puro.
+function formatarValorMercado(v) {
+    const n = Number(v);
+    if (v === null || v === undefined || v === "-" || v === "" || isNaN(n)) return "-";
+    if (n >= 1000000) return (n / 1000000).toFixed(n % 1000000 === 0 ? 0 : 1).replace(/\.0$/, "") + "M€";
+    if (n >= 1000) return (n / 1000).toFixed(n % 1000 === 0 ? 0 : 1).replace(/\.0$/, "") + "K€";
+    return n + "€";
+}
+
 function linhaTabela(j) {
     j.ov = calcularOverallDinamico(j);
     const statusClass = j.completo ? "status-completo" : "status-incompleto";
@@ -387,7 +396,7 @@ function linhaTabela(j) {
             <td class="badge-score ${obterClasseCor(col4)}">${col4 || "-"}</td>
             <td class="badge-score ${obterClasseCor(j.men)}">${j.men || "-"}</td>
             <td class="badge-score ${obterClasseCor(j.tal)}">${j.tal || "-"}</td>
-            <td style="font-weight: 500; color: #58a6ff;">${j.v || "-"}</td>
+            <td style="font-weight: 500; color: #58a6ff;">${formatarValorMercado(j.v)}</td>
             <td><span class="status-badge ${statusClass}">${statusTxt}</span></td>
             <td>
                 <button class="btn-edit" onclick="abrirModal(${j._id})" title="Editar">✎</button>
