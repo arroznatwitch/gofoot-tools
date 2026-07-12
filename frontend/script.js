@@ -46,6 +46,40 @@ function resolverNacaoISO(nat) {
     return partes[0] || null;
 }
 
+// ID estável do jogador: gerado UMA vez (na primeira importação/criação) e
+// depois preservado em todas as exportações/reimportações seguintes — é o que
+// permite juntar o envio de uma equipa de volta ao ficheiro mestre com todos
+// os jogadores, sabendo exactamente qual jogador é qual.
+const contadorIds = {};
+function gerarIdJogador(nome) {
+    const slug = (nome || "jogador")
+        .normalize("NFD").replace(/[̀-ͯ]/g, "")
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "");
+    contadorIds[slug] = (contadorIds[slug] || 0) + 1;
+    return slug + "_" + String(contadorIds[slug]).padStart(7, "0");
+}
+
+// O players.csv (export do Genie Scout/FM) traz o nome como "Apelido, Nome"
+// (ex: "á Bø, Hans Pauli"). Isto inverte para "Nome Apelido".
+function inverterNome(nomeCru) {
+    if (!nomeCru || !nomeCru.includes(",")) return nomeCru;
+    const partes = nomeCru.split(",").map(s => s.trim());
+    const sobrenome = partes[0], nome = partes[1];
+    return (nome && sobrenome) ? `${nome} ${sobrenome}` : nomeCru;
+}
+
+// Inverso de inverterNome: "Nome Apelido" -> "Apelido, Nome" (formato do CSV).
+// Assume que a última palavra é o apelido, o resto é o(s) nome(s) próprio(s).
+function reverterNome(nomeCompleto) {
+    if (!nomeCompleto) return nomeCompleto;
+    const partes = nomeCompleto.trim().split(/\s+/);
+    if (partes.length < 2) return nomeCompleto;
+    const sobrenome = partes[partes.length - 1];
+    const nome = partes.slice(0, -1).join(" ");
+    return `${sobrenome}, ${nome}`;
+}
+
 let listaJogadores = (window.FM_PLAYERS_DATA || []).map(marcarStatus);
 let listaFiltrada = listaJogadores.slice();
 let paginaAtual = 1;
@@ -268,15 +302,25 @@ function calcularOverallDinamico(j) {
     return Math.round(total);
 }
 
+function alternarFiltroStatus(idClicado) {
+    const outro = idClicado === "soCompletos" ? "soIncompletos" : "soCompletos";
+    if (document.getElementById(idClicado).checked) {
+        document.getElementById(outro).checked = false;
+    }
+    aplicarFiltros();
+}
+
 function aplicarFiltros() {
     const termo = document.getElementById("searchInput").value.toLowerCase().trim();
     const soIncompletos = document.getElementById("soIncompletos").checked;
+    const soCompletos = document.getElementById("soCompletos").checked;
 
-    if (!termo && !soIncompletos) {
+    if (!termo && !soIncompletos && !soCompletos) {
         listaFiltrada = listaJogadores;
     } else {
         listaFiltrada = listaJogadores.filter(j => {
             if (soIncompletos && j.completo) return false;
+            if (soCompletos && !j.completo) return false;
             if (!termo) return true;
             return j._nLower.includes(termo) || j._natLower.includes(termo) ||
                    j._cLower.includes(termo) || j._pLower.includes(termo);
@@ -476,6 +520,7 @@ function salvarJogador(e) {
             salvarEdicaoNoStorage(j);
         }
     } else {
+        dadosForm.id = gerarIdJogador(dadosForm.n);
         const novo = marcarStatus({ ...dadosForm, _manual: true });
         listaJogadores.unshift(novo);
         salvarJogadoresManuaisNoStorage();
@@ -527,18 +572,22 @@ function importarCsv(event) {
                 const tagMatch = (linha["Best Rating"] || "").match(/\(([A-Za-z]+)\)/);
                 const tag = tagMatch ? tagMatch[1] : null;
 
+                const nomeCerto = inverterNome(linha.Name);
+                const numOuNull = v => (v !== undefined && v !== null && v !== "" && !isNaN(v)) ? Number(v) : null;
                 const jogador = {
-                    n: linha.Name,
+                    id: linha.Id || gerarIdJogador(nomeCerto),
+                    n: nomeCerto,
                     nat: linha.Nation || "-",
                     c: linha.Club && linha.Club !== "-" ? linha.Club : "-",
                     a: parseInt(linha.Age) || null,
-                    p: linha.Position || "",
+                    // Posicao (grupo canónico, ex: "Z") tem prioridade sobre Position (notação FM, ex: "D C")
+                    p: linha.Posicao || linha.Position || "",
                     catg: TAG_CATEGORIA[tag] || null,
-                    pe: "-",
-                    v: "-",
-                    tec: null, ata: null, def: null, fis: null, men: null,
-                    ref: null, pos_gk: null, aer: null, sai: null,
-                    tal: null
+                    pe: PE_LETRA_INVERSO[linha.Pe] || "-",
+                    v: numOuNull(linha.Valor) ?? "-",
+                    tec: numOuNull(linha.TEC), ata: numOuNull(linha.ATA), def: numOuNull(linha.DEF), fis: numOuNull(linha.FIS), men: numOuNull(linha.MEN),
+                    ref: numOuNull(linha.REF), pos_gk: numOuNull(linha.POS_GK), aer: numOuNull(linha.AER), sai: numOuNull(linha.SAI),
+                    tal: numOuNull(linha.TAL)
                 };
 
                 aplicarEdicoesSalvas(jogador);
@@ -588,6 +637,7 @@ function converterImportGoFoot(j) {
     if (j.n !== undefined && j.p !== undefined) return j; // já é formato interno
 
     const interno = {
+        id: j.id || gerarIdJogador(j.nome),
         n: j.nome || "",
         nat: j.nacionalidade || "-",
         c: deslugifyClube(j.team_id),
@@ -625,7 +675,7 @@ function montarExportGoFoot(j) {
     const ehGoleiro = posicaoGrupo(j) === "G";
 
     const saida = {
-        id: null,
+        id: j.id || gerarIdJogador(j.n),
         nome: j.n || null,
         idade: j.a || null,
         nacionalidade: resolverNacaoISO(j.nat),
@@ -750,4 +800,156 @@ function importarDados(event) {
     };
     leitor.readAsText(arquivo);
     event.target.value = "";
+}
+
+// Nome normalizado para comparação: minúsculas, sem acentos, palavras
+// ordenadas — assim "Apelido, Nome" e "Nome Apelido" batem certo na mesma.
+function normalizarNomeParaMatch(nome) {
+    return (nome || "")
+        .normalize("NFD").replace(/[̀-ͯ]/g, "")
+        .toLowerCase()
+        .split(/[\s,]+/).filter(Boolean).sort().join(" ");
+}
+
+const NOVAS_COLUNAS_CSV = ["Id", "Pe", "Posicao", "TAL", "Valor", "TEC", "ATA", "DEF", "FIS", "MEN", "REF", "POS_GK", "AER", "SAI", "OVER"];
+
+// Lê o players.csv mestre + um .json de equipa (no formato de export do
+// GoFoot, com ou sem "id"), actualiza só as linhas dos jogadores que aparecem
+// na equipa (atribuindo Id se ainda não tiverem), e devolve um novo CSV para
+// descarregar — as restantes linhas do CSV ficam exactamente como estavam.
+function atualizarCsvComEquipa() {
+    const arquivoCsv = document.getElementById("csvMestreInput").files[0];
+    const arquivoJson = document.getElementById("equipaJsonInput").files[0];
+    const status = document.getElementById("statusAtualizacaoCsv");
+
+    if (!arquivoCsv || !arquivoJson) {
+        status.textContent = "Escolhe os dois ficheiros primeiro (o CSV mestre e o .json da equipa).";
+        return;
+    }
+
+    status.textContent = "A processar...";
+
+    const leitorJson = new FileReader();
+    leitorJson.onload = function (eJson) {
+        let equipa;
+        try {
+            equipa = JSON.parse(eJson.target.result);
+            if (!Array.isArray(equipa)) throw new Error("o .json da equipa não é uma lista");
+        } catch (erro) {
+            status.textContent = "Erro a ler o .json da equipa: " + erro.message;
+            return;
+        }
+
+        Papa.parse(arquivoCsv, {
+            header: true,
+            delimiter: ";",
+            skipEmptyLines: true,
+            encoding: "ISO-8859-1",
+            complete: function (resultado) {
+                const linhas = resultado.data;
+
+                const indice = {};
+                linhas.forEach((linha, i) => {
+                    if (!linha.Name) return;
+                    const chave = normalizarNomeParaMatch(inverterNome(linha.Name));
+                    (indice[chave] = indice[chave] || []).push(i);
+                });
+
+                let atualizados = 0, novosComId = 0, novosJogadoresAdicionados = 0;
+
+                equipa.forEach(jogadorEquipa => {
+                    const chave = normalizarNomeParaMatch(jogadorEquipa.nome);
+                    let candidatos = indice[chave];
+
+                    if (!candidatos || candidatos.length === 0) {
+                        const novaLinha = {
+                            Name: reverterNome(jogadorEquipa.nome),
+                            Nation: jogadorEquipa.nacionalidade || "",
+                            Club: deslugifyClube(jogadorEquipa.team_id) || "",
+                            Age: jogadorEquipa.idade || "",
+                            Id: jogadorEquipa.id || gerarIdJogador(jogadorEquipa.nome),
+                            Pe: jogadorEquipa.pe ?? "",
+                            Posicao: jogadorEquipa.posicao ?? "",
+                            TAL: jogadorEquipa.TAL ?? "",
+                            Valor: jogadorEquipa.valor ?? "",
+                            TEC: jogadorEquipa.TEC ?? "",
+                            ATA: jogadorEquipa.ATA ?? "",
+                            DEF: jogadorEquipa.DEF ?? "",
+                            FIS: jogadorEquipa.FIS ?? "",
+                            MEN: jogadorEquipa.MEN ?? "",
+                            REF: jogadorEquipa.REF ?? "",
+                            POS_GK: jogadorEquipa.POS ?? "",
+                            AER: jogadorEquipa.AER ?? "",
+                            SAI: jogadorEquipa.SAI ?? "",
+                            OVER: jogadorEquipa.OVER ?? "",
+                        };
+                        const novoIndice = linhas.length;
+                        linhas.push(novaLinha);
+                        (indice[chave] = indice[chave] || []).push(novoIndice);
+                        novosJogadoresAdicionados++;
+                        return;
+                    }
+
+                    let idxLinha = candidatos[0];
+                    if (candidatos.length > 1 && jogadorEquipa.team_id) {
+                        const comClubeIgual = candidatos.find(i => slugifyClube(linhas[i].Club) === jogadorEquipa.team_id);
+                        if (comClubeIgual !== undefined) idxLinha = comClubeIgual;
+                    }
+
+                    const linha = linhas[idxLinha];
+                    if (!linha.Id) {
+                        linha.Id = jogadorEquipa.id || gerarIdJogador(inverterNome(linha.Name));
+                        novosComId++;
+                    }
+                    // O clube do envio (equipa) manda sobre o do CSV mestre — se o jogador
+                    // mudou de clube, o team_id da equipa é a fonte da verdade.
+                    if (jogadorEquipa.team_id) linha.Club = deslugifyClube(jogadorEquipa.team_id);
+                    linha.Pe = jogadorEquipa.pe ?? linha.Pe ?? "";
+                    linha.Posicao = jogadorEquipa.posicao ?? linha.Posicao ?? "";
+                    linha.TAL = jogadorEquipa.TAL ?? linha.TAL ?? "";
+                    linha.Valor = jogadorEquipa.valor ?? linha.Valor ?? "";
+                    linha.TEC = jogadorEquipa.TEC ?? linha.TEC ?? "";
+                    linha.ATA = jogadorEquipa.ATA ?? linha.ATA ?? "";
+                    linha.DEF = jogadorEquipa.DEF ?? linha.DEF ?? "";
+                    linha.FIS = jogadorEquipa.FIS ?? linha.FIS ?? "";
+                    linha.MEN = jogadorEquipa.MEN ?? linha.MEN ?? "";
+                    linha.REF = jogadorEquipa.REF ?? linha.REF ?? "";
+                    linha.POS_GK = jogadorEquipa.POS ?? linha.POS_GK ?? "";
+                    linha.AER = jogadorEquipa.AER ?? linha.AER ?? "";
+                    linha.SAI = jogadorEquipa.SAI ?? linha.SAI ?? "";
+                    linha.OVER = jogadorEquipa.OVER ?? linha.OVER ?? "";
+                    atualizados++;
+                });
+
+                linhas.forEach(linha => {
+                    NOVAS_COLUNAS_CSV.forEach(col => { if (linha[col] === undefined) linha[col] = ""; });
+                });
+
+                const colunasFinais = [...resultado.meta.fields, ...NOVAS_COLUNAS_CSV.filter(c => !resultado.meta.fields.includes(c))];
+                const csvFinal = Papa.unparse(linhas, { delimiter: ";", columns: colunasFinais });
+
+                // Grava em ISO-8859-1 (não UTF-8) para bater certo com a leitura em
+                // importarCsv(), que assume ISO-8859-1 — evita mojibake em nomes acentuados
+                // quando este CSV actualizado é reimportado no painel.
+                const bytesISO = new Uint8Array(csvFinal.length);
+                for (let i = 0; i < csvFinal.length; i++) bytesISO[i] = csvFinal.charCodeAt(i) & 0xFF;
+                const blob = new Blob([bytesISO], { type: "text/csv;charset=ISO-8859-1" });
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement("a");
+                link.href = url;
+                link.download = "players_atualizado.csv";
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(url);
+
+                let msg = `Concluído: ${atualizados} jogador(es) actualizado(s) (${novosComId} com Id novo).`;
+                if (novosJogadoresAdicionados) {
+                    msg += ` ${novosJogadoresAdicionados} jogador(es) novo(s) adicionado(s) ao CSV (não existiam no ficheiro mestre).`;
+                }
+                status.textContent = msg;
+            }
+        });
+    };
+    leitorJson.readAsText(arquivoJson);
 }
