@@ -1093,3 +1093,159 @@ function tokensSignificativosClube(nome) {
  */
 function clubesSaoSemelhantes(clubeA, clubeB) {
     if (!clubeA || !clubeB) return false;
+
+    // Igualdade directa (ignorando espaços/pontuação).
+    if (normalizarClubeParaMatch(clubeA).replace(/ /g, "") ===
+        normalizarClubeParaMatch(clubeB).replace(/ /g, "")) return true;
+
+    const a = tokensSignificativosClube(clubeA);
+    const b = tokensSignificativosClube(clubeB);
+    if (!a.length || !b.length || a.length !== b.length) return false;
+
+    const setB = new Set(b);
+    return a.every(t => setB.has(t)); // mesmos tokens, ordem-independente
+}
+
+atualizarCsvComEquipa = function() {
+    const arquivoCsv = document.getElementById("csvMestreInput").files[0];
+    const arquivosJson = Array.from(document.getElementById("equipaJsonInput").files);
+    const status = document.getElementById("statusAtualizacaoCsv");
+
+    if (!arquivoCsv || !arquivosJson.length) {
+        status.textContent = "Escolhe o CSV mestre e pelo menos um .json de equipa.";
+        return;
+    }
+
+    status.textContent = "A processar (com validação flexível)...";
+
+    Promise.all(arquivosJson.map(lerJsonComoTexto))
+        .then(textos => {
+            let equipa = [];
+            textos.forEach((texto, i) => {
+                const lista = JSON.parse(texto);
+                if (!Array.isArray(lista)) throw new Error(`"${arquivosJson[i].name}" não é uma lista`);
+                equipa = equipa.concat(lista);
+            });
+
+            Papa.parse(arquivoCsv, {
+                header: true,
+                delimiter: ";",
+                skipEmptyLines: true,
+                encoding: "ISO-8859-1",
+                complete: function (resultado) {
+                    const linhas = resultado.data;
+
+                    const indice = {};
+                    linhas.forEach((linha, i) => {
+                        if (!linha.Name) return;
+                        const chave = normalizarNomeParaMatch(inverterNome(linha.Name));
+                        (indice[chave] = indice[chave] || []).push(i);
+                    });
+
+                    let atualizados = 0, novosComId = 0, novosJogadoresAdicionados = 0;
+
+                    equipa.forEach(jogadorEquipa => {
+                        const chave = normalizarNomeParaMatch(jogadorEquipa.nome);
+                        let candidatos = indice[chave];
+
+                        if (!candidatos || candidatos.length === 0) {
+                            const novaLinha = {
+                                Name: reverterNome(jogadorEquipa.nome),
+                                Nation: jogadorEquipa.nacionalidade || "",
+                                Club: deslugifyClube(jogadorEquipa.team_id) || "",
+                                Age: jogadorEquipa.idade || "",
+                                Id: jogadorEquipa.id || gerarIdJogador(jogadorEquipa.nome),
+                                Pe: jogadorEquipa.pe ?? "",
+                                Posicao: jogadorEquipa.posicao ?? "",
+                                TAL: jogadorEquipa.TAL ?? "",
+                                Valor: jogadorEquipa.valor ?? "",
+                                TEC: jogadorEquipa.TEC ?? "",
+                                ATA: jogadorEquipa.ATA ?? "",
+                                DEF: jogadorEquipa.DEF ?? "",
+                                FIS: jogadorEquipa.FIS ?? "",
+                                MEN: jogadorEquipa.MEN ?? "",
+                                REF: jogadorEquipa.REF ?? "",
+                                POS_GK: jogadorEquipa.POS ?? "",
+                                AER: jogadorEquipa.AER ?? "",
+                                SAI: jogadorEquipa.SAI ?? "",
+                                OVER: jogadorEquipa.OVER ?? "",
+                            };
+                            const novoIndice = linhas.length;
+                            linhas.push(novaLinha);
+                            (indice[chave] = indice[chave] || []).push(novoIndice);
+                            novosJogadoresAdicionados++;
+                            return;
+                        }
+
+                        let idxLinha = candidatos[0];
+
+                        // Desempate por clube: 1º match EXACTO; só depois similaridade.
+                        if (candidatos.length > 1 && jogadorEquipa.team_id) {
+                            let comClube = candidatos.find(i =>
+                                slugifyClube(linhas[i].Club) === jogadorEquipa.team_id);
+                            if (comClube === undefined) {
+                                comClube = candidatos.find(i =>
+                                    clubesSaoSemelhantes(slugifyClube(linhas[i].Club), jogadorEquipa.team_id));
+                            }
+                            if (comClube !== undefined) idxLinha = comClube;
+                        }
+
+                        const linha = linhas[idxLinha];
+                        if (!linha.Id) {
+                            linha.Id = jogadorEquipa.id || gerarIdJogador(inverterNome(linha.Name));
+                            novosComId++;
+                        }
+
+                        if (jogadorEquipa.team_id) linha.Club = deslugifyClube(jogadorEquipa.team_id);
+
+                        linha.Pe = jogadorEquipa.pe ?? linha.Pe ?? "";
+                        linha.Posicao = jogadorEquipa.posicao ?? linha.Posicao ?? "";
+                        linha.TAL = jogadorEquipa.TAL ?? linha.TAL ?? "";
+                        linha.Valor = jogadorEquipa.valor ?? linha.Valor ?? "";
+                        linha.TEC = jogadorEquipa.TEC ?? linha.TEC ?? "";
+                        linha.ATA = jogadorEquipa.ATA ?? linha.ATA ?? "";
+                        linha.DEF = jogadorEquipa.DEF ?? linha.DEF ?? "";
+                        linha.FIS = jogadorEquipa.FIS ?? linha.FIS ?? "";
+                        linha.MEN = jogadorEquipa.MEN ?? linha.MEN ?? "";
+                        linha.REF = jogadorEquipa.REF ?? linha.REF ?? "";
+                        linha.POS_GK = jogadorEquipa.POS ?? linha.POS_GK ?? "";
+                        linha.AER = jogadorEquipa.AER ?? linha.AER ?? "";
+                        linha.SAI = jogadorEquipa.SAI ?? linha.SAI ?? "";
+                        linha.OVER = jogadorEquipa.OVER ?? linha.OVER ?? "";
+                        atualizados++;
+                    });
+
+                    linhas.forEach(linha => {
+                        NOVAS_COLUNAS_CSV.forEach(col => { if (linha[col] === undefined) linha[col] = ""; });
+                    });
+
+                    const colunasFinais = [...resultado.meta.fields, ...NOVAS_COLUNAS_CSV.filter(c => !resultado.meta.fields.includes(c))];
+                    const csvFinal = Papa.unparse(linhas, { delimiter: ";", columns: colunasFinais });
+
+                    const bytesISO = new Uint8Array(csvFinal.length);
+                    for (let i = 0; i < csvFinal.length; i++) bytesISO[i] = csvFinal.charCodeAt(i) & 0xFF;
+                    const blob = new Blob([bytesISO], { type: "text/csv;charset=ISO-8859-1" });
+                    const url = URL.createObjectURL(blob);
+                    const link = document.createElement("a");
+                    link.href = url;
+                    link.download = "players_atualizado.csv";
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    URL.revokeObjectURL(url);
+
+                    let msg = `Concluído: ${atualizados} jogador(es) actualizado(s) (${novosComId} com Id novo) de ${arquivosJson.length} ficheiro(s) de equipa.`;
+                    if (novosJogadoresAdicionados) {
+                        msg += ` ${novosJogadoresAdicionados} jogador(es) novo(s) adicionado(s) ao CSV (não existiam no ficheiro mestre).`;
+                    }
+                    status.textContent = msg;
+                },
+                error: function (erro) {
+                    status.textContent = "Erro ao processar o CSV mestre: " + erro.message;
+                }
+            });
+        })
+        .catch(erro => {
+            status.textContent = "Erro a ler os .json de equipa: " + erro.message;
+        });
+};
