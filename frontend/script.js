@@ -1055,3 +1055,41 @@ function atualizarCsvComEquipa() {
             status.textContent = "Erro a ler os .json de equipa: " + erro.message;
         });
 }
+
+
+
+
+
+
+// Testando Função
+
+function normalizarClubeParaMatch(nome) {
+    if (!nome) return "";
+    return nome
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, " ")   // separa por espaços (trata "_" do slug também)
+        .trim();
+}
+
+// Termos genéricos ignorados na comparação (prefixos/siglas comuns e ligações).
+const TERMOS_IGNORAR_CLUBE = [
+    "fc", "ac", "sc", "cf", "fk", "cr", "tsv", "sd", "ud", "rc", "sad", "cp",
+    "sporting", "clube", "club", "atletico", "de", "do", "da"
+];
+
+function tokensSignificativosClube(nome) {
+    return normalizarClubeParaMatch(nome)
+        .split(" ")
+        .filter(t => t && !TERMOS_IGNORAR_CLUBE.includes(t));
+}
+
+/**
+ * Verifica se dois clubes são equivalentes, aceitando siglas/abreviações.
+ * Ex: "ac_milan" combina com "Milan"; "tsv_1860_munchen" combina com "1860 Munchen".
+ * Usa IGUALDADE de conjuntos de tokens (não substring), por isso "Nacional" NÃO
+ * é confundido com "Nacional da Madeira".
+ */
+function clubesSaoSemelhantes(clubeA, clubeB) {
+    if (!clubeA || !clubeB) return false;
