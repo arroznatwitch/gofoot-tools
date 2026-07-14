@@ -1,9 +1,5 @@
 // Definição das ligas: País -> Liga -> lista de clubes (o nome do clube tem de
 // bater com a coluna "Club" do players.csv). Editável à mão.
-//
-// Carregado por <script> (e não por fetch de .json) para funcionar mesmo quando
-// abres o index.html directamente por duplo-clique (file://), onde o fetch de
-// ficheiros locais é bloqueado pelo browser.
 window.LEAGUES_DATA = {
     "Brasil": {
         "Liga Brasileira 26/27": [
