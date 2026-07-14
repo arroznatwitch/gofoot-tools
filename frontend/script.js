@@ -80,6 +80,79 @@ function reverterNome(nomeCompleto) {
     return `${sobrenome}, ${nome}`;
 }
 
+// leagues.js (window.LEAGUES_DATA) é estático e mantido à mão (não é gerado pela
+// ferramenta) — mapeia País -> Liga -> lista de clubes esperados. Serve só de
+// referência para saber a que liga/país pertence cada clube; a validação de quais
+// equipas existem de facto vem da contagem de jogadores com atributos+OVER
+// carregados com aquele clube no players.csv (20+ jogadores = equipa válida).
+// É carregado por <script> (não por fetch) para funcionar também em file://.
+const LIGAS_DATA = window.LEAGUES_DATA || {};
+const MIN_JOGADORES_PARA_EQUIPA = 20;
+
+// Um jogador só conta para a validação da equipa se tiver TODOS os atributos
+// preenchidos + OVER calculável. calcularOverallDinamico já devolve null quando
+// falta algum atributo, por isso serve exactamente de teste de "atributos + OVER".
+function jogadorTemAtributosCompletos(j) {
+    return calcularOverallDinamico(j) !== null;
+}
+
+function contarJogadoresPorClube() {
+    const contagem = {};
+    listaJogadores.forEach(j => {
+        const slug = slugifyClube(j.c);
+        if (!slug) return;
+        if (!jogadorTemAtributosCompletos(j)) return; // só jogadores com atributos + OVER
+        contagem[slug] = (contagem[slug] || 0) + 1;
+    });
+    return contagem;
+}
+
+// Desenha o painel "Ligas & Países" directamente no index.html. Para cada país
+// mostra quantas equipas da liga estão válidas (clube com 20+ jogadores no CSV
+// carregado) e uma barra de progresso. Chamado sempre que os dados mudam.
+function atualizarPainelPaises() {
+    const conteudo = document.getElementById("paisesConteudo");
+    if (!conteudo) return;
+
+    if (!Object.keys(LIGAS_DATA).length) {
+        conteudo.innerHTML = `<p style="color:#8b949e; font-size:13px;">leagues.js indisponível (verifica que o ficheiro existe na pasta).</p>`;
+        return;
+    }
+
+    const contagem = contarJogadoresPorClube();
+
+    conteudo.innerHTML = Object.entries(LIGAS_DATA).map(([pais, ligas]) => {
+        // Junta todos os clubes das ligas do país (por agora cada país tem 1 liga).
+        const todosClubes = Object.values(ligas).flat();
+        const nomeLiga = Object.keys(ligas)[0] || "";
+        const validas = todosClubes.filter(c => (contagem[slugifyClube(c)] || 0) >= MIN_JOGADORES_PARA_EQUIPA);
+        const total = todosClubes.length;
+        const percent = total ? Math.round((validas.length / total) * 100) : 0;
+
+        const listaClubes = todosClubes.map(clube => {
+            const n = contagem[slugifyClube(clube)] || 0;
+            const ok = n >= MIN_JOGADORES_PARA_EQUIPA;
+            return `<li class="clube-item">
+                <span class="clube-nome">${clube}</span>
+                <span class="status-badge ${ok ? "status-completo" : "status-incompleto"}">${n}/${MIN_JOGADORES_PARA_EQUIPA}${ok ? " ✓" : ""}</span>
+            </li>`;
+        }).join("");
+
+        return `
+            <div class="pais-card">
+                <div class="liga-cabecalho">
+                    <span class="pais-titulo">${pais} <span style="color:#8b949e; font-weight:400; font-size:13px;">— ${nomeLiga}</span></span>
+                    <span class="liga-percent">Times: ${validas.length}/${total} válidos (${percent}%)</span>
+                </div>
+                <div class="progress-bar"><div class="progress-bar-fill" style="width:${percent}%;"></div></div>
+                <details style="margin-top:8px;">
+                    <summary style="cursor:pointer; color:#58a6ff; font-size:13px;">Ver clubes</summary>
+                    <ul class="clube-lista">${listaClubes}</ul>
+                </details>
+            </div>`;
+    }).join("");
+}
+
 let listaJogadores = (window.FM_PLAYERS_DATA || []).map(marcarStatus);
 let listaFiltrada = listaJogadores.slice();
 let paginaAtual = 1;
@@ -333,6 +406,7 @@ function aplicarFiltros() {
     paginaAtual = 1;
     renderizarPagina();
     atualizarEstatisticas();
+    atualizarPainelPaises();
 }
 
 function atualizarEstatisticas() {
@@ -830,30 +904,40 @@ const NOVAS_COLUNAS_CSV = ["Id", "Pe", "Posicao", "TAL", "Valor", "TEC", "ATA", 
 // GoFoot, com ou sem "id"), actualiza só as linhas dos jogadores que aparecem
 // na equipa (atribuindo Id se ainda não tiverem), e devolve um novo CSV para
 // descarregar — as restantes linhas do CSV ficam exactamente como estavam.
+function lerJsonComoTexto(arquivo) {
+    return new Promise((resolve, reject) => {
+        const leitor = new FileReader();
+        leitor.onload = e => resolve(e.target.result);
+        leitor.onerror = () => reject(new Error(`falha ao ler "${arquivo.name}"`));
+        leitor.readAsText(arquivo);
+    });
+}
+
 function atualizarCsvComEquipa() {
     const arquivoCsv = document.getElementById("csvMestreInput").files[0];
-    const arquivoJson = document.getElementById("equipaJsonInput").files[0];
+    const arquivosJson = Array.from(document.getElementById("equipaJsonInput").files);
     const status = document.getElementById("statusAtualizacaoCsv");
 
-    if (!arquivoCsv || !arquivoJson) {
-        status.textContent = "Escolhe os dois ficheiros primeiro (o CSV mestre e o .json da equipa).";
+    if (!arquivoCsv || !arquivosJson.length) {
+        status.textContent = "Escolhe o CSV mestre e pelo menos um .json de equipa.";
         return;
     }
 
     status.textContent = "A processar...";
 
-    const leitorJson = new FileReader();
-    leitorJson.onload = function (eJson) {
-        let equipa;
-        try {
-            equipa = JSON.parse(eJson.target.result);
-            if (!Array.isArray(equipa)) throw new Error("o .json da equipa não é uma lista");
-        } catch (erro) {
-            status.textContent = "Erro a ler o .json da equipa: " + erro.message;
-            return;
-        }
+    // Cada jogador já traz o seu próprio team_id, por isso vários .json de
+    // equipas diferentes podem ser seleccionados de uma vez — junta-se tudo
+    // numa única lista antes de fazer o merge com o CSV mestre.
+    Promise.all(arquivosJson.map(lerJsonComoTexto))
+        .then(textos => {
+            let equipa = [];
+            textos.forEach((texto, i) => {
+                const lista = JSON.parse(texto);
+                if (!Array.isArray(lista)) throw new Error(`"${arquivosJson[i].name}" não é uma lista`);
+                equipa = equipa.concat(lista);
+            });
 
-        Papa.parse(arquivoCsv, {
+            Papa.parse(arquivoCsv, {
             header: true,
             delimiter: ";",
             skipEmptyLines: true,
@@ -956,13 +1040,18 @@ function atualizarCsvComEquipa() {
                 document.body.removeChild(link);
                 URL.revokeObjectURL(url);
 
-                let msg = `Concluído: ${atualizados} jogador(es) actualizado(s) (${novosComId} com Id novo).`;
+                let msg = `Concluído: ${atualizados} jogador(es) actualizado(s) (${novosComId} com Id novo) de ${arquivosJson.length} ficheiro(s) de equipa.`;
                 if (novosJogadoresAdicionados) {
                     msg += ` ${novosJogadoresAdicionados} jogador(es) novo(s) adicionado(s) ao CSV (não existiam no ficheiro mestre).`;
                 }
                 status.textContent = msg;
-            }
+                },
+                error: function (erro) {
+                    status.textContent = "Erro ao processar o CSV mestre: " + erro.message;
+                }
+            });
+        })
+        .catch(erro => {
+            status.textContent = "Erro a ler os .json de equipa: " + erro.message;
         });
-    };
-    leitorJson.readAsText(arquivoJson);
 }

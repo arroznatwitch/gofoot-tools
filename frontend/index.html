@@ -21,20 +21,29 @@
         </div>
 
         <div class="welcome-box" style="margin-top:12px;">
-            <b>Actualizar base CSV com o envio de uma equipa:</b> carrega o <code>players.csv</code> mestre e o <code>.json</code>
-            de uma equipa (mesmo sem <code>id</code>) — atribui ID a quem não tiver, preenche os atributos/OVER de quem
-            aparecer na equipa, e deixa o resto do CSV como está.
+            <b>Actualizar base CSV com o envio de equipas:</b> carrega o <code>players.csv</code> mestre e um ou vários
+            <code>.json</code> de equipas (mesmo sem <code>id</code>) — cada jogador já traz o seu <code>team_id</code>,
+            por isso podes seleccionar os ficheiros de várias equipas de uma vez. Atribui ID a quem não tiver, preenche
+            os atributos/OVER de quem aparecer, e deixa o resto do CSV como está.
             <div style="margin-top:8px; display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
                 <label class="btn" style="display:inline-block;">
                     1. players.csv mestre
                     <input type="file" id="csvMestreInput" style="display:none;" accept=".csv">
                 </label>
                 <label class="btn" style="display:inline-block;">
-                    2. equipa (.json)
-                    <input type="file" id="equipaJsonInput" style="display:none;" accept=".json">
+                    2. equipa(s) (.json)
+                    <input type="file" id="equipaJsonInput" style="display:none;" accept=".json" multiple>
                 </label>
                 <button class="btn btn-primary" onclick="atualizarCsvComEquipa()">Actualizar e descarregar CSV</button>
                 <span id="statusAtualizacaoCsv" style="color:#8b949e; font-size:13px;"></span>
+            </div>
+        </div>
+
+        <div class="welcome-box" style="margin-top:12px; text-align:left;">
+            <b>🌍 Ligas &amp; Países</b> — progresso dos elencos carregados. Um clube conta como equipa válida quando tem
+            <b>20+ jogadores</b> no <code>players.csv</code>. Importa o CSV para actualizar.
+            <div id="paisesConteudo" style="margin-top:12px;">
+                <p style="color:#8b949e; font-size:13px;">Importa um <code>players.csv</code> para veres o progresso.</p>
             </div>
         </div>
 
@@ -183,6 +192,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
     <script src="fm_players.js"></script>
+    <script src="leagues.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
