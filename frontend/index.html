@@ -123,7 +123,9 @@
             <button class="btn btn-primary" onclick="exportarDados()">Exportar todos (.json)</button>
             <button class="btn" style="background-color: #d29922; color: white; border: none;" onclick="exportarDadosFiltrados()">Exportar filtrados (.json)</button>
             <button class="btn" style="background-color: #1f6feb; color: white; border: none;" onclick="document.getElementById('importInput').click()">Importar (.json)</button>
-            <input type="file" id="importInput" style="display: none;" accept=".json" onchange="importarDados(event)">
+            <input type="file" id="importInput" style="display: none;" accept=".json" multiple onchange="importarDados(event)">
+            <!-- TEMPORÁRIO: regen de IDs dos jogadores importados. Remover depois de migrar a base. -->
+            <button class="btn" style="background-color:#8957e5; color:white; border:none;" onclick="regenerarIdsCsv()">🔑 Regenerar IDs (.csv)</button>
         </div>
     </div>
 
@@ -150,7 +152,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="form-group"><label>Posições (Ex: ST, LW, AMC ou GK)</label><input type="text" id="addPos" class="form-control" placeholder="Ex: ST, LW, AMC" required oninput="atualizarCamposPorPosicao()"></div>
+                <div class="form-group"><label>Posições (Ex: ST, LW, AMC — guarda-redes: G ou GK)</label><input type="text" id="addPos" class="form-control" placeholder="Ex: ST, LW, AMC, G, GK" required oninput="atualizarCamposPorPosicao()"></div>
 
                 <div id="camposLinha">
                     <div class="form-row">

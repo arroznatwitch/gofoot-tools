@@ -18,7 +18,7 @@ window.LEAGUES_DATA = {
     "Jamaica": {
         "Liga da Jamaica 26/27": [
             "Harbour View", "Chapelton Maroons", "Arnett Gardens", "Portmore Utd",
-            "Cavalier", "Dunbeholden", "Mount Pleasant FC", "Tivoli Gardens",
+            "Cavalier", "Dunbeholden", "Mount Pleasant", "Tivoli Gardens",
             "Racing Utd (JAM)", "Montego Bay Utd", "Treasure Beach", "Waterhouse",
             "Molynes Utd", "Spanish Town Police"
         ]

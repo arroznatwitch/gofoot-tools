@@ -46,18 +46,28 @@ function resolverNacaoISO(nat) {
     return partes[0] || null;
 }
 
-// ID estável do jogador: gerado UMA vez (na primeira importação/criação) e
-// depois preservado em todas as exportações/reimportações seguintes — é o que
-// permite juntar o envio de uma equipa de volta ao ficheiro mestre com todos
-// os jogadores, sabendo exactamente qual jogador é qual.
-const contadorIds = {};
+// ID estável e ÚNICO do jogador: gerado UMA vez (na primeira importação/criação)
+// e depois preservado em todas as exportações/reimportações seguintes — é o que
+// permite juntar o envio de uma equipa de volta ao ficheiro mestre, sabendo
+// exactamente qual jogador é qual.
+//
+// O sufixo é ALEATÓRIO (não um contador por sessão). O contador reiniciava a cada
+// ficheiro/sessão, por isso dois homónimos exportados em ficheiros diferentes
+// recebiam o mesmo "nome_0000001" e colidiam. Com um sufixo aleatório o ID é
+// globalmente único mesmo para jogadores com o mesmo nome.
+const idsEmitidos = new Set();
 function gerarIdJogador(nome) {
     const slug = (nome || "jogador")
         .normalize("NFD").replace(/[̀-ͯ]/g, "")
         .toLowerCase()
         .replace(/[^a-z0-9]+/g, "");
-    contadorIds[slug] = (contadorIds[slug] || 0) + 1;
-    return slug + "_" + String(contadorIds[slug]).padStart(7, "0");
+    let id;
+    do {
+        const aleatorio = Math.random().toString(36).slice(2, 10); // 8 chars base36
+        id = slug + "_" + aleatorio;
+    } while (idsEmitidos.has(id));
+    idsEmitidos.add(id);
+    return id;
 }
 
 // O players.csv (export do Genie Scout/FM) traz o nome como "Apelido, Nome"
@@ -652,6 +662,8 @@ function importarCsv(event) {
         complete: function (resultado) {
             const linhas = resultado.data;
             const novosJogadores = [];
+            // Guarda as colunas do CSV para poder reescrevê-lo (ex: regenerar IDs).
+            colunasCsvImportadas = resultado.meta.fields;
 
             for (const linha of linhas) {
                 if (!linha.Name) continue;
@@ -676,6 +688,10 @@ function importarCsv(event) {
                     ref: numOuNull(linha.REF), pos_gk: numOuNull(linha.POS_GK), aer: numOuNull(linha.AER), sai: numOuNull(linha.SAI),
                     tal: numOuNull(linha.TAL)
                 };
+
+                // Mantém a linha original do CSV para poder reescrever o ficheiro
+                // completo (todas as colunas) na regeneração de IDs.
+                jogador._csvRaw = linha;
 
                 aplicarEdicoesSalvas(jogador);
                 novosJogadores.push(marcarStatus(jogador));
@@ -735,7 +751,10 @@ function converterImportGoFoot(j) {
         tal: j.TAL ?? null,
     };
 
-    if (j.posicao === "G") {
+    // Usa posicaoGrupo (não j.posicao === "G") porque a posição pode vir como
+    // código bruto do FM/EA (ex: "GK") em vez do grupo canónico "G" — senão os
+    // atributos de guarda-redes (REF/POS/AER/SAI) eram descartados e o OVER ficava null.
+    if (posicaoGrupo({ p: j.posicao }) === "G") {
         interno.ref = j.REF ?? null;
         interno.pos_gk = j.POS ?? null;
         interno.aer = j.AER ?? null;
@@ -838,6 +857,48 @@ function exportarDados() {
     baixarJSON(listaJogadores.map(montarExportGoFoot), "fm_players.json");
 }
 
+// Colunas do último players.csv importado (para reescrever o ficheiro completo).
+let colunasCsvImportadas = null;
+
+// TEMPORÁRIO: gera um ID único novo para os jogadores JÁ IMPORTADOS do players.csv
+// e descarrega o .csv (db completa, todas as colunas preservadas). Serve para
+// migrar uma base com IDs repetidos/antigos. Remover botão/função depois.
+function regenerarIdsCsv() {
+    const comRaw = listaJogadores.filter(j => j._csvRaw);
+    if (!comRaw.length) {
+        alert("Importa primeiro a base com o botão \"Importar Jogadores(.csv)\".");
+        return;
+    }
+    if (!confirm(`Isto gera um ID único novo para os ${comRaw.length.toLocaleString("pt-PT")} jogadores importados do CSV e descarrega o .csv novo. Continuar?`)) return;
+
+    comRaw.forEach(j => {
+        const novoId = gerarIdJogador(j.n);
+        j.id = novoId;
+        j._csvRaw.Id = novoId;
+    });
+
+    // Preserva todas as colunas do CSV original; só garante que "Id" existe.
+    const colunasFinais = [...(colunasCsvImportadas || Object.keys(comRaw[0]._csvRaw))];
+    if (!colunasFinais.includes("Id")) colunasFinais.push("Id");
+    const csvFinal = Papa.unparse(comRaw.map(j => j._csvRaw), { delimiter: ";", columns: colunasFinais });
+
+    // Grava em ISO-8859-1, igual ao que o importarCsv() espera.
+    const bytesISO = new Uint8Array(csvFinal.length);
+    for (let i = 0; i < csvFinal.length; i++) bytesISO[i] = csvFinal.charCodeAt(i) & 0xFF;
+    const blob = new Blob([bytesISO], { type: "text/csv;charset=ISO-8859-1" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "players_ids_unicos.csv";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+
+    aplicarFiltros();
+    alert(`Pronto: ${comRaw.length.toLocaleString("pt-PT")} linhas com IDs únicos novos. Descarregado "players_ids_unicos.csv" — usa esse como a tua db a partir de agora.`);
+}
+
 function exportarDadosFiltrados() {
     if (listaFiltrada.length === 0) {
         alert("Não há jogadores exibidos no filtro atual para exportar.");
@@ -849,43 +910,50 @@ function exportarDadosFiltrados() {
 }
 
 function importarDados(event) {
-    const arquivo = event.target.files[0];
-    if (!arquivo) return;
+    const arquivos = Array.from(event.target.files);
+    if (!arquivos.length) return;
 
     const overlay = document.getElementById("loadingOverlay");
     const texto = document.getElementById("loadingText");
     overlay.style.display = "flex";
-    texto.textContent = "Importando ficheiro .json...";
+    texto.textContent = arquivos.length > 1
+        ? `Importando ${arquivos.length} ficheiros .json...`
+        : "Importando ficheiro .json...";
 
-    const leitor = new FileReader();
-    leitor.onload = function (e) {
-        // setTimeout dá tempo ao overlay de aparecer antes do parse pesado bloquear a aba
-        setTimeout(() => {
-            try {
-                const bruto = JSON.parse(e.target.result);
-                if (!Array.isArray(bruto)) throw new Error("o ficheiro não contém uma lista de jogadores");
+    // Lê todos os ficheiros seleccionados e junta os jogadores de todos numa só lista.
+    Promise.all(arquivos.map(lerJsonComoTexto))
+        .then(textos => {
+            // setTimeout dá tempo ao overlay de aparecer antes do parse pesado bloquear a aba
+            setTimeout(() => {
+                try {
+                    let bruto = [];
+                    textos.forEach((texto, i) => {
+                        const lista = JSON.parse(texto);
+                        if (!Array.isArray(lista)) throw new Error(`"${arquivos[i].name}" não contém uma lista de jogadores`);
+                        bruto = bruto.concat(lista);
+                    });
 
-                // Nota: ao contrário do "Adicionar Jogador" manual, uma importação em massa
-                // não é gravada jogador-a-jogador no localStorage — para milhares de
-                // jogadores isso excederia a quota do browser (uns 5-10MB) e ficaria cada
-                // vez mais lento. Fica só na sessão atual; exporta de novo para guardar.
-                const dadosCarregados = bruto.map(converterImportGoFoot).map(marcarStatus);
+                    // Nota: ao contrário do "Adicionar Jogador" manual, uma importação em massa
+                    // não é gravada jogador-a-jogador no localStorage — para milhares de
+                    // jogadores isso excederia a quota do browser (uns 5-10MB) e ficaria cada
+                    // vez mais lento. Fica só na sessão atual; exporta de novo para guardar.
+                    const dadosCarregados = bruto.map(converterImportGoFoot).map(marcarStatus);
 
-                listaJogadores = listaJogadores.filter(j => j._manual).concat(dadosCarregados);
-                aplicarFiltros();
-                overlay.style.display = "none";
-                alert(`Sucesso! ${dadosCarregados.length.toLocaleString("pt-PT")} jogadores importados para o painel.`);
-            } catch (erro) {
-                overlay.style.display = "none";
-                alert("Não foi possível ler o ficheiro .json: " + erro.message);
-            }
-        }, 50);
-    };
-    leitor.onerror = function () {
-        overlay.style.display = "none";
-        alert("Erro ao ler o ficheiro — pode ser demasiado grande para o browser conseguir abrir.");
-    };
-    leitor.readAsText(arquivo);
+                    listaJogadores = listaJogadores.filter(j => j._manual).concat(dadosCarregados);
+                    aplicarFiltros();
+                    overlay.style.display = "none";
+                    alert(`Sucesso! ${dadosCarregados.length.toLocaleString("pt-PT")} jogadores importados de ${arquivos.length} ficheiro(s).`);
+                } catch (erro) {
+                    overlay.style.display = "none";
+                    alert("Não foi possível ler o(s) ficheiro(s) .json: " + erro.message);
+                }
+            }, 50);
+        })
+        .catch(erro => {
+            overlay.style.display = "none";
+            alert("Erro ao ler o(s) ficheiro(s): " + erro.message);
+        });
+
     event.target.value = "";
 }
 
@@ -945,8 +1013,13 @@ function atualizarCsvComEquipa() {
             complete: function (resultado) {
                 const linhas = resultado.data;
 
+                // Dois índices: por Id (identidade exacta — o que realmente importa,
+                // porque pode haver jogadores diferentes com o mesmo nome) e por nome
+                // (fallback para quando o jogador ainda não tem Id no CSV mestre).
                 const indice = {};
+                const indicePorId = {};
                 linhas.forEach((linha, i) => {
+                    if (linha.Id) indicePorId[linha.Id] = i;
                     if (!linha.Name) return;
                     const chave = normalizarNomeParaMatch(inverterNome(linha.Name));
                     (indice[chave] = indice[chave] || []).push(i);
@@ -954,11 +1027,38 @@ function atualizarCsvComEquipa() {
 
                 let atualizados = 0, novosComId = 0, novosJogadoresAdicionados = 0;
 
-                equipa.forEach(jogadorEquipa => {
-                    const chave = normalizarNomeParaMatch(jogadorEquipa.nome);
-                    let candidatos = indice[chave];
+                // Linhas já escritas por um jogador da equipa nesta run — impede que
+                // dois jogadores diferentes com o mesmo nome caiam na mesma linha.
+                const linhasUsadas = new Set();
 
-                    if (!candidatos || candidatos.length === 0) {
+                equipa.forEach(jogadorEquipa => {
+                    let idxLinha;
+
+                    // 1) Identidade EXACTA por Id. É o critério principal: se o jogador
+                    //    já tem Id no CSV, é esse jogador, independentemente do nome.
+                    //    !linhasUsadas: protege contra IDs não-únicos (o gerarIdJogador
+                    //    gera o Id a partir do nome, por isso homónimos podem partilhar
+                    //    o mesmo Id — não podem colapsar na mesma linha).
+                    if (jogadorEquipa.id && indicePorId[jogadorEquipa.id] !== undefined
+                        && !linhasUsadas.has(indicePorId[jogadorEquipa.id])) {
+                        idxLinha = indicePorId[jogadorEquipa.id];
+                    } else {
+                        // 2) Fallback por nome — só linhas livres e SEM Id de outro jogador
+                        //    (uma linha já com Id diferente pertence a outra pessoa).
+                        const chave = normalizarNomeParaMatch(jogadorEquipa.nome);
+                        const candidatos = (indice[chave] || []).filter(i =>
+                            !linhasUsadas.has(i) && (!linhas[i].Id || linhas[i].Id === jogadorEquipa.id));
+                        if (candidatos.length) {
+                            idxLinha = candidatos[0];
+                            if (candidatos.length > 1 && jogadorEquipa.team_id) {
+                                const comClubeIgual = candidatos.find(i => slugifyClube(linhas[i].Club) === jogadorEquipa.team_id);
+                                if (comClubeIgual !== undefined) idxLinha = comClubeIgual;
+                            }
+                        }
+                    }
+
+                    // 3) Não existe no CSV — adiciona linha nova.
+                    if (idxLinha === undefined) {
                         const novaLinha = {
                             Name: reverterNome(jogadorEquipa.nome),
                             Nation: jogadorEquipa.nacionalidade || "",
@@ -980,24 +1080,23 @@ function atualizarCsvComEquipa() {
                             SAI: jogadorEquipa.SAI ?? "",
                             OVER: jogadorEquipa.OVER ?? "",
                         };
-                        const novoIndice = linhas.length;
+                        idxLinha = linhas.length;
                         linhas.push(novaLinha);
-                        (indice[chave] = indice[chave] || []).push(novoIndice);
+                        linhasUsadas.add(idxLinha);
+                        if (novaLinha.Id) indicePorId[novaLinha.Id] = idxLinha;
                         novosJogadoresAdicionados++;
                         return;
                     }
 
-                    let idxLinha = candidatos[0];
-                    if (candidatos.length > 1 && jogadorEquipa.team_id) {
-                        const comClubeIgual = candidatos.find(i => slugifyClube(linhas[i].Club) === jogadorEquipa.team_id);
-                        if (comClubeIgual !== undefined) idxLinha = comClubeIgual;
-                    }
+                    linhasUsadas.add(idxLinha);
 
                     const linha = linhas[idxLinha];
                     if (!linha.Id) {
                         linha.Id = jogadorEquipa.id || gerarIdJogador(inverterNome(linha.Name));
                         novosComId++;
                     }
+                    // Regista o Id para dedup por identidade dentro da mesma run.
+                    if (linha.Id) indicePorId[linha.Id] = idxLinha;
                     // O clube do envio (equipa) manda sobre o do CSV mestre — se o jogador
                     // mudou de clube, o team_id da equipa é a fonte da verdade.
                     if (jogadorEquipa.team_id) linha.Club = deslugifyClube(jogadorEquipa.team_id);
