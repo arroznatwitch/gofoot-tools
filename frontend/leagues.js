@@ -3,8 +3,8 @@
 window.LEAGUES_DATA = {
     "Brasil": {
         "Liga Brasileira 26/27": [
-            "SPO", "AFC", "VIT", "COR", "SAN", "SEP", "JUV", "CRI", "ATP", "FIG",
-            "ITU", "CHA", "CEC", "BRA", "ATM", "FOR", "SPT", "INT", "FLU", "Vasco Da Gama"
+            "SPO", "AFC", "VIT", "COR", "SAN", "SEP", "REM", "CRI", "ATP", "COR",
+            "MIR", "CHA", "CEC", "BRA", "ATM", "FOR", "SPT", "INT", "FLU", "Vasco Da Gama"
         ]
     },
     "Portugal": {
