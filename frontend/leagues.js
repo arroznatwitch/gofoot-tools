@@ -12,7 +12,7 @@ window.LEAGUES_DATA = {
     },
     "Portugal": {
         "Liga Portuguesa 26/27": [
-            "FC Porto", "Benfica", "Sporting CP", "BRG", "VTSC", "Santa Clara",
+            "FC Porto", "Benfica", "Sporting CP", "SC Braga", "Vitória SC", "Santa Clara",
             "Gil Vicente", "Famalicão", "Marítimo", "Estoril Praia", "Rio Ave",
             "Alverca SAD", "Casa Pia", "Arouca", "Moreirense", "Nacional da Madeira",
             "Académico de Viseu", "Estrela da Amadora SAD"

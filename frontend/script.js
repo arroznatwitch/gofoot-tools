@@ -918,7 +918,7 @@ function regenerarIdsCsv() {
 
 // Mapa por defeito de siglas -> nome completo (editável na aba Painel++).
 // SIGLA=Nome. Linhas em branco ou a começar por # são ignoradas.
-const MAPA_SIGLAS_PADRAO = `# Brasil (revê antes de aplicar) — SIGLA=Nome do clube
+const MAPA_SIGLAS_PADRAO = `# Brasil — SIGLA=Nome do clube (baseado no team_id dos .json das equipas)
 SPO=São Paulo
 BOT=Botafogo
 VIT=Vitória
@@ -931,14 +931,19 @@ BAH=Bahia
 CRT=Coritiba
 MIR=Mirassol
 CHA=Chapecoense
-CEC=Flamengo
-BRA=Cruzeiro
+CEC=Cruzeiro
+BRA=RB Bragantino
+CAP=Atlético Paranaense
+GREMIO=Grêmio
 ATM=Atlético Mineiro
 FOR=Fortaleza
 SPT=Sport Recife
 INT=Internacional
 FLU=Fluminense
-Vasco Da Gama=Vasco`;
+Vasco Da Gama=Vasco
+# Portugal
+BRG=SC Braga
+VTSC=Vitória SC`;
 
 // Converte o texto do mapa (SIGLA=Nome, uma por linha) num objecto { sigla: nome }.
 function lerMapaSiglas(texto) {
