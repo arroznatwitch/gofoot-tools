@@ -2,12 +2,12 @@ window.LEAGUES_DATA = {
     "Brasil": {
         "Liga Brasileira 26/27": [
             "São Paulo", "Botafogo", "Vitória", "Corinthians", "Santos",
-            "Palmeiras", "Remo", "Criciúma", "Bahia", "Coritiba",
+            "Palmeiras", "Remo", "Bahia", "Coritiba", "RB Bragantino", "Atlético Paranaense",
             "Mirassol", "Chapecoense", "Flamengo", "Cruzeiro", "Atlético Mineiro",
-            "Fortaleza", "Grêmio", "Internacional", "Fluminense", "Vasco"
+            "Grêmio", "Internacional", "Fluminense", "Vasco", 
         ],
         "Segunda Liga Brasileira 26/27": [
-            "Sport Recife"
+            "Sport Recife", "Fortaleza", "Criciúma",
         ]
     },
     "Portugal": {
