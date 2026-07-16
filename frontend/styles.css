@@ -360,3 +360,154 @@
         .clube-progress { display: flex; align-items: center; gap: 8px; width: 220px; }
         .clube-progress .progress-bar { width: 120px; }
         .clube-count { font-size: 12px; color: #8b949e; white-space: nowrap; width: 70px; text-align: right; }
+
+        /* ===================== HEADER ===================== */
+        .app-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            padding-bottom: 18px;
+            margin-bottom: 18px;
+            border-bottom: 1px solid #30363d;
+        }
+        .app-brand { display: flex; align-items: center; gap: 14px; }
+        .app-logo {
+            font-size: 30px;
+            width: 52px; height: 52px;
+            display: flex; align-items: center; justify-content: center;
+            background: linear-gradient(135deg, #238636, #2ea043);
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(35, 134, 54, 0.35);
+        }
+        .app-title { font-size: 22px; font-weight: 700; letter-spacing: 0.2px; }
+        .app-sub { font-size: 13px; color: #8b949e; margin-top: 2px; }
+        .host-badge {
+            font-size: 12px;
+            font-weight: 600;
+            color: #3fb950;
+            background-color: rgba(63, 185, 80, 0.1);
+            border: 1px solid rgba(63, 185, 80, 0.3);
+            border-radius: 20px;
+            padding: 6px 14px;
+            white-space: nowrap;
+        }
+
+        /* ===================== TABS ===================== */
+        .tabs {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin-bottom: 22px;
+            border-bottom: 1px solid #30363d;
+        }
+        .tab-btn {
+            background: none;
+            border: none;
+            border-bottom: 2px solid transparent;
+            color: #8b949e;
+            padding: 12px 18px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.15s;
+            margin-bottom: -1px;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+        .tab-btn:hover { color: #e6edf3; background-color: #1f242c; }
+        .tab-btn.active { color: #e6edf3; border-bottom-color: #2ea043; }
+        .tab-btn.tab-dev.active { border-bottom-color: #8957e5; }
+        .tab-btn.tab-dev { color: #a371f7; }
+
+        .aba { animation: fadeIn 0.2s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+
+        /* ===================== PAINÉIS / CARDS ===================== */
+        .painel-card {
+            background-color: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 10px;
+            padding: 20px 22px;
+            margin-bottom: 18px;
+        }
+        .painel-titulo { font-size: 17px; font-weight: 700; margin-bottom: 8px; }
+        .painel-desc { font-size: 13.5px; color: #8b949e; line-height: 1.55; margin-bottom: 14px; }
+        .painel-desc code, .aviso-dev code {
+            background-color: #161b22; border: 1px solid #30363d;
+            border-radius: 4px; padding: 1px 5px; font-size: 12px; color: #c9d1d9;
+        }
+        .acoes-linha { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+        .status-texto { color: #8b949e; font-size: 13px; }
+
+        .aviso-dev {
+            background-color: rgba(210, 153, 34, 0.1);
+            border: 1px solid rgba(210, 153, 34, 0.4);
+            color: #e3b341;
+            border-radius: 8px;
+            padding: 14px 18px;
+            font-size: 13.5px;
+            line-height: 1.55;
+            margin-bottom: 18px;
+        }
+        .btn-dev { background-color: #8957e5; color: white; border: none; }
+        .btn-dev:hover { background-color: #a371f7; }
+
+        .mapa-siglas {
+            width: 100%;
+            background-color: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 12px 14px;
+            color: #e6edf3;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 13px;
+            line-height: 1.6;
+            resize: vertical;
+            outline: none;
+        }
+        .mapa-siglas:focus { border-color: #8957e5; }
+
+        /* ===================== LIGAS (redesenho) ===================== */
+        .ligas-cabecalho { margin-bottom: 18px; }
+        .vazio-msg { color: #8b949e; font-size: 14px; padding: 20px 0; }
+
+        .pais-header {
+            display: flex; align-items: center; gap: 10px;
+            margin-bottom: 14px;
+        }
+        .pais-nome { font-size: 19px; font-weight: 700; }
+
+        .liga-seccao { margin-bottom: 18px; }
+        .liga-seccao:last-child { margin-bottom: 0; }
+        .liga-header {
+            display: flex; justify-content: space-between; align-items: center;
+            gap: 12px; margin-bottom: 8px;
+        }
+        .liga-percent-badge {
+            font-size: 12.5px; font-weight: 600; color: #c9d1d9;
+            background-color: #161b22; border: 1px solid #30363d;
+            border-radius: 20px; padding: 3px 12px; white-space: nowrap;
+        }
+        .clubes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 8px;
+            margin-top: 12px;
+        }
+        .clube-chip {
+            display: flex; justify-content: space-between; align-items: center;
+            gap: 10px;
+            background-color: #161b22;
+            border: 1px solid #30363d;
+            border-left: 3px solid #d29922;
+            border-radius: 8px;
+            padding: 9px 12px;
+            font-size: 13.5px;
+        }
+        .clube-chip.ok { border-left-color: #2ea043; }
+        .clube-chip-nome { font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .clube-chip-count { font-size: 11px; font-weight: 700; white-space: nowrap; }
+        .clube-chip.ok .clube-chip-count { color: #3fb950; }
+        .clube-chip:not(.ok) .clube-chip-count { color: #d29922; }

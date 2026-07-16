@@ -3,130 +3,193 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel de Jogadores</title>
+    <title>GoFoot Tools</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
     <div class="container">
-        <div class="welcome-box">
-            Essa ferramenta foi criada para a criação de patchs para o jogo GoFoot.
-        </div>
-
-        <div class="top-bar">
-            <input type="text" id="searchInput" class="search-box" placeholder="Pesquisar jogador, nação, clube ou posição...">
-            <button class="btn" onclick="abrirModal()">+ Adicionar Jogador</button>
-            <button class="btn btn-info" onclick="document.getElementById('csvInput').click()">Importar Jogadores(.csv)</button>
-            <input type="file" id="csvInput" style="display: none;" accept=".csv" onchange="importarCsv(event)">
-        </div>
-
-        <div class="welcome-box" style="margin-top:12px;">
-            <b>Actualizar base CSV com o envio de equipas:</b> carrega o <code>players.csv</code> mestre e um ou vários
-            <code>.json</code> de equipas (mesmo sem <code>id</code>) — cada jogador já traz o seu <code>team_id</code>,
-            por isso podes seleccionar os ficheiros de várias equipas de uma vez. Atribui ID a quem não tiver, preenche
-            os atributos/OVER de quem aparecer, e deixa o resto do CSV como está.
-            <div style="margin-top:8px; display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
-                <label class="btn" style="display:inline-block;">
-                    1. players.csv mestre
-                    <input type="file" id="csvMestreInput" style="display:none;" accept=".csv">
-                </label>
-                <label class="btn" style="display:inline-block;">
-                    2. equipa(s) (.json)
-                    <input type="file" id="equipaJsonInput" style="display:none;" accept=".json" multiple>
-                </label>
-                <button class="btn btn-primary" onclick="atualizarCsvComEquipa()">Actualizar e descarregar CSV</button>
-                <span id="statusAtualizacaoCsv" style="color:#8b949e; font-size:13px;"></span>
+        <header class="app-header">
+            <div class="app-brand">
+                <span class="app-logo">⚽</span>
+                <div>
+                    <h1 class="app-title">GoFoot Tools</h1>
+                    <p class="app-sub">Ferramenta não-oficial para criar patchs do GoFoot</p>
+                </div>
             </div>
-        </div>
+            <span class="host-badge" title="Site estático — sem servidor, sem base de dados online">
+                🟢 Hospedado no GitHub Pages
+            </span>
+        </header>
 
-        <div class="welcome-box" style="margin-top:12px; text-align:left;">
-            <b>🌍 Ligas &amp; Países</b> — progresso dos elencos carregados. Um clube conta como equipa válida quando tem
-            <b>20+ jogadores</b> no <code>players.csv</code>. Importa o CSV para actualizar.
-            <div id="paisesConteudo" style="margin-top:12px;">
-                <p style="color:#8b949e; font-size:13px;">Importa um <code>players.csv</code> para veres o progresso.</p>
-            </div>
-        </div>
+        <nav class="tabs" id="tabs">
+            <button class="tab-btn active" data-aba="jogadores" onclick="trocarAba('jogadores')">👥 Jogadores</button>
+            <button class="tab-btn" data-aba="atualizar" onclick="trocarAba('atualizar')">🔄 Actualizar CSV</button>
+            <button class="tab-btn" data-aba="ligas" onclick="trocarAba('ligas')">🏆 Ligas</button>
+            <button class="tab-btn tab-dev" data-aba="dev" onclick="trocarAba('dev')">🛠️ Painel++</button>
+        </nav>
 
-        <div class="filter-bar">
-            <label><input type="checkbox" id="soIncompletos" onchange="alternarFiltroStatus('soIncompletos')"> Mostrar apenas incompletos</label>
-            <label><input type="checkbox" id="soCompletos" onchange="alternarFiltroStatus('soCompletos')"> Mostrar apenas completos</label>
-            <span class="stats-pill" id="statTotal">Total: 0</span>
-            <span class="stats-pill" id="statCompletos">Completos: 0</span>
-            <span class="stats-pill" id="statIncompletos">Incompletos: 0</span>
-        </div>
-
-        <div class="table-container">
-            <div class="loading-overlay" id="loadingOverlay">
-                <div class="spinner"></div>
-                <div id="loadingText">Importando base de dados...</div>
+        <!-- ================= ABA: JOGADORES ================= -->
+        <section class="aba" id="aba-jogadores">
+            <div class="top-bar">
+                <input type="text" id="searchInput" class="search-box" placeholder="Pesquisar jogador, nação, clube ou posição...">
+                <button class="btn" onclick="abrirModal()">+ Adicionar Jogador</button>
+                <button class="btn btn-info" onclick="document.getElementById('csvInput').click()">Importar Jogadores(.csv)</button>
+                <input type="file" id="csvInput" style="display: none;" accept=".csv" onchange="importarCsv(event)">
             </div>
 
-            <div id="wrapLinha">
-                <h3 class="table-titulo">Jogadores de Linha</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Jogador</th>
-                            <th>Nação</th>
-                            <th>Clube</th>
-                            <th>Idade</th>
-                            <th>Pé</th>
-                            <th>Posição</th>
-                            <th>Geral</th>
-                            <th>Técnica</th>
-                            <th>Ataque</th>
-                            <th>Defesa</th>
-                            <th>Físico</th>
-                            <th>Mental</th>
-                            <th>Talento</th>
-                            <th>Valor de Mercado</th>
-                            <th>Status</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody id="playerTableBody"></tbody>
-                </table>
+            <div class="filter-bar">
+                <label><input type="checkbox" id="soIncompletos" onchange="alternarFiltroStatus('soIncompletos')"> Mostrar apenas incompletos</label>
+                <label><input type="checkbox" id="soCompletos" onchange="alternarFiltroStatus('soCompletos')"> Mostrar apenas completos</label>
+                <span class="stats-pill" id="statTotal">Total: 0</span>
+                <span class="stats-pill" id="statCompletos">Completos: 0</span>
+                <span class="stats-pill" id="statIncompletos">Incompletos: 0</span>
             </div>
 
-            <div id="wrapGoleiro" style="margin-top:24px;">
-                <h3 class="table-titulo">Guarda-Redes</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Jogador</th>
-                            <th>Nação</th>
-                            <th>Clube</th>
-                            <th>Idade</th>
-                            <th>Pé</th>
-                            <th>Posição</th>
-                            <th>Geral</th>
-                            <th>Reflexos</th>
-                            <th>Posicionamento</th>
-                            <th>Jogo Aéreo</th>
-                            <th>Saída de Bola</th>
-                            <th>Mental</th>
-                            <th>Talento</th>
-                            <th>Valor de Mercado</th>
-                            <th>Status</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody id="gkTableBody"></tbody>
-                </table>
+            <div class="table-container">
+                <div class="loading-overlay" id="loadingOverlay">
+                    <div class="spinner"></div>
+                    <div id="loadingText">Importando base de dados...</div>
+                </div>
+
+                <div id="wrapLinha">
+                    <h3 class="table-titulo">Jogadores de Linha</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Jogador</th>
+                                <th>Nação</th>
+                                <th>Clube</th>
+                                <th>Idade</th>
+                                <th>Pé</th>
+                                <th>Posição</th>
+                                <th>Geral</th>
+                                <th>Técnica</th>
+                                <th>Ataque</th>
+                                <th>Defesa</th>
+                                <th>Físico</th>
+                                <th>Mental</th>
+                                <th>Talento</th>
+                                <th>Valor de Mercado</th>
+                                <th>Status</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="playerTableBody"></tbody>
+                    </table>
+                </div>
+
+                <div id="wrapGoleiro" style="margin-top:24px;">
+                    <h3 class="table-titulo">Guarda-Redes</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Jogador</th>
+                                <th>Nação</th>
+                                <th>Clube</th>
+                                <th>Idade</th>
+                                <th>Pé</th>
+                                <th>Posição</th>
+                                <th>Geral</th>
+                                <th>Reflexos</th>
+                                <th>Posicionamento</th>
+                                <th>Jogo Aéreo</th>
+                                <th>Saída de Bola</th>
+                                <th>Mental</th>
+                                <th>Talento</th>
+                                <th>Valor de Mercado</th>
+                                <th>Status</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="gkTableBody"></tbody>
+                    </table>
+                </div>
             </div>
-        </div>
 
-        <div class="pagination-bar" id="paginationBar"></div>
+            <div class="pagination-bar" id="paginationBar"></div>
 
-        <div class="bottom-bar">
-            <button class="btn btn-danger" onclick="limparTabela()">Limpar tabela</button>
-            <button class="btn btn-primary" onclick="exportarDados()">Exportar todos (.json)</button>
-            <button class="btn" style="background-color: #d29922; color: white; border: none;" onclick="exportarDadosFiltrados()">Exportar filtrados (.json)</button>
-            <button class="btn" style="background-color: #1f6feb; color: white; border: none;" onclick="document.getElementById('importInput').click()">Importar (.json)</button>
-            <input type="file" id="importInput" style="display: none;" accept=".json" multiple onchange="importarDados(event)">
-            <!-- TEMPORÁRIO: regen de IDs dos jogadores importados. Remover depois de migrar a base. -->
-            <button class="btn" style="background-color:#8957e5; color:white; border:none;" onclick="regenerarIdsCsv()">🔑 Regenerar IDs (.csv)</button>
-        </div>
+            <div class="bottom-bar">
+                <button class="btn btn-danger" onclick="limparTabela()">Limpar tabela</button>
+                <button class="btn btn-primary" onclick="exportarDados()">Exportar todos (.json)</button>
+                <button class="btn" style="background-color: #d29922; color: white; border: none;" onclick="exportarDadosFiltrados()">Exportar filtrados (.json)</button>
+                <button class="btn" style="background-color: #1f6feb; color: white; border: none;" onclick="document.getElementById('importInput').click()">Importar (.json)</button>
+                <input type="file" id="importInput" style="display: none;" accept=".json" multiple onchange="importarDados(event)">
+            </div>
+        </section>
+
+        <!-- ================= ABA: ACTUALIZAR CSV ================= -->
+        <section class="aba" id="aba-atualizar" hidden>
+            <div class="painel-card">
+                <h2 class="painel-titulo">🔄 Actualizar base CSV com o envio de equipas</h2>
+                <p class="painel-desc">
+                    Carrega o <code>players.csv</code> mestre e um ou vários <code>.json</code> de equipas (mesmo sem
+                    <code>id</code>). Cada jogador já traz o seu <code>team_id</code>, por isso podes seleccionar os
+                    ficheiros de várias equipas de uma vez. Atribui ID a quem não tiver, preenche os atributos/OVER de
+                    quem aparecer, e deixa o resto do CSV como está.
+                </p>
+                <div class="acoes-linha">
+                    <label class="btn" style="display:inline-block;">
+                        1. players.csv mestre
+                        <input type="file" id="csvMestreInput" style="display:none;" accept=".csv">
+                    </label>
+                    <label class="btn" style="display:inline-block;">
+                        2. equipa(s) (.json)
+                        <input type="file" id="equipaJsonInput" style="display:none;" accept=".json" multiple>
+                    </label>
+                    <button class="btn btn-primary" onclick="atualizarCsvComEquipa()">Actualizar e descarregar CSV</button>
+                    <span id="statusAtualizacaoCsv" class="status-texto"></span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= ABA: LIGAS ================= -->
+        <section class="aba" id="aba-ligas" hidden>
+            <div class="ligas-cabecalho">
+                <h2 class="painel-titulo">🏆 Ligas &amp; Países</h2>
+                <p class="painel-desc">
+                    Progresso dos elencos carregados. Um clube conta como equipa válida quando tem
+                    <b>20+ jogadores com todos os atributos + OVER</b>. Importa o <code>players.csv</code> na aba
+                    <b>Jogadores</b> para veres o progresso.
+                </p>
+            </div>
+            <div id="paisesConteudo">
+                <p class="vazio-msg">Importa um <code>players.csv</code> para veres o progresso.</p>
+            </div>
+        </section>
+
+        <!-- ================= ABA: PAINEL++ (DEV) ================= -->
+        <section class="aba" id="aba-dev" hidden>
+            <div class="aviso-dev">
+                ⚠️ <b>Painel de desenvolvimento.</b> Estas ferramentas alteram a base de dados em massa.
+                <b>Não uses sem saber exactamente o que estás a fazer</b> — faz sempre uma cópia do teu
+                <code>players.csv</code> antes.
+            </div>
+
+            <div class="painel-card">
+                <h2 class="painel-titulo">🔑 Regenerar IDs (.csv)</h2>
+                <p class="painel-desc">
+                    Gera um ID único novo para <b>todos</b> os jogadores importados do <code>players.csv</code>
+                    (resolve IDs repetidos/antigos) e descarrega o <code>.csv</code> com todas as colunas preservadas.
+                    Importa primeiro a base na aba <b>Jogadores</b>.
+                </p>
+                <button class="btn btn-dev" onclick="regenerarIdsCsv()">🔑 Regenerar IDs e descarregar CSV</button>
+            </div>
+
+            <div class="painel-card">
+                <h2 class="painel-titulo">🔤 Traduzir Siglas (.csv)</h2>
+                <p class="painel-desc">
+                    Troca as <b>siglas</b> dos clubes na coluna <code>Club</code> do <code>players.csv</code> pelos nomes
+                    completos, segundo o mapa abaixo (um por linha: <code>SIGLA=Nome Completo</code>). Importa primeiro a
+                    base na aba <b>Jogadores</b>, revê o mapa, e descarrega o <code>.csv</code> traduzido.
+                </p>
+                <textarea id="siglasMapa" class="mapa-siglas" spellcheck="false" rows="12"></textarea>
+                <div class="acoes-linha" style="margin-top:10px;">
+                    <button class="btn btn-dev" onclick="traduzirSiglas()">🔤 Traduzir e descarregar CSV</button>
+                    <span id="statusTraduzirSiglas" class="status-texto"></span>
+                </div>
+            </div>
+        </section>
     </div>
 
     <div id="playerModal" class="modal">

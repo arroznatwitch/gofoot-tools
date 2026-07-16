@@ -117,50 +117,63 @@ function contarJogadoresPorClube() {
     return contagem;
 }
 
-// Desenha o painel "Ligas & Países" directamente no index.html. Para cada país
-// mostra quantas equipas da liga estão válidas (clube com 20+ jogadores no CSV
-// carregado) e uma barra de progresso. Chamado sempre que os dados mudam.
+// Bandeira (emoji) por país, só para deixar a aba Ligas mais apresentável.
+const BANDEIRAS_PAIS = { "Brasil": "🇧🇷", "Portugal": "🇵🇹", "Jamaica": "🇯🇲" };
+
+// Desenha o painel "Ligas & Países" na aba Ligas. Para cada país e cada liga,
+// mostra quantas equipas estão válidas (clube com 20+ jogadores com atributos+OVER)
+// com barra de progresso e uma grelha de clubes. Chamado sempre que os dados mudam.
 function atualizarPainelPaises() {
     const conteudo = document.getElementById("paisesConteudo");
     if (!conteudo) return;
 
     if (!Object.keys(LIGAS_DATA).length) {
-        conteudo.innerHTML = `<p style="color:#8b949e; font-size:13px;">leagues.js indisponível (verifica que o ficheiro existe na pasta).</p>`;
+        conteudo.innerHTML = `<p class="vazio-msg">leagues.js indisponível (verifica que o ficheiro existe na pasta).</p>`;
         return;
     }
 
     const contagem = contarJogadoresPorClube();
 
     conteudo.innerHTML = Object.entries(LIGAS_DATA).map(([pais, ligas]) => {
-        // Junta todos os clubes das ligas do país (por agora cada país tem 1 liga).
-        const todosClubes = Object.values(ligas).flat();
-        const nomeLiga = Object.keys(ligas)[0] || "";
-        const validas = todosClubes.filter(c => (contagem[slugifyClube(c)] || 0) >= MIN_JOGADORES_PARA_EQUIPA);
-        const total = todosClubes.length;
-        const percent = total ? Math.round((validas.length / total) * 100) : 0;
+        const bandeira = BANDEIRAS_PAIS[pais] || "🏳️";
 
-        const listaClubes = todosClubes.map(clube => {
-            const n = contagem[slugifyClube(clube)] || 0;
-            const ok = n >= MIN_JOGADORES_PARA_EQUIPA;
-            return `<li class="clube-item">
-                <span class="clube-nome">${clube}</span>
-                <span class="status-badge ${ok ? "status-completo" : "status-incompleto"}">${n}/${MIN_JOGADORES_PARA_EQUIPA}${ok ? " ✓" : ""}</span>
-            </li>`;
+        const seccoesLigas = Object.entries(ligas).map(([nomeLiga, clubes]) => {
+            const validas = clubes.filter(c => (contagem[slugifyClube(c)] || 0) >= MIN_JOGADORES_PARA_EQUIPA).length;
+            const total = clubes.length;
+            const percent = total ? Math.round((validas / total) * 100) : 0;
+
+            const chips = clubes.map(clube => {
+                const n = contagem[slugifyClube(clube)] || 0;
+                const ok = n >= MIN_JOGADORES_PARA_EQUIPA;
+                return `<div class="clube-chip ${ok ? "ok" : ""}">
+                    <span class="clube-chip-nome" title="${clube}">${clube}</span>
+                    <span class="clube-chip-count">${n}/${MIN_JOGADORES_PARA_EQUIPA}${ok ? " ✓" : ""}</span>
+                </div>`;
+            }).join("");
+
+            return `
+                <div class="liga-seccao">
+                    <div class="liga-header">
+                        <span class="liga-nome">${nomeLiga}</span>
+                        <span class="liga-percent-badge">${validas}/${total} válidas · ${percent}%</span>
+                    </div>
+                    <div class="progress-bar"><div class="progress-bar-fill" style="width:${percent}%;"></div></div>
+                    <div class="clubes-grid">${chips}</div>
+                </div>`;
         }).join("");
 
         return `
             <div class="pais-card">
-                <div class="liga-cabecalho">
-                    <span class="pais-titulo">${pais} <span style="color:#8b949e; font-weight:400; font-size:13px;">— ${nomeLiga}</span></span>
-                    <span class="liga-percent">Times: ${validas.length}/${total} válidos (${percent}%)</span>
-                </div>
-                <div class="progress-bar"><div class="progress-bar-fill" style="width:${percent}%;"></div></div>
-                <details style="margin-top:8px;">
-                    <summary style="cursor:pointer; color:#58a6ff; font-size:13px;">Ver clubes</summary>
-                    <ul class="clube-lista">${listaClubes}</ul>
-                </details>
+                <div class="pais-header"><span class="pais-nome">${bandeira} ${pais}</span></div>
+                ${seccoesLigas}
             </div>`;
     }).join("");
+}
+
+// Troca de aba (puro DOM, sem rede — funciona em file:// e no GitHub Pages).
+function trocarAba(nome) {
+    document.querySelectorAll(".aba").forEach(s => { s.hidden = (s.id !== "aba-" + nome); });
+    document.querySelectorAll(".tab-btn").forEach(b => { b.classList.toggle("active", b.dataset.aba === nome); });
 }
 
 let listaJogadores = (window.FM_PLAYERS_DATA || []).map(marcarStatus);
@@ -222,6 +235,10 @@ document.addEventListener("DOMContentLoaded", () => {
     carregarJogadoresManuais();
     carregarPaises();
     aplicarFiltros();
+
+    // Pré-preenche o mapa de siglas (aba Painel++), se ainda estiver vazio.
+    const siglasMapa = document.getElementById("siglasMapa");
+    if (siglasMapa && !siglasMapa.value.trim()) siglasMapa.value = MAPA_SIGLAS_PADRAO;
 
     let debounceTimer = null;
     document.getElementById("searchInput").addEventListener("input", () => {
@@ -897,6 +914,98 @@ function regenerarIdsCsv() {
 
     aplicarFiltros();
     alert(`Pronto: ${comRaw.length.toLocaleString("pt-PT")} linhas com IDs únicos novos. Descarregado "players_ids_unicos.csv" — usa esse como a tua db a partir de agora.`);
+}
+
+// Mapa por defeito de siglas -> nome completo (editável na aba Painel++).
+// SIGLA=Nome. Linhas em branco ou a começar por # são ignoradas.
+const MAPA_SIGLAS_PADRAO = `# Brasil (revê antes de aplicar) — SIGLA=Nome do clube
+SPO=São Paulo
+BOT=Botafogo
+VIT=Vitória
+COR=Corinthians
+SAN=Santos
+SEP=Palmeiras
+REM=Remo
+CRI=Criciúma
+BAH=Bahia
+CRT=Coritiba
+MIR=Mirassol
+CHA=Chapecoense
+CEC=Flamengo
+BRA=Cruzeiro
+ATM=Atlético Mineiro
+FOR=Fortaleza
+SPT=Sport Recife
+INT=Internacional
+FLU=Fluminense
+Vasco Da Gama=Vasco`;
+
+// Converte o texto do mapa (SIGLA=Nome, uma por linha) num objecto { sigla: nome }.
+function lerMapaSiglas(texto) {
+    const mapa = {};
+    (texto || "").split(/\r?\n/).forEach(linha => {
+        const l = linha.trim();
+        if (!l || l.startsWith("#")) return;
+        const i = l.indexOf("=");
+        if (i < 1) return;
+        const sigla = l.slice(0, i).trim();
+        const nome = l.slice(i + 1).trim();
+        if (sigla && nome) mapa[sigla] = nome;
+    });
+    return mapa;
+}
+
+// TEMPORÁRIO (dev): troca as siglas dos clubes na coluna Club do players.csv
+// importado pelos nomes completos, segundo o mapa da textarea, e descarrega o .csv.
+function traduzirSiglas() {
+    const status = document.getElementById("statusTraduzirSiglas");
+    const comRaw = listaJogadores.filter(j => j._csvRaw);
+    if (!comRaw.length) {
+        status.textContent = "Importa primeiro a base na aba Jogadores (Importar Jogadores.csv).";
+        return;
+    }
+
+    const mapa = lerMapaSiglas(document.getElementById("siglasMapa").value);
+    if (!Object.keys(mapa).length) {
+        status.textContent = "O mapa de siglas está vazio.";
+        return;
+    }
+    if (!confirm("Isto troca as siglas dos clubes pelos nomes completos (segundo o mapa) e descarrega o .csv. Continuar?")) return;
+
+    // Índice de procura insensível a maiúsculas/minúsculas — na base as siglas
+    // aparecem em várias caixas ("SPO" vazio vs "Spo" preenchido), por isso a
+    // comparação tem de ignorar a caixa para apanhar todas as linhas.
+    const mapaUpper = {};
+    Object.entries(mapa).forEach(([sigla, nome]) => { mapaUpper[sigla.trim().toUpperCase()] = nome; });
+
+    let trocados = 0;
+    comRaw.forEach(j => {
+        const clubeAtual = (j._csvRaw.Club || "").trim();
+        const nome = mapaUpper[clubeAtual.toUpperCase()];
+        if (nome) {
+            j._csvRaw.Club = nome;
+            j.c = nome;
+            trocados++;
+        }
+    });
+
+    const colunasFinais = [...(colunasCsvImportadas || Object.keys(comRaw[0]._csvRaw))];
+    const csvFinal = Papa.unparse(comRaw.map(j => j._csvRaw), { delimiter: ";", columns: colunasFinais });
+
+    const bytesISO = new Uint8Array(csvFinal.length);
+    for (let i = 0; i < csvFinal.length; i++) bytesISO[i] = csvFinal.charCodeAt(i) & 0xFF;
+    const blob = new Blob([bytesISO], { type: "text/csv;charset=ISO-8859-1" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "players_siglas_traduzidas.csv";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+
+    aplicarFiltros();
+    status.textContent = `Pronto: ${trocados.toLocaleString("pt-PT")} linha(s) com clube traduzido. Descarregado "players_siglas_traduzidas.csv".`;
 }
 
 function exportarDadosFiltrados() {

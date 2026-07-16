@@ -1,10 +1,13 @@
-// Definição das ligas: País -> Liga -> lista de clubes (o nome do clube tem de
-// bater com a coluna "Club" do players.csv). Editável à mão.
 window.LEAGUES_DATA = {
     "Brasil": {
         "Liga Brasileira 26/27": [
-            "SPO", "BOT", "VIT", "COR", "SAN", "SEP", "REM", "CRI", "BAH", "CRT",
-            "MIR", "CHA", "CEC", "BRA", "ATM", "FOR", "SPT", "INT", "FLU", "Vasco Da Gama"
+            "São Paulo", "Botafogo", "Vitória", "Corinthians", "Santos",
+            "Palmeiras", "Remo", "Criciúma", "Bahia", "Coritiba",
+            "Mirassol", "Chapecoense", "Flamengo", "Cruzeiro", "Atlético Mineiro",
+            "Fortaleza", "Grêmio", "Internacional", "Fluminense", "Vasco"
+        ],
+        "Segunda Liga Brasileira 26/27": [
+            "Sport Recife"
         ]
     },
     "Portugal": {
