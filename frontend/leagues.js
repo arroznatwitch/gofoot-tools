@@ -7,7 +7,10 @@ window.LEAGUES_DATA = {
             "Grêmio", "Internacional", "Fluminense", "Vasco", 
         ],
         "Segunda Liga Brasileira 26/27": [
-            "Sport Recife", "Fortaleza", "Criciúma",
+            "América Mineiro", "Athletic Club", "Atlético Goianiense", "Avaí", 
+            "Botafogo-SP", "Ceará", "CRB", "Criciúma", "Cuiabá", "Fortaleza",
+            "Goiás", "Juventude", "Londrina", "Naútico", "Novorizontino", 
+            "Operário-PR", "Ponte Preta, "São Bernardo", "Sport", "Vila Nova",
         ]
     },
     "Portugal": {
