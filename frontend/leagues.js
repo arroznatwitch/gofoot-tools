@@ -10,7 +10,7 @@ window.LEAGUES_DATA = {
             "América Mineiro", "Athletic Club", "Atlético Goianiense", "Avaí", 
             "Botafogo-SP", "Ceará", "CRB", "Criciúma", "Cuiabá", "Fortaleza",
             "Goiás", "Juventude", "Londrina", "Naútico", "Novorizontino", 
-            "Operário-PR", "Ponte Preta, "São Bernardo", "Sport", "Vila Nova",
+            "Operário-PR", "Ponte Preta", "São Bernardo", "Sport", "Vila Nova",
         ]
     },
     "Portugal": {
