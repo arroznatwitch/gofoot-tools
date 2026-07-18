@@ -11,7 +11,13 @@ window.LEAGUES_DATA = {
             "Botafogo-SP", "Ceará", "CRB", "Criciúma", "Cuiabá", "Fortaleza",
             "Goiás", "Juventude", "Londrina", "Naútico", "Novorizontino", 
             "Operário-PR", "Ponte Preta", "São Bernardo", "Sport Recife", "Vila Nova",
-        ]
+        ],
+        "Terceira Liga Brasileira 26/27": [
+        "Amazonas", "Anápolis", "Barra", "Botafogo-PB", "Brusque",
+        "Caxias", "Confiança", "Ferroviária", "Figueirense", "Floresta",
+        "Guarani", "Inter De Limeira", "Itabaiana", "Ituano", "Maranhão",
+        "Maringá", "Paysandu", "Santa Cruz", "Volta Redonda", "Ypiranga-RS"
+    ]
     },
     "Portugal": {
         "Liga Portuguesa 26/27": [
@@ -28,5 +34,13 @@ window.LEAGUES_DATA = {
             "Racing Utd (JAM)", "Montego Bay Utd", "Treasure Beach", "Waterhouse",
             "Molynes Utd", "Spanish Town Police"
         ]
-    }
+    },
+    "Turquia": {
+    "Süper Lig 26/27": [
+        "Fenerbahce", "Galatasaray", "Besiktas JK", "Trabzonspor", "Basaksehir FK",
+        "Göztepe", "Samsunspor", "Caykur Rizespor", "Alanyaspor", "Konyaspor",
+        "Kasimpasa", "Kocaelispor", "Gaziantep FK", "Corum FK", "Genclerbirligi Ankara",
+        "Amed SK", "Erzurumspor FK", "Eyüpspor"
+    ]
+}
 };
