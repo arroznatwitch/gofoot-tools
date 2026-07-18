@@ -473,41 +473,97 @@
         .ligas-cabecalho { margin-bottom: 18px; }
         .vazio-msg { color: #8b949e; font-size: 14px; padding: 20px 0; }
 
-        .pais-header {
-            display: flex; align-items: center; gap: 10px;
+        /* País colapsável (esconde as ligas) */
+        .pais-acc {
+            border: 1px solid #30363d;
+            border-radius: 12px;
+            background-color: #0d1117;
             margin-bottom: 14px;
+            overflow: hidden;
         }
-        .pais-nome { font-size: 19px; font-weight: 700; }
-
-        .liga-seccao { margin-bottom: 18px; }
-        .liga-seccao:last-child { margin-bottom: 0; }
-        .liga-header {
+        .pais-summary {
             display: flex; justify-content: space-between; align-items: center;
-            gap: 12px; margin-bottom: 8px;
+            gap: 12px;
+            padding: 14px 18px;
+            cursor: pointer;
+            list-style: none;
+            user-select: none;
+        }
+        .pais-summary::-webkit-details-marker { display: none; }
+        .pais-summary:hover { background-color: #12161c; }
+        .pais-nome { font-size: 18px; font-weight: 700; display: flex; align-items: center; gap: 10px; }
+        .pais-bandeira {
+            width: 26px; height: auto; border-radius: 3px;
+            box-shadow: 0 0 0 1px rgba(255,255,255,0.08);
+            display: block;
+        }
+        .pais-bandeira-emoji { font-size: 20px; }
+        .pais-acc[open] > .pais-summary .chevron { transform: rotate(180deg); }
+        .pais-corpo { padding: 0 14px 14px; }
+
+        /* Liga colapsável (accordion compacto) */
+        .liga-acc {
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            background-color: #161b22;
+            margin-bottom: 8px;
+        }
+        .liga-acc:last-child { margin-bottom: 0; }
+        .liga-acc[open] { background-color: #12161c; }
+        .liga-summary {
+            display: flex; justify-content: space-between; align-items: center;
+            gap: 12px; padding: 11px 14px; cursor: pointer;
+            list-style: none; user-select: none;
+        }
+        .liga-summary::-webkit-details-marker { display: none; }
+        .liga-summary:hover { background-color: #1f242c; border-radius: 8px; }
+        .liga-nome { color: #58a6ff; font-weight: 600; }
+        .liga-meta { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+        .liga-media {
+            font-size: 12px; font-weight: 700; color: #58a6ff;
+            background-color: rgba(88,166,255,0.1); border: 1px solid rgba(88,166,255,0.25);
+            border-radius: 20px; padding: 3px 10px; white-space: nowrap;
         }
         .liga-percent-badge {
             font-size: 12.5px; font-weight: 600; color: #c9d1d9;
-            background-color: #161b22; border: 1px solid #30363d;
+            background-color: #0d1117; border: 1px solid #30363d;
             border-radius: 20px; padding: 3px 12px; white-space: nowrap;
         }
+        .chevron { color: #8b949e; font-size: 12px; transition: transform 0.2s; }
+        .liga-acc[open] .liga-summary .chevron { transform: rotate(180deg); }
+
         .clubes-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
             gap: 8px;
-            margin-top: 12px;
+            padding: 12px 14px 14px;
         }
         .clube-chip {
             display: flex; justify-content: space-between; align-items: center;
             gap: 10px;
-            background-color: #161b22;
+            background-color: #0d1117;
             border: 1px solid #30363d;
             border-left: 3px solid #d29922;
             border-radius: 8px;
             padding: 9px 12px;
             font-size: 13.5px;
         }
-        .clube-chip.ok { border-left-color: #2ea043; }
+        .clube-chip.ok { border-left-color: #2ea043; flex-direction: column; align-items: stretch; gap: 6px; }
+        .chip-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
         .clube-chip-nome { font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
         .clube-chip-count { font-size: 11px; font-weight: 700; white-space: nowrap; }
         .clube-chip.ok .clube-chip-count { color: #3fb950; }
         .clube-chip:not(.ok) .clube-chip-count { color: #d29922; }
+
+        .chip-medias { display: flex; gap: 5px; flex-wrap: wrap; }
+        .stat-badge {
+            flex: 1; min-width: 42px; text-align: center;
+            font-size: 11px; font-weight: 700; letter-spacing: 0.2px;
+            border: 1px solid; border-radius: 20px; padding: 3px 6px;
+            white-space: nowrap;
+        }
+        .sb-green      { color: #3fb950; background-color: rgba(0, 205, 78, 0.12);  border-color: rgba(0, 205, 78, 0.35); }
+        .sb-lightgreen { color: #a5d64a; background-color: rgba(153, 207, 45, 0.12); border-color: rgba(153, 207, 45, 0.35); }
+        .sb-yellow     { color: #e1a300; background-color: rgba(225, 163, 0, 0.12);  border-color: rgba(225, 163, 0, 0.35); }
+        .sb-red        { color: #ff7b72; background-color: rgba(221, 51, 51, 0.12);   border-color: rgba(221, 51, 51, 0.4); }
+        .sb-nula       { color: #8b949e; background-color: #161b22;                   border-color: #21262d; }

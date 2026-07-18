@@ -117,12 +117,83 @@ function contarJogadoresPorClube() {
     return contagem;
 }
 
-// Bandeira (emoji) por país, só para deixar a aba Ligas mais apresentável.
-const BANDEIRAS_PAIS = { "Brasil": "🇧🇷", "Portugal": "🇵🇹", "Jamaica": "🇯🇲" };
+// Bandeira do país: imagem via flagcdn.com (uma "API" de bandeiras por código ISO).
+// É só um <img> — se a CDN falhar mostra o emoji de reserva, nunca "buga" o site.
+const BANDEIRAS_PAIS = { "Brasil": "🇧🇷", "Portugal": "🇵🇹", "Jamaica": "🇯🇲", "Turquia": "🇹🇷" };
+function bandeiraHtml(pais) {
+    const code = ISO_NACOES[(pais || "").toLowerCase()];
+    const emoji = BANDEIRAS_PAIS[pais] || "🏳️";
+    if (code) {
+        return `<img class="pais-bandeira" src="https://flagcdn.com/w40/${code}.png" alt=""
+                     loading="lazy" onerror="this.outerHTML='<span class=&quot;pais-bandeira-emoji&quot;>${emoji}</span>'">`;
+    }
+    return `<span class="pais-bandeira-emoji">${emoji}</span>`;
+}
 
-// Desenha o painel "Ligas & Países" na aba Ligas. Para cada país e cada liga,
-// mostra quantas equipas estão válidas (clube com 20+ jogadores com atributos+OVER)
-// com barra de progresso e uma grelha de clubes. Chamado sempre que os dados mudam.
+// Formação do "melhor 11" (na verdade 12 titulares): para cada slot escolhem-se
+// os N melhores por OVER dentro dos grupos indicados. Assim a média reflecte a
+// MELHOR equipa e não é arrastada por reservas/jovens fracos.
+//   1 G · 2 L · 2 Z · 4 meio (V/M) · 3 ataque (PE/CA/PD)
+const FORMACAO_XI = [
+    { grupos: ["G"], n: 1, linha: "def" },
+    { grupos: ["L"], n: 2, linha: "def" },
+    { grupos: ["Z"], n: 2, linha: "def" },
+    { grupos: ["V", "M"], n: 4, linha: "mei" },
+    { grupos: ["PE", "CA", "PD"], n: 3, linha: "ata" },
+];
+
+// Agrega por clube: conta jogadores completos e calcula a média do OVER do melhor
+// 11 (titulares escolhidos por posição) e por linha (Defesa=G/L/Z, Meio=V/M, Ataque=PE/CA/PD).
+function agregarPorClube() {
+    const porClube = {};
+    listaJogadores.forEach(j => {
+        const slug = slugifyClube(j.c);
+        if (!slug) return;
+        const over = calcularOverallDinamico(j);
+        if (over === null) return; // só jogadores completos
+        const c = porClube[slug] || (porClube[slug] = { n: 0, grupos: {} });
+        c.n++;
+        const g = posicaoGrupo(j);
+        if (g) (c.grupos[g] = c.grupos[g] || []).push(over);
+    });
+
+    const media = arr => (arr.length ? Math.round(arr.reduce((s, x) => s + x, 0) / arr.length) : null);
+    const agg = {};
+    Object.entries(porClube).forEach(([slug, c]) => {
+        const linhas = { def: [], mei: [], ata: [] };
+        FORMACAO_XI.forEach(slot => {
+            let pool = [];
+            slot.grupos.forEach(g => { pool = pool.concat(c.grupos[g] || []); });
+            pool.sort((a, b) => b - a);
+            linhas[slot.linha] = linhas[slot.linha].concat(pool.slice(0, slot.n));
+        });
+        const xi = [...linhas.def, ...linhas.mei, ...linhas.ata];
+        agg[slug] = { n: c.n, over: media(xi), def: media(linhas.def), mei: media(linhas.mei), ata: media(linhas.ata) };
+    });
+    return agg;
+}
+
+// Mesma escala de cor do OVER, mas para o efeito de pílula (badge).
+function classeCorBadge(nota) {
+    if (nota === null || nota === undefined || isNaN(nota)) return "sb-nula";
+    if (nota >= 80) return "sb-green";
+    if (nota >= 70) return "sb-lightgreen";
+    if (nota >= 50) return "sb-yellow";
+    return "sb-red";
+}
+function badgeMedia(label, nota) {
+    return `<span class="stat-badge ${classeCorBadge(nota)}">${label} ${nota ?? "–"}</span>`;
+}
+
+// Estados de abrir/fechar (persistem entre re-renders).
+const paisesColapsados = new Set();     // países fechados (por defeito abertos)
+const ligasExpandidas = new Set();      // ligas abertas (por defeito fechadas)
+function alternarPais(pais, aberto) { if (aberto) paisesColapsados.delete(pais); else paisesColapsados.add(pais); }
+function alternarLiga(chave, aberto) { if (aberto) ligasExpandidas.add(chave); else ligasExpandidas.delete(chave); }
+
+// Desenha o painel "Ligas & Países". Cada PAÍS é colapsável (esconde as ligas),
+// e cada liga é um accordion compacto que mostra a grelha de clubes com a média
+// de OVER/ATA/MEI/DEF do melhor 11.
 function atualizarPainelPaises() {
     const conteudo = document.getElementById("paisesConteudo");
     if (!conteudo) return;
@@ -132,41 +203,67 @@ function atualizarPainelPaises() {
         return;
     }
 
-    const contagem = contarJogadoresPorClube();
+    const agg = agregarPorClube();
 
     conteudo.innerHTML = Object.entries(LIGAS_DATA).map(([pais, ligas]) => {
-        const bandeira = BANDEIRAS_PAIS[pais] || "🏳️";
-
         const seccoesLigas = Object.entries(ligas).map(([nomeLiga, clubes]) => {
-            const validas = clubes.filter(c => (contagem[slugifyClube(c)] || 0) >= MIN_JOGADORES_PARA_EQUIPA).length;
-            const total = clubes.length;
-            const percent = total ? Math.round((validas / total) * 100) : 0;
+            const chave = pais + "||" + nomeLiga;
+            let validas = 0, somaOver = 0;
 
             const chips = clubes.map(clube => {
-                const n = contagem[slugifyClube(clube)] || 0;
+                const a = agg[slugifyClube(clube)];
+                const n = a ? a.n : 0;
                 const ok = n >= MIN_JOGADORES_PARA_EQUIPA;
-                return `<div class="clube-chip ${ok ? "ok" : ""}">
+                if (ok) {
+                    validas++; somaOver += (a.over || 0);
+                    return `<div class="clube-chip ok">
+                        <div class="chip-top">
+                            <span class="clube-chip-nome" title="${clube}">${clube}</span>
+                            <span class="clube-chip-count">${n} ✓</span>
+                        </div>
+                        <div class="chip-medias">
+                            ${badgeMedia("OVR", a.over)}
+                            ${badgeMedia("ATA", a.ata)}
+                            ${badgeMedia("MEI", a.mei)}
+                            ${badgeMedia("DEF", a.def)}
+                        </div>
+                    </div>`;
+                }
+                return `<div class="clube-chip">
                     <span class="clube-chip-nome" title="${clube}">${clube}</span>
-                    <span class="clube-chip-count">${n}/${MIN_JOGADORES_PARA_EQUIPA}${ok ? " ✓" : ""}</span>
+                    <span class="clube-chip-count">${n}/${MIN_JOGADORES_PARA_EQUIPA}</span>
                 </div>`;
             }).join("");
 
+            const total = clubes.length;
+            const percent = total ? Math.round((validas / total) * 100) : 0;
+            const mediaLiga = validas ? Math.round(somaOver / validas) : null;
+            const abertoLiga = ligasExpandidas.has(chave) ? " open" : "";
+
             return `
-                <div class="liga-seccao">
-                    <div class="liga-header">
+                <details class="liga-acc"${abertoLiga} ontoggle="alternarLiga('${chave.replace(/'/g, "\\'")}', this.open)">
+                    <summary class="liga-summary">
                         <span class="liga-nome">${nomeLiga}</span>
-                        <span class="liga-percent-badge">${validas}/${total} válidas · ${percent}%</span>
-                    </div>
-                    <div class="progress-bar"><div class="progress-bar-fill" style="width:${percent}%;"></div></div>
+                        <span class="liga-meta">
+                            ${mediaLiga != null ? `<span class="liga-media">Média OVR ${mediaLiga}</span>` : ""}
+                            <span class="liga-percent-badge">${validas}/${total} válidas · ${percent}%</span>
+                            <span class="chevron">▾</span>
+                        </span>
+                    </summary>
+                    <div class="progress-bar" style="margin:10px 14px 0;"><div class="progress-bar-fill" style="width:${percent}%;"></div></div>
                     <div class="clubes-grid">${chips}</div>
-                </div>`;
+                </details>`;
         }).join("");
 
+        const abertoPais = paisesColapsados.has(pais) ? "" : " open";
         return `
-            <div class="pais-card">
-                <div class="pais-header"><span class="pais-nome">${bandeira} ${pais}</span></div>
-                ${seccoesLigas}
-            </div>`;
+            <details class="pais-acc"${abertoPais} ontoggle="alternarPais('${pais.replace(/'/g, "\\'")}', this.open)">
+                <summary class="pais-summary">
+                    <span class="pais-nome">${bandeiraHtml(pais)} ${pais}</span>
+                    <span class="chevron">▾</span>
+                </summary>
+                <div class="pais-corpo">${seccoesLigas}</div>
+            </details>`;
     }).join("");
 }
 
