@@ -14,7 +14,7 @@ window.LEAGUES_DATA = {
         ],
         "Terceira Liga Brasileira 26/27": [
         "Amazonas", "Anápolis", "Barra", "Botafogo-PB", "Brusque",
-        "Caxias do Sul", "Confiança", "Ferroviária", "Figueirense", "Floresta",
+        "Caxias", "Confiança", "Ferroviária", "Figueirense", "Floresta",
         "Guarani", "Inter De Limeira", "Itabaiana", "Ituano", "Maranhão",
         "Maringá", "Paysandu", "Santa Cruz", "Volta Redonda", "Ypiranga-RS"
     ]
