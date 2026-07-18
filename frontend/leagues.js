@@ -28,5 +28,13 @@ window.LEAGUES_DATA = {
             "Racing Utd (JAM)", "Montego Bay Utd", "Treasure Beach", "Waterhouse",
             "Molynes Utd", "Spanish Town Police"
         ]
-    }
+    },
+    "Turquia": {
+    "Süper Lig 26/27": [
+        "Fenerbahce", "Galatasaray", "Besiktas JK", "Trabzonspor", "Basaksehir FK",
+        "Göztepe", "Samsunspor", "Caykur Rizespor", "Alanyaspor", "Konyaspor",
+        "Kasimpasa", "Kocaelispor", "Gaziantep FK", "Corum FK", "Genclerbirligi Ankara",
+        "Amed SK", "Erzurumspor FK", "Eyüpspor"
+    ]
+}
 };
