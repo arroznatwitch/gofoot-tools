@@ -11,7 +11,13 @@ window.LEAGUES_DATA = {
             "Botafogo-SP", "Ceará", "CRB", "Criciúma", "Cuiabá", "Fortaleza",
             "Goiás", "Juventude", "Londrina", "Naútico", "Novorizontino", 
             "Operário-PR", "Ponte Preta", "São Bernardo", "Sport Recife", "Vila Nova",
-        ]
+        ],
+        "Terceira Liga Brasileira 26/27": [
+        "Amazonas", "Anápolis", "Barra", "Botafogo-PB", "Brusque",
+        "Caxias do Sul", "Confiança", "Ferroviária", "Figueirense", "Floresta",
+        "Guarani", "Inter De Limeira", "Itabaiana", "Ituano", "Maranhão",
+        "Maringá", "Paysandu", "Santa Cruz", "Volta Redonda", "Ypiranga-RS"
+    ]
     },
     "Portugal": {
         "Liga Portuguesa 26/27": [
