@@ -4,7 +4,7 @@ const ISO_NACOES = {
     "argentina":"ar","armenia":"am","arménia":"am","australia":"au","austrália":"au","austria":"at","áustria":"at",
     "belgium":"be","bélgica":"be","bolivia":"bo","bolívia":"bo","bosnia and herzegovina":"ba","bósnia":"ba",
     "brazil":"br","brasil":"br","bulgaria":"bg","bulgária":"bg","cameroon":"cm","camarões":"cm","canada":"ca","canadá":"ca",
-    "chile":"cl","china":"cn","china pr":"cn","colombia":"co","colômbia":"co","costa rica":"cr",
+    "chile":"cl","china":"cn","china pr":"cn","colombia":"co","colômbia":"co","costa rica":"cr","cuba":"cu",
     "croatia":"hr","croácia":"hr","cyprus":"cy","chipre":"cy","czechia":"cz","czech republic":"cz","chéquia":"cz","república checa":"cz",
     "denmark":"dk","dinamarca":"dk","ecuador":"ec","equador":"ec","egypt":"eg","egito":"eg",
     "england":"gb-eng","inglaterra":"gb-eng","estonia":"ee","estónia":"ee",
@@ -70,6 +70,17 @@ function gerarIdJogador(nome) {
     return id;
 }
 
+// Gera um Id único que também não colide com nenhum Id já registado no mapa
+// indicePorId (id -> índice da linha). Usado no merge para garantir que um Id
+// nunca é escrito por cima de outro jogador — se o Id "preferido" (o que veio
+// no .json) já pertence a OUTRA linha, gera-se um novo até ser mesmo único.
+function gerarIdUnicoContra(nome, idPreferido, indicePorId) {
+    if (idPreferido && indicePorId[idPreferido] === undefined) return idPreferido;
+    let candidato;
+    do { candidato = gerarIdJogador(nome); } while (indicePorId[candidato] !== undefined);
+    return candidato;
+}
+
 // O players.csv (export do Genie Scout/FM) traz o nome como "Apelido, Nome"
 // (ex: "á Bø, Hans Pauli"). Isto inverte para "Nome Apelido".
 function inverterNome(nomeCru) {
@@ -119,7 +130,7 @@ function contarJogadoresPorClube() {
 
 // Bandeira do país: imagem via flagcdn.com (uma "API" de bandeiras por código ISO).
 // É só um <img> — se a CDN falhar mostra o emoji de reserva, nunca "buga" o site.
-const BANDEIRAS_PAIS = { "Brasil": "🇧🇷", "Portugal": "🇵🇹", "Jamaica": "🇯🇲", "Turquia": "🇹🇷" };
+const BANDEIRAS_PAIS = { "Brasil": "🇧🇷", "Portugal": "🇵🇹", "Jamaica": "🇯🇲", "Turquia": "🇹🇷", "Cuba": "🇨🇺" };
 function bandeiraHtml(pais) {
     const code = ISO_NACOES[(pais || "").toLowerCase()];
     const emoji = BANDEIRAS_PAIS[pais] || "🏳️";
@@ -130,16 +141,16 @@ function bandeiraHtml(pais) {
     return `<span class="pais-bandeira-emoji">${emoji}</span>`;
 }
 
-// Formação do "melhor 11" (na verdade 12 titulares): para cada slot escolhem-se
-// os N melhores por OVER dentro dos grupos indicados. Assim a média reflecte a
-// MELHOR equipa e não é arrastada por reservas/jovens fracos.
-//   1 G · 2 L · 2 Z · 4 meio (V/M) · 3 ataque (PE/CA/PD)
+// Formação do "melhor 11": para cada slot escolhem-se os N melhores por OVER
+// dentro dos grupos indicados. Assim a média reflecte a MELHOR equipa e não é
+// arrastada por reservas/jovens fracos.
+//   1 G · 2 L · 2 Z · 4 meio (V/M) · 2 ataque (PE/CA/PD)  = 11
 const FORMACAO_XI = [
     { grupos: ["G"], n: 1, linha: "def" },
     { grupos: ["L"], n: 2, linha: "def" },
     { grupos: ["Z"], n: 2, linha: "def" },
     { grupos: ["V", "M"], n: 4, linha: "mei" },
-    { grupos: ["PE", "CA", "PD"], n: 3, linha: "ata" },
+    { grupos: ["PE", "CA", "PD"], n: 2, linha: "ata" },
 ];
 
 // Agrega por clube: conta jogadores completos e calcula a média do OVER do melhor
@@ -540,9 +551,69 @@ function atualizarEstatisticas() {
     document.getElementById("statIncompletos").textContent = `Incompletos: ${(listaJogadores.length - completos).toLocaleString("pt-PT")}`;
 }
 
+// Ordenação da tabela: clicar num cabeçalho cicla 1º clique = crescente/A-Z,
+// 2º clique = decrescente/Z-A, 3º clique = volta à ordem por defeito (sem ordenar).
+let ordenacaoAtual = { coluna: null, direcao: null };
+
+function valorOrdenacao(j, coluna) {
+    const ehGoleiro = posicaoGrupo(j) === "G";
+    switch (coluna) {
+        case "nome": return (j.n || "").toLowerCase();
+        case "nacao": return (j.nat || "").toLowerCase();
+        case "clube": return (j.c || "").toLowerCase();
+        case "idade": return Number(j.a) || 0;
+        case "pe": return (j.pe || "").toLowerCase();
+        case "posicao": return (posicaoGrupo(j) || j.p || "").toLowerCase();
+        case "geral": { const v = calcularOverallDinamico(j); return v === null ? -1 : v; }
+        case "attr1": { const v = ehGoleiro ? j.ref : j.tec; return v === null || v === undefined ? -1 : Number(v); }
+        case "attr2": { const v = ehGoleiro ? j.pos_gk : j.ata; return v === null || v === undefined ? -1 : Number(v); }
+        case "attr3": { const v = ehGoleiro ? j.aer : j.def; return v === null || v === undefined ? -1 : Number(v); }
+        case "attr4": { const v = ehGoleiro ? j.sai : j.fis; return v === null || v === undefined ? -1 : Number(v); }
+        case "mental": return (j.men === null || j.men === undefined) ? -1 : Number(j.men);
+        case "talento": return (j.tal === null || j.tal === undefined) ? -1 : Number(j.tal);
+        case "valor": { const v = Number(j.v); return isNaN(v) ? -1 : v; }
+        case "status": return j.completo ? 1 : 0;
+        default: return 0;
+    }
+}
+
+function ordenarLista(lista) {
+    if (!ordenacaoAtual.coluna || !ordenacaoAtual.direcao) return lista;
+    const copia = lista.slice();
+    copia.sort((a, b) => {
+        const va = valorOrdenacao(a, ordenacaoAtual.coluna);
+        const vb = valorOrdenacao(b, ordenacaoAtual.coluna);
+        const cmp = (typeof va === "string") ? va.localeCompare(vb, "pt") : va - vb;
+        return ordenacaoAtual.direcao === "asc" ? cmp : -cmp;
+    });
+    return copia;
+}
+
+function atualizarIndicadoresOrdenacao() {
+    document.querySelectorAll(".th-sort").forEach(th => {
+        th.classList.remove("sort-asc", "sort-desc");
+        if (th.dataset.coluna === ordenacaoAtual.coluna) {
+            th.classList.add(ordenacaoAtual.direcao === "asc" ? "sort-asc" : "sort-desc");
+        }
+    });
+}
+
+function ordenarPor(coluna) {
+    if (ordenacaoAtual.coluna !== coluna) {
+        ordenacaoAtual = { coluna, direcao: "asc" };
+    } else if (ordenacaoAtual.direcao === "asc") {
+        ordenacaoAtual.direcao = "desc";
+    } else {
+        ordenacaoAtual = { coluna: null, direcao: null }; // 3º clique: volta ao default
+    }
+    atualizarIndicadoresOrdenacao();
+    renderizarPagina();
+}
+
 function renderizarPagina() {
+    const dadosOrdenados = ordenarLista(listaFiltrada);
     const inicio = (paginaAtual - 1) * TAMANHO_PAGINA;
-    const pagina = listaFiltrada.slice(inicio, inicio + TAMANHO_PAGINA);
+    const pagina = dadosOrdenados.slice(inicio, inicio + TAMANHO_PAGINA);
     renderizarTabela(pagina);
     renderizarPaginacao();
 }
@@ -829,6 +900,17 @@ function importarCsv(event) {
 const PE_LETRA = { "Direito": "D", "Esquerdo": "E", "Ambidestro": "A" };
 const PE_LETRA_INVERSO = { "D": "Direito", "E": "Esquerdo", "A": "Ambidestro" };
 
+// Correcções de team_id: alguns exports trazem o mesmo clube com um team_id
+// diferente (erro de grafia na fonte, ex: "Ciego de Aliva" vs "Ciego de Ávila").
+// Aplicado logo na entrada dos dados para que ambos contem como o MESMO clube
+// em vez de ficarem divididos em duas entradas com metade dos jogadores cada.
+const CORRECAO_TEAM_ID = {
+    "ciego_de_aliva_fc": "ciego_de_avila_fc",
+};
+function corrigirTeamId(teamId) {
+    return CORRECAO_TEAM_ID[teamId] || teamId;
+}
+
 // Nome do clube -> slug (minúsculas, sem acentos/espaços) para usar como team_id.
 function slugifyClube(nomeClube) {
     if (!nomeClube || nomeClube === "-") return null;
@@ -857,7 +939,7 @@ function converterImportGoFoot(j) {
         id: j.id || gerarIdJogador(j.nome),
         n: j.nome || "",
         nat: j.nacionalidade || "-",
-        c: deslugifyClube(j.team_id),
+        c: deslugifyClube(corrigirTeamId(j.team_id)),
         a: j.idade || null,
         pe: PE_LETRA_INVERSO[j.pe] || "-",
         p: j.posicao || "",
@@ -1213,6 +1295,9 @@ function atualizarCsvComEquipa() {
             textos.forEach((texto, i) => {
                 const lista = JSON.parse(texto);
                 if (!Array.isArray(lista)) throw new Error(`"${arquivosJson[i].name}" não é uma lista`);
+                // Corrige team_ids duplicados/com erro de grafia (ver CORRECAO_TEAM_ID)
+                // logo na entrada, para o merge tratar sempre como o mesmo clube.
+                lista.forEach(j => { if (j.team_id) j.team_id = corrigirTeamId(j.team_id); });
                 equipa = equipa.concat(lista);
             });
 
@@ -1244,38 +1329,55 @@ function atualizarCsvComEquipa() {
 
                 equipa.forEach(jogadorEquipa => {
                     let idxLinha;
+                    const chaveNomeEquipa = normalizarNomeParaMatch(jogadorEquipa.nome);
 
-                    // 1) Identidade EXACTA por Id. É o critério principal: se o jogador
-                    //    já tem Id no CSV, é esse jogador, independentemente do nome.
-                    //    !linhasUsadas: protege contra IDs não-únicos (o gerarIdJogador
-                    //    gera o Id a partir do nome, por isso homónimos podem partilhar
-                    //    o mesmo Id — não podem colapsar na mesma linha).
+                    // 1) Identidade por Id — MAS só conta se o nome também bater. Ids
+                    //    antigos (gerados só pelo nome, ex: "antonio_0000001") podem já
+                    //    ter sido partilhados por engano por DOIS jogadores diferentes
+                    //    no CSV mestre; sem esta verificação, o segundo colapsava para
+                    //    a linha do primeiro e um jogador desaparecia (perda de dados).
                     if (jogadorEquipa.id && indicePorId[jogadorEquipa.id] !== undefined
                         && !linhasUsadas.has(indicePorId[jogadorEquipa.id])) {
-                        idxLinha = indicePorId[jogadorEquipa.id];
-                    } else {
+                        const idxCandidato = indicePorId[jogadorEquipa.id];
+                        const nomeLinha = linhas[idxCandidato].Name;
+                        const nomesBatem = !nomeLinha || normalizarNomeParaMatch(inverterNome(nomeLinha)) === chaveNomeEquipa;
+                        if (nomesBatem) idxLinha = idxCandidato;
+                        // se não bater, o Id está a ser reutilizado por engano — ignora
+                        // este match e segue para o fallback por nome / linha nova, e mais
+                        // abaixo é-lhe atribuído um Id novo em vez de continuar a partilhar.
+                    }
+
+                    if (idxLinha === undefined) {
                         // 2) Fallback por nome — só linhas livres e SEM Id de outro jogador
                         //    (uma linha já com Id diferente pertence a outra pessoa).
-                        const chave = normalizarNomeParaMatch(jogadorEquipa.nome);
-                        const candidatos = (indice[chave] || []).filter(i =>
+                        const candidatos = (indice[chaveNomeEquipa] || []).filter(i =>
                             !linhasUsadas.has(i) && (!linhas[i].Id || linhas[i].Id === jogadorEquipa.id));
                         if (candidatos.length) {
                             idxLinha = candidatos[0];
                             if (candidatos.length > 1 && jogadorEquipa.team_id) {
-                                const comClubeIgual = candidatos.find(i => slugifyClube(linhas[i].Club) === jogadorEquipa.team_id);
-                                if (comClubeIgual !== undefined) idxLinha = comClubeIgual;
+                                // 1º tenta clube exacto; só depois similaridade por tokens
+                                // (aceita siglas/abreviações sem confundir "Nacional" com
+                                // "Nacional da Madeira" — ver clubesSaoSemelhantes).
+                                let comClube = candidatos.find(i => slugifyClube(linhas[i].Club) === jogadorEquipa.team_id);
+                                if (comClube === undefined) {
+                                    comClube = candidatos.find(i => clubesSaoSemelhantes(slugifyClube(linhas[i].Club), jogadorEquipa.team_id));
+                                }
+                                if (comClube !== undefined) idxLinha = comClube;
                             }
                         }
                     }
 
-                    // 3) Não existe no CSV — adiciona linha nova.
+                    // 3) Não existe no CSV — adiciona linha nova. O Id nunca é escrito
+                    //    por cima de outro: se o Id do .json já pertence a outra linha,
+                    //    gera-se um Id novo e único para este jogador.
                     if (idxLinha === undefined) {
+                        const idFinal = gerarIdUnicoContra(jogadorEquipa.nome, jogadorEquipa.id, indicePorId);
                         const novaLinha = {
                             Name: reverterNome(jogadorEquipa.nome),
                             Nation: jogadorEquipa.nacionalidade || "",
                             Club: deslugifyClube(jogadorEquipa.team_id) || "",
                             Age: jogadorEquipa.idade || "",
-                            Id: jogadorEquipa.id || gerarIdJogador(jogadorEquipa.nome),
+                            Id: idFinal,
                             Pe: jogadorEquipa.pe ?? "",
                             Posicao: jogadorEquipa.posicao ?? "",
                             TAL: jogadorEquipa.TAL ?? "",
@@ -1294,7 +1396,7 @@ function atualizarCsvComEquipa() {
                         idxLinha = linhas.length;
                         linhas.push(novaLinha);
                         linhasUsadas.add(idxLinha);
-                        if (novaLinha.Id) indicePorId[novaLinha.Id] = idxLinha;
+                        indicePorId[idFinal] = idxLinha;
                         novosJogadoresAdicionados++;
                         return;
                     }
@@ -1303,7 +1405,8 @@ function atualizarCsvComEquipa() {
 
                     const linha = linhas[idxLinha];
                     if (!linha.Id) {
-                        linha.Id = jogadorEquipa.id || gerarIdJogador(inverterNome(linha.Name));
+                        // Mesma garantia de unicidade ao preencher o Id de uma linha existente.
+                        linha.Id = gerarIdUnicoContra(inverterNome(linha.Name), jogadorEquipa.id, indicePorId);
                         novosComId++;
                     }
                     // Regista o Id para dedup por identidade dentro da mesma run.
@@ -1416,146 +1519,10 @@ function clubesSaoSemelhantes(clubeA, clubeB) {
     return a.every(t => setB.has(t)); // mesmos tokens, ordem-independente
 }
 
-atualizarCsvComEquipa = function() {
-    const arquivoCsv = document.getElementById("csvMestreInput").files[0];
-    const arquivosJson = Array.from(document.getElementById("equipaJsonInput").files);
-    const status = document.getElementById("statusAtualizacaoCsv");
-
-    if (!arquivoCsv || !arquivosJson.length) {
-        status.textContent = "Escolhe o CSV mestre e pelo menos um .json de equipa.";
-        return;
-    }
-
-    status.textContent = "A processar (com validação flexível)...";
-
-    Promise.all(arquivosJson.map(lerJsonComoTexto))
-        .then(textos => {
-            let equipa = [];
-            textos.forEach((texto, i) => {
-                const lista = JSON.parse(texto);
-                if (!Array.isArray(lista)) throw new Error(`"${arquivosJson[i].name}" não é uma lista`);
-                equipa = equipa.concat(lista);
-            });
-
-            Papa.parse(arquivoCsv, {
-                header: true,
-                delimiter: ";",
-                skipEmptyLines: true,
-                encoding: "ISO-8859-1",
-                complete: function (resultado) {
-                    const linhas = resultado.data;
-
-                    const indice = {};
-                    linhas.forEach((linha, i) => {
-                        if (!linha.Name) return;
-                        const chave = normalizarNomeParaMatch(inverterNome(linha.Name));
-                        (indice[chave] = indice[chave] || []).push(i);
-                    });
-
-                    let atualizados = 0, novosComId = 0, novosJogadoresAdicionados = 0;
-
-                    equipa.forEach(jogadorEquipa => {
-                        const chave = normalizarNomeParaMatch(jogadorEquipa.nome);
-                        let candidatos = indice[chave];
-
-                        if (!candidatos || candidatos.length === 0) {
-                            const novaLinha = {
-                                Name: reverterNome(jogadorEquipa.nome),
-                                Nation: jogadorEquipa.nacionalidade || "",
-                                Club: deslugifyClube(jogadorEquipa.team_id) || "",
-                                Age: jogadorEquipa.idade || "",
-                                Id: jogadorEquipa.id || gerarIdJogador(jogadorEquipa.nome),
-                                Pe: jogadorEquipa.pe ?? "",
-                                Posicao: jogadorEquipa.posicao ?? "",
-                                TAL: jogadorEquipa.TAL ?? "",
-                                Valor: jogadorEquipa.valor ?? "",
-                                TEC: jogadorEquipa.TEC ?? "",
-                                ATA: jogadorEquipa.ATA ?? "",
-                                DEF: jogadorEquipa.DEF ?? "",
-                                FIS: jogadorEquipa.FIS ?? "",
-                                MEN: jogadorEquipa.MEN ?? "",
-                                REF: jogadorEquipa.REF ?? "",
-                                POS_GK: jogadorEquipa.POS ?? "",
-                                AER: jogadorEquipa.AER ?? "",
-                                SAI: jogadorEquipa.SAI ?? "",
-                                OVER: jogadorEquipa.OVER ?? "",
-                            };
-                            const novoIndice = linhas.length;
-                            linhas.push(novaLinha);
-                            (indice[chave] = indice[chave] || []).push(novoIndice);
-                            novosJogadoresAdicionados++;
-                            return;
-                        }
-
-                        let idxLinha = candidatos[0];
-
-                        // Desempate por clube: 1º match EXACTO; só depois similaridade.
-                        if (candidatos.length > 1 && jogadorEquipa.team_id) {
-                            let comClube = candidatos.find(i =>
-                                slugifyClube(linhas[i].Club) === jogadorEquipa.team_id);
-                            if (comClube === undefined) {
-                                comClube = candidatos.find(i =>
-                                    clubesSaoSemelhantes(slugifyClube(linhas[i].Club), jogadorEquipa.team_id));
-                            }
-                            if (comClube !== undefined) idxLinha = comClube;
-                        }
-
-                        const linha = linhas[idxLinha];
-                        if (!linha.Id) {
-                            linha.Id = jogadorEquipa.id || gerarIdJogador(inverterNome(linha.Name));
-                            novosComId++;
-                        }
-
-                        if (jogadorEquipa.team_id) linha.Club = deslugifyClube(jogadorEquipa.team_id);
-
-                        linha.Pe = jogadorEquipa.pe ?? linha.Pe ?? "";
-                        linha.Posicao = jogadorEquipa.posicao ?? linha.Posicao ?? "";
-                        linha.TAL = jogadorEquipa.TAL ?? linha.TAL ?? "";
-                        linha.Valor = jogadorEquipa.valor ?? linha.Valor ?? "";
-                        linha.TEC = jogadorEquipa.TEC ?? linha.TEC ?? "";
-                        linha.ATA = jogadorEquipa.ATA ?? linha.ATA ?? "";
-                        linha.DEF = jogadorEquipa.DEF ?? linha.DEF ?? "";
-                        linha.FIS = jogadorEquipa.FIS ?? linha.FIS ?? "";
-                        linha.MEN = jogadorEquipa.MEN ?? linha.MEN ?? "";
-                        linha.REF = jogadorEquipa.REF ?? linha.REF ?? "";
-                        linha.POS_GK = jogadorEquipa.POS ?? linha.POS_GK ?? "";
-                        linha.AER = jogadorEquipa.AER ?? linha.AER ?? "";
-                        linha.SAI = jogadorEquipa.SAI ?? linha.SAI ?? "";
-                        linha.OVER = jogadorEquipa.OVER ?? linha.OVER ?? "";
-                        atualizados++;
-                    });
-
-                    linhas.forEach(linha => {
-                        NOVAS_COLUNAS_CSV.forEach(col => { if (linha[col] === undefined) linha[col] = ""; });
-                    });
-
-                    const colunasFinais = [...resultado.meta.fields, ...NOVAS_COLUNAS_CSV.filter(c => !resultado.meta.fields.includes(c))];
-                    const csvFinal = Papa.unparse(linhas, { delimiter: ";", columns: colunasFinais });
-
-                    const bytesISO = new Uint8Array(csvFinal.length);
-                    for (let i = 0; i < csvFinal.length; i++) bytesISO[i] = csvFinal.charCodeAt(i) & 0xFF;
-                    const blob = new Blob([bytesISO], { type: "text/csv;charset=ISO-8859-1" });
-                    const url = URL.createObjectURL(blob);
-                    const link = document.createElement("a");
-                    link.href = url;
-                    link.download = "players_atualizado.csv";
-                    document.body.appendChild(link);
-                    link.click();
-                    document.body.removeChild(link);
-                    URL.revokeObjectURL(url);
-
-                    let msg = `Concluído: ${atualizados} jogador(es) actualizado(s) (${novosComId} com Id novo) de ${arquivosJson.length} ficheiro(s) de equipa.`;
-                    if (novosJogadoresAdicionados) {
-                        msg += ` ${novosJogadoresAdicionados} jogador(es) novo(s) adicionado(s) ao CSV (não existiam no ficheiro mestre).`;
-                    }
-                    status.textContent = msg;
-                },
-                error: function (erro) {
-                    status.textContent = "Erro ao processar o CSV mestre: " + erro.message;
-                }
-            });
-        })
-        .catch(erro => {
-            status.textContent = "Erro a ler os .json de equipa: " + erro.message;
-        });
-};
+// NOTA: a versão anterior desta função (definida mais acima, perto de
+// lerJsonComoTexto) é a ÚNICA versão activa — este ficheiro tinha aqui uma
+// segunda definição (via reatribuição `atualizarCsvComEquipa = function(){...}`)
+// que sobrepunha essa e não tinha a protecção contra colisão de Id nem contra
+// dois jogadores diferentes caírem na mesma linha. Foi removida (2026) por
+// causar perda de jogadores no merge — ver correcção acima que usa
+// clubesSaoSemelhantes() como desempate secundário.

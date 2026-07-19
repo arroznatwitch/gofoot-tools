@@ -42,5 +42,14 @@ window.LEAGUES_DATA = {
         "Kasimpasa", "Kocaelispor", "Gaziantep FK", "Corum FK", "Genclerbirligi Ankara",
         "Amed SK", "Erzurumspor FK", "Eyüpspor"
     ]
-}
+
+},
+    "Cuba": {
+        "Primeira Liga - 26/27": [
+            "Artemisa FC", "CD Santiago de Cuba", "Ciego de Ávila FC",
+            "Cienfuegos FC", "FC Camagüey", "FC Holguín", "FC Isla de la Juventud",
+            "FC La Habana", "FC Pinar del Río", "FC Villa Clara", "Granma FC",
+            "Guantánamo FC", "Las Tunas FC", "Matanzas FC", "Mayabeque FC", "Sancti Spíritus FC"
+        ]
+    }
 };

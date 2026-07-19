@@ -153,6 +153,22 @@
             white-space: nowrap;
         }
 
+        .th-sort {
+            cursor: pointer;
+            user-select: none;
+            transition: color 0.15s;
+        }
+        .th-sort:hover { color: #e6edf3; }
+        .th-sort::after {
+            content: "↕";
+            display: inline-block;
+            margin-left: 5px;
+            opacity: 0.35;
+            font-size: 11px;
+        }
+        .th-sort.sort-asc::after { content: "▲"; opacity: 1; color: #58a6ff; }
+        .th-sort.sort-desc::after { content: "▼"; opacity: 1; color: #58a6ff; }
+
         td {
             padding: 12px;
             border-bottom: 1px solid #21262d;
