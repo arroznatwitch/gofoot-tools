@@ -19,6 +19,14 @@ window.LEAGUES_DATA = {
         "Maringá", "Paysandu", "Santa Cruz", "Volta Redonda", "Ypiranga-RS"
     ]
     },
+"Paraguai": {
+    "Primera División - 26/27": [
+        "Rubio Nu Py", "Nacional Asuncion", "Ameliano Py", "Trinidense Py", "Recoleta Py",
+        "San Lorenzo Py", "Dos De Mayo Py", "Guarani Py", "Libertad Asuncion", "Luqueno Py",
+        "Cerro Porteno Py", "Olimpia Py"
+    ]
+},
+    
     "Portugal": {
         "Liga Portuguesa Betclic- 26/27": [
             "FC Porto", "Benfica", "Sporting CP", "SC Braga", "Vitória SC", "Santa Clara",
