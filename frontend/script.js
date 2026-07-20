@@ -596,14 +596,9 @@ function recalcularValoresMercado() {
         ` Descarregado "players_valores_recalculados.csv".`);
 }
 
-// TEMPORÁRIO (dev): preenche o <select> só com os clubes que já têm 20+
-// jogadores completos (atributos+OVER definido) — a mesma regra usada na aba
-// Ligas. Clubes ainda incompletos não aparecem, para não se apagar por engano
-// um plantel que ainda está a ser preenchido.
-function popularSelectApagarClube() {
-    const select = document.getElementById("apagarClubeSelect");
-    if (!select) return;
-
+// Calcula, por clube (slug), quantos jogadores tem e quantos são completos
+// (atributos+OVER definido). Usado pelos dois selects do Painel++ abaixo.
+function estatisticasPorClube() {
     const porSlug = {}; // slug -> { nome, total, completos }
     listaJogadores.forEach(j => {
         const slug = slugifyClube(j.c);
@@ -612,22 +607,66 @@ function popularSelectApagarClube() {
         o.total++;
         if (calcularOverallDinamico(j) !== null) o.completos++;
     });
+    return porSlug;
+}
 
+// Preenche um <select> só com os clubes que já têm 20+ jogadores completos
+// (atributos+OVER definido) — a mesma regra usada na aba Ligas. Clubes ainda
+// incompletos não aparecem, para não se mexer por engano num plantel que
+// ainda está a ser preenchido. `formatarOpcao(o)` decide o texto de cada opção.
+function popularSelectClubesCompletos(idSelect, formatarOpcao, msgVazio) {
+    const select = document.getElementById(idSelect);
+    if (!select) return;
+
+    const porSlug = estatisticasPorClube();
     const valorSelecionado = select.value;
     const entradas = Object.entries(porSlug)
         .filter(([, o]) => o.completos >= MIN_JOGADORES_PARA_EQUIPA)
         .sort((a, b) => a[1].nome.localeCompare(b[1].nome, "pt"));
 
     if (!entradas.length) {
-        select.innerHTML = '<option value="">— nenhum clube com 20+ jogadores completos —</option>';
+        select.innerHTML = `<option value="">${msgVazio}</option>`;
         return;
     }
 
-    select.innerHTML = entradas.map(([slug, o]) =>
-        `<option value="${slug}">${o.nome} — ${o.completos}/${o.total} completos ✓</option>`
-    ).join("");
-
+    select.innerHTML = entradas.map(([slug, o]) => `<option value="${slug}">${formatarOpcao(o)}</option>`).join("");
     if (valorSelecionado && porSlug[valorSelecionado]) select.value = valorSelecionado;
+}
+
+function popularSelectApagarClube() {
+    popularSelectClubesCompletos(
+        "apagarClubeSelect",
+        o => `${o.nome} — ${o.completos}/${o.total} completos ✓`,
+        "— nenhum clube com 20+ jogadores completos —"
+    );
+    popularSelectClubesCompletos(
+        "limparIncompletosSelect",
+        o => `${o.nome} — ${o.completos} completos, ${o.total - o.completos} sem OVER a apagar`,
+        "— nenhum clube com 20+ jogadores completos —"
+    );
+}
+
+// Descarrega o .csv com os jogadores (vindos do CSV, com _csvRaw) actualmente
+// em listaJogadores — usado depois de qualquer apagar/limpar no Painel++, para
+// a alteração sair logo em ficheiro e não ficar só na sessão do browser.
+function descarregarCsvDeListaJogadores(nomeArquivo) {
+    const comRaw = listaJogadores.filter(j => j._csvRaw);
+    if (!comRaw.length) return; // nada vindo de CSV para escrever (ex: só havia manuais)
+
+    const colunasFinais = [...(colunasCsvImportadas || Object.keys(comRaw[0]._csvRaw))];
+    const csvFinal = Papa.unparse(comRaw.map(j => j._csvRaw), { delimiter: ";", columns: colunasFinais });
+
+    const bytesISO = new Uint8Array(csvFinal.length);
+    for (let i = 0; i < csvFinal.length; i++) bytesISO[i] = csvFinal.charCodeAt(i) & 0xFF;
+    const blob = new Blob([bytesISO], { type: "text/csv;charset=ISO-8859-1" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = nomeArquivo;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
 }
 
 // TEMPORÁRIO (dev): apaga da lista carregada TODOS os jogadores do clube
@@ -655,7 +694,98 @@ function apagarJogadoresDoClube() {
     salvarJogadoresManuaisNoStorage();
     aplicarFiltros();
     popularSelectApagarClube();
-    alert(`Pronto: ${alvo.length.toLocaleString("pt-PT")} jogador(es) do clube "${nomeClube}" foram apagados da lista carregada.`);
+    descarregarCsvDeListaJogadores("players_atualizado.csv");
+    alert(`Pronto: ${alvo.length.toLocaleString("pt-PT")} jogador(es) do clube "${nomeClube}" foram apagados. Descarregado "players_atualizado.csv".`);
+}
+
+// TEMPORÁRIO (dev): apaga TODOS os jogadores de TODOS os clubes que já têm
+// 20+ completos, numa só vez (em vez de ires clube a clube).
+function apagarJogadoresDeTodosOsClubesCompletos() {
+    const porSlug = estatisticasPorClube();
+    const clubesAlvo = Object.entries(porSlug).filter(([, o]) => o.completos >= MIN_JOGADORES_PARA_EQUIPA);
+
+    if (!clubesAlvo.length) {
+        alert("Não há nenhum clube com 20+ jogadores completos ainda.");
+        return;
+    }
+
+    const slugsAlvo = new Set(clubesAlvo.map(([slug]) => slug));
+    const total = listaJogadores.filter(j => slugsAlvo.has(slugifyClube(j.c))).length;
+
+    if (!confirm(`Isto apaga TODOS os jogadores (completos e incompletos) de ${clubesAlvo.length.toLocaleString("pt-PT")} clube(s) já completos — ${total.toLocaleString("pt-PT")} jogador(es) no total. Não pode ser desfeito. Continuar?`)) return;
+
+    listaJogadores = listaJogadores.filter(j => !slugsAlvo.has(slugifyClube(j.c)));
+    salvarJogadoresManuaisNoStorage();
+    aplicarFiltros();
+    popularSelectApagarClube();
+    alert(`Pronto: ${total.toLocaleString("pt-PT")} jogador(es) apagados de ${clubesAlvo.length.toLocaleString("pt-PT")} clube(s) completos.`);
+}
+
+// TEMPORÁRIO (dev): num clube já completo (20+ com OVER), apaga só os
+// jogadores SEM OVER (lixo/duplicados incompletos), mantendo os completos.
+// Serve para optimizar/limpar a base sem perder o plantel já pronto do clube.
+function limparIncompletosDoClube() {
+    const select = document.getElementById("limparIncompletosSelect");
+    const slugAlvo = select ? select.value : "";
+    if (!slugAlvo) {
+        alert("Escolhe um clube na lista primeiro.");
+        return;
+    }
+
+    const doClube = listaJogadores.filter(j => slugifyClube(j.c) === slugAlvo);
+    const incompletos = doClube.filter(j => calcularOverallDinamico(j) === null);
+    if (!incompletos.length) {
+        alert("Esse clube já não tem jogadores sem OVER para apagar.");
+        popularSelectApagarClube();
+        return;
+    }
+    const nomeClube = doClube[0].c;
+    const completos = doClube.length - incompletos.length;
+
+    if (!confirm(`Isto apaga ${incompletos.length.toLocaleString("pt-PT")} jogador(es) SEM OVER do clube "${nomeClube}" (mantém os ${completos.toLocaleString("pt-PT")} completos). Não pode ser desfeito. Continuar?`)) return;
+
+    const incompletosSet = new Set(incompletos);
+    listaJogadores = listaJogadores.filter(j => !incompletosSet.has(j));
+    salvarJogadoresManuaisNoStorage();
+    aplicarFiltros();
+    popularSelectApagarClube();
+
+    descarregarCsvDeListaJogadores("players_clube_limpo.csv");
+
+    alert(`Pronto: ${incompletos.length.toLocaleString("pt-PT")} jogador(es) sem OVER do clube "${nomeClube}" foram apagados. Ficaram ${completos.toLocaleString("pt-PT")} completos.`);
+}
+
+// TEMPORÁRIO (dev): em TODOS os clubes já completos (20+ com OVER) de uma só
+// vez, apaga os jogadores SEM OVER (lixo/duplicados incompletos), mantendo os
+// completos. Não mexe em clubes que ainda não chegaram aos 20 completos.
+function limparIncompletosDeTodosOsClubes() {
+    const porSlug = estatisticasPorClube();
+    const clubesAlvo = Object.entries(porSlug).filter(([, o]) => o.completos >= MIN_JOGADORES_PARA_EQUIPA);
+
+    if (!clubesAlvo.length) {
+        alert("Não há nenhum clube com 20+ jogadores completos ainda.");
+        return;
+    }
+
+    const slugsAlvo = new Set(clubesAlvo.map(([slug]) => slug));
+    const incompletos = listaJogadores.filter(j => slugsAlvo.has(slugifyClube(j.c)) && calcularOverallDinamico(j) === null);
+
+    if (!incompletos.length) {
+        alert(`Os ${clubesAlvo.length.toLocaleString("pt-PT")} clube(s) completos já não têm jogadores sem OVER para apagar.`);
+        return;
+    }
+
+    if (!confirm(`Isto apaga ${incompletos.length.toLocaleString("pt-PT")} jogador(es) SEM OVER, espalhados por ${clubesAlvo.length.toLocaleString("pt-PT")} clube(s) já completos (mantém os jogadores completos de cada um). Não pode ser desfeito. Continuar?`)) return;
+
+    const incompletosSet = new Set(incompletos);
+    listaJogadores = listaJogadores.filter(j => !incompletosSet.has(j));
+    salvarJogadoresManuaisNoStorage();
+    aplicarFiltros();
+    popularSelectApagarClube();
+
+    descarregarCsvDeListaJogadores("players_clube_limpo.csv");
+    
+    alert(`Pronto: ${incompletos.length.toLocaleString("pt-PT")} jogador(es) sem OVER apagados em ${clubesAlvo.length.toLocaleString("pt-PT")} clube(s) completos.`);
 }
 
 function alternarFiltroStatus(idClicado) {

@@ -200,6 +200,25 @@
                     <select id="apagarClubeSelect" class="form-control" style="max-width:360px;"></select>
                     <button class="btn btn-danger" onclick="apagarJogadoresDoClube()">🗑️ Apagar jogadores deste clube</button>
                 </div>
+                <div class="acoes-linha" style="margin-top:10px; border-top:1px solid #30363d; padding-top:10px;">
+                    <button class="btn btn-danger" onclick="apagarJogadoresDeTodosOsClubesCompletos()">🗑️ Apagar de TODOS os clubes completos de uma vez</button>
+                </div>
+            </div>
+
+            <div class="painel-card">
+                <h2 class="painel-titulo">🧹 Limpar Jogadores Sem OVER (optimizar)</h2>
+                <p class="painel-desc">
+                    Só aparecem clubes já <b>completos</b> (20+ com OVER). Escolhe um e apaga só os jogadores
+                    <b>sem OVER</b> desse clube (lixo/duplicados incompletos), mantendo os que já estão prontos —
+                    reduz o tamanho da base sem perder o plantel concluído.
+                </p>
+                <div class="acoes-linha">
+                    <select id="limparIncompletosSelect" class="form-control" style="max-width:360px;"></select>
+                    <button class="btn btn-danger" onclick="limparIncompletosDoClube()">🧹 Apagar jogadores sem OVER</button>
+                </div>
+                <div class="acoes-linha" style="margin-top:10px; border-top:1px solid #30363d; padding-top:10px;">
+                    <button class="btn btn-danger" onclick="limparIncompletosDeTodosOsClubes()">🧹 Limpar sem OVER de TODOS os clubes completos de uma vez</button>
+                </div>
             </div>
 
             <div class="painel-card">
