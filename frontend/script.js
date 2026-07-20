@@ -5,6 +5,7 @@ const ISO_NACOES = {
     "belgium":"be","bélgica":"be","bolivia":"bo","bolívia":"bo","bosnia and herzegovina":"ba","bósnia":"ba",
     "brazil":"br","brasil":"br","bulgaria":"bg","bulgária":"bg","cameroon":"cm","camarões":"cm","canada":"ca","canadá":"ca",
     "chile":"cl","china":"cn","china pr":"cn","colombia":"co","colômbia":"co","costa rica":"cr","cuba":"cu",
+    "san marino":"sm",
     "croatia":"hr","croácia":"hr","cyprus":"cy","chipre":"cy","czechia":"cz","czech republic":"cz","chéquia":"cz","república checa":"cz",
     "denmark":"dk","dinamarca":"dk","ecuador":"ec","equador":"ec","egypt":"eg","egito":"eg",
     "england":"gb-eng","inglaterra":"gb-eng","estonia":"ee","estónia":"ee",
@@ -130,7 +131,7 @@ function contarJogadoresPorClube() {
 
 // Bandeira do país: imagem via flagcdn.com (uma "API" de bandeiras por código ISO).
 // É só um <img> — se a CDN falhar mostra o emoji de reserva, nunca "buga" o site.
-const BANDEIRAS_PAIS = { "Brasil": "🇧🇷", "Portugal": "🇵🇹", "Jamaica": "🇯🇲", "Turquia": "🇹🇷", "Cuba": "🇨🇺" };
+const BANDEIRAS_PAIS = { "Brasil": "🇧🇷", "Portugal": "🇵🇹", "Jamaica": "🇯🇲", "Turquia": "🇹🇷", "Cuba": "🇨🇺", "San Marino": "🇸🇲" };
 function bandeiraHtml(pais) {
     const code = ISO_NACOES[(pais || "").toLowerCase()];
     const emoji = BANDEIRAS_PAIS[pais] || "🏳️";
@@ -514,6 +515,149 @@ function calcularOverallDinamico(j) {
     return Math.round(total);
 }
 
+// Valor de mercado (€) gerado a partir do OVER, talento, idade e físico.
+// É determinístico: o mesmo jogador dá sempre o mesmo valor (o "ruído" vem de um
+// hash, não de aleatório real). Devolve null se faltar OVER/talento/idade.
+function calcularValorMercado(j) {
+    const overall = calcularOverallDinamico(j);
+    const talento = Number(j.tal);
+    const idade = Number(j.a);
+    if (overall === null || isNaN(talento) || isNaN(idade)) return null;
+
+    let valorBase, fatorIdade;
+
+    if (idade <= 19) {
+        const talN = Math.max(0.01, (talento - 30) / 70);
+        const ovrN = Math.max(0.01, (overall - 30) / 70);
+        valorBase = 20000 + 600000000 * Math.pow(talN, 5.5) * Math.pow(ovrN, 1.5);
+        fatorIdade = 1 + (19 - idade) * 0.06;
+    } else if (idade <= 33) {
+        valorBase = 800000 * Math.exp(0.10 * (overall - 50) + 0.042 * (talento - 50));
+        fatorIdade = idade <= 26 ? 1 : 1 - (idade - 26) * 0.08;
+    } else {
+        // Físico: os guarda-redes não têm FIS, usa-se o Mental como aproximação.
+        const ehGoleiro = posicaoGrupo(j) === "G";
+        const fisRaw = ehGoleiro ? j.men : j.fis;
+        const fisico = (fisRaw !== null && fisRaw !== undefined && !isNaN(fisRaw)) ? Number(fisRaw) : overall;
+        valorBase = 5000000 * Math.exp(0.025 * (overall - 50) + 0.010 * (fisico - 50));
+        fatorIdade = 0.40 * Math.pow(0.72, idade - 34);
+    }
+
+    // Variação determinística de ±5% a partir de um hash.
+    const hash = overall * 7919 + idade * 6271 + talento * 3571;
+    const noise = 0.95 + ((Math.abs(hash) % 1000) / 1000) * 0.10; // 0.95 .. 1.05
+    let valorFinal = valorBase * fatorIdade * noise;
+
+    if (valorFinal < 5000) valorFinal = 5000; // nunca menos que 5.000 €
+    return Math.round(valorFinal);
+}
+
+// TEMPORÁRIO/dev: recalcula o valor de mercado de TODOS os jogadores carregados
+// pela fórmula (só os que têm OVER+talento+idade). Actualiza a tabela e, se vieram
+// de CSV, também a coluna Valor da linha original (para o export/regen).
+function recalcularValoresMercado() {
+    const comRaw = listaJogadores.filter(j => j._csvRaw);
+    if (!comRaw.length) {
+        alert("Importa primeiro a base com o botão \"Importar Jogadores(.csv)\".");
+        return;
+    }
+    if (!confirm(`Recalcular o valor de mercado dos ${comRaw.length.toLocaleString("pt-PT")} jogadores importados do CSV pela fórmula e descarregar o .csv novo. Continuar?`)) return;
+
+    let feitos = 0, semDados = 0;
+    comRaw.forEach(j => {
+        const v = calcularValorMercado(j);
+        if (v === null) { semDados++; return; }
+        j.v = v;
+        j._csvRaw.Valor = v;
+        marcarStatus(j);
+        feitos++;
+    });
+
+    // Preserva todas as colunas do CSV original.
+    const colunasFinais = [...(colunasCsvImportadas || Object.keys(comRaw[0]._csvRaw))];
+    const csvFinal = Papa.unparse(comRaw.map(j => j._csvRaw), { delimiter: ";", columns: colunasFinais });
+
+    // Grava em ISO-8859-1, igual ao que o importarCsv() espera.
+    const bytesISO = new Uint8Array(csvFinal.length);
+    for (let i = 0; i < csvFinal.length; i++) bytesISO[i] = csvFinal.charCodeAt(i) & 0xFF;
+    const blob = new Blob([bytesISO], { type: "text/csv;charset=ISO-8859-1" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "players_valores_recalculados.csv";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+
+    aplicarFiltros();
+    alert(`Valores de mercado recalculados: ${feitos.toLocaleString("pt-PT")} jogador(es).` +
+        (semDados ? ` ${semDados.toLocaleString("pt-PT")} ficaram de fora (falta OVER/talento/idade).` : "") +
+        ` Descarregado "players_valores_recalculados.csv".`);
+}
+
+// TEMPORÁRIO (dev): preenche o <select> só com os clubes que já têm 20+
+// jogadores completos (atributos+OVER definido) — a mesma regra usada na aba
+// Ligas. Clubes ainda incompletos não aparecem, para não se apagar por engano
+// um plantel que ainda está a ser preenchido.
+function popularSelectApagarClube() {
+    const select = document.getElementById("apagarClubeSelect");
+    if (!select) return;
+
+    const porSlug = {}; // slug -> { nome, total, completos }
+    listaJogadores.forEach(j => {
+        const slug = slugifyClube(j.c);
+        if (!slug) return;
+        const o = porSlug[slug] || (porSlug[slug] = { nome: j.c, total: 0, completos: 0 });
+        o.total++;
+        if (calcularOverallDinamico(j) !== null) o.completos++;
+    });
+
+    const valorSelecionado = select.value;
+    const entradas = Object.entries(porSlug)
+        .filter(([, o]) => o.completos >= MIN_JOGADORES_PARA_EQUIPA)
+        .sort((a, b) => a[1].nome.localeCompare(b[1].nome, "pt"));
+
+    if (!entradas.length) {
+        select.innerHTML = '<option value="">— nenhum clube com 20+ jogadores completos —</option>';
+        return;
+    }
+
+    select.innerHTML = entradas.map(([slug, o]) =>
+        `<option value="${slug}">${o.nome} — ${o.completos}/${o.total} completos ✓</option>`
+    ).join("");
+
+    if (valorSelecionado && porSlug[valorSelecionado]) select.value = valorSelecionado;
+}
+
+// TEMPORÁRIO (dev): apaga da lista carregada TODOS os jogadores do clube
+// escolhido (por team_id/slug) — útil para limpar um plantel antigo antes de
+// um novo merge. Não mexe no players.csv em disco, só na sessão actual.
+function apagarJogadoresDoClube() {
+    const select = document.getElementById("apagarClubeSelect");
+    const slugAlvo = select ? select.value : "";
+    if (!slugAlvo) {
+        alert("Escolhe um clube na lista primeiro.");
+        return;
+    }
+
+    const alvo = listaJogadores.filter(j => slugifyClube(j.c) === slugAlvo);
+    if (!alvo.length) {
+        alert("Esse clube já não tem jogadores carregados.");
+        popularSelectApagarClube();
+        return;
+    }
+    const nomeClube = alvo[0].c;
+
+    if (!confirm(`Isto apaga ${alvo.length.toLocaleString("pt-PT")} jogador(es) do clube "${nomeClube}" da lista carregada (na sessão actual). Não pode ser desfeito. Continuar?`)) return;
+
+    listaJogadores = listaJogadores.filter(j => slugifyClube(j.c) !== slugAlvo);
+    salvarJogadoresManuaisNoStorage();
+    aplicarFiltros();
+    popularSelectApagarClube();
+    alert(`Pronto: ${alvo.length.toLocaleString("pt-PT")} jogador(es) do clube "${nomeClube}" foram apagados da lista carregada.`);
+}
+
 function alternarFiltroStatus(idClicado) {
     const outro = idClicado === "soCompletos" ? "soIncompletos" : "soCompletos";
     if (document.getElementById(idClicado).checked) {
@@ -542,6 +686,7 @@ function aplicarFiltros() {
     renderizarPagina();
     atualizarEstatisticas();
     atualizarPainelPaises();
+    popularSelectApagarClube();
 }
 
 function atualizarEstatisticas() {
@@ -771,8 +916,7 @@ function salvarJogador(e) {
         pe: document.getElementById("addPe").value,
         p: document.getElementById("addPos").value.toLowerCase().replace(/\s/g, ""),
         men: parseInt(document.getElementById("addMen").value),
-        tal: parseInt(document.getElementById("addTalento").value) || null,
-        v: parseFloat(document.getElementById("addValor").value)
+        tal: parseInt(document.getElementById("addTalento").value) || null
     };
 
     const ehGoleiro = posicaoGrupo(dadosForm) === "G";
@@ -789,6 +933,11 @@ function salvarJogador(e) {
         dadosForm.fis = parseInt(document.getElementById("addFis").value) || null;
         dadosForm.ref = null; dadosForm.pos_gk = null; dadosForm.aer = null; dadosForm.sai = null;
     }
+
+    // O valor de mercado é GERADO pela fórmula depois de todos os atributos
+    // estarem definidos (o campo no formulário está bloqueado). Se ainda não
+    // houver OVER/talento/idade suficientes, fica "-".
+    dadosForm.v = calcularValorMercado(dadosForm) ?? "-";
 
     if (idEditando) {
         const j = listaJogadores.find(p => p._id === idEditando);

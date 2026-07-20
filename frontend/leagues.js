@@ -59,5 +59,12 @@ window.LEAGUES_DATA = {
             "FC La Habana", "FC Pinar del Río", "FC Villa Clara", "Granma FC",
             "Guantánamo FC", "Las Tunas FC", "Matanzas FC", "Mayabeque FC", "Sancti Spíritus FC"
         ]
+    },
+    "San Marino": {
+        "Campionato Sammarinese - 26/27": [
+            "Pennarossa", "Cosmos", "Juvenes-Dogana", "Tre Penne", "Cailungo",
+            "Domagnano", "Faetano", "Fiorentino", "Folgore", "La Fiorita",
+            "Libertas", "Murata", "San Giovanni", "San Marino Academy", "Tre Fiori", "Virtus"
+        ]
     }
 };

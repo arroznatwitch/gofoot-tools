@@ -18,7 +18,7 @@
                 </div>
             </div>
             <span class="host-badge" title="Site estático — sem servidor, sem base de dados online">
-                🟢 Ultima atualização: 18-07-2026 21:16
+                🟢 Ultima atualização: 20-07-2026 15:36
             </span>
         </header>
 
@@ -179,6 +179,30 @@
             </div>
 
             <div class="painel-card">
+                <h2 class="painel-titulo">💰 Recalcular Valor de Mercado</h2>
+                <p class="painel-desc">
+                    Recalcula o <b>valor de mercado</b> dos jogadores importados do <code>players.csv</code> pela
+                    fórmula (OVER · talento · idade · físico), substitui os valores actuais e descarrega logo o
+                    <code>.csv</code> actualizado (todas as colunas preservadas). Só afecta jogadores com OVER,
+                    talento e idade. Importa primeiro a base na aba <b>Jogadores</b>.
+                </p>
+                <button class="btn btn-dev" onclick="recalcularValoresMercado()">💰 Recalcular e descarregar CSV</button>
+            </div>
+
+            <div class="painel-card">
+                <h2 class="painel-titulo">🗑️ Apagar Jogadores de um Clube</h2>
+                <p class="painel-desc">
+                    Só aparecem clubes com <b>20+ jogadores completos</b> (atributos+OVER definido). Escolhe um e
+                    apaga <b>todos</b> os jogadores desse clube da lista carregada — útil para limpar um plantel
+                    já concluído antes de um novo merge. Só afecta a sessão actual, não mexe em ficheiros no disco.
+                </p>
+                <div class="acoes-linha">
+                    <select id="apagarClubeSelect" class="form-control" style="max-width:360px;"></select>
+                    <button class="btn btn-danger" onclick="apagarJogadoresDoClube()">🗑️ Apagar jogadores deste clube</button>
+                </div>
+            </div>
+
+            <div class="painel-card">
                 <h2 class="painel-titulo">🔤 Traduzir Siglas (.csv)</h2>
                 <p class="painel-desc">
                     Troca as <b>siglas</b> dos clubes na coluna <code>Club</code> do <code>players.csv</code> pelos nomes
@@ -245,7 +269,7 @@
                     <div class="form-group"><label>Mental (1 a 99)</label><input type="number" id="addMen" class="form-control" min="1" max="99" required></div>
                     <div class="form-group"><label>Talento / Potencial (1 a 99)</label><input type="number" id="addTalento" class="form-control" min="1" max="99" required></div>
                 </div>
-                <div class="form-group"><label>Valor de Mercado (€)</label><input type="number" id="addValor" class="form-control" min="0" placeholder="Ex: 85000000" required></div>
+                <div class="form-group"><label>Valor de Mercado (€) <span style="color:#8b949e; font-weight:400;">— gerado automaticamente</span></label><input type="number" id="addValor" class="form-control" min="0" placeholder="Gerado após os atributos" readonly disabled></div>
 
                 <input type="hidden" id="editandoId" value="">
 
