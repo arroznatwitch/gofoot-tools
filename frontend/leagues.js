@@ -41,6 +41,16 @@ window.LEAGUES_DATA = {
         "Grasshopper Ch", "Sion Ch"
     ]
 },
+
+"Uruguai": {
+    "Liga AUF Intermedio - 26/27": [
+        "Albion Fc", "Ca Boston River", "Club Nacional", "Ca Juventud", 
+        "Ca Progreso", "Cd Maldonado", "Central Espanol Fc", "Cerro Largo Fc", 
+        "Ca Cerro", "Fc Danubio Montevideo", "Defensor Sporting Club", "Liverpool Fc Montevideo", 
+        "Montevideo City Torque", "Montevideo Wanderers", "Ca Penarol", "Racing Club Montevideo"
+    ]
+},
+
 "Paraguai": {
     "Primera División - 26/27": [
         "Rubio Nu Py", "Nacional Asuncion", "Ameliano Py", "Trinidense Py", "Recoleta Py",

@@ -18,11 +18,14 @@
 
 
 
-Equador:
+***Equador:***
 
 &#x20;LigaPRO Série A (Completo.)
 
 &#x20;LigaPRO Série B (Completo.)
+
+***Uruguai:***
+Liga AUF Intermedio (Completo.)
 
 
 
