@@ -19,6 +19,14 @@ window.LEAGUES_DATA = {
         "Maringá", "Paysandu", "Santa Cruz", "Volta Redonda", "Ypiranga-RS"
     ]
     },
+
+    "Suíça": {
+    "Super League - 26/27": [
+        "Young Boys Ch", "Servette Ch", "Lugano Ch", "Fc Zurich Ch", "St Gallen Ch", 
+        "Thun Ch", "Luzern Ch", "Basileia Ch", "Vaduz Ch", "Lausanne Ch", 
+        "Grasshopper Ch", "Sion Ch"
+    ]
+},
 "Paraguai": {
     "Primera División - 26/27": [
         "Rubio Nu Py", "Nacional Asuncion", "Ameliano Py", "Trinidense Py", "Recoleta Py",
