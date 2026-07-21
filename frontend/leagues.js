@@ -74,6 +74,15 @@ window.LEAGUES_DATA = {
     ]
 
 },
+
+"Suécia": {
+    "Allsvenskan - 26/27": [
+        "AIK Solna", "BK Häcken", "Degerfors IF", "Djurgårdens IF", 
+        "GAIS", "Halmstads BK", "Hammarby IF", "IF Brommapojkarna", 
+        "IF Elfsborg", "IFK Göteborg", "IK Sirius", "Malmö FF", 
+        "Mjällby AIF", "Västerås SK"
+    ]
+},
     "Cuba": {
         "Primeira Liga - 26/27": [
             "Artemisa FC", "CD Santiago de Cuba", "Ciego de Ávila FC",
