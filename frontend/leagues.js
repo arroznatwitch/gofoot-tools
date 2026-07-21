@@ -20,6 +20,20 @@ window.LEAGUES_DATA = {
     ]
     },
 
+    "Equador": {
+    "LigaPro - 26/27": [
+        "Barcelona Guayaquil Sc", "Cd Leones Del Norte", "Cd Macara", "Cd Universidad Catolica", 
+        "Cs Emelec", "Delfin Sc", "Deportivo Cuenca", "Independiente Del Valle", 
+        "Guayaquil City Fc", "Ldu Quito", "Libertad Fc", "Mushuc Runa Sc", 
+        "Manta Fc", "Sd Aucas", "Orense Sc", "Tecnico Universitario"
+    ],
+    "Serie B - 26/27": [
+        "22 De Julio Fc", "Ad Nueve De Octubre", "Cd El Nacional", "Atletico Futbol Club", 
+        "Cd Santo Domingo De Los Tsachilas", "Cuenca Juniors", "Cumbaya Fc", "Gualaceo Sc", 
+        "Independiente Juniors", "Ldu De Portoviejo", "San Antonio Fc", "Vinotinto Fc"
+    ]
+},
+
     "Suíça": {
     "Super League - 26/27": [
         "Young Boys Ch", "Servette Ch", "Lugano Ch", "Fc Zurich Ch", "St Gallen Ch", 
