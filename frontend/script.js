@@ -596,6 +596,67 @@ function recalcularValoresMercado() {
         ` Descarregado "players_valores_recalculados.csv".`);
 }
 
+// Salário (€): 0,1% do valor de mercado, multiplicado consoante o OVER.
+//   OVER > 90      -> x1.75
+//   OVER 80-89     -> x1.50
+//   OVER 75-79     -> x1.25
+//   OVER 0-74      -> x1.00
+// Devolve null se faltar o valor de mercado ou o OVER.
+function calcularSalario(j) {
+    const overall = calcularOverallDinamico(j);
+    const valor = Number(j.v);
+    if (overall === null || isNaN(valor) || valor <= 0) return null;
+
+    let multiplicador;
+    if (overall > 90) multiplicador = 1.75;
+    else if (overall >= 80) multiplicador = 1.50;
+    else if (overall >= 75) multiplicador = 1.25;
+    else multiplicador = 1.00;
+
+    return Math.round(valor * 0.001 * multiplicador);
+}
+
+// TEMPORÁRIO/dev: recalcula o salário de TODOS os jogadores importados do CSV
+// pela fórmula (0,1% do valor de mercado × multiplicador por OVER), substitui
+// os valores actuais e descarrega logo o .csv actualizado (coluna Salario).
+function recalcularSalarios() {
+    const comRaw = listaJogadores.filter(j => j._csvRaw);
+    if (!comRaw.length) {
+        alert("Importa primeiro a base com o botão \"Importar Jogadores(.csv)\".");
+        return;
+    }
+    if (!confirm(`Recalcular o salário dos ${comRaw.length.toLocaleString("pt-PT")} jogadores importados do CSV pela fórmula e descarregar o .csv novo. Continuar?`)) return;
+
+    let feitos = 0, semDados = 0;
+    comRaw.forEach(j => {
+        const s = calcularSalario(j);
+        if (s === null) { semDados++; return; }
+        j.sal = s;
+        j._csvRaw.Salario = s;
+        feitos++;
+    });
+
+    const colunasFinais = [...(colunasCsvImportadas || Object.keys(comRaw[0]._csvRaw))];
+    if (!colunasFinais.includes("Salario")) colunasFinais.push("Salario");
+    const csvFinal = Papa.unparse(comRaw.map(j => j._csvRaw), { delimiter: ";", columns: colunasFinais });
+
+    const bytesISO = new Uint8Array(csvFinal.length);
+    for (let i = 0; i < csvFinal.length; i++) bytesISO[i] = csvFinal.charCodeAt(i) & 0xFF;
+    const blob = new Blob([bytesISO], { type: "text/csv;charset=ISO-8859-1" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "players_salarios_recalculados.csv";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+
+    alert(`Salários recalculados: ${feitos.toLocaleString("pt-PT")} jogador(es).` +
+        (semDados ? ` ${semDados.toLocaleString("pt-PT")} ficaram de fora (falta valor de mercado/OVER).` : "") +
+        ` Descarregado "players_salarios_recalculados.csv".`);
+}
+
 // Calcula, por clube (slug), quantos jogadores tem e quantos são completos
 // (atributos+OVER definido). Usado pelos dois selects do Painel++ abaixo.
 function estatisticasPorClube() {
@@ -646,29 +707,6 @@ function popularSelectApagarClube() {
     );
 }
 
-// Descarrega o .csv com os jogadores (vindos do CSV, com _csvRaw) actualmente
-// em listaJogadores — usado depois de qualquer apagar/limpar no Painel++, para
-// a alteração sair logo em ficheiro e não ficar só na sessão do browser.
-function descarregarCsvDeListaJogadores(nomeArquivo) {
-    const comRaw = listaJogadores.filter(j => j._csvRaw);
-    if (!comRaw.length) return; // nada vindo de CSV para escrever (ex: só havia manuais)
-
-    const colunasFinais = [...(colunasCsvImportadas || Object.keys(comRaw[0]._csvRaw))];
-    const csvFinal = Papa.unparse(comRaw.map(j => j._csvRaw), { delimiter: ";", columns: colunasFinais });
-
-    const bytesISO = new Uint8Array(csvFinal.length);
-    for (let i = 0; i < csvFinal.length; i++) bytesISO[i] = csvFinal.charCodeAt(i) & 0xFF;
-    const blob = new Blob([bytesISO], { type: "text/csv;charset=ISO-8859-1" });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = nomeArquivo;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    URL.revokeObjectURL(url);
-}
-
 // TEMPORÁRIO (dev): apaga da lista carregada TODOS os jogadores do clube
 // escolhido (por team_id/slug) — útil para limpar um plantel antigo antes de
 // um novo merge. Não mexe no players.csv em disco, só na sessão actual.
@@ -694,8 +732,7 @@ function apagarJogadoresDoClube() {
     salvarJogadoresManuaisNoStorage();
     aplicarFiltros();
     popularSelectApagarClube();
-    descarregarCsvDeListaJogadores("players_atualizado.csv");
-    alert(`Pronto: ${alvo.length.toLocaleString("pt-PT")} jogador(es) do clube "${nomeClube}" foram apagados. Descarregado "players_atualizado.csv".`);
+    alert(`Pronto: ${alvo.length.toLocaleString("pt-PT")} jogador(es) do clube "${nomeClube}" foram apagados da lista carregada.`);
 }
 
 // TEMPORÁRIO (dev): apaga TODOS os jogadores de TODOS os clubes que já têm
@@ -847,6 +884,7 @@ function valorOrdenacao(j, coluna) {
         case "mental": return (j.men === null || j.men === undefined) ? -1 : Number(j.men);
         case "talento": return (j.tal === null || j.tal === undefined) ? -1 : Number(j.tal);
         case "valor": { const v = Number(j.v); return isNaN(v) ? -1 : v; }
+        case "salario": { const v = Number(j.sal); return isNaN(v) ? -1 : v; }
         case "status": return j.completo ? 1 : 0;
         default: return 0;
     }
@@ -945,6 +983,7 @@ function linhaTabela(j) {
             <td class="badge-score ${obterClasseCor(j.men)}">${j.men || "-"}</td>
             <td class="badge-score ${obterClasseCor(j.tal)}">${j.tal || "-"}</td>
             <td style="font-weight: 500; color: #58a6ff;">${formatarValorMercado(j.v)}</td>
+            <td style="font-weight: 500; color: #3fb950;">${formatarValorMercado(j.sal)}</td>
             <td><span class="status-badge ${statusClass}">${statusTxt}</span></td>
             <td>
                 <button class="btn-edit" onclick="abrirModal(${j._id})" title="Editar">✎</button>
@@ -967,7 +1006,7 @@ function renderizarTabela(dados) {
 
     if (dados.length === 0) {
         wrapLinha.style.display = "block";
-        tbodyLinha.innerHTML = `<tr><td colspan="16" style="text-align:center; color:#8b949e; padding: 24px;">Nenhum jogador encontrado.</td></tr>`;
+        tbodyLinha.innerHTML = `<tr><td colspan="17" style="text-align:center; color:#8b949e; padding: 24px;">Nenhum jogador encontrado.</td></tr>`;
         return;
     }
 
@@ -1148,6 +1187,7 @@ function importarCsv(event) {
                     catg: TAG_CATEGORIA[tag] || null,
                     pe: PE_LETRA_INVERSO[linha.Pe] || "-",
                     v: numOuNull(linha.Valor) ?? "-",
+                    sal: numOuNull(linha.Salario),
                     tec: numOuNull(linha.TEC), ata: numOuNull(linha.ATA), def: numOuNull(linha.DEF), fis: numOuNull(linha.FIS), men: numOuNull(linha.MEN),
                     ref: numOuNull(linha.REF), pos_gk: numOuNull(linha.POS_GK), aer: numOuNull(linha.AER), sai: numOuNull(linha.SAI),
                     tal: numOuNull(linha.TAL)
@@ -1223,6 +1263,7 @@ function converterImportGoFoot(j) {
         pe: PE_LETRA_INVERSO[j.pe] || "-",
         p: j.posicao || "",
         v: (j.valor !== null && j.valor !== undefined) ? j.valor : "-",
+        sal: (j.salario !== null && j.salario !== undefined && !isNaN(j.salario)) ? Number(j.salario) : null,
         tal: j.TAL ?? null,
     };
 
@@ -1264,7 +1305,7 @@ function montarExportGoFoot(j) {
         pe: PE_LETRA[j.pe] || null,
         posicao: posicaoGrupo(j),
         TAL: j.tal ?? null,
-        salario: null,
+        salario: (j.sal !== null && j.sal !== undefined && !isNaN(j.sal)) ? Number(j.sal) : null,
         valor: (j.v !== null && j.v !== undefined && j.v !== "-" && !isNaN(j.v)) ? Number(j.v) : null,
         team_id: slugifyClube(j.c),
         energia: 100,
@@ -1538,7 +1579,7 @@ function normalizarNomeParaMatch(nome) {
         .split(/[\s,]+/).filter(Boolean).sort().join(" ");
 }
 
-const NOVAS_COLUNAS_CSV = ["Id", "Pe", "Posicao", "TAL", "Valor", "TEC", "ATA", "DEF", "FIS", "MEN", "REF", "POS_GK", "AER", "SAI", "OVER"];
+const NOVAS_COLUNAS_CSV = ["Id", "Pe", "Posicao", "TAL", "Valor", "Salario", "TEC", "ATA", "DEF", "FIS", "MEN", "REF", "POS_GK", "AER", "SAI", "OVER"];
 
 // Lê o players.csv mestre + um .json de equipa (no formato de export do
 // GoFoot, com ou sem "id"), actualiza só as linhas dos jogadores que aparecem
