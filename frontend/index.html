@@ -181,25 +181,16 @@
             </div>
 
             <div class="painel-card">
-                <h2 class="painel-titulo">💰 Recalcular Valor de Mercado</h2>
+                <h2 class="painel-titulo">💰 Recalcular Valor de Mercado e Salário</h2>
                 <p class="painel-desc">
-                    Recalcula o <b>valor de mercado</b> dos jogadores importados do <code>players.csv</code> pela
-                    fórmula (OVER · talento · idade · físico), substitui os valores actuais e descarrega logo o
-                    <code>.csv</code> actualizado (todas as colunas preservadas). Só afecta jogadores com OVER,
-                    talento e idade. Importa primeiro a base na aba <b>Jogadores</b>.
+                    Recalcula o <b>valor de mercado</b> (fórmula OVER · talento · idade · físico) e depois o
+                    <b>salário</b> (0,1% do valor recalculado, ×1.75 se OVER&gt;90, ×1.50 se 80-89, ×1.25 se
+                    75-79, ×1.00 se 0-74) dos jogadores importados do <code>players.csv</code>, num só passo.
+                    Substitui os valores actuais e descarrega logo o <code>.csv</code> actualizado (todas as
+                    colunas preservadas). Só afecta jogadores com OVER, talento e idade. Importa primeiro a base
+                    na aba <b>Jogadores</b>.
                 </p>
-                <button class="btn btn-dev" onclick="recalcularValoresMercado()">💰 Recalcular e descarregar CSV</button>
-            </div>
-
-            <div class="painel-card">
-                <h2 class="painel-titulo">💵 Recalcular Salário</h2>
-                <p class="painel-desc">
-                    Recalcula o <b>salário</b> dos jogadores importados do <code>players.csv</code>: 0,1% do valor
-                    de mercado, multiplicado por <b>1.75</b> (OVER &gt;90), <b>1.50</b> (80-89), <b>1.25</b> (75-79)
-                    ou <b>1.00</b> (0-74). Substitui os valores actuais e descarrega logo o <code>.csv</code>
-                    actualizado. Só afecta jogadores com valor de mercado e OVER definidos.
-                </p>
-                <button class="btn btn-dev" onclick="recalcularSalarios()">💵 Recalcular e descarregar CSV</button>
+                <button class="btn btn-dev" onclick="recalcularValorESalario()">💰 Recalcular ambos e descarregar CSV</button>
             </div>
 
             <div class="painel-card">

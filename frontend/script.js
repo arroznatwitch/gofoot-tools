@@ -552,50 +552,6 @@ function calcularValorMercado(j) {
     return Math.round(valorFinal);
 }
 
-// TEMPORÁRIO/dev: recalcula o valor de mercado de TODOS os jogadores carregados
-// pela fórmula (só os que têm OVER+talento+idade). Actualiza a tabela e, se vieram
-// de CSV, também a coluna Valor da linha original (para o export/regen).
-function recalcularValoresMercado() {
-    const comRaw = listaJogadores.filter(j => j._csvRaw);
-    if (!comRaw.length) {
-        alert("Importa primeiro a base com o botão \"Importar Jogadores(.csv)\".");
-        return;
-    }
-    if (!confirm(`Recalcular o valor de mercado dos ${comRaw.length.toLocaleString("pt-PT")} jogadores importados do CSV pela fórmula e descarregar o .csv novo. Continuar?`)) return;
-
-    let feitos = 0, semDados = 0;
-    comRaw.forEach(j => {
-        const v = calcularValorMercado(j);
-        if (v === null) { semDados++; return; }
-        j.v = v;
-        j._csvRaw.Valor = v;
-        marcarStatus(j);
-        feitos++;
-    });
-
-    // Preserva todas as colunas do CSV original.
-    const colunasFinais = [...(colunasCsvImportadas || Object.keys(comRaw[0]._csvRaw))];
-    const csvFinal = Papa.unparse(comRaw.map(j => j._csvRaw), { delimiter: ";", columns: colunasFinais });
-
-    // Grava em ISO-8859-1, igual ao que o importarCsv() espera.
-    const bytesISO = new Uint8Array(csvFinal.length);
-    for (let i = 0; i < csvFinal.length; i++) bytesISO[i] = csvFinal.charCodeAt(i) & 0xFF;
-    const blob = new Blob([bytesISO], { type: "text/csv;charset=ISO-8859-1" });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = "players_valores_recalculados.csv";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    URL.revokeObjectURL(url);
-
-    aplicarFiltros();
-    alert(`Valores de mercado recalculados: ${feitos.toLocaleString("pt-PT")} jogador(es).` +
-        (semDados ? ` ${semDados.toLocaleString("pt-PT")} ficaram de fora (falta OVER/talento/idade).` : "") +
-        ` Descarregado "players_valores_recalculados.csv".`);
-}
-
 // Salário (€): 0,1% do valor de mercado, multiplicado consoante o OVER.
 //   OVER > 90      -> x1.75
 //   OVER 80-89     -> x1.50
@@ -616,23 +572,32 @@ function calcularSalario(j) {
     return Math.round(valor * 0.001 * multiplicador);
 }
 
-// TEMPORÁRIO/dev: recalcula o salário de TODOS os jogadores importados do CSV
-// pela fórmula (0,1% do valor de mercado × multiplicador por OVER), substitui
-// os valores actuais e descarrega logo o .csv actualizado (coluna Salario).
-function recalcularSalarios() {
+// TEMPORÁRIO/dev: recalcula o valor de mercado E o salário de TODOS os
+// jogadores importados do CSV, num só passo (o salário usa o valor de mercado
+// já recalculado). Substitui os valores actuais e descarrega logo o .csv
+// actualizado (colunas Valor e Salario).
+function recalcularValorESalario() {
     const comRaw = listaJogadores.filter(j => j._csvRaw);
     if (!comRaw.length) {
         alert("Importa primeiro a base com o botão \"Importar Jogadores(.csv)\".");
         return;
     }
-    if (!confirm(`Recalcular o salário dos ${comRaw.length.toLocaleString("pt-PT")} jogadores importados do CSV pela fórmula e descarregar o .csv novo. Continuar?`)) return;
+    if (!confirm(`Recalcular o valor de mercado e o salário dos ${comRaw.length.toLocaleString("pt-PT")} jogadores importados do CSV pelas fórmulas e descarregar o .csv novo. Continuar?`)) return;
 
     let feitos = 0, semDados = 0;
     comRaw.forEach(j => {
+        const v = calcularValorMercado(j);
+        if (v === null) { semDados++; return; }
+        j.v = v;
+        j._csvRaw.Valor = v;
+        marcarStatus(j);
+
+        // O salário usa o valor de mercado já recalculado acima.
         const s = calcularSalario(j);
-        if (s === null) { semDados++; return; }
-        j.sal = s;
-        j._csvRaw.Salario = s;
+        if (s !== null) {
+            j.sal = s;
+            j._csvRaw.Salario = s;
+        }
         feitos++;
     });
 
@@ -646,15 +611,16 @@ function recalcularSalarios() {
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
-    link.download = "players_salarios_recalculados.csv";
+    link.download = "players_valores_salarios_recalculados.csv";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
 
-    alert(`Salários recalculados: ${feitos.toLocaleString("pt-PT")} jogador(es).` +
-        (semDados ? ` ${semDados.toLocaleString("pt-PT")} ficaram de fora (falta valor de mercado/OVER).` : "") +
-        ` Descarregado "players_salarios_recalculados.csv".`);
+    aplicarFiltros();
+    alert(`Valor de mercado e salário recalculados: ${feitos.toLocaleString("pt-PT")} jogador(es).` +
+        (semDados ? ` ${semDados.toLocaleString("pt-PT")} ficaram de fora (falta OVER/talento/idade).` : "") +
+        ` Descarregado "players_valores_salarios_recalculados.csv".`);
 }
 
 // Calcula, por clube (slug), quantos jogadores tem e quantos são completos
