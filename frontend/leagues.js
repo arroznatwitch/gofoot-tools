@@ -50,7 +50,23 @@ window.LEAGUES_DATA = {
         "Montevideo City Torque", "Montevideo Wanderers", "Ca Penarol", "Racing Club Montevideo"
     ]
 },
-
+"Peru": {
+    "Liga 1 - 26/27": [
+        "Alianza Lima", "Sport Boys Association", "Sporting Cristal", "Juan Pablo Ii College", 
+        "Los Chankas", "Universitario De Deportes", "Fbc Melgar", "Cusco Fc", 
+        "Club Atletico Grau", "Universidad Tecnica Cajamarca", "Sport Huancayo", "Alianza Atletico Sullana", 
+        "Deportivo Garcilaso", "Fc Cajamarca", "Club Cienciano", "Asociacion Deportiva Tarma", 
+        "Comerciantes Unidos"
+    ]
+},
+"Venezuela": {
+    "Liga FUTVE - 26/27": [
+        "Anzoategui", "Carabobo Fc", "Caracas Fc", "Deportivo La Guaira", 
+        "Deportivo Rayo Zuliano", "Deportivo Tachira", "Estudiantes De Merida", "Metropolitanos Fc", 
+        "Monagas Sc", "Portuguesa Futbol Club", "Academia Puerto Cabello", "Trujillanos", 
+        "Universidad Central Venezuela", "Zamora"
+    ]
+},
 "Paraguai": {
     "Primera División - 26/27": [
         "Rubio Nu Py", "Nacional Asuncion", "Ameliano Py", "Trinidense Py", "Recoleta Py",
@@ -84,7 +100,6 @@ window.LEAGUES_DATA = {
     ]
 
 },
-
 "Suécia": {
     "Allsvenskan - 26/27": [
         "AIK Solna", "BK Häcken", "Degerfors IF", "Djurgårdens IF", 
