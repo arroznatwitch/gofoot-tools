@@ -268,15 +268,42 @@ function atualizarPainelPaises() {
         }).join("");
 
         const abertoPais = paisesColapsados.has(pais) ? "" : " open";
+        const paisEscapado = pais.replace(/'/g, "\\'");
         return `
-            <details class="pais-acc"${abertoPais} ontoggle="alternarPais('${pais.replace(/'/g, "\\'")}', this.open)">
+            <details class="pais-acc"${abertoPais} ontoggle="alternarPais('${paisEscapado}', this.open)">
                 <summary class="pais-summary">
                     <span class="pais-nome">${bandeiraHtml(pais)} ${pais}</span>
-                    <span class="chevron">▾</span>
+                    <span class="pais-acoes">
+                        <button type="button" class="btn-exportar-pais" title="Exportar todos os jogadores das ligas de ${pais} (.json, para testes)"
+                            onclick="event.stopPropagation(); event.preventDefault(); exportarJogadoresDoPais('${paisEscapado}');">⬇️ Exportar</button>
+                        <span class="chevron">▾</span>
+                    </span>
                 </summary>
                 <div class="pais-corpo">${seccoesLigas}</div>
             </details>`;
     }).join("");
+}
+
+// Exporta (para testes) TODOS os jogadores carregados que pertencem a qualquer
+// clube das ligas de um país — junta as ligas todas desse país (ex: Série A/B/C
+// do Brasil) numa lista só. Sai no formato { "players": [...] }, como o GoFoot
+// espera (não um array solto), para poderes testar directamente no jogo.
+function exportarJogadoresDoPais(pais) {
+    const ligas = LIGAS_DATA[pais];
+    if (!ligas) return;
+
+    const clubesDoPais = Object.values(ligas).flat();
+    const slugsDoPais = new Set(clubesDoPais.map(slugifyClube));
+
+    const jogadoresDoPais = listaJogadores.filter(j => slugsDoPais.has(slugifyClube(j.c)));
+    if (!jogadoresDoPais.length) {
+        alert(`Não há jogadores carregados de nenhum clube das ligas de ${pais}.`);
+        return;
+    }
+
+    const nomeArquivo = `players_${slugifyClube(pais)}.json`;
+    baixarJSON({ players: jogadoresDoPais.map(montarExportGoFoot) }, nomeArquivo);
+    alert(`Exportados ${jogadoresDoPais.length.toLocaleString("pt-PT")} jogador(es) das ligas de ${pais} para "${nomeArquivo}".`);
 }
 
 // Troca de aba (puro DOM, sem rede — funciona em file:// e no GitHub Pages).

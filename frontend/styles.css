@@ -517,6 +517,20 @@
         .pais-acc[open] > .pais-summary .chevron { transform: rotate(180deg); }
         .pais-corpo { padding: 0 14px 14px; }
 
+        .pais-acoes { display: flex; align-items: center; gap: 12px; }
+        .btn-exportar-pais {
+            font-size: 12px; font-weight: 600;
+            color: #58a6ff;
+            background-color: rgba(88,166,255,0.1);
+            border: 1px solid rgba(88,166,255,0.3);
+            border-radius: 20px;
+            padding: 5px 12px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: 0.15s;
+        }
+        .btn-exportar-pais:hover { background-color: rgba(88,166,255,0.2); }
+
         /* Liga colapsável (accordion compacto) */
         .liga-acc {
             border: 1px solid #30363d;
