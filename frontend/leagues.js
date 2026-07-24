@@ -127,6 +127,13 @@ window.LEAGUES_DATA = {
             "Guantánamo FC", "Las Tunas FC", "Matanzas FC", "Mayabeque FC", "Sancti Spíritus FC"
         ]
     },
+    "Austrália": {
+    "A-League - 26/27": [
+        "Adelaide United", "Auckland Fc", "Central Coast Mariners", "Macarthur Fc", 
+        "Melbourne City Fc", "Melbourne Victory", "Newcastle United Jets", "Perth Glory", 
+        "Sydney FC", "Wellington Phoenix", "Western Sydney Fc", "Brisbane Roar"
+    ]
+},
     "San Marino": {
         "Campionato Sammarinese - 26/27": [
             "Pennarossa", "Cosmos", "Juvenes-Dogana", "Tre Penne", "Cailungo",
