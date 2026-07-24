@@ -31,6 +31,15 @@ window.LEAGUES_DATA = {
         "Ca Central Cordoba Sde", "Ca Sarmiento"
     ]
 },
+"Colômbia": {
+    "Categoría Primera A - 26/27": [
+        "Cd America De Cali", "Atletico Nacional", "Junior Fc", "Deportes Tolima", 
+        "Deportivo Cali", "Independiente Santa Fe", "Millonarios Bogota", "Atletico Bucaramanga", 
+        "Independiente Medellin", "Internacional De Bogota", "Once Caldas", "Cucuta Deportivo", 
+        "Fortaleza Ceif", "Rionegro Aguilas", "Alianza Fc", "Boyaca Chico Fc", 
+        "Deportivo Pasto", "Deportivo Pereira", "Jaguares De Cordoba", "Llaneros Fc"
+    ]
+},
     "Equador": {
     "LigaPro - 26/27": [
         "Barcelona Guayaquil Sc", "Cd Leones Del Norte", "Cd Macara", "Cd Universidad Catolica", 
