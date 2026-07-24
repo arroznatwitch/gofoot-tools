@@ -19,7 +19,18 @@ window.LEAGUES_DATA = {
         "Maringá", "Paysandu", "Santa Cruz", "Volta Redonda", "Ypiranga-RS"
     ]
     },
-
+"Argentina": {
+    "Liga Profesional - 26/27": [
+        "Aa Estudiantes Rio Cuarto", "Aa Argentinos Juniors", "Club Atletico Tigre", "Ca Boca Juniors", 
+        "Racing Club", "River Plate", "Rosario Central", "Estudiantes De La Plata", 
+        "Ca San Lorenzo De Almagro", "Ca Talleres", "Ca Lanus", "Ca Independiente", 
+        "Ca Barracas Central", "Ca Belgrano", "Ca Velez Sarsfield", "Ca Gimnasia Y Esgrima Lp", 
+        "Cs Independiente Rivadavia", "Defensa Y Justicia", "Ca Huracan", "Instituto Acc", 
+        "Ca Platense", "Ca Newells Old Boys", "Ca Union Santa Fe", "Ca Aldosivi", 
+        "Ca Banfield", "Ca Gimnasia Y Esgrima Mendoza", "Club Atletico Tucuman", "Cd Riestra", 
+        "Ca Central Cordoba Sde", "Ca Sarmiento"
+    ]
+},
     "Equador": {
     "LigaPro - 26/27": [
         "Barcelona Guayaquil Sc", "Cd Leones Del Norte", "Cd Macara", "Cd Universidad Catolica", 
