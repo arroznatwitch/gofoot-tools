@@ -40,6 +40,14 @@ window.LEAGUES_DATA = {
         "Deportivo Pasto", "Deportivo Pereira", "Jaguares De Cordoba", "Llaneros Fc"
     ]
 },
+"Chile": {
+    "Primera División - 26/27": [
+        "Audax Italiano", "Cd Cobresal", "Cd Everton", "Cd Huachipato", 
+        "Cd Nublense", "Cd Ohiggins", "Cd Palestino", "Cd Union La Calera", 
+        "Universidad Catolica", "Coquimbo Unido", "Csd Colocolo", "Deportes Concepcion", 
+        "Deportes La Serena", "Universidad De Chile", "Deportes Limache", "Universidad De Concepcion"
+    ]
+},
     "Equador": {
     "LigaPro - 26/27": [
         "Barcelona Guayaquil Sc", "Cd Leones Del Norte", "Cd Macara", "Cd Universidad Catolica", 
