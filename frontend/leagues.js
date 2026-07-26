@@ -168,6 +168,14 @@ window.LEAGUES_DATA = {
         "Sydney FC", "Wellington Phoenix", "Western Sydney Fc", "Brisbane Roar"
     ]
 },
+"China": {
+    "Chinese Super League - 26/27": [
+        "Shanghai Shenhua", "Shanghai Port", "Zhejiang FC", "Shandong Taishan", 
+        "Beijing Guoan", "Shenzhen Peng City", "Chengdu Rongcheng", "Liaoning Tieren", 
+        "Yunnan Yukun", "Chongqing Tonglianglong", "Wuhan Three Towns", "Dalian Yingbo", 
+        "Tianjin Jinmen Tiger", "Henan FC", "Qingdao West Coast", "Qingdao Hainiu"
+    ]
+},
     "San Marino": {
         "Campionato Sammarinese - 26/27": [
             "Pennarossa", "Cosmos", "Juvenes-Dogana", "Tre Penne", "Cailungo",
