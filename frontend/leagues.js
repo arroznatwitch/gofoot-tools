@@ -128,6 +128,23 @@ window.LEAGUES_DATA = {
     ]
 
 },
+"Rússia": {
+    "Premier League - 26/27": [
+        "Akhmat Grozny", "Akron Togliatti", "Baltika Kaliningrad", "Cska Moscow", 
+        "Dinamo Makhachkala", "Dinamo Moscow", "Fakel Voronezh", "Fc Krasnodar", 
+        "Fc Rostov", "Fk Orenburg", "Krylya Sovetov", "Lokomotiv Moscow", 
+        "Rodina Moscow", "Rubin Kazan", "Spartak Moscow", "Zenit"
+    ]
+},
+"Espanha": {
+    "La Liga - 26/27": [
+        "Real Madrid", "Barcelona", "Atletico Madrid", "FC Villarreal", 
+        "Real Sociedad", "Athletic Club Fc", "Real Bétis", "Celta de Vigo", 
+        "Sevilha FC", "Valência CF", "RCD Espanyol", "Levante UD", 
+        "Rayo Vallecano", "RC Deportivo da Corunha", "Getafe CF", "CA Osasuna", 
+        "Racing Santander", "Deportivo Alavés", "Elche CF", "Málaga CF"
+    ]
+},
 "Suécia": {
     "Allsvenskan - 26/27": [
         "AIK Solna", "BK Häcken", "Degerfors IF", "Djurgårdens IF", 
