@@ -130,10 +130,10 @@ window.LEAGUES_DATA = {
 },
 "Rússia": {
     "Premier League - 26/27": [
-        "Akhmat Grozny", "Akron Togliatti", "Baltika Kaliningrad", "Cska Moscow", 
+        "Zenit", "Akron Togliatti", "Baltika Kaliningrad", "Cska Moscow", 
         "Dinamo Makhachkala", "Dinamo Moscow", "Fakel Voronezh", "Fc Krasnodar", 
         "Fc Rostov", "Fk Orenburg", "Krylya Sovetov", "Lokomotiv Moscow", 
-        "Rodina Moscow", "Rubin Kazan", "Spartak Moscow", "Zenit"
+        "Rodina Moscow", "Rubin Kazan", "Spartak Moscow", "Akhmat Grozny"
     ]
 },
 "Espanha": {
