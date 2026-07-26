@@ -129,7 +129,7 @@ window.LEAGUES_DATA = {
 
 },
 "Rússia": {
-    "Premier League - 26/27": [
+    "Premier League Russa - 26/27": [
         "Zenit", "Akron Togliatti", "Baltika Kaliningrad", "Cska Moscow", 
         "Dinamo Makhachkala", "Dinamo Moscow", "Fakel Voronezh", "Fc Krasnodar", 
         "Fc Rostov", "Fk Orenburg", "Krylya Sovetov", "Lokomotiv Moscow", 
@@ -138,7 +138,7 @@ window.LEAGUES_DATA = {
 },
 "Espanha": {
     "La Liga - 26/27": [
-        "Real Madrid", "Barcelona", "Atletico Madrid", "FC Villarreal", 
+        "Real Madrid", "Barcelona", "Atletico Madrid", "Villarreal Cf", 
         "Real Sociedad", "Athletic Club Fc", "Real Bétis", "Celta de Vigo", 
         "Sevilha FC", "Valência CF", "RCD Espanyol", "Levante UD", 
         "Rayo Vallecano", "RC Deportivo da Corunha", "Getafe CF", "CA Osasuna", 
