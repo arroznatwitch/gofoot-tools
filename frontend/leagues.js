@@ -140,7 +140,7 @@ window.LEAGUES_DATA = {
     "La Liga - 26/27": [
         "Real Madrid", "Barcelona", "Atletico Madrid", "Villarreal Cf", 
         "Real Sociedad", "Athletic Club Fc", "Real Bétis", "Celta de Vigo", 
-        "Sevilha FC", "Valência CF", "RCD Espanyol", "Levante UD", 
+        "Sevilla Fc", "Valência CF", "RCD Espanyol", "Levante UD", 
         "Rayo Vallecano", "RC Deportivo da Corunha", "Getafe CF", "CA Osasuna", 
         "Racing Santander", "Deportivo Alavés", "Elche CF", "Málaga CF"
     ]
@@ -174,6 +174,15 @@ window.LEAGUES_DATA = {
         "Beijing Guoan", "Shenzhen Peng City", "Chengdu Rongcheng", "Liaoning Tieren", 
         "Yunnan Yukun", "Chongqing Tonglianglong", "Wuhan Three Towns", "Dalian Yingbo", 
         "Tianjin Jinmen Tiger", "Henan FC", "Qingdao West Coast", "Qingdao Hainiu"
+    ]
+},
+"Japão": {
+    "J1 League - 26/27": [
+        "Kashima Antlers", "Vissel Kobe", "Kawasaki Frontale", "Sanfrecce Hiroshima", 
+        "Machida Zelvia", "Kashiwa Reysol", "Fc Tokyo", "Gamba Osaka", 
+        "Kyoto Sanga", "Yokohama F Marinos", "Urawa Red Diamonds", "Shimizu Spulse", 
+        "Jef United Chiba", "Vvaren Nagasaki", "Cerezo Osaka", "Nagoya Grampus", 
+        "Avispa Fukuoka", "Mito Hollyhock", "Fagiano Okayama", "Tokyo Verdy"
     ]
 },
     "San Marino": {
