@@ -145,6 +145,22 @@ window.LEAGUES_DATA = {
         "Racing Santander", "Deportivo Alavés", "Elche CF", "Málaga CF"
     ]
 },
+"Alemanha": {
+    "Bundesliga - 26/27": [
+        "1fc Colonia", "1fsv Mainz 05", "Bayer 04 Leverkusen", "Borussia Dortmund", 
+        "Borussia Monchengladbach", "Fc Augsburg", "Hamburger Sv", "Fc Bayern Munique", 
+        "Rb Leipzig", "Sc Freiburg", "Sc Paderborn 07", "Schalke 04", 
+        "Sg Eintracht Frankfurt", "Sv 07 Elversberg", "Vfb Stuttgart", "Tsg 1899 Hoffenheim", 
+        "Werder Bremen"
+    ],
+    "2. Bundesliga - 26/27": [
+        "1fc Heidenheim 1846", "1fc Kaiserslautern", "1fc Nuremberg", "Arminia Bielefeld", 
+        "Eintracht Braunschweig Tsv", "Fc Energie Cottbus", "Fc St Pauli", "Hannover 96", 
+        "Hertha Berlim", "Holstein Kiel", "Karlsruher Sc", "Magdeburgo", 
+        "Sg Dynamo Dresden", "Spvgg Greuther Furth", "Sv Darmstadt 98", "Vfl Bochum", 
+        "Vfl Osnabruck", "Vfl Wolfsburg"
+    ]
+},
 "Suécia": {
     "Allsvenskan - 26/27": [
         "AIK Solna", "BK Häcken", "Degerfors IF", "Djurgårdens IF", 
