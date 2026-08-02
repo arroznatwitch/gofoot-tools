@@ -141,7 +141,7 @@ window.LEAGUES_DATA = {
         "Real Madrid", "Barcelona", "Atletico Madrid", "Villarreal Cf", 
         "Real Sociedad", "Athletic Club Fc", "Real Bétis", "Celta de Vigo", 
         "Sevilla Fc", "Valência CF", "RCD Espanyol", "Levante UD", 
-        "Rayo Vallecano", "RC Deportivo da Corunha", "Getafe CF", "CA Osasuna", 
+        "Rayo Vallecano", "Deportivo La Coruna", "Getafe CF", "CA Osasuna", 
         "Racing Santander", "Deportivo Alavés", "Elche CF", "Málaga CF"
     ]
 },
