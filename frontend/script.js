@@ -573,7 +573,9 @@ function calcularValorMercado(j) {
     // Variação determinística de ±5% a partir de um hash.
     const hash = overall * 7919 + idade * 6271 + talento * 3571;
     const noise = 0.95 + ((Math.abs(hash) % 1000) / 1000) * 0.10; // 0.95 .. 1.05
-    let valorFinal = valorBase * fatorIdade * noise;
+    // Guarda-redes valem bem menos no mercado do que jogadores de campo equivalentes.
+    const fatorPosicao = posicaoGrupo(j) === "G" ? 0.60 : 1;
+    let valorFinal = valorBase * fatorIdade * fatorPosicao * noise;
 
     if (valorFinal < 5000) valorFinal = 5000; // nunca menos que 5.000 €
     return Math.round(valorFinal);
