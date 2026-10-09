@@ -84,7 +84,7 @@ window.LEAGUES_DATA = {
         "Los Chankas", "Universitario De Deportes", "Fbc Melgar", "Cusco Fc", 
         "Club Atletico Grau", "Universidad Tecnica Cajamarca", "Sport Huancayo", "Alianza Atletico Sullana", 
         "Deportivo Garcilaso", "Fc Cajamarca", "Club Cienciano", "Asociacion Deportiva Tarma", 
-        "Comerciantes Unidos"
+        "Comerciantes Unidos", "Deportivo Moquegua"
     ]
 },
 "Venezuela": {
@@ -113,10 +113,10 @@ window.LEAGUES_DATA = {
     },
     "Jamaica": {
         "Jamaica Premier League - 26/27": [
-            "Harbour View", "Chapelton Maroons", "Arnett Gardens", "Portmore Utd",
+            "Tru Juice FC", "Chapelton Maroons", "Arnett Gardens", "Portmore Utd",
             "Cavalier", "Dunbeholden", "Mount Pleasant", "Tivoli Gardens",
             "Racing Utd (JAM)", "Montego Bay Utd", "Treasure Beach", "Waterhouse",
-            "Molynes Utd", "Spanish Town Police"
+            "Molynes Utd", "Humble Lions FC"
         ]
     },
     "Turquia": {
@@ -151,7 +151,7 @@ window.LEAGUES_DATA = {
         "Borussia Monchengladbach", "Fc Augsburg", "Hamburger Sv", "Fc Bayern Munique", 
         "Rb Leipzig", "Sc Freiburg", "Sc Paderborn 07", "Schalke 04", 
         "Sg Eintracht Frankfurt", "Sv 07 Elversberg", "Vfb Stuttgart", "Tsg 1899 Hoffenheim", 
-        "Werder Bremen"
+        "Werder Bremen", "1fc Union Berlim"
     ],
     "2. Bundesliga - 26/27": [
         "1fc Heidenheim 1846", "1fc Kaiserslautern", "1fc Nuremberg", "Arminia Bielefeld", 
@@ -166,7 +166,7 @@ window.LEAGUES_DATA = {
         "AIK Solna", "BK Häcken", "Degerfors IF", "Djurgårdens IF", 
         "GAIS", "Halmstads BK", "Hammarby IF", "IF Brommapojkarna", 
         "IF Elfsborg", "IFK Göteborg", "IK Sirius", "Malmö FF", 
-        "Mjällby AIF", "Västerås SK"
+        "Mjällby AIF", "Västerås SK", "Kalmar FF", "Örgryte IS"
     ]
 },
     "Cuba": {
