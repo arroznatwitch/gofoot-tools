@@ -19,7 +19,35 @@ window.LEAGUES_DATA = {
         "Maringá", "Paysandu", "Santa Cruz", "Volta Redonda", "Ypiranga-RS"
     ]
     },
-
+"Argentina": {
+    "Liga Profesional - 26/27": [
+        "Aa Estudiantes Rio Cuarto", "Aa Argentinos Juniors", "Club Atletico Tigre", "Ca Boca Juniors", 
+        "Racing Club", "River Plate", "Rosario Central", "Estudiantes De La Plata", 
+        "Ca San Lorenzo De Almagro", "Ca Talleres", "Ca Lanus", "Ca Independiente", 
+        "Ca Barracas Central", "Ca Belgrano", "Ca Velez Sarsfield", "Ca Gimnasia Y Esgrima Lp", 
+        "Cs Independiente Rivadavia", "Defensa Y Justicia", "Ca Huracan", "Instituto Acc", 
+        "Ca Platense", "Ca Newells Old Boys", "Ca Union Santa Fe", "Ca Aldosivi", 
+        "Ca Banfield", "Ca Gimnasia Y Esgrima Mendoza", "Club Atletico Tucuman", "Cd Riestra", 
+        "Ca Central Cordoba Sde", "Ca Sarmiento"
+    ]
+},
+"Colômbia": {
+    "Categoría Primera A - 26/27": [
+        "Cd America De Cali", "Atletico Nacional", "Junior Fc", "Deportes Tolima", 
+        "Deportivo Cali", "Independiente Santa Fe", "Millonarios Bogota", "Atletico Bucaramanga", 
+        "Independiente Medellin", "Internacional De Bogota", "Once Caldas", "Cucuta Deportivo", 
+        "Fortaleza Ceif", "Rionegro Aguilas", "Alianza Fc", "Boyaca Chico Fc", 
+        "Deportivo Pasto", "Deportivo Pereira", "Jaguares De Cordoba", "Llaneros Fc"
+    ]
+},
+"Chile": {
+    "Primera División - 26/27": [
+        "Audax Italiano", "Cd Cobresal", "Cd Everton", "Cd Huachipato", 
+        "Cd Nublense", "Cd Ohiggins", "Cd Palestino", "Cd Union La Calera", 
+        "Universidad Catolica", "Coquimbo Unido", "Csd Colocolo", "Deportes Concepcion", 
+        "Deportes La Serena", "Universidad De Chile", "Deportes Limache", "Universidad De Concepcion"
+    ]
+},
     "Equador": {
     "LigaPro - 26/27": [
         "Barcelona Guayaquil Sc", "Cd Leones Del Norte", "Cd Macara", "Cd Universidad Catolica", 
@@ -100,6 +128,39 @@ window.LEAGUES_DATA = {
     ]
 
 },
+"Rússia": {
+    "Premier League Russa - 26/27": [
+        "Zenit", "Akron Togliatti", "Baltika Kaliningrad", "Cska Moscow", 
+        "Dinamo Makhachkala", "Dinamo Moscow", "Fakel Voronezh", "Fc Krasnodar", 
+        "Fc Rostov", "Fk Orenburg", "Krylya Sovetov", "Lokomotiv Moscow", 
+        "Rodina Moscow", "Rubin Kazan", "Spartak Moscow", "Akhmat Grozny"
+    ]
+},
+"Espanha": {
+    "La Liga - 26/27": [
+        "Real Madrid", "Barcelona", "Atletico Madrid", "Villarreal Cf", 
+        "Real Sociedad", "Athletic Club Fc", "Real Bétis", "Celta de Vigo", 
+        "Sevilla Fc", "Valência CF", "RCD Espanyol", "Levante UD", 
+        "Rayo Vallecano", "Deportivo La Coruna", "Getafe CF", "CA Osasuna", 
+        "Racing Santander", "Deportivo Alavés", "Elche CF", "Málaga CF"
+    ]
+},
+"Alemanha": {
+    "Bundesliga - 26/27": [
+        "1fc Colonia", "1fsv Mainz 05", "Bayer 04 Leverkusen", "Borussia Dortmund", 
+        "Borussia Monchengladbach", "Fc Augsburg", "Hamburger Sv", "Fc Bayern Munique", 
+        "Rb Leipzig", "Sc Freiburg", "Sc Paderborn 07", "Schalke 04", 
+        "Sg Eintracht Frankfurt", "Sv 07 Elversberg", "Vfb Stuttgart", "Tsg 1899 Hoffenheim", 
+        "Werder Bremen"
+    ],
+    "2. Bundesliga - 26/27": [
+        "1fc Heidenheim 1846", "1fc Kaiserslautern", "1fc Nuremberg", "Arminia Bielefeld", 
+        "Eintracht Braunschweig Tsv", "Fc Energie Cottbus", "Fc St Pauli", "Hannover 96", 
+        "Hertha Berlim", "Holstein Kiel", "Karlsruher Sc", "Magdeburgo", 
+        "Sg Dynamo Dresden", "Spvgg Greuther Furth", "Sv Darmstadt 98", "Vfl Bochum", 
+        "Vfl Osnabruck", "Vfl Wolfsburg"
+    ]
+},
 "Suécia": {
     "Allsvenskan - 26/27": [
         "AIK Solna", "BK Häcken", "Degerfors IF", "Djurgårdens IF", 
@@ -116,6 +177,30 @@ window.LEAGUES_DATA = {
             "Guantánamo FC", "Las Tunas FC", "Matanzas FC", "Mayabeque FC", "Sancti Spíritus FC"
         ]
     },
+    "Austrália": {
+    "A-League - 26/27": [
+        "Adelaide United", "Auckland Fc", "Central Coast Mariners", "Macarthur Fc", 
+        "Melbourne City Fc", "Melbourne Victory", "Newcastle United Jets", "Perth Glory", 
+        "Sydney FC", "Wellington Phoenix", "Western Sydney Fc", "Brisbane Roar"
+    ]
+},
+"China": {
+    "Chinese Super League - 26/27": [
+        "Shanghai Shenhua", "Shanghai Port", "Zhejiang FC", "Shandong Taishan", 
+        "Beijing Guoan", "Shenzhen Peng City", "Chengdu Rongcheng", "Liaoning Tieren", 
+        "Yunnan Yukun", "Chongqing Tonglianglong", "Wuhan Three Towns", "Dalian Yingbo", 
+        "Tianjin Jinmen Tiger", "Henan FC", "Qingdao West Coast", "Qingdao Hainiu"
+    ]
+},
+"Japão": {
+    "J1 League - 26/27": [
+        "Kashima Antlers", "Vissel Kobe", "Kawasaki Frontale", "Sanfrecce Hiroshima", 
+        "Machida Zelvia", "Kashiwa Reysol", "Fc Tokyo", "Gamba Osaka", 
+        "Kyoto Sanga", "Yokohama F Marinos", "Urawa Red Diamonds", "Shimizu Spulse", 
+        "Jef United Chiba", "Vvaren Nagasaki", "Cerezo Osaka", "Nagoya Grampus", 
+        "Avispa Fukuoka", "Mito Hollyhock", "Fagiano Okayama", "Tokyo Verdy"
+    ]
+},
     "San Marino": {
         "Campionato Sammarinese - 26/27": [
             "Pennarossa", "Cosmos", "Juvenes-Dogana", "Tre Penne", "Cailungo",
