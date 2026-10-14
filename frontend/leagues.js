@@ -17,7 +17,25 @@ window.LEAGUES_DATA = {
         "Caxias", "Confiança", "Ferroviária", "Figueirense", "Floresta",
         "Guarani", "Inter De Limeira", "Itabaiana", "Ituano", "Maranhão",
         "Maringá", "Paysandu", "Santa Cruz", "Volta Redonda", "Ypiranga-RS"
-    ]
+    ],
+        "Brasileirão Série D - 26/27": [
+            "AM Nacional", "Manaus", "Manauara", "GAS", "Monte Roraima", "São Raimundo", 
+            "Independência", "Galvez", "Humaitá", "Porto Velho", "Guaporé", "Araguaína", 
+            "Gama", "Brasiliense", "Luverdense", "Primavera", "Inhumas", "Aparecidense", 
+            "Capital", "Ceilândia", "Mixto", "MT Operário", "União Rondonópolis", "Goiatuba", 
+            "Trem", "Oratório", "Tuna Luso", "Águia de Marabá", "Tocantinópolis", "Imperatriz", 
+            "MA Sampaio Corrêa", "Moto Club", "IAPE", "Maracanã", "Iguatu", "Parnahyba", 
+            "Ferroviário", "Tirol", "CE Atlético", "Altos", "Piauí", "PI Fluminense", 
+            "ABC", "RN América", "Laguna", "Sousa", "Maguary", "Central", 
+            "Retrô", "Decisão", "Serra Branca", "Treze", "Lagarto", "Sergipe", 
+            "ASA", "CSA", "CSE", "Jacuipense", "BA Atlético", "Juazeirense", 
+            "Uberlândia", "Betim", "CRAC", "ABECAT", "MS Operário", "Ivinhema", 
+            "Porto", "Rio Branco", "ES Vitória", "Real Noroeste", "Tombense", "Democrata GV", 
+            "Madureira", "RJ Portuguesa", "RJ America", "SP Portuguesa", "Água Santa", "Pouso Alegre", 
+            "Nova Iguaçu", "RJ Sampaio Corrêa", "Maricá", "XV de Piracicaba", "Noroeste", "Velo Clube", 
+            "Cianorte", "FC Cascavel", "São Joseense", "Azuriz", "Blumenau", "Marcílio Dias", 
+            "São José", "Brasil de Pelotas", "São Luiz", "Guarany de Bagé", "Joinville", "Santa Catarina"
+        ]
     },
 "Argentina": {
     "Liga Profesional - 26/27": [

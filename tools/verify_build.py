@@ -29,6 +29,10 @@ ap.add_argument("--orig", required=True)
 ap.add_argument("--new", required=True)
 ap.add_argument("--leagues-add", required=True)
 ap.add_argument("--leagues-js", default=os.path.join(HERE, "..", "frontend", "leagues.js"))
+ap.add_argument("--allow-short", action="store_true",
+                help="clubes com menos de 20 jogadores completos só avisam (ligas em que só entram jogadores atuais)")
+ap.add_argument("--over-range", nargs=2, type=int, metavar=("MIN", "MAX"),
+                help="intervalo de OVER pedido para as ligas novas (a média e o melhor 11 de cada clube têm de ficar dentro)")
 args = ap.parse_args()
 
 a_raw = open(args.orig, "rb").read()
@@ -153,20 +157,43 @@ def league_summary(label, clubs):
     return short
 
 
+def over_stats(label, clubs):
+    """Distribuição do OVER de todos os jogadores completos dos clubes da liga (inclui os que já estavam avaliados)."""
+    overs = [o for c in clubs for _g, o in per_club.get(slug(c), [])]
+    xis = [xi_over(per_club[slug(c)]) for c in clubs if per_club.get(slug(c))]
+    club_means = [statistics.mean(o for _g, o in per_club[slug(c)]) for c in clubs if per_club.get(slug(c))]
+    print(f"   {label:40} jogadores={len(overs)} OVER média={statistics.mean(overs):.1f} desvio={statistics.pstdev(overs):.1f}"
+          f" mín={min(overs)} máx={max(overs)} | médias dos clubes {min(club_means):.1f}-{max(club_means):.1f}"
+          f" | melhor 11 dos clubes {min(xis)}-{max(xis)}")
+    if args.over_range:
+        lo, hi = args.over_range
+        out = sum(not (lo <= o <= hi) for o in overs)
+        print(f"      fora de {lo}-{hi}: {out} de {len(overs)} ({100 * out / len(overs):.1f}%)")
+        assert lo <= statistics.mean(overs) <= hi, "a média da liga está fora do intervalo pedido"
+        assert all(lo <= m <= hi for m in club_means), "há clubes com média fora do intervalo pedido"
+        assert all(x <= hi for x in xis), "há clubes cujo melhor 11 passa o máximo pedido"
+
+
 print("ligas novas (20+ completos por clube) e média OVR do melhor 11:")
 below = []
 for country, leagues in add.items():
     for ln, clubs in leagues.items():
         below += league_summary(f"NOVA {country} / {ln}", clubs)
+for country, leagues in add.items():
+    for ln, clubs in leagues.items():
+        over_stats(f"NOVA {country} / {ln}", clubs)
 if os.path.exists(args.leagues_js):
     existing = load_leagues_js(args.leagues_js)
+    new_sets = [{slug(c) for c in clubs} for leagues in add.values() for clubs in leagues.values()]
     print("ligas já existentes, para comparar:")
     for country, leagues in existing.items():
-        if country in add:
-            continue
         for ln, clubs in leagues.items():
+            if {slug(c) for c in clubs} in new_sets:
+                continue  # é uma das ligas novas (o leagues.js já foi atualizado)
             league_summary(f"{country} / {ln}", clubs)
-assert not below, below
+if below:
+    print(f"AVISO: {len(below)} clubes com menos de 20 jogadores completos (não contam na aba Ligas): {below}")
+    assert args.allow_short, below
 
 print("OVER das linhas completadas/novas: mín", min(over_vals), "mediana", statistics.median(over_vals), "máx", max(over_vals))
 print("tudo certo: todas as verificações passaram")

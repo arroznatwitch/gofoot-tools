@@ -6,6 +6,16 @@ a pedir ao site. Faz uma pausa de ~1 s entre pedidos; não aumentes o ritmo.
 
 Uso:
     python tools/fetch_transfermarkt.py --out tools/work/tm_squads.json --cache-dir tools/work/tm_raw
+
+O config pode ter, por liga: "tm_kind": "cup" (competição por fases, como a Série D: os clubes vêm da página de
+participantes de "tm_participants_season"), "clubs" (lista de clubes a usar, com o "tm_id" de cada um) e
+"squad_season": "auto" (ver abaixo). Exemplo:
+    python tools/fetch_transfermarkt.py --config tools/config_serie_d.json --out tools/work/serie_d_tm.json --cache-dir ...
+
+Atenção às épocas: o Transfermarkt rotula-as clube a clube. Nos clubes "de calendário" (Série D) o saison_id 2025 é a
+época "2026" (a atual) e o 2026 é a "2027", vazia; nos outros o saison_id 2026 é a "26/27". Com "squad_season": "auto" lê-se
+a página do config.season e, se o título disser só um ano (2027), usa-se a do saison_id anterior. O resultado guarda
+season_id e season_label de cada clube. Nunca se usam épocas mais antigas para completar plantéis.
 """
 import argparse
 import html as htmllib
@@ -76,6 +86,24 @@ def parse_clubs(page):
     return out
 
 
+def season_label(page):
+    """'26/27' ou '2027': a época que o Transfermarkt mostra no título da página do plantel."""
+    m = re.search(r"<title>[^<]*?Detailed squad (\d{2}/\d{2}|\d{4})", page)
+    return m.group(1) if m else None
+
+
+def parse_participants(page):
+    """Clubes da página 'Participating teams' de uma competição por fases (Transfermarkt 'pokalwettbewerb')."""
+    out, seen = [], set()
+    for m in re.finditer(r'<a title="([^"]+)" href="/([^/"]+)/startseite/verein/(\d+)(?:/saison_id/\d+)?"', page):
+        title, slug, cid = m.groups()
+        if cid in seen:
+            continue
+        seen.add(cid)
+        out.append({"name": htmllib.unescape(title).strip(), "slug": slug, "id": int(cid)})
+    return out
+
+
 def parse_squad(page):
     i = page.find('<table class="items">')
     if i < 0:
@@ -128,6 +156,7 @@ def main():
     ap.add_argument("--config", default=os.path.join(HERE, "config.json"))
     ap.add_argument("--out", required=True, help="ficheiro .json de saída (plantéis)")
     ap.add_argument("--cache-dir", required=True, help="pasta onde guardar o HTML descarregado")
+    ap.add_argument("--only", help="só esta liga (campo 'league' do config)")
     args = ap.parse_args()
 
     cfg = json.load(open(args.config, encoding="utf-8"))
@@ -136,18 +165,51 @@ def main():
     os.makedirs(os.path.dirname(os.path.abspath(args.out)), exist_ok=True)
     result = []
     for lg in cfg["leagues"]:
-        url = (f"https://www.transfermarkt.com/{lg['tm_slug']}/startseite/wettbewerb/{lg['tm_code']}"
-               f"/plus/?saison_id={season}")
-        page = get(url, os.path.join(args.cache_dir, f"league_{lg['tm_code']}.html"))
-        clubs = parse_clubs(page)
+        if args.only and lg["league"] != args.only:
+            continue
+        kind = lg.get("tm_kind", "league")
+        if kind == "cup":
+            # competição por fases (ex.: Série D): os clubes vêm da página de participantes de uma época anterior,
+            # porque o Transfermarkt só a preenche depois de a época arrancar
+            pseason = lg.get("tm_participants_season", season)
+            url = (f"https://www.transfermarkt.com/{lg['tm_slug']}/teilnehmer/pokalwettbewerb/{lg['tm_code']}"
+                   f"/saison_id/{pseason}")
+            clubs = parse_participants(get(url, os.path.join(args.cache_dir, f"participants_{lg['tm_code']}_{pseason}.html")))
+        else:
+            url = (f"https://www.transfermarkt.com/{lg['tm_slug']}/startseite/wettbewerb/{lg['tm_code']}"
+                   f"/plus/?saison_id={season}")
+            clubs = parse_clubs(get(url, os.path.join(args.cache_dir, f"league_{lg['tm_code']}.html")))
+        wanted = lg.get("clubs")  # lista do config: ordem e nome dos clubes tal como entram no site
+        if wanted:
+            by_id = {c["id"]: c for c in clubs}
+            missing = [w for w in wanted if w["tm_id"] not in by_id]
+            if missing:
+                print("   AVISO: clubes do config que não estão no Transfermarkt:", [w["name"] for w in missing])
+            extra = [c["name"] for c in clubs if c["id"] not in {w["tm_id"] for w in wanted}]
+            if extra:
+                print("   AVISO: clubes do Transfermarkt que não estão no config:", extra)
+            clubs = [by_id[w["tm_id"]] for w in wanted if w["tm_id"] in by_id]
         print(f"{lg['country']} / {lg['league']}: {len(clubs)} clubes", flush=True)
         for c in clubs:
-            sq = get(f"https://www.transfermarkt.com/{c['slug']}/kader/verein/{c['id']}/saison_id/{season}/plus/1",
-                     os.path.join(args.cache_dir, f"squad_{c['id']}.html"))
-            players = parse_squad(sq)
-            print(f"   {c['name']:28} jogadores={len(players)}", flush=True)
+            if lg.get("squad_season") == "auto":
+                sid = season
+                page = get(f"https://www.transfermarkt.com/{c['slug']}/kader/verein/{c['id']}/saison_id/{sid}/plus/1",
+                           os.path.join(args.cache_dir, f"squad_{c['id']}_{sid}.html"))
+                label = season_label(page)
+                if label and re.fullmatch(r"\d{4}", label):  # clube "de calendário": a época atual é a do saison_id anterior
+                    sid = season - 1
+                    page = get(f"https://www.transfermarkt.com/{c['slug']}/kader/verein/{c['id']}/saison_id/{sid}/plus/1",
+                               os.path.join(args.cache_dir, f"squad_{c['id']}_{sid}.html"))
+                    label = season_label(page)
+                players, extra = parse_squad(page), {"season_id": sid, "season_label": label}
+            else:
+                sq = get(f"https://www.transfermarkt.com/{c['slug']}/kader/verein/{c['id']}/saison_id/{season}/plus/1",
+                         os.path.join(args.cache_dir, f"squad_{c['id']}.html"))
+                players, extra = parse_squad(sq), {}
+            print(f"   {c['name']:28} jogadores={len(players)}" + (f" (época {extra['season_label']})" if extra else ""),
+                  flush=True)
             result.append({"country": lg["country"], "league": lg["league"], "code": lg["tm_code"],
-                           "site_label": lg["site_label"], **c, "players": players})
+                           "site_label": lg["site_label"], **c, **extra, "players": players})
     with open(args.out, "w", encoding="utf-8") as f:
         json.dump(result, f, ensure_ascii=False)
     print("clubes:", len(result), "| jogadores:", sum(len(c["players"]) for c in result))

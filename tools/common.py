@@ -277,6 +277,16 @@ EA_GROUP = {
 }
 
 
+def wing_foot(grp, foot):
+    """Pé dos extremos no GoFoot: ponta esquerda (PE) joga com o pé esquerdo e ponta direita (PD) com o direito.
+    Ambidestros (A) e as outras posições ficam como estão."""
+    if grp == "PE" and foot == "D":
+        return "E"
+    if grp == "PD" and foot == "E":
+        return "D"
+    return foot
+
+
 # ----------------------------------------------------------------------------- numeric utils
 def clamp(x, lo, hi):
     return lo if x < lo else hi if x > hi else x

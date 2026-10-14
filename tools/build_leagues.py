@@ -36,7 +36,8 @@ from common import _lev1  # noqa: E402
 
 ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
 ap.add_argument("--csv", required=True, help="players.csv de partida (só leitura)")
-ap.add_argument("--ea", required=True, help="json criado por fetch_ea.py")
+ap.add_argument("--ea", default=None,
+                help="json criado por fetch_ea.py (opcional: as ligas com \"ratings\": \"fm\" no config não precisam dele)")
 ap.add_argument("--tm", required=True, help="json criado por fetch_transfermarkt.py")
 ap.add_argument("--out", required=True, help="pasta de saída")
 ap.add_argument("--config", default=os.path.join(HERE, "config.json"))
@@ -124,7 +125,7 @@ for r in rows:
             pre_idx[t[:5]].append(r.i)
 
 # =============================================================================== load EA + TM
-ea = json.load(open(EA_PATH, encoding="utf-8"))
+ea = json.load(open(EA_PATH, encoding="utf-8")) if EA_PATH else []
 ea_by_dob = collections.defaultdict(list)
 for p in ea:
     m = re.match(r"(\d+)/(\d+)/(\d+)", p.get("birth") or "")
@@ -167,25 +168,48 @@ def ea_over(x, age):
 # Rated rows that already carry a club name keep counting for it: use that spelling when it exists.
 rated_clubs = collections.Counter(r.club for r in rows if r.rated)
 VARIANTS = CONFIG.get("club_name_variants", {})
+LG_CFG = {(lg["country"], lg["league"]): lg for lg in CONFIG["leagues"]}
+CLUB_CFG = {w["tm_id"]: w for lg in CONFIG["leagues"] for w in lg.get("clubs", [])}  # lista de clubes pedida no config
 for c in tm:
     c["name"] = c["name"].strip()
     best, best_n = c["name"], rated_clubs.get(c["name"], 0)
     for v in VARIANTS.get(c["name"], []):
         if rated_clubs.get(v, 0) > best_n:
             best, best_n = v, rated_clubs[v]
+    if c["id"] in CLUB_CFG:  # o config manda no nome com que o clube entra no site
+        best = CLUB_CFG[c["id"]]["name"]
     c["csv_name"] = best
     c["csv_slug"] = slug(best)
+    c["lg_cfg"] = LG_CFG.get((c["country"], c["league"]), {})
 assert all(n == 1 for n in collections.Counter(c["csv_slug"] for c in tm).values())
 leagues_js = load_leagues_js(ARGS.leagues_js)
-new_countries = {c["country"] for c in tm}
-covered = {slug(cn) for country, ls in leagues_js.items() if country not in new_countries
-           for cl in ls.values() for cn in cl}
-assert not [c["csv_name"] for c in tm if c["csv_slug"] in covered], "club slug clash with existing leagues.js"
+being_built = {(c["country"], c["site_label"]) for c in tm}  # ligas que este build acrescenta (já podem estar no leagues.js)
+covered = {slug(cn) for country, ls in leagues_js.items() for label, cl in ls.items()
+           if (country, label) not in being_built for cn in cl}
+clashes = [c["csv_name"] for c in tm if c["csv_slug"] in covered]
+assert not clashes, "nome de clube igual ao de outra liga do leagues.js (o site junta os dois): %s" % clashes
 
 # =============================================================================== matching TM <-> CSV
 tm_players = []
+KEEP = {}  # a player listed by two clubs (he moved during the season) stays with the club he joined last
+
+
+def joined_key(p):
+    m = re.match(r"(\d{2})/(\d{2})/(\d{4})", p.get("joined") or "")
+    return m.group(3) + m.group(2) + m.group(1) if m else ""
+
+
 for c in tm:
     for p in c["players"]:
+        k = KEEP.get(p["tm_id"])
+        if k is None or joined_key(p) > joined_key(k[1]):
+            KEEP[p["tm_id"]] = (c, p)
+dup_players = 0
+for c in tm:
+    for p in c["players"]:
+        if KEEP[p["tm_id"]][0] is not c or KEEP[p["tm_id"]][1] is not p:
+            dup_players += 1
+            continue
         q = dict(p)
         q["club"] = c
         q["toks"] = eff_tokens(p["name"])
@@ -194,7 +218,7 @@ for c in tm:
         q["key"] = f"{c['id']}:{p['tm_id']}"
         q["match"] = None
         tm_players.append(q)
-print("TM players:", len(tm_players))
+print("TM players:", len(tm_players), "| listed by two clubs (kept with the latest):", dup_players)
 
 
 def surname_tokens(name):
@@ -210,8 +234,15 @@ def club_key(s):
     return frozenset(t for t in tokens(s) if t not in GENERIC_CLUB)
 
 
+def club_pool_names(club):
+    """FM club strings (slugs) that belong to the club. A club listed in the config with "fm" uses only those."""
+    names = set(aliases.get(club["id"], ()))
+    return sorted(names if club["id"] in seed_aliases else names | {club["csv_slug"]})
+
+
 def club_bonus(q, r, aliases):
-    if r.club_n == q["club"]["csv_slug"] or r.club_n in aliases.get(q["club"]["id"], ()):
+    cid = q["club"]["id"]
+    if (r.club_n == q["club"]["csv_slug"] and cid not in seed_aliases) or r.club_n in aliases.get(cid, ()):
         return 25
     sf = q.get("signed_from")
     if sf and club_key(sf) and club_key(sf) == club_key(r.club):
@@ -292,14 +323,17 @@ def match_all(aliases):
     return assigned, per_player, used
 
 
+# grafias do clube no FM indicadas no config ("fm": [...]): quando existem, são as únicas que contam para esse clube
+seed_aliases = {cid: {slug(a) for a in w.get("fm", ())} for cid, w in CLUB_CFG.items() if "fm" in w}
 print("matching pass 1 ...")
-assigned, per_player, used_rows = match_all({})
+assigned, per_player, used_rows = match_all(seed_aliases)
 by_key = {q["key"]: q for q in tm_players}
 alias = collections.defaultdict(collections.Counter)
 for k, (i, s) in assigned.items():
     if s >= 135 and not rows[i].rated:
         alias[by_key[k]["club"]["id"]][rows[i].club_n] += 1
 aliases = {cid: {c for c, n in cnt.items() if n >= 3 and c not in ("", "-")} for cid, cnt in alias.items()}
+aliases.update(seed_aliases)
 print("matching pass 2 (with FM club aliases) ...")
 assigned, per_player, used_rows = match_all(aliases)
 for k, (i, s) in assigned.items():
@@ -310,7 +344,7 @@ stage3 = 0
 for q in tm_players:
     if q["match"] is not None:
         continue
-    pool_clubs = set(aliases.get(q["club"]["id"], ())) | {q["club"]["csv_slug"]}
+    pool_clubs = club_pool_names(q["club"])
     best, second = None, None
     qn = " ".join(sorted(tokens(q["name"])))
     for cs in pool_clubs:
@@ -648,6 +682,77 @@ def over_from_value(value, age):
     return 55
 
 
+# =============================================================================== leagues without EA ratings ("ratings": "fm")
+# The FM rating of the league's own players is turned into a z-score and put on the OVER distribution asked for in
+# the config (over_target: mean, sd, min, max). Players without an FM rating take the median of players with the same
+# market value, or a reproducible draw around the mean when they have none.
+FM_LEAGUES = {k: lg for k, lg in LG_CFG.items() if lg.get("ratings") == "fm"}
+FM_TARGET, FM_STATS, FM_VAL = {}, {}, {}
+FM_VAL_EDGES = [0, 5e4, 1e5, 2e5, 3e5, 5e5, 1e6, 1e12]
+
+
+def unit_normal(key):
+    """Reproducible standard-normal number for a key (Box-Muller over an md5 hash)."""
+    h = hashlib.md5(key.encode("utf-8")).digest()
+    u1 = (int.from_bytes(h[:6], "big") + 1) / (2 ** 48 + 1)
+    u2 = int.from_bytes(h[6:12], "big") / 2 ** 48
+    return math.sqrt(-2 * math.log(u1)) * math.cos(2 * math.pi * u2)
+
+
+def fm_league_over(lk, grp, rating):
+    T = FM_TARGET[lk]
+    mu, sd = FM_STATS[lk].get(grp) or FM_STATS[lk]["*"]
+    z = (rating - mu) / max(sd, 1.0)
+    return int(clamp(G.js_round(T["mean"] + z * T["sd"]), T["min"], T["max"]))
+
+
+def fm_league_tal(lk, grp, over, rating, pot):
+    """Potential gap of the FM rows, on the same (compressed) scale as the OVER."""
+    _mu, sd = FM_STATS[lk].get(grp) or FM_STATS[lk]["*"]
+    return over + max(0.0, fm_tal(grp, pot) - fm_over(grp, rating)) * FM_TARGET[lk]["sd"] / max(sd, 1.0)
+
+
+def fm_league_nofm(lk, q, age):
+    """OVER of a player without an FM rating."""
+    T = FM_TARGET[lk]
+    base = None
+    if q["value"]:
+        vb = max(i for i in range(len(FM_VAL_EDGES) - 1) if FM_VAL_EDGES[i] <= q["value"])
+        for d in (0, 1, -1, 2, -2, 3, -3):
+            if FM_VAL[lk].get(vb + d) is not None:
+                base = FM_VAL[lk][vb + d]
+                break
+    if base is None:
+        base = T["mean"] - 1.0 + 0.7 * T["sd"] * unit_normal(q["key"])
+    base += {16: -3, 17: -2.5, 18: -2, 19: -1, 20: -0.5}.get(age, 0)
+    return int(clamp(G.js_round(base), T["min"], T["max"]))
+
+
+for lk, lg in FM_LEAGUES.items():
+    T = {"mean": 51.0, "sd": 3.8, "min": 42, "max": 60}
+    T.update(lg.get("over_target", {}))
+    FM_TARGET[lk] = T
+    by_g = collections.defaultdict(list)
+    for q in tm_players:
+        m = q["match"]
+        if (q["club"]["country"], q["club"]["league"]) == lk and m is not None and not m.rated and m.rating is not None:
+            by_g[q["grp"] or m.grp or "M"].append(m.rating)
+    allr = [x for v in by_g.values() for x in v]
+    mu_all, sd_all = statistics.mean(allr), statistics.pstdev(allr)
+    FM_STATS[lk] = {g: ((statistics.mean(v), statistics.pstdev(v)) if len(v) >= 40 else (mu_all, sd_all))
+                    for g, v in by_g.items()}
+    FM_STATS[lk]["*"] = (mu_all, sd_all)
+    print(f"{lk[1]}: FM rating of {len(allr)} matched players: mean {mu_all:.1f} sd {sd_all:.1f} -> OVER target {T}")
+    pts = collections.defaultdict(list)
+    for q in tm_players:
+        m = q["match"]
+        if (q["club"]["country"], q["club"]["league"]) == lk and m is not None and not m.rated \
+                and m.rating is not None and q["value"]:
+            vb = max(i for i in range(len(FM_VAL_EDGES) - 1) if FM_VAL_EDGES[i] <= q["value"])
+            pts[vb].append(fm_league_over(lk, q["grp"] or m.grp or "M", m.rating))
+    FM_VAL[lk] = {vb: statistics.median(v) for vb, v in pts.items() if len(v) >= 8}
+
+
 # =============================================================================== per-player plan
 FOOT = {"right": "D", "left": "E", "both": "A"}
 plan = []
@@ -671,7 +776,13 @@ for q in tm_players:
     if m is not None and m.rating is not None:
         raw_fm = G.js_round(clamp(fm_over(grp, m.rating), 40, 90))
         over_fm = int(clamp(G.js_round(raw_fm + fm_corr(club["country"], age)), 40, 90))
-    if over_ea is not None:
+    lk = (club["country"], club["league"])
+    if lk in FM_LEAGUES:
+        if m is not None and m.rating is not None:
+            over, src = fm_league_over(lk, grp, m.rating), "FM"
+        else:
+            over, src = fm_league_nofm(lk, q, age), "FMV"
+    elif over_ea is not None:
         over, src = over_ea, "EA"
         if over_fm is not None and abs(over_fm - over_ea) >= 10:
             mismatch.append((q["name"], club["name"], over_ea, over_fm, m.name, m.club, m.rating))
@@ -679,12 +790,15 @@ for q in tm_players:
         over, src = over_fm, "FM"
     else:
         over, src = over_from_value(q["value"], age) + {16: -7, 17: -5, 18: -3, 19: -1}.get(age, 0), "TM"
-    over = int(clamp(over, 40, 90))
+    over = int(clamp(over, 40, 90)) if lk not in FM_LEAGUES else over
     item["over"], item["over_src"] = over, src
     diag["over_" + src] += 1
     # TAL
     if m is not None and m.pot is not None and m.rating is not None:
-        tal = over + (fm_tal(grp, m.pot) - fm_over(grp, m.rating))
+        if lk in FM_LEAGUES:
+            tal = fm_league_tal(lk, grp, over, m.rating, m.pot)
+        else:
+            tal = over + (fm_tal(grp, m.pot) - fm_over(grp, m.rating))
         tal_src = "FM"
     else:
         b = 0 if age <= 19 else 1 if age <= 22 else 2 if age <= 25 else 3 if age <= 29 else 4
@@ -709,7 +823,7 @@ for q in tm_players:
     assert G.calcular_over(grp, attrs) == over, (q["name"], grp, attrs, over)
     item["attrs"] = attrs
     foot = FOOT.get(q["foot"]) or (("E" if ea_p["foot"] == 2 else "D") if ea_p else None)
-    item["pe"] = foot or "D"
+    item["pe"] = wing_foot(grp, foot or "D")
     item["valor"] = G.calcular_valor(grp, over, item["tal"], age, attrs.get("FIS"), attrs.get("MEN"))
     item["salario"] = G.calcular_salario(over, item["valor"])
     plan.append(item)
@@ -717,10 +831,15 @@ print("plan:", dict(collections.Counter(i["kind"] for i in plan)), "|", dict(dia
 print("EA vs FM disagreement >= 10:", len(mismatch))
 
 # =============================================================================== squad caps and GK top-up
+def club_pool_rows(club):
+    """FM rows that belong to the club."""
+    return [rows[i] for cs in club_pool_names(club) for i in rows_by_club.get(cs, ())]
+
+
 by_club = collections.defaultdict(list)
 for it in plan:
     by_club[it["club"]["id"]].append(it)
-dropped, topped, gk_short = [], [], []
+dropped, topped, gk_short, short_squads = [], [], [], []
 for cid, items in by_club.items():
     club = items[0]["club"]
     if len(items) > 35:
@@ -732,12 +851,9 @@ for cid, items in by_club.items():
     gks = [it for it in items if it["grp"] == "G" and it["kind"] != "dropped"]
     if len(gks) < 3:
         pool = []
-        for cs in set(aliases.get(cid, ())) | {club["csv_slug"]}:
-            for i in rows_by_club.get(cs, ()):
-                r = rows[i]
-                if i in used_rows or r.rated or r.grp != "G" or r.age is None or r.age > 22 or (r.rating or 0) < 50:
-                    continue
-                pool.append(r)
+        if club["lg_cfg"].get("gk_topup", True):  # FM rows are a year old: leagues that want only current data turn it off
+            pool = [r for r in club_pool_rows(club)
+                    if not (r.i in used_rows or r.rated or r.grp != "G" or r.age is None or r.age > 22 or (r.rating or 0) < 50)]
         if pool:
             r = max(pool, key=lambda x: x.rating)
             used_rows.add(r.i)
@@ -757,9 +873,17 @@ for cid, items in by_club.items():
             topped.append((club["name"], q["name"], r.age, r.rating))
         else:
             gk_short.append((club["name"], len(gks)))
+    min_squad = club["lg_cfg"].get("min_squad", 0)
+    if min_squad:
+        members = (sum(it["kind"] in ("fm", "new") for it in items)
+                   + sum(1 for i in rows_by_club.get(club["csv_slug"], ()) if rows[i].rated))
+        if members < min_squad:
+            short_squads.append((club["name"], members))
 print("dropped by the 35-player cap:", dropped)
 print("goalkeepers added from the club's FM rows:", topped)
 print("clubs that stay below 3 GKs:", gk_short)
+if short_squads:
+    print(f"clubs below their minimum squad ({len(short_squads)}):", short_squads)
 
 # =============================================================================== diagnostics
 if DIAG:
@@ -826,13 +950,17 @@ def attr_fields(grp, attrs):
     return out
 
 
-def fix_mangled_name(fm_name, tm_name):
+def fix_mangled_name(fm_name, tm_name, strict=False):
     """The FM export lost some characters ('Vlasic' -> 'Vlaaic', 'Redzic' -> 'Red~ic'). When the Transfermarkt name is the
-    same name apart from 1-character differences or junk characters, use the Transfermarkt spelling."""
+    same name apart from 1-character differences or junk characters, use the Transfermarkt spelling. With strict=True
+    (config "name_fix": "mangled") only names with letters the export cannot hold (s-caron, z-caron...) are touched, so
+    different spellings of the same name ('Vitor' / 'Victor') stay as the FM has them."""
     if re.search(r"[~`^?]", fm_name):
         return reverter_nome(tm_name)
     a, b = tokens(tm_name), tokens(fm_name)
     if set(a) == set(b):
+        return fm_name
+    if strict and not any(ord(ch) > 255 for ch in tm_name):
         return fm_name
     for x in a:
         for y in b:
@@ -862,7 +990,7 @@ for it in plan:
         f = split_raw(body[r.i])
         vals["Club"] = club["csv_name"]
         vals["Age"] = str(it["age"])
-        fixed = fix_mangled_name(r.name, q["name"])
+        fixed = fix_mangled_name(r.name, q["name"], club["lg_cfg"].get("name_fix") == "mangled")
         if fixed != r.name:
             vals["Name"] = fixed
             renamed.append((r.name, fixed))
