@@ -20,7 +20,7 @@ HTML, CSS e JavaScript puro (vanilla). [PapaParse](https://www.papaparse.com/) p
 
 ## Ferramentas (`tools/`)
 
-Scripts em Python para acrescentar ligas novas à base: descarregam os plantéis do Transfermarkt e os ratings da EA FC e preenchem apenas quem ainda não tem OVER. Ver [tools/README.md](tools/README.md).
+Scripts em Python para acrescentar ligas novas à base: descarregam os plantéis do Transfermarkt e os ratings da EA FC e preenchem apenas quem ainda não tem OVER. Também geram o `frontend/fm_players.js`, os jogadores completos que o site carrega ao abrir. Ver [tools/README.md](tools/README.md).
 
 ## Apoiar o GoFoot
 

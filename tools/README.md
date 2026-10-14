@@ -27,12 +27,24 @@ python tools/verify_build.py --orig players.csv --new tools/work/out/players_new
 # 5. aplicar: substituir o CSV e acrescentar as ligas ao site
 cp tools/work/out/players_new.csv players.csv
 python tools/update_leagues_js.py --add tools/work/out/leagues_add.json --before Suécia
+
+# 6. publicar os dados no site: gera o frontend/fm_players.js (só jogadores completos) e atualiza o selo
+python tools/build_site_data.py --csv players.csv
 ```
 
-Depois importa o `players.csv` no site e confirma na aba **Ligas** (cada clube novo deve ter 20+ completos).
+Faz commit de `players.csv`, `frontend/leagues.js`, `frontend/fm_players.js` e `frontend/index.html`. O `players.csv`
+não é publicado (o site só publica a pasta `frontend/`); o que o site mostra ao abrir vem do `fm_players.js`.
 
 Outros scripts: `test_formulas.py` confirma que o port das fórmulas do site (`gofoot_formulas.py`) reproduz o CSV
 (Valor e Salário a 100%). `common.py` tem as funções de apoio (nomes, nacionalidades, leitura do `leagues.js`).
+
+## O que o site carrega ao abrir
+
+`frontend/fm_players.js` define `window.FM_PLAYERS_DATA` com os jogadores **completos** (a mesma regra do site:
+nome, nação, clube, idade, pé, posição, atributos, TAL e valor), por isso a aba Ligas e o botão Exportar de cada país
+já funcionam sem importar nada e não incluem jogadores sem OVER. Importar o `players.csv` na aba Jogadores substitui
+estes dados pela base inteira. Se mudares o `players.csv`, volta a correr o passo 6, senão o site fica desatualizado.
+O script também atualiza o selo "Última atualização" do `index.html` (`--no-badge` para não mexer nele).
 
 ## Para outras ligas
 
@@ -74,7 +86,9 @@ novos) para poderem ser repetidos com o mesmo resultado.
   nacionalidade e clube. Casos raros podem ficar sem ligação: nesse caso o jogador entra como linha nova.
 * Jogadores já avaliados que o Transfermarkt coloca num clube novo mas que no CSV estão noutro clube (ou livres) não
   são mexidos; ficam listados em `report.json` (`rated_in_other_club`).
-* Ficam jogadores do FM **sem OVER** nos clubes (reservas, antigos). Usa o "Limpar sem OVER" do Painel++.
+* Ficam jogadores do FM **sem OVER** nos clubes (reservas, antigos). O site já ignora-os (o `fm_players.js` só tem
+  completos), mas continuam no `players.csv`. Atenção: o botão "Limpar sem OVER" do Painel++ chama
+  `descarregarCsvDeListaJogadores`, que foi removida no commit `6756de8`; apaga na sessão, dá erro e não descarrega o CSV.
 * Nacionalidades que o `ISO_NACOES` do `script.js` não conhece (E.U.A., Rep. do Congo, Cabo Verde...) exportam-se sem
   código ISO. Já acontecia antes.
 * A calibração usa o commit `855cdaa` do git. Num clone raso, usa `--pre` com um snapshot do `players.csv` anterior a ele.

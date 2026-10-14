@@ -312,7 +312,9 @@ function trocarAba(nome) {
     document.querySelectorAll(".tab-btn").forEach(b => { b.classList.toggle("active", b.dataset.aba === nome); });
 }
 
-let listaJogadores = (window.FM_PLAYERS_DATA || []).map(marcarStatus);
+// Os jogadores que vêm já com o site (fm_players.js) são carregados no DOMContentLoaded, mais abaixo: aqui ainda
+// não existem o proximoId nem as outras constantes que o marcarStatus usa.
+let listaJogadores = [];
 let listaFiltrada = listaJogadores.slice();
 let paginaAtual = 1;
 const TAMANHO_PAGINA = 50;
@@ -368,6 +370,9 @@ function marcarStatus(j) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+    // Jogadores completos que vêm com o site (fm_players.js, gerado por tools/build_site_data.py). Aplica as
+    // edições guardadas no browser, tal como o importarCsv faz.
+    listaJogadores = (window.FM_PLAYERS_DATA || []).map(j => marcarStatus(aplicarEdicoesSalvas(j)));
     carregarJogadoresManuais();
     carregarPaises();
     aplicarFiltros();
