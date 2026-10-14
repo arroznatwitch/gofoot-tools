@@ -1,0 +1,31 @@
+{
+  "season": 2026,
+  "leagues": [
+    {"country": "Inglaterra", "league": "Premier League", "site_label": "Premier League - 26/27", "tm_slug": "premier-league", "tm_code": "GB1"},
+    {"country": "França", "league": "Ligue 1", "site_label": "Ligue 1 - 26/27", "tm_slug": "ligue-1", "tm_code": "FR1"},
+    {"country": "Itália", "league": "Serie A", "site_label": "Serie A - 26/27", "tm_slug": "serie-a", "tm_code": "IT1"},
+    {"country": "Holanda", "league": "Eredivisie", "site_label": "Eredivisie - 26/27", "tm_slug": "eredivisie", "tm_code": "NL1"},
+    {"country": "Bélgica", "league": "Jupiler Pro League", "site_label": "Jupiler Pro League - 26/27", "tm_slug": "jupiler-pro-league", "tm_code": "BE1"},
+    {"country": "Áustria", "league": "Bundesliga Austríaca", "site_label": "Bundesliga Austríaca - 26/27", "tm_slug": "bundesliga", "tm_code": "A1"}
+  ],
+  "club_name_variants": {
+    "Chelsea FC": ["Chelsea"],
+    "Newcastle United": ["Newcastle"],
+    "AFC Bournemouth": ["Bournemouth"],
+    "Leeds United": ["Leeds"],
+    "Fulham FC": ["Fulham"],
+    "FC Toulouse": ["Toulouse FC"],
+    "Juventus FC": ["Juventus"],
+    "US Sassuolo": ["Sassuolo"],
+    "Torino FC": ["Torino"],
+    "Genoa CFC": ["Genoa"],
+    "Venezia FC": ["Venezia"]
+  },
+  "tal_ref_cap": {"G": 85, "Z": 82, "L": 82, "V": 84, "M": 84, "PE": 89, "PD": 89, "CA": 89},
+  "tal_pins": {"Vitinha": 84, "Marquinhos": 82, "Erling Haaland": 89},
+  "_notas": {
+    "club_name_variants": "Nome do Transfermarkt (tabela da liga) -> grafias que jogadores JÁ avaliados usam no players.csv. Se existir, usa-se a grafia com mais jogadores avaliados, para que eles continuem a contar para o clube. Confirma sempre no CSV antes de escolher.",
+    "tal_ref_cap": "Máximo de TAL (jogadores com 22+ anos) por posição: referências do jogo usadas na recalibração do commit 5b4747e.",
+    "tal_pins": "Jogadores cuja referência de TAL no jogo é conhecida (nome como aparece no Transfermarkt)."
+  }
+}

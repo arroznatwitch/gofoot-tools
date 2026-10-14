@@ -18,6 +18,10 @@ Ferramenta não-oficial para criar e organizar bases de jogadores para o jogo **
 
 HTML, CSS e JavaScript puro (vanilla). [PapaParse](https://www.papaparse.com/) para o parsing do `.csv`.
 
+## Ferramentas (`tools/`)
+
+Scripts em Python para acrescentar ligas novas à base: descarregam os plantéis do Transfermarkt e os ratings da EA FC e preenchem apenas quem ainda não tem OVER. Ver [tools/README.md](tools/README.md).
+
 ## Apoiar o GoFoot
 
 Se queres e gostas do jogo, considera apoiar diretamente:
