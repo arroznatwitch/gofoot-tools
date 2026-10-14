@@ -161,6 +161,58 @@ window.LEAGUES_DATA = {
         "Vfl Osnabruck", "Vfl Wolfsburg"
     ]
 },
+"Inglaterra": {
+    "Premier League - 26/27": [
+        "Manchester City", "Arsenal FC", "Chelsea", "Liverpool FC", 
+        "Manchester United", "Tottenham Hotspur", "Newcastle", "Brighton & Hove Albion", 
+        "Brentford FC", "Aston Villa", "Bournemouth", "Crystal Palace", 
+        "Nottingham Forest", "Sunderland AFC", "Leeds", "Everton FC", 
+        "Fulham", "Ipswich Town", "Coventry City", "Hull City"
+    ]
+},
+"França": {
+    "Ligue 1 - 26/27": [
+        "Paris Saint-Germain", "AS Monaco", "RC Strasbourg Alsace", "Olympique Lyon", 
+        "Stade Rennais FC", "LOSC Lille", "RC Lens", "Paris FC", 
+        "Olympique Marseille", "OGC Nice", "Toulouse FC", "FC Lorient", 
+        "AJ Auxerre", "Stade Brestois 29", "Angers SCO", "Le Havre AC", 
+        "ESTAC Troyes", "Le Mans FC"
+    ]
+},
+"Itália": {
+    "Serie A - 26/27": [
+        "Inter Milan", "Juventus", "Como 1907", "AC Milan", 
+        "AS Roma", "Atalanta BC", "SSC Napoli", "ACF Fiorentina", 
+        "SS Lazio", "Bologna FC 1909", "Sassuolo", "Torino", 
+        "Genoa", "Udinese Calcio", "Parma Calcio 1913", "Cagliari Calcio", 
+        "Venezia", "Frosinone Calcio", "AC Monza", "US Lecce"
+    ]
+},
+"Holanda": {
+    "Eredivisie - 26/27": [
+        "PSV Eindhoven", "Feyenoord Rotterdam", "Ajax Amsterdam", "AZ Alkmaar", 
+        "FC Twente Enschede", "FC Utrecht", "NEC Nijmegen", "SC Heerenveen", 
+        "FC Groningen", "Sparta Rotterdam", "PEC Zwolle", "Go Ahead Eagles", 
+        "Willem II Tilburg", "Excelsior Rotterdam", "ADO Den Haag", "Fortuna Sittard", 
+        "SC Cambuur Leeuwarden", "SC Telstar"
+    ]
+},
+"Bélgica": {
+    "Jupiler Pro League - 26/27": [
+        "Club Brugge KV", "KRC Genk", "Union Saint-Gilloise", "RSC Anderlecht", 
+        "KAA Gent", "Standard Liège", "Royal Antwerp FC", "KVC Westerlo", 
+        "Sint-Truidense VV", "KV Mechelen", "Cercle Brugge", "Royal Charleroi SC", 
+        "Oud-Heverlee Leuven", "Zulte Waregem", "Lommel SK", "RAAL La Louvière", 
+        "KV Kortrijk", "SK Beveren"
+    ]
+},
+"Áustria": {
+    "Bundesliga Austríaca - 26/27": [
+        "Red Bull Salzburg", "SK Sturm Graz", "LASK", "Rapid Vienna", 
+        "Austria Vienna", "Wolfsberger AC", "TSV Hartberg", "Grazer AK 1902", 
+        "SCR Altach", "WSG Tirol", "SV Ried", "SC Austria Lustenau"
+    ]
+},
 "Suécia": {
     "Allsvenskan - 26/27": [
         "AIK Solna", "BK Häcken", "Degerfors IF", "Djurgårdens IF", 
