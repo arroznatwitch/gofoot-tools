@@ -32,6 +32,29 @@ const ISO_NACOES = {
     "venezuela":"ve","wales":"gb-wls","gales":"gb-wls","país de gales":"gb-wls","algeria":"dz","argélia":"dz","angola":"ao","albania":"al","albânia":"al",
     "afghanistan":"af","afeganistão":"af","azerbaijan":"az","azerbaijão":"az","sierra leone":"sl","serra leoa":"sl",
     "burkina faso":"bf","gabon":"ga","gabão":"ga","zambia":"zm","zâmbia":"zm","zimbabwe":"zw","curacao":"cw","curaçao":"cw",
+    // Nomes do players.csv (português do FM) que faltavam; sem eles o Exportar deixava o nome no lugar do código ISO.
+    "andorra":"ad","anguilha":"ai","antígua e barbuda":"ag","aruba":"aw","bahamas":"bs","bangladexe":"bd",
+    "barbados":"bb","barém":"bh","belize":"bz","benim":"bj","bermudas":"bm","bielorrússia":"by","bonaire":"bq",
+    "botsuana":"bw","brunei":"bn","burkina fasso":"bf","burundi":"bi","butão":"bt","cabo verde":"cv","camboja":"kh",
+    "cazaquistão":"kz","chade":"td","comores":"km","congo":"cg","coreia do norte":"kp","curaçau":"cw","djibuti":"dj",
+    "dominica":"dm","e.u.a.":"us","emirados árabes":"ae","eritreia":"er","essuatíni":"sz","etiópia":"et",
+    "filipinas":"ph","gibraltar":"gi","granada":"gd","guadalupe":"gp","guam":"gu","guatemala":"gt","guiana":"gy",
+    "guiana francesa":"gf","guiné equatorial":"gq","guiné-bissau":"gw","gâmbia":"gm","haiti":"ht",
+    "hong kong (rp china)":"hk","ilhas caimão":"ky","ilhas cook":"ck","ilhas fiji":"fj","ilhas martinica":"mq",
+    "ilhas reunião":"re","ilhas salomão":"sb","ilhas t & c":"tc","ilhas virgens (eua)":"vi","ilhas virgens (ru)":"vg",
+    "ilhas wallis e futuna":"wf","iémen":"ye","jordânia":"jo","koweit":"kw","laos":"la","lesoto":"ls","libéria":"lr",
+    "liechtenstein":"li","líbano":"lb","líbia":"ly","macau (rp china)":"mo","madagáscar":"mg","maiote":"yt",
+    "maldivas":"mv","malta":"mt","maláui":"mw","marianas do norte":"mp","mauritânia":"mr","maurícia":"mu",
+    "mianmar":"mm","micronésia":"fm","moldávia":"md","mongólia":"mn","monserrate":"ms","moçambique":"mz",
+    "mónaco":"mc","namíbia":"na","nepal":"np","nicarágua":"ni","nova caledónia":"nc","níger":"ne","omã":"om",
+    "palestina":"ps","papua-nova guiné":"pg","paquistão":"pk","país basco":"es","porto rico":"pr","quirguistão":"kg",
+    "rep. centro-africana":"cf","rep. do congo":"cd","república dominicana":"do","ruanda":"rw",
+    "s. tomé e príncipe":"st","s. vincente":"vc","salvador":"sv","samoa americana":"as","samoa ocidental":"ws",
+    "seicheles":"sc","seri lanca":"lk","singapura":"sg","somália":"so","st lucia":"lc","sudão":"sd",
+    "sudão do sul":"ss","suriname":"sr","são bartolomeu":"bl","são cristóvão e neves":"kn","são marino":"sm",
+    "são martinho":"sx","síria":"sy","taipé (rp china)":"tw","taiti":"pf","tajiquistão":"tj","tanzânia":"tz",
+    "timor-leste":"tl","togo":"tg","tonga":"to","trindade e tobago":"tt","turcomenistão":"tm","tuvalu":"tv",
+    "uganda":"ug","vanuatu":"vu","vietname":"vn","zanzibar":"tz","zimbabué":"zw",
 };
 
 // Alguns jogadores têm dupla nacionalidade no CSV (ex: "Ilhas Faroé / Dinamarca").
@@ -39,12 +62,46 @@ const ISO_NACOES = {
 // separadores comuns) e tenta cada parte, ficando com a primeira que bater certo.
 function resolverNacaoISO(nat) {
     if (!nat || nat === "-") return null;
+    // Primeiro o nome inteiro: "Trindade e Tobago", "São Cristóvão e Neves"... têm " e " e seriam partidos abaixo.
+    const inteiro = nat.trim().toLowerCase();
+    if (ISO_NACOES[inteiro]) return ISO_NACOES[inteiro];
     const partes = nat.split(/\s*\/\s*|\s+e\s+|,\s*/i).map(p => p.trim().toLowerCase()).filter(Boolean);
     for (const parte of partes) {
         if (ISO_NACOES[parte]) return ISO_NACOES[parte];
     }
     // nenhuma parte reconhecida: devolve o texto original (primeira parte) em minúsculas, em vez de null
     return partes[0] || null;
+}
+
+// O JSON do jogo traz a nacionalidade como código ISO ("pt", "de", "gb-eng"...). Na base queremos o nome em
+// português, como no resto do players.csv; é o inverso do ISO_NACOES e usa a mesma grafia do FM.
+const NOME_POR_ISO = {
+    "ad":"Andorra","ae":"Emirados Árabes","al":"Albânia","am":"Arménia","ao":"Angola","ar":"Argentina","at":"Áustria",
+    "au":"Austrália","ba":"Bósnia","be":"Bélgica","bf":"Burkina Fasso","bg":"Bulgária","bi":"Burundi","bj":"Benim",
+    "bo":"Bolívia","br":"Brasil","by":"Bielorrússia","ca":"Canadá","cd":"Rep. do Congo","cf":"Rep. Centro-Africana",
+    "cg":"Congo","ch":"Suíça","ci":"Costa do Marfim","cl":"Chile","cm":"Camarões","cn":"China","co":"Colômbia",
+    "cr":"Costa Rica","cu":"Cuba","cv":"Cabo Verde","cw":"Curaçau","cy":"Chipre","cz":"Chéquia","de":"Alemanha",
+    "dk":"Dinamarca","do":"República Dominicana","dz":"Argélia","ec":"Equador","ee":"Estónia","eg":"Egito",
+    "en":"Inglaterra","es":"Espanha","fi":"Finlândia","fo":"Ilhas Faroé","fr":"França","ga":"Gabão",
+    "gb-eng":"Inglaterra","gb-nir":"Irlanda do Norte","gb-sct":"Escócia","gb-wls":"País de Gales","ge":"Geórgia",
+    "gh":"Gana","gm":"Gâmbia","gn":"Guiné","gq":"Guiné Equatorial","gr":"Grécia","gw":"Guiné-Bissau","hn":"Honduras",
+    "hr":"Croácia","ht":"Haiti","hu":"Hungria","id":"Indonésia","ie":"Irlanda","il":"Israel","iq":"Iraque",
+    "ir":"Irão","is":"Islândia","it":"Itália","jm":"Jamaica","jp":"Japão","ke":"Quénia","km":"Comores",
+    "kr":"Coreia do Sul","lc":"St Lucia","li":"Liechtenstein","lt":"Lituânia","lu":"Luxemburgo","lv":"Letónia",
+    "ma":"Marrocos","md":"Moldávia","me":"Montenegro","mk":"Macedónia do Norte","ml":"Mali","mq":"Ilhas Martinica",
+    "mr":"Mauritânia","mt":"Malta","mx":"México","mz":"Moçambique","ng":"Nigéria","nl":"Países Baixos","no":"Noruega",
+    "nz":"Nova Zelândia","pa":"Panamá","pe":"Perú","pk":"Paquistão","pl":"Polónia","ps":"Palestina","pt":"Portugal",
+    "py":"Paraguai","ro":"Roménia","rs":"Sérvia","ru":"Rússia","sc":"Escócia","se":"Suécia","si":"Eslovénia",
+    "sk":"Eslováquia","sl":"Serra Leoa","sm":"São Marino","sn":"Senegal","sr":"Suriname","sy":"Síria",
+    "th":"Tailândia","tn":"Tunísia","tr":"Turquia","tt":"Trindade e Tobago","ua":"Ucrânia","us":"E.U.A.",
+    "uy":"Uruguai","ve":"Venezuela","xk":"Kosovo","za":"África do Sul","zm":"Zâmbia",
+};
+
+// Código ISO -> nome em português. Se não for um código conhecido, devolve o texto como veio.
+function nomeDaNacao(nat) {
+    if (!nat) return nat;
+    const codigo = String(nat).trim().toLowerCase();
+    return NOME_POR_ISO[codigo] || nat;
 }
 
 // ID estável e ÚNICO do jogador: gerado UMA vez (na primeira importação/criação)
@@ -1257,7 +1314,7 @@ function converterImportGoFoot(j) {
     const interno = {
         id: j.id || gerarIdJogador(j.nome),
         n: j.nome || "",
-        nat: j.nacionalidade || "-",
+        nat: nomeDaNacao(j.nacionalidade) || "-",
         c: deslugifyClube(corrigirTeamId(j.team_id)),
         a: j.idade || null,
         pe: PE_LETRA_INVERSO[j.pe] || "-",
@@ -1694,7 +1751,7 @@ function atualizarCsvComEquipa() {
                         const idFinal = gerarIdUnicoContra(jogadorEquipa.nome, jogadorEquipa.id, indicePorId);
                         const novaLinha = {
                             Name: reverterNome(jogadorEquipa.nome),
-                            Nation: jogadorEquipa.nacionalidade || "",
+                            Nation: nomeDaNacao(jogadorEquipa.nacionalidade) || "",
                             Club: deslugifyClube(jogadorEquipa.team_id) || "",
                             Age: jogadorEquipa.idade || "",
                             Id: idFinal,

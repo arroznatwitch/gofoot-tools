@@ -80,6 +80,17 @@ LF (`core.autocrlf`). Por isso o build edita as linhas "cruas": as que não muda
 fora de ISO-8859-1 são transliterados (`š` → `s`). Os scripts usam `--today` (data para as idades) e `--seed` (Ids
 novos) para poderem ser repetidos com o mesmo resultado.
 
+## Nacionalidades
+
+A coluna `Nation` leva sempre o **nome em português** (grafia do FM: `Alemanha`, `E.U.A.`, `Rep. do Congo`...), nunca
+o código ISO (`de`, `us`...). O JSON do jogo é que traz códigos, e foi por aí que entraram milhares nos jogadores. Hoje
+o site converte-os em nome ao importar (`nomeDaNacao()` e `NOME_POR_ISO` no `script.js`) e, ao exportar, volta a
+transformar o nome em código (`resolverNacaoISO()` e `ISO_NACOES`).
+
+* `python tools/fix_nationalities.py --csv players.csv --out tools/work/players_nacoes.csv` corrige um CSV (só mexe na
+  coluna Nation). Com `--check` só lista o que há por corrigir e os nomes que o site não consegue converter em ISO.
+* As tabelas estão em `nacoes.py`. Se aparecer um país novo, acrescenta-o lá e ao `ISO_NACOES`/`NOME_POR_ISO` do site.
+
 ## Limitações conhecidas
 
 * O FM troca alguns caracteres (`Joško` → `Joako`); a ligação é feita com tolerância a uma letra, data de nascimento,
@@ -89,8 +100,6 @@ novos) para poderem ser repetidos com o mesmo resultado.
 * Ficam jogadores do FM **sem OVER** nos clubes (reservas, antigos). O site já ignora-os (o `fm_players.js` só tem
   completos), mas continuam no `players.csv`. Atenção: o botão "Limpar sem OVER" do Painel++ chama
   `descarregarCsvDeListaJogadores`, que foi removida no commit `6756de8`; apaga na sessão, dá erro e não descarrega o CSV.
-* Nacionalidades que o `ISO_NACOES` do `script.js` não conhece (E.U.A., Rep. do Congo, Cabo Verde...) exportam-se sem
-  código ISO. Já acontecia antes.
 * A calibração usa o commit `855cdaa` do git. Num clone raso, usa `--pre` com um snapshot do `players.csv` anterior a ele.
 
 ## Primeira execução (14-10-2026)
