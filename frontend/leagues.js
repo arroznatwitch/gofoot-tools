@@ -161,6 +161,14 @@ window.LEAGUES_DATA = {
         "Sevilla Fc", "Valência CF", "RCD Espanyol", "Levante UD", 
         "Rayo Vallecano", "Deportivo La Coruna", "Getafe CF", "CA Osasuna", 
         "Racing Santander", "Deportivo Alavés", "Elche CF", "Málaga CF"
+    ],
+    "La Liga 2 - 26/27": [
+        "Almería", "Girona", "RCD Mallorca", "Real Oviedo", 
+        "Las Palmas", "Leganés", "Real Valladolid CF", "Cádiz", 
+        "Sporting Gijón", "CD Castellón", "Real Sociedad B", "Burgos", 
+        "Granada", "SD Eibar", "Albacete Balompié", "Córdoba CF", 
+        "Andorra", "RC Celta Fortuna", "CD Eldense", "CE Sabadell FC", 
+        "Tenerife", "AD Ceuta FC"
     ]
 },
 "Alemanha": {
@@ -186,6 +194,14 @@ window.LEAGUES_DATA = {
         "Brentford FC", "Aston Villa", "Bournemouth", "Crystal Palace", 
         "Nottingham Forest", "Sunderland AFC", "Leeds", "Everton FC", 
         "Fulham", "Ipswich Town", "Coventry City", "Hull City"
+    ],
+    "Championship - 26/27": [
+        "West Ham United", "Wolverhampton Wanderers", "Middlesbrough FC", "Southampton", 
+        "Burnley FC", "Swansea City", "Sheffield United", "Norwich City", 
+        "Stoke City", "Wrexham AFC", "Birmingham City", "Watford FC", 
+        "Millwall FC", "West Bromwich Albion", "Bristol City", "Derby County", 
+        "Queens Park Rangers", "Preston North End", "Charlton Athletic", "Portsmouth", 
+        "Blackburn Rovers", "Bolton Wanderers", "Cardiff City", "Lincoln City"
     ]
 },
 "França": {
@@ -195,6 +211,13 @@ window.LEAGUES_DATA = {
         "Olympique Marseille", "OGC Nice", "Toulouse FC", "FC Lorient", 
         "AJ Auxerre", "Stade Brestois 29", "Angers SCO", "Le Havre AC", 
         "ESTAC Troyes", "Le Mans FC"
+    ],
+    "Ligue 2 - 26/27": [
+        "AS Saint-Étienne", "Stade Reims", "FC Nantes", "FC Metz", 
+        "Montpellier HSC", "Clermont Foot 63", "AS Nancy-Lorraine", "Red Star FC", 
+        "Rodez AF", "USL Dunkerque", "Grenoble Foot 38", "EA Guingamp", 
+        "Pau FC", "Stade Lavallois", "FC Sochaux-Montbéliard", "FC Annecy", 
+        "US Boulogne", "Dijon FCO"
     ]
 },
 "Itália": {
@@ -204,6 +227,13 @@ window.LEAGUES_DATA = {
         "SS Lazio", "Bologna FC 1909", "Sassuolo", "Torino", 
         "Genoa", "Udinese Calcio", "Parma Calcio 1913", "Cagliari Calcio", 
         "Venezia", "Frosinone Calcio", "AC Monza", "US Lecce"
+    ],
+    "Serie B - 26/27": [
+        "Pisa Sporting Club", "Palermo FC", "US Cremonese", "Hellas Verona", 
+        "UC Sampdoria", "Modena FC", "Mantova 1911", "US Avellino 1912", 
+        "FC Südtirol", "Cesena FC", "Calcio Padova", "FC Empoli", 
+        "Carrarese Calcio 1908", "US Catanzaro", "Benevento Calcio", "SS Juve Stabia", 
+        "Ascoli Calcio", "LR Vicenza", "SS Arezzo", "Virtus Entella"
     ]
 },
 "Holanda": {

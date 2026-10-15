@@ -1,0 +1,31 @@
+{
+  "season": 2026,
+  "leagues": [
+    {"country": "Inglaterra", "league": "Championship", "site_label": "Championship - 26/27", "tm_slug": "championship", "tm_code": "GB2", "squad_season": "auto", "min_squad": 20, "over_shift": -1, "name_fix": "mangled"},
+    {"country": "Espanha", "league": "La Liga 2", "site_label": "La Liga 2 - 26/27", "tm_slug": "laliga2", "tm_code": "ES2", "squad_season": "auto", "min_squad": 20, "over_shift": -1, "name_fix": "mangled"},
+    {"country": "Itália", "league": "Serie B", "site_label": "Serie B - 26/27", "tm_slug": "serie-b", "tm_code": "IT2", "squad_season": "auto", "min_squad": 20, "over_shift": -1, "name_fix": "mangled"},
+    {"country": "França", "league": "Ligue 2", "site_label": "Ligue 2 - 26/27", "tm_slug": "ligue-2", "tm_code": "FR2", "squad_season": "auto", "min_squad": 20, "over_shift": -1, "name_fix": "mangled"}
+  ],
+  "club_name_variants": {
+    "Southampton FC": ["Southampton"],
+    "Portsmouth FC": ["Portsmouth"],
+    "UD Almería": ["Almería"],
+    "Girona FC": ["Girona"],
+    "UD Las Palmas": ["Las Palmas"],
+    "CD Leganés": ["Leganés"],
+    "Cádiz CF": ["Cádiz"],
+    "Burgos CF": ["Burgos"],
+    "Granada CF": ["Granada"],
+    "FC Andorra": ["Andorra"],
+    "CD Tenerife": ["Tenerife"]
+  },
+  "tal_ref_cap": {"G": 85, "Z": 82, "L": 82, "V": 84, "M": 84, "PE": 89, "PD": 89, "CA": 89},
+  "tal_pins": {},
+  "_notas": {
+    "leagues": "Segundas divisões dos 'Big 5' que faltavam no site (a 2. Bundesliga já lá estava): Championship, La Liga 2, Serie B e Ligue 2. Entram no bloco do país que já existe. Todos os clubes da liga no Transfermarkt (26/27).",
+    "squad_season": "auto = a época atual de cada clube no Transfermarkt (ver fetch_transfermarkt.py).",
+    "over_shift": "Nivelamento: -1 ponto de OVER por cima da conversão EA->GoFoot. A 2. Bundesliga que já estava no site fica 2 pontos abaixo da EA (Top-18 66,6 contra 68,5 da EA).",
+    "name_fix": "mangled = só repõe nomes com letras que o export do FM não guarda (š, ž...); outras grafias do mesmo nome ficam como no FM.",
+    "club_name_variants": "Nome do Transfermarkt -> grafia que jogadores já avaliados usam no players.csv (confirmada no CSV)."
+  }
+}
