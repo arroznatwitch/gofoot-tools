@@ -1,10 +1,10 @@
 {
   "season": 2026,
   "leagues": [
-    {"country": "Inglaterra", "league": "Championship", "site_label": "Championship - 26/27", "tm_slug": "championship", "tm_code": "GB2", "squad_season": "auto", "min_squad": 20, "over_shift": -1, "name_fix": "mangled"},
-    {"country": "Espanha", "league": "La Liga 2", "site_label": "La Liga 2 - 26/27", "tm_slug": "laliga2", "tm_code": "ES2", "squad_season": "auto", "min_squad": 20, "over_shift": -1, "name_fix": "mangled"},
-    {"country": "Itália", "league": "Serie B", "site_label": "Serie B - 26/27", "tm_slug": "serie-b", "tm_code": "IT2", "squad_season": "auto", "min_squad": 20, "over_shift": -1, "name_fix": "mangled"},
-    {"country": "França", "league": "Ligue 2", "site_label": "Ligue 2 - 26/27", "tm_slug": "ligue-2", "tm_code": "FR2", "squad_season": "auto", "min_squad": 20, "over_shift": -1, "name_fix": "mangled"}
+    {"country": "Inglaterra", "league": "Championship", "site_label": "Championship - 26/27", "tm_slug": "championship", "tm_code": "GB2", "squad_season": "auto", "min_squad": 20, "same_club_guard": true, "over_shift": -1, "name_fix": "mangled"},
+    {"country": "Espanha", "league": "La Liga 2", "site_label": "La Liga 2 - 26/27", "tm_slug": "laliga2", "tm_code": "ES2", "squad_season": "auto", "min_squad": 20, "same_club_guard": true, "over_shift": -1, "name_fix": "mangled"},
+    {"country": "Itália", "league": "Serie B", "site_label": "Serie B - 26/27", "tm_slug": "serie-b", "tm_code": "IT2", "squad_season": "auto", "min_squad": 20, "same_club_guard": true, "over_shift": -1, "name_fix": "mangled"},
+    {"country": "França", "league": "Ligue 2", "site_label": "Ligue 2 - 26/27", "tm_slug": "ligue-2", "tm_code": "FR2", "squad_season": "auto", "min_squad": 20, "same_club_guard": true, "over_shift": -1, "name_fix": "mangled"}
   ],
   "club_name_variants": {
     "Southampton FC": ["Southampton"],

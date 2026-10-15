@@ -208,6 +208,12 @@ def main():
                     nats.append(en)
                 else:
                     unknown_nats[n] += 1
+            # a idade da página do clube no ogol nem sempre é fiável (33 em vez de 24): usa a da ficha. Se o Transfermarkt já tem
+            # alguém com o mesmo nome e a mesma idade neste clube, é a mesma pessoa e não se acrescenta outra vez
+            if any(name_sim(eff_tokens(p["name"]), eff_tokens(o["name"])) >= 0.9 and p["age"] is not None and abs(p["age"] - age) <= 1
+                   for p in kept + added):
+                rejected.append((o["name"], "já está no plantel do Transfermarkt"))
+                continue
             added.append({"tm_id": f"og{o['og_id']}", "slug": o["slug"], "name": o["name"], "num": "",
                           "pos": tm_position(prof.get("Posição"), o["coarse"]), "dob": dob_s, "age": age, "nats": nats,
                           "height": "", "foot": "", "joined": "", "signed_from": None, "contract": "", "value": None,

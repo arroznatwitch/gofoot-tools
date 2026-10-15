@@ -1,9 +1,9 @@
 {
   "season": 2026,
   "leagues": [
-    {"country": "Inglaterra", "league": "League One", "site_label": "League One - 26/27", "tm_slug": "league-one", "tm_code": "GB3", "squad_season": "auto", "min_squad": 20, "over_shift": -1, "name_fix": "mangled"},
-    {"country": "Inglaterra", "league": "League Two", "site_label": "League Two - 26/27", "tm_slug": "league-two", "tm_code": "GB4", "squad_season": "auto", "min_squad": 20, "over_shift": -1, "name_fix": "mangled"},
-    {"country": "Alemanha", "league": "3. Liga", "site_label": "3. Liga - 26/27", "tm_slug": "3-liga", "tm_code": "L3", "squad_season": "auto", "min_squad": 20, "over_shift": -1, "name_fix": "mangled"}
+    {"country": "Inglaterra", "league": "League One", "site_label": "League One - 26/27", "tm_slug": "league-one", "tm_code": "GB3", "squad_season": "auto", "min_squad": 20, "same_club_guard": true, "over_shift": -1, "name_fix": "mangled"},
+    {"country": "Inglaterra", "league": "League Two", "site_label": "League Two - 26/27", "tm_slug": "league-two", "tm_code": "GB4", "squad_season": "auto", "min_squad": 20, "same_club_guard": true, "over_shift": -1, "name_fix": "mangled"},
+    {"country": "Alemanha", "league": "3. Liga", "site_label": "3. Liga - 26/27", "tm_slug": "3-liga", "tm_code": "L3", "squad_season": "auto", "min_squad": 20, "same_club_guard": true, "over_shift": -1, "name_fix": "mangled"}
   ],
   "club_name_variants": {
     "SC Fortuna Köln": ["Fortuna Köln"]

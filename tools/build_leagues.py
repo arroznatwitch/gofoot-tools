@@ -769,6 +769,17 @@ for q in tm_players:
             diag["rated_in_other_club"] += 1
         plan.append(item)
         continue
+    if club["lg_cfg"].get("same_club_guard") and q["age"] is not None:
+        # "same_club_guard": se o clube já tem uma linha avaliada com o mesmo nome e a mesma idade (±2), é a mesma pessoa
+        # (o utilizador escreveu o nome de outra maneira): não se cria uma segunda linha
+        twin = next((rows[i] for i in rows_by_club.get(club["csv_slug"], ())
+                     if rows[i].rated and rows[i].age is not None and abs(rows[i].age - q["age"]) <= 2
+                     and name_sim(q["toks"], rows[i].toks) >= 0.92), None)
+        if twin is not None:
+            item["kind"], item["row"] = "rated", twin
+            diag["same_club_guard"] += 1
+            plan.append(item)
+            continue
     item["kind"] = "fm" if m is not None else "new"
     age = q["age"] if q["age"] is not None else (m.age + 1 if m and m.age else 25)
     item["age"] = age

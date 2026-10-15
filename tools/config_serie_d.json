@@ -6,7 +6,7 @@
       "tm_kind": "cup", "tm_slug": "campeonato-brasileiro-serie-d", "tm_code": "BRA4", "tm_participants_season": 2025,
       "squad_season": "auto",
       "ratings": "fm", "over_target": {"mean": 51, "sd": 3.3, "min": 45, "max": 57}, "name_fix": "mangled",
-      "min_squad": 20, "gk_topup": false,
+      "min_squad": 20, "same_club_guard": true, "gk_topup": false,
       "clubs": [
         {"name": "AM Nacional", "tm_id": 22782, "fm": ["Nacional (AM)"], "ogol": "nacional-am/3356"},
         {"name": "Manaus", "tm_id": 46022, "fm": ["MAN"], "ogol": "manaus-fc/85493"},
