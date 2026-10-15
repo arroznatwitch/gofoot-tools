@@ -14,7 +14,8 @@ participantes de "tm_participants_season"), "clubs" (lista de clubes a usar, com
 
 Atenção às épocas: o Transfermarkt rotula-as clube a clube. Nos clubes "de calendário" (Série D) o saison_id 2025 é a
 época "2026" (a atual) e o 2026 é a "2027", vazia; nos outros o saison_id 2026 é a "26/27". Com "squad_season": "auto" lê-se
-a página do config.season e, se o título disser só um ano (2027), usa-se a do saison_id anterior. O resultado guarda
+a página do config.season e, se o título disser um ano maior (2027), usa-se a do saison_id anterior (na Noruega, na Irlanda e
+na Finlândia o saison_id 2026 já é a época "2026" e fica). O resultado guarda
 season_id e season_label de cada clube. Nunca se usam épocas mais antigas para completar plantéis.
 """
 import argparse
@@ -27,6 +28,7 @@ import time
 import urllib.error
 import urllib.request
 
+sys.stdout.reconfigure(encoding="utf-8")  # nomes de clubes com letras fora do cp1252 (Poznań, Qarabağ...)
 HERE = os.path.dirname(os.path.abspath(__file__))
 UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36")
@@ -196,7 +198,7 @@ def main():
                 page = get(f"https://www.transfermarkt.com/{c['slug']}/kader/verein/{c['id']}/saison_id/{sid}/plus/1",
                            os.path.join(args.cache_dir, f"squad_{c['id']}_{sid}.html"))
                 label = season_label(page)
-                if label and re.fullmatch(r"\d{4}", label):  # clube "de calendário": a época atual é a do saison_id anterior
+                if label and re.fullmatch(r"\d{4}", label) and int(label) > season:  # "2027" no saison_id 2026: a atual é a do anterior
                     sid = season - 1
                     page = get(f"https://www.transfermarkt.com/{c['slug']}/kader/verein/{c['id']}/saison_id/{sid}/plus/1",
                                os.path.join(args.cache_dir, f"squad_{c['id']}_{sid}.html"))

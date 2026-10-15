@@ -178,6 +178,7 @@ for c in tm:
             best, best_n = v, rated_clubs[v]
     if c["id"] in CLUB_CFG:  # o config manda no nome com que o clube entra no site
         best = CLUB_CFG[c["id"]]["name"]
+    best = to_latin1(best)  # o CSV é ISO-8859-1: o leagues.js tem de levar a mesma grafia (o site junta clubes pelo nome)
     c["csv_name"] = best
     c["csv_slug"] = slug(best)
     c["lg_cfg"] = LG_CFG.get((c["country"], c["league"]), {})
@@ -791,6 +792,8 @@ for q in tm_players:
     else:
         over, src = over_from_value(q["value"], age) + {16: -7, 17: -5, 18: -3, 19: -1}.get(age, 0), "TM"
     over = int(clamp(over, 40, 90)) if lk not in FM_LEAGUES else over
+    if club["lg_cfg"].get("over_shift"):  # nivelamento da liga no config (pontos de OVER, também para o TAL, o valor e o salário)
+        over = int(clamp(over + club["lg_cfg"]["over_shift"], 40, 90))
     item["over"], item["over_src"] = over, src
     diag["over_" + src] += 1
     # TAL
@@ -862,7 +865,8 @@ for cid, items in by_club.items():
                  "age": age, "isos": r.isos, "grp": "G", "pos": "Goalkeeper", "foot": "", "value": r.value, "nats": [],
                  "ea": None, "club": club, "key": f"gk:{r.i}", "dob": None, "match": r}
             grp = "G"
-            over = int(clamp(G.js_round(clamp(fm_over(grp, r.rating), 40, 90) + fm_corr(club["country"], age)), 40, 90))
+            over = int(clamp(G.js_round(clamp(fm_over(grp, r.rating), 40, 90) + fm_corr(club["country"], age)
+                                        + club["lg_cfg"].get("over_shift", 0)), 40, 90))
             tal = int(clamp(G.js_round(over + fm_tal(grp, r.pot) - fm_over(grp, r.rating)), 40, 94))
             attrs = attrs_from_neighbour(grp, over, age, q["key"])
             valor = G.calcular_valor(grp, over, tal, age, attrs.get("FIS"), attrs.get("MEN"))

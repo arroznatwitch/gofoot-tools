@@ -1,0 +1,42 @@
+{
+  "season": 2026,
+  "leagues": [
+    {"country": "Polónia", "league": "Ekstraklasa", "site_label": "Ekstraklasa - 26/27", "tm_slug": "ekstraklasa", "tm_code": "PL1", "squad_season": "auto", "min_squad": 20, "over_shift": -1},
+    {"country": "Escócia", "league": "Scottish Premiership", "site_label": "Scottish Premiership - 26/27", "tm_slug": "scottish-premiership", "tm_code": "SC1", "squad_season": "auto", "min_squad": 20, "over_shift": -1},
+    {"country": "Dinamarca", "league": "Superliga", "site_label": "Superliga - 26/27", "tm_slug": "superliga", "tm_code": "DK1", "squad_season": "auto", "min_squad": 20, "over_shift": -1},
+    {"country": "Noruega", "league": "Eliteserien", "site_label": "Eliteserien - 26/27", "tm_slug": "eliteserien", "tm_code": "NO1", "squad_season": "auto", "min_squad": 20, "over_shift": -1},
+    {"country": "Roménia", "league": "SuperLiga", "site_label": "SuperLiga - 26/27", "tm_slug": "superliga", "tm_code": "RO1", "squad_season": "auto", "min_squad": 20, "over_shift": -1},
+    {"country": "Irlanda", "league": "Premier Division", "site_label": "Premier Division - 26/27", "tm_slug": "league-of-ireland-premier-division", "tm_code": "IR1", "squad_season": "auto", "min_squad": 20, "over_shift": -1},
+    {"country": "Grécia", "league": "Super League", "site_label": "Super League - 26/27", "tm_slug": "super-league-1", "tm_code": "GR1", "squad_season": "auto", "min_squad": 20, "over_shift": -1,
+     "clubs": [{"name": "Olympiacos Piraeus", "tm_id": 683}, {"name": "AEK Athens", "tm_id": 2441}, {"name": "Panathinaikos", "tm_id": 265}, {"name": "PAOK Thessaloniki", "tm_id": 1091}]},
+    {"country": "Chéquia", "league": "Chance Liga", "site_label": "Chance Liga - 26/27", "tm_slug": "fortuna-liga", "tm_code": "TS1", "squad_season": "auto", "min_squad": 20, "over_shift": -1,
+     "clubs": [{"name": "SK Slavia Prague", "tm_id": 62}, {"name": "AC Sparta Praha", "tm_id": 197}, {"name": "Viktoria Plzen", "tm_id": 941}]},
+    {"country": "Croácia", "league": "SuperSport HNL", "site_label": "SuperSport HNL - 26/27", "tm_slug": "supersport-hnl", "tm_code": "KR1", "squad_season": "auto", "min_squad": 20, "over_shift": -1,
+     "clubs": [{"name": "Dinamo Zagreb", "tm_id": 419}, {"name": "HNK Hajduk Split", "tm_id": 447}]},
+    {"country": "Ucrânia", "league": "Premier Liga", "site_label": "Premier Liga - 26/27", "tm_slug": "premier-liga", "tm_code": "UKR1", "squad_season": "auto", "min_squad": 20, "over_shift": -1,
+     "clubs": [{"name": "Dynamo Kyiv", "tm_id": 338}, {"name": "Shakhtar Donetsk", "tm_id": 660}]},
+    {"country": "Hungria", "league": "Nemzeti Bajnokság", "site_label": "Nemzeti Bajnokság - 26/27", "tm_slug": "nemzeti-bajnoksag", "tm_code": "UNG1", "squad_season": "auto", "min_squad": 20, "over_shift": -1,
+     "clubs": [{"name": "Ferencvárosi TC", "tm_id": 279}]},
+    {"country": "Chipre", "league": "Cyprus League", "site_label": "Cyprus League - 26/27", "tm_slug": "protathlima-cyta", "tm_code": "ZYP1", "squad_season": "auto", "min_squad": 20, "over_shift": -1,
+     "clubs": [{"name": "APOEL Nicosia", "tm_id": 2784}]},
+    {"country": "Azerbaijão", "league": "Premyer Liqa", "site_label": "Premyer Liqa - 26/27", "tm_slug": "premyer-liqa", "tm_code": "AZ1", "squad_season": "auto", "min_squad": 20, "over_shift": -1,
+     "clubs": [{"name": "Qarabag FK", "tm_id": 10625}]},
+    {"country": "Finlândia", "league": "Veikkausliiga", "site_label": "Veikkausliiga - 26/27", "tm_slug": "veikkausliiga", "tm_code": "FI1", "squad_season": "auto", "min_squad": 20, "over_shift": -1,
+     "clubs": [{"name": "HJK Helsinki", "tm_id": 1008}]}
+  ],
+  "club_name_variants": {
+    "Rangers FC": ["Rangers"],
+    "Celtic FC": ["Celtic"],
+    "Hibernian FC": ["Hibernian"],
+    "FC Nordsjælland": ["FC Nordsjaelland"],
+    "Viking FK": ["Viking"]
+  },
+  "tal_ref_cap": {"G": 85, "Z": 82, "L": 82, "V": 84, "M": 84, "PE": 89, "PD": 89, "CA": 89},
+  "tal_pins": {},
+  "_notas": {
+    "leagues": "Primeiras divisões europeias do FIFA (EA FC) que faltavam no site. Ligas completas (Polónia, Escócia, Dinamarca, Noruega, Roménia, Irlanda): todos os clubes do Transfermarkt. Ligas em que o FIFA só tem alguns clubes (Grécia, Chéquia, Croácia, Ucrânia, Hungria, Chipre, Azerbaijão, Finlândia): só esses clubes, indicados em clubs.",
+    "squad_season": "auto = a época atual de cada clube no Transfermarkt (ver fetch_transfermarkt.py).",
+    "over_shift": "Nivelamento: -1 ponto de OVER em todos os jogadores da liga, por cima da conversão EA->GoFoot. As ligas mais fracas que já estavam no site (2. Bundesliga, Allsvenskan, Argentina) ficam cerca de 2 pontos abaixo da EA, e as grandes ligas feitas pela EA cerca de 1.",
+    "club_name_variants": "Nome do Transfermarkt -> grafia que jogadores já avaliados usam no players.csv (confirmada no CSV)."
+  }
+}

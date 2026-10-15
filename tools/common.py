@@ -209,6 +209,8 @@ NATIONS = {
     "Sierra Leone": ("sl", "Serra Leoa"), "Liberia": ("lr", "Libéria"), "Kazakhstan": ("kz", "Cazaquistão"),
     "Azerbaijan": ("az", "Azerbaijão"), "Albania ": ("al", "Albânia"), "Malawi": ("mw", "Maláui"),
     "Namibia": ("na", "Namíbia"), "Botswana": ("bw", "Botsuana"), "Lesotho": ("ls", "Lesoto"),
+    "Grenada": ("gd", "Granada"), "Guyana": ("gy", "Guiana"), "Somalia": ("so", "Somália"), "Mauritius": ("mu", "Maurícia"),
+    "St. Kitts & Nevis": ("kn", "São Cristóvão e Neves"),
     "Eritrea": ("er", "Eritreia"), "Chad": ("td", "Chade"), "Sao Tome and Principe": ("st", "S. Tomé e Príncipe"),
     "Korea, North": ("kp", "Coreia do Norte"), "Thailand": ("th", "Tailândia"), "Vietnam": ("vn", "Vietname"),
     "India": ("in", "Índia"), "Pakistan": ("pk", "Paquistão"), "Qatar": ("qa", "Qatar"),

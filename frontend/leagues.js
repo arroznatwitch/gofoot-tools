@@ -231,6 +231,92 @@ window.LEAGUES_DATA = {
         "SCR Altach", "WSG Tirol", "SV Ried", "SC Austria Lustenau"
     ]
 },
+"Polónia": {
+    "Ekstraklasa - 26/27": [
+        "Lech Poznan", "Widzew Lodz", "Jagiellonia Bialystok", "Górnik Zabrze", 
+        "Raków Czestochowa", "Korona Kielce", "Cracovia", "Legia Warszawa", 
+        "Pogon Szczecin", "Zaglebie Lubin", "Motor Lublin", "Wisla Kraków", 
+        "Wieczysta Krakow", "Wisla Plock", "GKS Katowice", "Slask Wroclaw", 
+        "Radomiak Radom", "Piast Gliwice"
+    ]
+},
+"Escócia": {
+    "Scottish Premiership - 26/27": [
+        "Rangers", "Celtic", "Heart of Midlothian FC", "Hibernian", 
+        "Motherwell FC", "Aberdeen FC", "Dundee United FC", "St. Mirren FC", 
+        "Dundee FC", "Kilmarnock FC", "St. Johnstone FC", "Falkirk FC"
+    ]
+},
+"Dinamarca": {
+    "Superliga - 26/27": [
+        "FC Midtjylland", "FC Copenhagen", "FC Nordsjaelland", "Bröndby IF", 
+        "Aarhus GF", "Odense Boldklub", "Viborg FF", "Randers FC", 
+        "Silkeborg IF", "Lyngby Boldklub", "Sönderjyske Fodbold", "AC Horsens"
+    ]
+},
+"Noruega": {
+    "Eliteserien - 26/27": [
+        "FK Bodø/Glimt", "Viking", "Molde FK", "Rosenborg BK", 
+        "SK Brann", "Tromsø IL", "Sarpsborg 08 FF", "Sandefjord Fotball", 
+        "Lillestrøm SK", "Kristiansund BK", "Fredrikstad FK", "Aalesunds FK", 
+        "Vålerenga Fotball Elite", "Hamarkameratene", "KFUM-Kameratene Oslo", "IK Start"
+    ]
+},
+"Roménia": {
+    "SuperLiga - 26/27": [
+        "Universitatea Craiova", "FC Rapid 1923", "FCSB", "FC Dinamo 1948", 
+        "FC Universitatea Cluj", "ACSC FC Arges", "CFR Cluj", "FCV Farul Constanta", 
+        "FC Botosani", "UTA Arad", "SC Otelul Galati", "Petrolul Ploiesti", 
+        "Corvinul Hunedoara", "Sepsi OSK Sf. Gheorghe", "FC Voluntari", "FK Csikszereda Miercurea Ciuc"
+    ]
+},
+"Irlanda": {
+    "Premier Division - 26/27": [
+        "Shamrock Rovers", "St. Patrick's Athletic", "Bohemian Football Club", "Shelbourne FC", 
+        "Derry City", "Drogheda United FC", "Sligo Rovers", "Dundalk FC", 
+        "Galway United FC", "Waterford FC"
+    ]
+},
+"Grécia": {
+    "Super League - 26/27": [
+        "Olympiacos Piraeus", "AEK Athens", "Panathinaikos", "PAOK Thessaloniki"
+    ]
+},
+"Chéquia": {
+    "Chance Liga - 26/27": [
+        "SK Slavia Prague", "AC Sparta Praha", "Viktoria Plzen"
+    ]
+},
+"Croácia": {
+    "SuperSport HNL - 26/27": [
+        "Dinamo Zagreb", "HNK Hajduk Split"
+    ]
+},
+"Ucrânia": {
+    "Premier Liga - 26/27": [
+        "Dynamo Kyiv", "Shakhtar Donetsk"
+    ]
+},
+"Hungria": {
+    "Nemzeti Bajnokság - 26/27": [
+        "Ferencvárosi TC"
+    ]
+},
+"Chipre": {
+    "Cyprus League - 26/27": [
+        "APOEL Nicosia"
+    ]
+},
+"Azerbaijão": {
+    "Premyer Liqa - 26/27": [
+        "Qarabag FK"
+    ]
+},
+"Finlândia": {
+    "Veikkausliiga - 26/27": [
+        "HJK Helsinki"
+    ]
+},
 "Suécia": {
     "Allsvenskan - 26/27": [
         "AIK Solna", "BK Häcken", "Degerfors IF", "Djurgårdens IF", 
