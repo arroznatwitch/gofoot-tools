@@ -185,6 +185,13 @@ window.LEAGUES_DATA = {
         "Hertha Berlim", "Holstein Kiel", "Karlsruher Sc", "Magdeburgo", 
         "Sg Dynamo Dresden", "Spvgg Greuther Furth", "Sv Darmstadt 98", "Vfl Bochum", 
         "Vfl Osnabruck", "Vfl Wolfsburg"
+    ],
+    "3. Liga - 26/27": [
+        "TSG 1899 Hoffenheim II", "VfB Stuttgart II", "Fortuna Düsseldorf", "SV Waldhof Mannheim", 
+        "Rot-Weiss Essen", "1.FC Saarbrücken", "MSV Duisburg", "FC Hansa Rostock", 
+        "Alemannia Aachen", "Preußen Münster", "SV Wehen Wiesbaden", "SSV Jahn Regensburg", 
+        "FC Ingolstadt 04", "FC Viktoria Köln", "SC Verl", "Würzburger Kickers", 
+        "Fortuna Köln", "TSV Havelse", "SG Sonnenhof Großaspach", "SV Meppen"
     ]
 },
 "Inglaterra": {
@@ -202,6 +209,22 @@ window.LEAGUES_DATA = {
         "Millwall FC", "West Bromwich Albion", "Bristol City", "Derby County", 
         "Queens Park Rangers", "Preston North End", "Charlton Athletic", "Portsmouth", 
         "Blackburn Rovers", "Bolton Wanderers", "Cardiff City", "Lincoln City"
+    ],
+    "League One - 26/27": [
+        "Leicester City", "Luton Town", "Sheffield Wednesday", "Leyton Orient", 
+        "Huddersfield Town", "Oxford United", "Milton Keynes Dons", "Blackpool FC", 
+        "Reading FC", "Wigan Athletic", "Plymouth Argyle", "Wycombe Wanderers", 
+        "Bradford City", "Stockport County", "Stevenage FC", "Notts County", 
+        "Mansfield Town", "Peterborough United", "Barnsley FC", "Doncaster Rovers", 
+        "Burton Albion", "AFC Wimbledon", "Bromley FC", "Cambridge United"
+    ],
+    "League Two - 26/27": [
+        "Salford City", "Port Vale FC", "Chesterfield FC", "Bristol Rovers", 
+        "Rotherham United", "Northampton Town", "Swindon Town", "Crewe Alexandra", 
+        "Colchester United", "Tranmere Rovers", "Shrewsbury Town", "Barnet FC", 
+        "Newport County", "Grimsby Town", "Gillingham FC", "Walsall FC", 
+        "Cheltenham Town", "Exeter City", "Crawley Town", "Rochdale AFC", 
+        "Fleetwood Town", "Oldham Athletic", "Accrington Stanley", "York City"
     ]
 },
 "França": {

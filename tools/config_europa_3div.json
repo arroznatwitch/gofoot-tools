@@ -1,0 +1,20 @@
+{
+  "season": 2026,
+  "leagues": [
+    {"country": "Inglaterra", "league": "League One", "site_label": "League One - 26/27", "tm_slug": "league-one", "tm_code": "GB3", "squad_season": "auto", "min_squad": 20, "over_shift": -1, "name_fix": "mangled"},
+    {"country": "Inglaterra", "league": "League Two", "site_label": "League Two - 26/27", "tm_slug": "league-two", "tm_code": "GB4", "squad_season": "auto", "min_squad": 20, "over_shift": -1, "name_fix": "mangled"},
+    {"country": "Alemanha", "league": "3. Liga", "site_label": "3. Liga - 26/27", "tm_slug": "3-liga", "tm_code": "L3", "squad_season": "auto", "min_squad": 20, "over_shift": -1, "name_fix": "mangled"}
+  ],
+  "club_name_variants": {
+    "SC Fortuna Köln": ["Fortuna Köln"]
+  },
+  "tal_ref_cap": {"G": 85, "Z": 82, "L": 82, "V": 84, "M": 84, "PE": 89, "PD": 89, "CA": 89},
+  "tal_pins": {},
+  "_notas": {
+    "leagues": "3.as e 4.as divisões que o FIFA (EA FC) tem: League One e League Two (Inglaterra) e 3. Liga (Alemanha). A Serie C, a Primera Federación e o National não estão no FIFA e não entram. Todos os clubes da liga no Transfermarkt (26/27).",
+    "squad_season": "auto = a época atual de cada clube no Transfermarkt (ver fetch_transfermarkt.py).",
+    "over_shift": "Nivelamento: -1 ponto de OVER por cima da conversão EA->GoFoot, como nas outras ligas europeias novas (a 2. Bundesliga que já estava no site fica 2 pontos abaixo da EA).",
+    "name_fix": "mangled = só repõe nomes com letras que o export do FM não guarda (š, ž...); outras grafias do mesmo nome ficam como no FM.",
+    "club_name_variants": "Nome do Transfermarkt -> grafia que jogadores já avaliados usam no players.csv (confirmada no CSV)."
+  }
+}
