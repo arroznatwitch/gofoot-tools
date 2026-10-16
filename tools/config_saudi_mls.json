@@ -1,0 +1,254 @@
+{
+  "season": 2026,
+  "leagues": [
+    {
+      "country": "Arábia Saudita",
+      "league": "Saudi Pro League",
+      "site_label": "Saudi Pro League - 26/27",
+      "tm_slug": "saudi-pro-league",
+      "tm_code": "SA1",
+      "squad_season": "auto",
+      "min_squad": 20,
+      "same_club_guard": true,
+      "over_shift": -1,
+      "name_fix": "mangled",
+      "gk_topup": false,
+      "clubs": [
+        {
+          "name": "Al-Hilal",
+          "tm_id": 1114
+        },
+        {
+          "name": "Al-Ahli SFC",
+          "tm_id": 18487
+        },
+        {
+          "name": "Al-Qadsiah",
+          "tm_id": 26069
+        },
+        {
+          "name": "Al-Ittihad",
+          "tm_id": 8023
+        },
+        {
+          "name": "Al-Nassr",
+          "tm_id": 18544
+        },
+        {
+          "name": "Neom SC",
+          "tm_id": 34911
+        },
+        {
+          "name": "Al-Diriyah",
+          "tm_id": 52358
+        },
+        {
+          "name": "Al-Shabab",
+          "tm_id": 9840
+        },
+        {
+          "name": "Al-Ettifaq",
+          "tm_id": 7732
+        },
+        {
+          "name": "Al-Taawoun",
+          "tm_id": 28844
+        },
+        {
+          "name": "Al-Fateh",
+          "tm_id": 27221
+        },
+        {
+          "name": "Al-Khaleej",
+          "tm_id": 6070
+        },
+        {
+          "name": "Abha",
+          "tm_id": 40039
+        },
+        {
+          "name": "Al-Kholood",
+          "tm_id": 91427
+        },
+        {
+          "name": "Al-Fayha",
+          "tm_id": 50531
+        },
+        {
+          "name": "Al-Riyadh",
+          "tm_id": 31008
+        },
+        {
+          "name": "Al-Faisaly",
+          "tm_id": 28848
+        },
+        {
+          "name": "Al-Hazem",
+          "tm_id": 9131
+        }
+      ],
+      "no_fm": [
+        1169021,
+        315632
+      ]
+    },
+    {
+      "country": "Estados Unidos",
+      "league": "Major League Soccer",
+      "site_label": "Major League Soccer - 26/27",
+      "tm_slug": "major-league-soccer",
+      "tm_code": "MLS1",
+      "squad_season": "auto",
+      "min_squad": 20,
+      "same_club_guard": true,
+      "over_shift": -1,
+      "name_fix": "mangled",
+      "gk_topup": false,
+      "clubs": [
+        {
+          "name": "Inter Miami",
+          "tm_id": 69261
+        },
+        {
+          "name": "New York City FC",
+          "tm_id": 40058
+        },
+        {
+          "name": "Cincinnati",
+          "tm_id": 51772
+        },
+        {
+          "name": "Columbus Crew",
+          "tm_id": 813
+        },
+        {
+          "name": "Vancouver Whitecaps FC",
+          "tm_id": 6321
+        },
+        {
+          "name": "Atlanta",
+          "tm_id": 51663
+        },
+        {
+          "name": "Orlando City",
+          "tm_id": 45604
+        },
+        {
+          "name": "Los Angeles FC",
+          "tm_id": 51828
+        },
+        {
+          "name": "Real Salt Lake",
+          "tm_id": 6643
+        },
+        {
+          "name": "Chicago Fire FC",
+          "tm_id": 432
+        },
+        {
+          "name": "Portland Timbers",
+          "tm_id": 4291
+        },
+        {
+          "name": "Philadelphia Union",
+          "tm_id": 25467
+        },
+        {
+          "name": "Seattle Sounders FC",
+          "tm_id": 9636
+        },
+        {
+          "name": "Colorado Rapids",
+          "tm_id": 1247
+        },
+        {
+          "name": "New York Red Bulls",
+          "tm_id": 623
+        },
+        {
+          "name": "San Diego FC",
+          "tm_id": 114977
+        },
+        {
+          "name": "New England Revolution",
+          "tm_id": 626
+        },
+        {
+          "name": "FC Dallas",
+          "tm_id": 8816
+        },
+        {
+          "name": "Toronto FC",
+          "tm_id": 11141
+        },
+        {
+          "name": "Nashville SC",
+          "tm_id": 63966
+        },
+        {
+          "name": "LA Galaxy",
+          "tm_id": 1061
+        },
+        {
+          "name": "Charlotte FC",
+          "tm_id": 78435
+        },
+        {
+          "name": "St. Louis City SC",
+          "tm_id": 82686
+        },
+        {
+          "name": "Sporting Kansas City",
+          "tm_id": 4284
+        },
+        {
+          "name": "Minnesota United FC",
+          "tm_id": 56089
+        },
+        {
+          "name": "San Jose Earthquakes",
+          "tm_id": 218
+        },
+        {
+          "name": "Austin FC",
+          "tm_id": 72309
+        },
+        {
+          "name": "Houston Dynamo FC",
+          "tm_id": 9168
+        },
+        {
+          "name": "CF Montréal",
+          "tm_id": 4078
+        },
+        {
+          "name": "D.C. United",
+          "tm_id": 2440
+        }
+      ],
+      "no_fm": [
+        530421
+      ]
+    }
+  ],
+  "club_name_variants": {},
+  "tal_ref_cap": {
+    "G": 85,
+    "Z": 82,
+    "L": 82,
+    "V": 84,
+    "M": 84,
+    "PE": 89,
+    "PD": 89,
+    "CA": 89
+  },
+  "tal_pins": {},
+  "_notas": {
+    "leagues": "Liga Saudita (18 clubes) e MLS (30 clubes): as duas estão no FIFA (EA FC), por isso o OVER sai das notas da EA como nas ligas europeias. Todos os clubes da liga no Transfermarkt (26/27 na Arábia Saudita; 2026 na MLS, que é uma liga de calendário).",
+    "over_shift": "-1 ponto de OVER por cima da conversão EA->GoFoot, como nas outras ligas feitas pelo FIFA. Conferido com os 18 jogadores destas ligas que o utilizador já tinha avaliado à mão e que têm nota da EA: o OVER dele fica em média 1 ponto abaixo do da conversão (mediana -1).",
+    "clubs": "Nome com que cada clube entra no site. Onde já havia jogadores avaliados com outra grafia (Atlanta, Cincinnati, Inter Miami, Orlando City, Al-Ittihad...) usa-se essa, para eles contarem para o clube. 'Al-Ahli SFC' mantém o SFC porque 'Al-Ahli' no CSV mistura vários clubes com esse nome.",
+    "gk_topup": "false: não se acrescentam guarda-redes de linhas antigas do FM (só plantel atual do Transfermarkt).",
+    "squad_season": "auto = a época atual de cada clube no Transfermarkt (ver fetch_transfermarkt.py).",
+    "no_fm": "Ids do Transfermarkt que não podem ficar com nenhuma linha do FM, conferidos à mão: Bader Al-Mutairi (Abha) e Abdullah Al-Qahtani (Al-Fayha) tinham sido ligados a outra pessoa com o mesmo nome (outra nacionalidade ou mais velha do que no Transfermarkt) e Daniel (FC Dallas, guarda-redes) a outro Daniel. Entram como jogadores sem FM, com a nota da EA."
+  }
+}

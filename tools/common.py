@@ -222,6 +222,8 @@ NATIONS = {
     "Bahrain": ("bh", "Barém"), "Yemen": ("ye", "Iémen"), "Singapore": ("sg", "Singapura"),
     "Malaysia": ("my", "Malásia"), "Andorra": ("ad", "Andorra"), "Liechtenstein": ("li", "Liechtenstein"),
     "San Marino": ("sm", "São Marino"), "Gibraltar": ("gi", "Gibraltar"), "Fiji": ("fj", "Ilhas Fiji"),
+    "New Caledonia": ("nc", "Nova Caledónia"), "St. Vincent & Grenadinen": ("vc", "S. Vincente"),
+    "St. Vincent & the Grenadines": ("vc", "S. Vincente"),
 }
 ISO_TO_PT = {iso: pt for _en, (iso, pt) in NATIONS.items()}
 PT_TO_ISO = {norm_text(pt): iso for iso, pt in ISO_TO_PT.items()}

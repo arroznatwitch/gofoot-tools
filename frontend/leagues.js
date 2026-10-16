@@ -423,5 +423,26 @@ window.LEAGUES_DATA = {
             "Domagnano", "Faetano", "Fiorentino", "Folgore", "La Fiorita",
             "Libertas", "Murata", "San Giovanni", "San Marino Academy", "Tre Fiori", "Virtus"
         ]
-    }
+    },
+"Arábia Saudita": {
+    "Saudi Pro League - 26/27": [
+        "Al-Hilal", "Al-Ahli SFC", "Al-Qadsiah", "Al-Ittihad", 
+        "Al-Nassr", "Neom SC", "Al-Diriyah", "Al-Shabab", 
+        "Al-Ettifaq", "Al-Taawoun", "Al-Fateh", "Al-Khaleej", 
+        "Abha", "Al-Kholood", "Al-Fayha", "Al-Riyadh", 
+        "Al-Faisaly", "Al-Hazem"
+    ]
+},
+"Estados Unidos": {
+    "Major League Soccer - 26/27": [
+        "Inter Miami", "New York City FC", "Cincinnati", "Columbus Crew", 
+        "Vancouver Whitecaps FC", "Atlanta", "Orlando City", "Los Angeles FC", 
+        "Real Salt Lake", "Chicago Fire FC", "Portland Timbers", "Philadelphia Union", 
+        "Seattle Sounders FC", "Colorado Rapids", "New York Red Bulls", "San Diego FC", 
+        "New England Revolution", "FC Dallas", "Toronto FC", "Nashville SC", 
+        "LA Galaxy", "Charlotte FC", "St. Louis City SC", "Sporting Kansas City", 
+        "Minnesota United FC", "San Jose Earthquakes", "Austin FC", "Houston Dynamo FC", 
+        "CF Montréal", "D.C. United"
+    ]
+}
 };
