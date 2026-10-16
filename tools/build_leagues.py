@@ -220,6 +220,9 @@ for c in tm:
         q["match"] = None
         tm_players.append(q)
 print("TM players:", len(tm_players), "| listed by two clubs (kept with the latest):", dup_players)
+# "no_fm" in a league's config: Transfermarkt ids of players that must not take any FM row (checked by hand: the match
+# was another person with the same name). They go in as players without FM data.
+NO_FM = {pid for lg in CONFIG["leagues"] for pid in lg.get("no_fm", ())}
 
 
 def surname_tokens(name):
@@ -253,7 +256,7 @@ def club_bonus(q, r, aliases):
 
 def candidates(q):
     T = q["toks"]
-    if not T:
+    if not T or q["tm_id"] in NO_FM:
         return []
     cnt = collections.Counter()
     for t in T:
@@ -343,7 +346,7 @@ for k, (i, s) in assigned.items():
 # stage 3: players still unmatched -> look inside the club's own FM rows with a looser, char-level name test
 stage3 = 0
 for q in tm_players:
-    if q["match"] is not None:
+    if q["match"] is not None or q["tm_id"] in NO_FM:
         continue
     pool_clubs = club_pool_names(q["club"])
     best, second = None, None
@@ -686,7 +689,8 @@ def over_from_value(value, age):
 # =============================================================================== leagues without EA ratings ("ratings": "fm")
 # The FM rating of the league's own players is turned into a z-score and put on the OVER distribution asked for in
 # the config (over_target: mean, sd, min, max). Players without an FM rating take the median of players with the same
-# market value, or a reproducible draw around the mean when they have none.
+# market value, or a reproducible draw around the mean when they have none; with "nofm_model": "regression" in the
+# league config they take a regression on market value and age instead (young academy players, whose value is potential).
 FM_LEAGUES = {k: lg for k, lg in LG_CFG.items() if lg.get("ratings") == "fm"}
 FM_TARGET, FM_STATS, FM_VAL = {}, {}, {}
 FM_VAL_EDGES = [0, 5e4, 1e5, 2e5, 3e5, 5e5, 1e6, 1e12]
@@ -713,9 +717,25 @@ def fm_league_tal(lk, grp, over, rating, pot):
     return over + max(0.0, fm_tal(grp, pot) - fm_over(grp, rating)) * FM_TARGET[lk]["sd"] / max(sd, 1.0)
 
 
+FM_REG = {}  # "nofm_model": "regression": players without an FM rating get their OVER from the Transfermarkt value and age
+
+
+def reg_features(value, age):
+    a = clamp(age, 16, 33)
+    return [math.log10(max(value or 25000, 25000)), a, (a - 24) ** 2 / 10.0]
+
+
 def fm_league_nofm(lk, q, age):
     """OVER of a player without an FM rating."""
     T = FM_TARGET[lk]
+    if lk in FM_REG:
+        # value and age -> OVER (what the FM-rated players of the same league show), with the spread of the residuals
+        # put back as a draw that is reproducible per player: they do not all pile up on the same few numbers, and a
+        # 17-year-old with a high value (potential) is not rated like a 27-year-old with the same value
+        w_, b_, sd_ = FM_REG[lk]
+        pred = b_ + sum(wj * xj for wj, xj in zip(w_, reg_features(q["value"], age)))
+        pred += 0.8 * sd_ * clamp(unit_normal(q["key"]), -2.0, 2.0)
+        return int(clamp(G.js_round(pred), T["min"], T["max"]))
     base = None
     if q["value"]:
         vb = max(i for i in range(len(FM_VAL_EDGES) - 1) if FM_VAL_EDGES[i] <= q["value"])
@@ -752,6 +772,19 @@ for lk, lg in FM_LEAGUES.items():
             vb = max(i for i in range(len(FM_VAL_EDGES) - 1) if FM_VAL_EDGES[i] <= q["value"])
             pts[vb].append(fm_league_over(lk, q["grp"] or m.grp or "M", m.rating))
     FM_VAL[lk] = {vb: statistics.median(v) for vb, v in pts.items() if len(v) >= 8}
+    if lg.get("nofm_model") == "regression":
+        X, y = [], []
+        for q in tm_players:
+            m = q["match"]
+            if (q["club"]["country"], q["club"]["league"]) == lk and m is not None and not m.rated and m.rating is not None:
+                X.append(reg_features(q["value"], q["age"] if q["age"] is not None else (m.age + 1 if m.age else 25)))
+                y.append(float(fm_league_over(lk, q["grp"] or m.grp or "M", m.rating)))
+        if len(X) >= 60:
+            w_, b_ = fit_ridge(X, y, 0.05 * len(X))
+            res = [yi - (b_ + sum(wj * xj for wj, xj in zip(w_, xi))) for xi, yi in zip(X, y)]
+            FM_REG[lk] = (w_, b_, statistics.pstdev(res))
+            print(f"{lk[1]}: OVER of players without an FM rating = regression on value and age "
+                  f"(n={len(X)}, R2={1 - statistics.pvariance(res) / statistics.pvariance(y):.2f}, residual sd {FM_REG[lk][2]:.1f})")
 
 
 # =============================================================================== per-player plan

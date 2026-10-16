@@ -127,6 +127,13 @@ window.LEAGUES_DATA = {
             "Gil Vicente", "Famalicão", "Marítimo", "Estoril Praia", "Rio Ave",
             "Alverca SAD", "Casa Pia", "Arouca", "Moreirense", "Nacional da Madeira",
             "Académico de Viseu", "Estrela da Amadora SAD"
+        ],
+        "Liga Portugal 2 - 26/27": [
+            "SL Benfica B", "Sporting CP B", "FC Porto B", "SC União Torreense", 
+            "CD Tondela", "FC Vizela", "Leiria", "GD Chaves", 
+            "AVS SAD", "Farense", "FC Felgueiras 1932", "Feirense", 
+            "Lusitânia FC Lourosa", "Leixões", "Portimonense SAD", "Académica Coimbra", 
+            "Penafiel", "Amarante"
         ]
     },
     "Jamaica": {
