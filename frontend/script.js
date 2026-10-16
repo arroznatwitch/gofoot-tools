@@ -274,7 +274,10 @@ function atualizarPainelPaises() {
 
     const agg = agregarPorClube();
 
-    conteudo.innerHTML = Object.entries(LIGAS_DATA).map(([pais, ligas]) => {
+    // Países por ordem alfabética (A-Z, os acentos não contam). As ligas de cada país ficam na ordem das divisões.
+    const paisesOrdenados = Object.entries(LIGAS_DATA).sort(([a], [b]) => a.localeCompare(b, "pt"));
+
+    conteudo.innerHTML = paisesOrdenados.map(([pais, ligas]) => {
         const seccoesLigas = Object.entries(ligas).map(([nomeLiga, clubes]) => {
             const chave = pais + "||" + nomeLiga;
             let validas = 0, somaOver = 0;
