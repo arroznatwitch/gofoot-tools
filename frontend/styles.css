@@ -137,7 +137,9 @@
 
         table {
             width: 100%;
-            border-collapse: collapse;
+            /* separate (e não collapse) para as colunas fixas à esquerda levarem as bordas consigo ao fazer scroll */
+            border-collapse: separate;
+            border-spacing: 0;
             text-align: left;
             font-size: 14px;
         }
@@ -208,6 +210,34 @@
         .btn-delete:hover { color: #f85149; }
         .btn-edit:hover { color: #58a6ff; }
 
+        /* Botão "Editar" de cada jogador. Fica na 1ª coluna e o nome também, ambos fixos à esquerda:
+           a tabela é mais larga do que o ecrã, por isso sem isto o botão só aparecia ao fazer scroll até ao fim. */
+        .btn-editar {
+            background-color: rgba(88, 166, 255, 0.1);
+            border: 1px solid rgba(88, 166, 255, 0.4);
+            color: #58a6ff;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 5px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: 0.2s;
+        }
+        .btn-editar:hover { background-color: #1f6feb; border-color: #1f6feb; color: white; }
+
+        .col-acao, .col-nome {
+            position: sticky;
+            z-index: 2;
+            background-color: #161b22;
+        }
+        .col-acao { left: 0; width: 96px; min-width: 96px; }
+        .col-nome { left: 96px; width: 150px; min-width: 150px; max-width: 150px; box-shadow: 1px 0 0 #30363d; }
+        @media (max-width: 720px) {
+            /* em ecrãs estreitos só o botão fica fixo: o nome ocuparia demasiado espaço */
+            .col-nome { position: static; box-shadow: none; }
+        }
+
         .pagination-bar {
             display: flex;
             align-items: center;
@@ -248,7 +278,7 @@
             border-radius: 12px;
             padding: 24px;
             width: 100%;
-            max-width: 440px;
+            max-width: 520px;
             max-height: 85vh;
             overflow-y: auto;
             box-shadow: 0 12px 32px rgba(0, 0, 0, 0.7);
@@ -289,7 +319,21 @@
 
         .form-control:focus { border-color: #58a6ff; }
 
-        .form-row { display: flex; gap: 10px; }
+        .campo-id { font-family: Consolas, 'Courier New', monospace; font-size: 13px; color: #8b949e; cursor: not-allowed; }
+        .label-nota { color: #6e7681; font-weight: 400; }
+        .btn-calc {
+            background: none;
+            border: none;
+            color: #58a6ff;
+            font-size: 11px;
+            cursor: pointer;
+            padding: 0 0 0 4px;
+        }
+        .btn-calc:hover { text-decoration: underline; }
+        .dica-modal { font-size: 12px; color: #8b949e; line-height: 1.5; margin: -4px 0 4px; }
+        .modal-actions .btn-repor { margin-right: auto; }
+
+        .form-row { display: flex; gap: 10px; align-items: flex-end; } /* flex-end: com rótulos que quebram em 2 linhas os campos ficam alinhados */
         .form-row .form-group { flex: 1; }
 
         .modal-actions {

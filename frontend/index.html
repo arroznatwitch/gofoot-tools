@@ -57,7 +57,8 @@
                     <table>
                         <thead>
                             <tr>
-                                <th class="th-sort" data-coluna="nome" onclick="ordenarPor('nome')">Jogador</th>
+                                <th class="col-acao"></th>
+                                <th class="th-sort col-nome" data-coluna="nome" onclick="ordenarPor('nome')">Jogador</th>
                                 <th class="th-sort" data-coluna="nacao" onclick="ordenarPor('nacao')">País</th>
                                 <th class="th-sort" data-coluna="clube" onclick="ordenarPor('clube')">Clube</th>
                                 <th class="th-sort" data-coluna="idade" onclick="ordenarPor('idade')">Idade</th>
@@ -85,7 +86,8 @@
                     <table>
                         <thead>
                             <tr>
-                                <th class="th-sort" data-coluna="nome" onclick="ordenarPor('nome')">Jogador</th>
+                                <th class="col-acao"></th>
+                                <th class="th-sort col-nome" data-coluna="nome" onclick="ordenarPor('nome')">Jogador</th>
                                 <th class="th-sort" data-coluna="nacao" onclick="ordenarPor('nacao')">País</th>
                                 <th class="th-sort" data-coluna="clube" onclick="ordenarPor('clube')">Clube</th>
                                 <th class="th-sort" data-coluna="idade" onclick="ordenarPor('idade')">Idade</th>
@@ -246,58 +248,72 @@
         <div class="modal-content">
             <h3 id="modalTitulo">Adicionar Novo Jogador</h3>
             <form id="playerForm" onsubmit="salvarJogador(event)">
+                <div class="form-group">
+                    <label>ID <span class="label-nota">— único, não pode ser alterado</span></label>
+                    <input type="text" id="addId" class="form-control campo-id" placeholder="gerado ao guardar" readonly disabled>
+                </div>
                 <div class="form-group"><label>Nome</label><input type="text" id="addNome" class="form-control" required></div>
                 <div class="form-group">
                     <label>Nação</label>
-                    <select id="addNat" class="form-control">
-                        <option value="">A carregar países...</option>
-                    </select>
+                    <input type="text" id="addNat" class="form-control" list="listaNacoes" autocomplete="off" placeholder="Ex: Portugal">
+                    <datalist id="listaNacoes"></datalist>
                 </div>
-                <div class="form-group"><label>Clube</label><input type="text" id="addClube" class="form-control"></div>
+                <div class="form-group">
+                    <label>Clube</label>
+                    <input type="text" id="addClube" class="form-control" list="listaClubes" autocomplete="off">
+                    <datalist id="listaClubes"></datalist>
+                </div>
                 <div class="form-row">
-                    <div class="form-group"><label>Idade</label><input type="number" id="addIdade" class="form-control" required></div>
+                    <div class="form-group"><label>Idade</label><input type="number" id="addIdade" class="form-control" min="14" max="55" required oninput="atualizarCalculosDoModal()"></div>
                     <div class="form-group">
                         <label>Pé Preferido</label>
                         <select id="addPe" class="form-control" required>
                             <option value="Direito">Direito</option>
                             <option value="Esquerdo">Esquerdo</option>
                             <option value="Ambidestro">Ambidestro</option>
+                            <option value="-">— (sem pé definido)</option>
                         </select>
                     </div>
                 </div>
-                <div class="form-group"><label>Posições</label><input type="text" id="addPos" class="form-control" placeholder="Ex: G, L, Z, V, M, CA, PE e PD" required oninput="atualizarCamposPorPosicao()"></div>
+                <div class="form-group"><label>Posições</label><input type="text" id="addPos" class="form-control" placeholder="Ex: G, L, Z, V, M, CA, PE e PD" required oninput="aoMudarPosicao()"></div>
 
                 <div id="camposLinha">
                     <div class="form-row">
-                        <div class="form-group"><label>Técnica (1 a 99)</label><input type="number" id="addTec" class="form-control" min="1" max="99"></div>
-                        <div class="form-group"><label>Ataque (1 a 99)</label><input type="number" id="addAta" class="form-control" min="1" max="99"></div>
+                        <div class="form-group"><label>Técnica (1 a 99)</label><input type="number" id="addTec" class="form-control" min="1" max="99" oninput="atualizarCalculosDoModal()"></div>
+                        <div class="form-group"><label>Ataque (1 a 99)</label><input type="number" id="addAta" class="form-control" min="1" max="99" oninput="atualizarCalculosDoModal()"></div>
                     </div>
                     <div class="form-row">
-                        <div class="form-group"><label>Defesa (1 a 99)</label><input type="number" id="addDef" class="form-control" min="1" max="99"></div>
-                        <div class="form-group"><label>Físico (1 a 99)</label><input type="number" id="addFis" class="form-control" min="1" max="99"></div>
+                        <div class="form-group"><label>Defesa (1 a 99)</label><input type="number" id="addDef" class="form-control" min="1" max="99" oninput="atualizarCalculosDoModal()"></div>
+                        <div class="form-group"><label>Físico (1 a 99)</label><input type="number" id="addFis" class="form-control" min="1" max="99" oninput="atualizarCalculosDoModal()"></div>
                     </div>
                 </div>
 
                 <div id="camposGoleiro" style="display:none;">
                     <div class="form-row">
-                        <div class="form-group"><label>Reflexos (1 a 99)</label><input type="number" id="addRef" class="form-control" min="1" max="99"></div>
-                        <div class="form-group"><label>Posicionamento (1 a 99)</label><input type="number" id="addPosGk" class="form-control" min="1" max="99"></div>
+                        <div class="form-group"><label>Reflexos (1 a 99)</label><input type="number" id="addRef" class="form-control" min="1" max="99" oninput="atualizarCalculosDoModal()"></div>
+                        <div class="form-group"><label>Posicionamento (1 a 99)</label><input type="number" id="addPosGk" class="form-control" min="1" max="99" oninput="atualizarCalculosDoModal()"></div>
                     </div>
                     <div class="form-row">
-                        <div class="form-group"><label>Jogo Aéreo (1 a 99)</label><input type="number" id="addAer" class="form-control" min="1" max="99"></div>
-                        <div class="form-group"><label>Saída de Bola (1 a 99)</label><input type="number" id="addSai" class="form-control" min="1" max="99"></div>
+                        <div class="form-group"><label>Jogo Aéreo (1 a 99)</label><input type="number" id="addAer" class="form-control" min="1" max="99" oninput="atualizarCalculosDoModal()"></div>
+                        <div class="form-group"><label>Saída de Bola (1 a 99)</label><input type="number" id="addSai" class="form-control" min="1" max="99" oninput="atualizarCalculosDoModal()"></div>
                     </div>
                 </div>
 
                 <div class="form-row">
-                    <div class="form-group"><label>Mental (1 a 99)</label><input type="number" id="addMen" class="form-control" min="1" max="99" required></div>
-                    <div class="form-group"><label>Talento / Potencial (1 a 99)</label><input type="number" id="addTalento" class="form-control" min="1" max="99" required></div>
+                    <div class="form-group"><label>Mental (1 a 99)</label><input type="number" id="addMen" class="form-control" min="1" max="99" required oninput="atualizarCalculosDoModal()"></div>
+                    <div class="form-group"><label>Talento / Potencial (1 a 99)</label><input type="number" id="addTalento" class="form-control" min="1" max="99" required oninput="atualizarCalculosDoModal()"></div>
                 </div>
-                <div class="form-group"><label>Valor de Mercado (€) <span style="color:#8b949e; font-weight:400;">— gerado automaticamente</span></label><input type="number" id="addValor" class="form-control" min="0" placeholder="Gerado após os atributos" readonly disabled></div>
+                <div class="form-row">
+                    <div class="form-group"><label>Geral (OVER)</label><input type="number" id="addOver" class="form-control" min="1" max="99" oninput="marcarOverEditado()" onchange="aplicarOverDigitado()"></div>
+                    <div class="form-group"><label>Valor (€) <button type="button" class="btn-calc" onclick="recalcularValorNoModal()" title="Calcular pela fórmula">↻ auto</button></label><input type="number" id="addValor" class="form-control" min="0" step="1" oninput="aoEditarValor()"></div>
+                    <div class="form-group"><label>Salário (€) <button type="button" class="btn-calc" onclick="recalcularSalarioNoModal()" title="Calcular pela fórmula">↻ auto</button></label><input type="number" id="addSal" class="form-control" min="0" step="1" oninput="aoEditarSalario()"></div>
+                </div>
+                <p class="dica-modal">Se mudares o Geral (OVER), os atributos são ajustados para o dar. O valor e o salário seguem a fórmula até os escreveres à mão (<b>↻ auto</b> volta à fórmula).</p>
 
                 <input type="hidden" id="editandoId" value="">
 
                 <div class="modal-actions">
+                    <button type="button" class="btn btn-repor" id="btnReporModal" onclick="reporJogadorOriginal()" title="Volta ao que veio da base e apaga as alterações guardadas" hidden>↺ Repor original</button>
                     <button type="button" class="btn" onclick="fecharModal()">Cancelar</button>
                     <button type="submit" class="btn btn-primary" id="btnSalvarModal">Salvar Jogador</button>
                 </div>

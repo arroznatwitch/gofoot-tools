@@ -379,9 +379,13 @@ let proximoId = 1;
 
 const CHAVE_EDITS = "gofootEdits";
 const CHAVE_MANUAIS = "gofootManualPlayers";
+// Edições feitas com o botão "Editar": por id do jogador, só os campos que mudaram em relação à base.
+const CHAVE_EDICOES = "gofootEditsV2";
 
 let mapaEdicoes = {};
 try { mapaEdicoes = JSON.parse(localStorage.getItem(CHAVE_EDITS) || "{}"); } catch (e) { mapaEdicoes = {}; }
+let mapaEdicoesPorId = {};
+try { mapaEdicoesPorId = JSON.parse(localStorage.getItem(CHAVE_EDICOES) || "{}"); } catch (e) { mapaEdicoesPorId = {}; }
 
 const TAG_CATEGORIA = {
     GK: "gk",
@@ -443,6 +447,11 @@ document.addEventListener("DOMContentLoaded", () => {
         clearTimeout(debounceTimer);
         debounceTimer = setTimeout(aplicarFiltros, 250);
     });
+
+    // Esc fecha o modal de edição.
+    document.addEventListener("keydown", e => {
+        if (e.key === "Escape" && document.getElementById("playerModal").style.display === "flex") fecharModal();
+    });
 });
 
 function carregarJogadoresManuais() {
@@ -460,30 +469,124 @@ function salvarJogadoresManuaisNoStorage() {
     localStorage.setItem(CHAVE_MANUAIS, JSON.stringify(manuais));
 }
 
-function salvarEdicaoNoStorage(j) {
-    mapaEdicoes[gerarIdentidade(j)] = {
-        tec: j.tec, ata: j.ata, def: j.def, fis: j.fis, men: j.men,
-        ref: j.ref, pos_gk: j.pos_gk, aer: j.aer, sai: j.sai,
-        tal: j.tal, pe: j.pe, v: j.v
-    };
-    localStorage.setItem(CHAVE_EDITS, JSON.stringify(mapaEdicoes));
+// Tudo o que o botão "Editar" pode mudar num jogador. Só o id fica de fora (o OVER sai dos atributos).
+const CAMPOS_EDITAVEIS = ["n", "nat", "c", "a", "pe", "p", "tec", "ata", "def", "fis", "men", "ref", "pos_gk", "aer", "sai", "tal", "v", "sal"];
+
+function copiarCamposEditaveis(j) {
+    const copia = {};
+    CAMPOS_EDITAVEIS.forEach(c => { copia[c] = j[c]; });
+    return copia;
+}
+
+// 21 e "21", ou null e "", contam como iguais: só interessa o que o utilizador de facto mudou.
+function mesmoValor(a, b) {
+    const norm = x => (x === undefined || x === null || x === "") ? null : x;
+    a = norm(a); b = norm(b);
+    if (a === b) return true;
+    if (a === null || b === null) return false;
+    return String(a) === String(b);
+}
+
+function gravarNoStorage(chave, valor) {
+    try {
+        localStorage.setItem(chave, JSON.stringify(valor));
+    } catch (e) {
+        alert("Não foi possível guardar no browser (armazenamento cheio ou bloqueado). A alteração fica só nesta sessão.");
+    }
+}
+
+// Guarda só os campos que diferem da base (j._original), por id: se a base for actualizada, o que o utilizador não
+// tocou acompanha a actualização. A edição antiga (por nome|nação|clube|idade) deixa de valer, esta substitui-a.
+function guardarEdicaoNoStorage(j) {
+    const base = j._original;
+    if (!base) return;
+    const alterados = {};
+    CAMPOS_EDITAVEIS.forEach(c => { if (!mesmoValor(j[c], base[c])) alterados[c] = j[c] === undefined ? null : j[c]; });
+
+    const chaveAntiga = gerarIdentidade(base);
+    if (mapaEdicoes[chaveAntiga]) {
+        delete mapaEdicoes[chaveAntiga];
+        gravarNoStorage(CHAVE_EDITS, mapaEdicoes);
+    }
+    if (Object.keys(alterados).length) {
+        mapaEdicoesPorId[j.id] = alterados;
+    } else {
+        delete mapaEdicoesPorId[j.id];
+        delete j._original; // voltou ao que veio da base: já não há edição
+    }
+    gravarNoStorage(CHAVE_EDICOES, mapaEdicoesPorId);
 }
 
 function aplicarEdicoesSalvas(j) {
     const salva = mapaEdicoes[gerarIdentidade(j)];
+    const porId = j.id ? mapaEdicoesPorId[j.id] : null;
+    if (!salva && !porId) return j;
+
+    j._original = copiarCamposEditaveis(j); // a base antes de qualquer edição: serve para repor e para guardar só o que mudou
     if (salva) {
         j.tec = salva.tec; j.ata = salva.ata; j.def = salva.def;
         j.fis = salva.fis; j.men = salva.men; j.tal = salva.tal;
         j.ref = salva.ref; j.pos_gk = salva.pos_gk; j.aer = salva.aer; j.sai = salva.sai;
         j.pe = salva.pe || "-"; j.v = salva.v || "-";
     }
+    if (porId) {
+        Object.assign(j, porId);
+        sincronizarCsvRaw(j, Object.keys(porId));
+    }
     return j;
+}
+
+// A linha original do .csv (usada pelos botões do Painel++ que descarregam o .csv) acompanha o jogador editado.
+// Só se escrevem as colunas dos campos que mudaram; o resto fica exactamente como veio.
+const COLUNA_CSV = { nat: "Nation", c: "Club", a: "Age", tal: "TAL", v: "Valor", sal: "Salario",
+                     tec: "TEC", ata: "ATA", def: "DEF", fis: "FIS", men: "MEN", ref: "REF", pos_gk: "POS_GK", aer: "AER", sai: "SAI" };
+function sincronizarCsvRaw(j, campos) {
+    const r = j._csvRaw;
+    if (!r) return;
+    const texto = v => (v === null || v === undefined || v === "-") ? "" : v;
+    campos.forEach(c => {
+        if (c === "n") r.Name = reverterNome(j.n);
+        else if (c === "pe") r.Pe = PE_LETRA[j.pe] || "";
+        else if (c === "p") r.Posicao = posicaoGrupo(j) || j.p;
+        else if (COLUNA_CSV[c]) r[COLUNA_CSV[c]] = texto(j[c]);
+    });
+    if (campos.some(c => c === "p" || ["tec", "ata", "def", "fis", "men", "ref", "pos_gk", "aer", "sai"].includes(c))) {
+        const over = calcularOverallDinamico(j);
+        r.OVER = over === null ? "" : over;
+    }
+}
+
+// Sugestões dos campos Nação e Clube do modal (são texto livre; a lista só ajuda a acertar na grafia).
+function preencherDatalist(id, valores) {
+    const lista = document.getElementById(id);
+    if (!lista) return;
+    lista.replaceChildren(...valores.map(v => { const o = document.createElement("option"); o.value = v; return o; }));
+}
+
+// Nações: as que já existem na base (grafia do FM) e os nomes em português; a API só acrescenta o que falta.
+let nacoesDaApi = [];
+function popularListaNacoes() {
+    const nomes = new Map(); // minúsculas -> grafia (a da base ganha à da API)
+    const juntar = n => { if (n && n !== "-" && !nomes.has(n.toLowerCase())) nomes.set(n.toLowerCase(), n); };
+    listaJogadores.forEach(j => juntar(j.nat));
+    Object.values(NOME_POR_ISO).forEach(juntar);
+    nacoesDaApi.forEach(juntar);
+    preencherDatalist("listaNacoes", [...nomes.values()].sort((a, b) => a.localeCompare(b, "pt")));
+}
+
+// Clubes: os do leagues.js (grafia certa para contarem na aba Ligas) e os que já existem na base.
+function popularListaClubes() {
+    const nomes = new Set();
+    Object.values(LIGAS_DATA).forEach(ligas => Object.values(ligas).forEach(clubes => clubes.forEach(c => nomes.add(c))));
+    listaJogadores.forEach(j => { if (j.c && j.c !== "-") nomes.add(j.c); });
+    preencherDatalist("listaClubes", [...nomes].sort((a, b) => a.localeCompare(b, "pt")));
 }
 
 // Países via API countries.dev — gratuita e sem chave (o restcountries.com
 // descontinuou todas as versões anteriores à v5, que agora exige conta+chave).
+// Sem a API, o campo Nação continua a funcionar com as nações que já estão na base.
 function carregarPaises() {
-    const select = document.getElementById("addNat");
+    popularListaNacoes();
     fetch("https://countries.dev/countries?fields=name,translations&full=true")
         .then(r => { if (!r.ok) throw new Error("Falha na API"); return r.json(); })
         .then(dados => {
@@ -500,26 +603,14 @@ function carregarPaises() {
             // A API só lista estados soberanos, então as nações constituintes do
             // Reino Unido (comuns nos jogos de futebol) não aparecem — adiciona-as à mão.
             nomes.push("Escócia", "País de Gales", "Irlanda do Norte", "Inglaterra");
-
-            nomes.sort((a, b) => a.localeCompare(b, "pt"));
-            select.innerHTML = '<option value="">Selecione um país</option>' +
-                nomes.map(n => `<option value="${n}">${n}</option>`).join("");
+            nacoesDaApi = nomes;
+            popularListaNacoes();
         })
-        .catch(() => {
-            select.innerHTML = '<option value="">API indisponível — escreva abaixo</option>';
-            const input = document.createElement("input");
-            input.type = "text"; input.id = "addNatFallback"; input.className = "form-control";
-            input.placeholder = "Digite a nação manualmente";
-            input.style.marginTop = "8px";
-            select.after(input);
-        });
+        .catch(() => { /* sem API ficam as nações da base */ });
 }
 
 function obterNacaoSelecionada() {
-    const select = document.getElementById("addNat");
-    const fallback = document.getElementById("addNatFallback");
-    if (fallback && fallback.value.trim()) return fallback.value.trim();
-    return select.value || "-";
+    return document.getElementById("addNat").value.trim() || "-";
 }
 
 function obterClasseCor(nota) {
@@ -890,7 +981,8 @@ function alternarFiltroStatus(idClicado) {
     aplicarFiltros();
 }
 
-function aplicarFiltros() {
+// manterPagina === true (ao guardar uma edição) deixa a tabela na página em que estava, em vez de voltar à primeira.
+function aplicarFiltros(manterPagina) {
     const termo = document.getElementById("searchInput").value.toLowerCase().trim();
     const soIncompletos = document.getElementById("soIncompletos").checked;
     const soCompletos = document.getElementById("soCompletos").checked;
@@ -906,7 +998,9 @@ function aplicarFiltros() {
                    j._cLower.includes(termo) || j._pLower.includes(termo);
         });
     }
-    paginaAtual = 1;
+    paginaAtual = manterPagina === true
+        ? Math.min(paginaAtual, Math.max(1, Math.ceil(listaFiltrada.length / TAMANHO_PAGINA)))
+        : 1;
     renderizarPagina();
     atualizarEstatisticas();
     atualizarPainelPaises();
@@ -1015,6 +1109,11 @@ function formatarValorMercado(v) {
     return n + "€";
 }
 
+// Os campos de texto são editáveis à mão: escapam-se antes de irem para o innerHTML.
+function esc(texto) {
+    return String(texto ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+}
+
 function linhaTabela(j) {
     j.ov = calcularOverallDinamico(j);
     const statusClass = j.completo ? "status-completo" : "status-incompleto";
@@ -1024,14 +1123,16 @@ function linhaTabela(j) {
     const col2 = ehGoleiro ? j.pos_gk : j.ata;
     const col3 = ehGoleiro ? j.aer : j.def;
     const col4 = ehGoleiro ? j.sai : j.fis;
+    // O botão Editar vai na 1ª coluna, fixa ao fazer scroll para o lado (a tabela é mais larga do que o ecrã).
     return `
         <tr>
-            <td style="font-weight: 600;">${j.n || "-"}</td>
-            <td style="color: #8b949e;">${j.nat && j.nat !== "-" ? j.nat.toUpperCase() : "-"}</td>
-            <td>${j.c || "-"}</td>
+            <td class="col-acao"><button class="btn-editar" onclick="abrirModal(${j._id})" title="Editar jogador (tudo menos o ID)">✎ Editar</button></td>
+            <td class="col-nome" style="font-weight: 600;">${esc(j.n) || "-"}</td>
+            <td style="color: #8b949e;">${j.nat && j.nat !== "-" ? esc(j.nat.toUpperCase()) : "-"}</td>
+            <td>${esc(j.c) || "-"}</td>
             <td>${j.a || "-"}</td>
-            <td style="color: #8b949e; font-size: 13px;">${j.pe || "-"}</td>
-            <td style="text-transform: uppercase; font-size: 13px; color: #8b949e;">${posicaoGrupo(j) || j.p || "-"}</td>
+            <td style="color: #8b949e; font-size: 13px;">${esc(j.pe) || "-"}</td>
+            <td style="text-transform: uppercase; font-size: 13px; color: #8b949e;">${esc(posicaoGrupo(j) || j.p) || "-"}</td>
             <td class="badge-score ${obterClasseCor(j.ov)}">${j.ov || "-"}</td>
             <td class="badge-score ${obterClasseCor(col1)}">${col1 || "-"}</td>
             <td class="badge-score ${obterClasseCor(col2)}">${col2 || "-"}</td>
@@ -1043,7 +1144,6 @@ function linhaTabela(j) {
             <td style="font-weight: 500; color: #3fb950;">${formatarValorMercado(j.sal)}</td>
             <td><span class="status-badge ${statusClass}">${statusTxt}</span></td>
             <td>
-                <button class="btn-edit" onclick="abrirModal(${j._id})" title="Editar">✎</button>
                 <button class="btn-delete" onclick="excluirJogador(${j._id})" title="Excluir">✕</button>
             </td>
         </tr>`;
@@ -1063,7 +1163,7 @@ function renderizarTabela(dados) {
 
     if (dados.length === 0) {
         wrapLinha.style.display = "block";
-        tbodyLinha.innerHTML = `<tr><td colspan="17" style="text-align:center; color:#8b949e; padding: 24px;">Nenhum jogador encontrado.</td></tr>`;
+        tbodyLinha.innerHTML = `<tr><td colspan="18" style="text-align:center; color:#8b949e; padding: 24px;">Nenhum jogador encontrado.</td></tr>`;
         return;
     }
 
@@ -1071,11 +1171,24 @@ function renderizarTabela(dados) {
     tbodyGk.innerHTML = goleiros.map(linhaTabela).join("");
 }
 
+// Estado do modal: o valor e o salário seguem a fórmula até serem escritos à mão (o "↻ auto" volta à fórmula).
+let valorEditadoAMao = false;
+let salarioEditadoAMao = false;
+let overEditadoAMao = false;
+let chaveCalculoModal = "";
+
+const PES_VALIDOS = ["Direito", "Esquerdo", "Ambidestro", "-"];
+
 function abrirModal(id) {
     const modal = document.getElementById("playerModal");
     const titulo = document.getElementById("modalTitulo");
     const btnSalvar = document.getElementById("btnSalvarModal");
+    const btnRepor = document.getElementById("btnReporModal");
     document.getElementById("editandoId").value = "";
+    btnRepor.hidden = true;
+    valorEditadoAMao = false; salarioEditadoAMao = false; overEditadoAMao = false;
+    popularListaNacoes();
+    popularListaClubes();
 
     if (id) {
         const j = listaJogadores.find(p => p._id === id);
@@ -1083,10 +1196,12 @@ function abrirModal(id) {
         document.getElementById("editandoId").value = id;
         titulo.textContent = "Editar Jogador";
         btnSalvar.textContent = "Guardar Alterações";
+        document.getElementById("addId").value = j.id || ""; // só para ver: o ID não se altera
         document.getElementById("addNome").value = j.n || "";
+        document.getElementById("addNat").value = j.nat && j.nat !== "-" ? j.nat : "";
         document.getElementById("addClube").value = j.c && j.c !== "-" ? j.c : "";
         document.getElementById("addIdade").value = j.a || "";
-        document.getElementById("addPe").value = j.pe && j.pe !== "-" ? j.pe : "Direito";
+        document.getElementById("addPe").value = PES_VALIDOS.includes(j.pe) ? j.pe : "-";
         document.getElementById("addPos").value = j.p || "";
         document.getElementById("addTec").value = j.tec || "";
         document.getElementById("addAta").value = j.ata || "";
@@ -1099,21 +1214,18 @@ function abrirModal(id) {
         document.getElementById("addSai").value = j.sai || "";
         document.getElementById("addTalento").value = j.tal || "";
         document.getElementById("addValor").value = j.v && j.v !== "-" ? j.v : "";
-
-        const select = document.getElementById("addNat");
-        const fallback = document.getElementById("addNatFallback");
-        if ([...select.options].some(o => o.value === j.nat)) {
-            select.value = j.nat;
-        } else if (fallback) {
-            fallback.value = j.nat && j.nat !== "-" ? j.nat : "";
-        }
+        document.getElementById("addSal").value = j.sal !== null && j.sal !== undefined && j.sal !== "" ? j.sal : "";
+        btnRepor.hidden = !(j._original && !j._manual);
         atualizarCamposPorPosicao();
+        const over = calcularOverallDinamico(j);
+        document.getElementById("addOver").value = over === null ? "" : over;
     } else {
         titulo.textContent = "Adicionar Novo Jogador";
         btnSalvar.textContent = "Salvar Jogador";
         document.getElementById("playerForm").reset();
         atualizarCamposPorPosicao();
     }
+    chaveCalculoModal = chaveDeCalculo(lerJogadorDoFormulario());
 
     modal.style.display = "flex";
 }
@@ -1125,56 +1237,189 @@ function atualizarCamposPorPosicao() {
     document.getElementById("camposGoleiro").style.display = ehGoleiro ? "block" : "none";
 }
 
+function aoMudarPosicao() {
+    atualizarCamposPorPosicao();
+    atualizarCalculosDoModal();
+}
+
 function fecharModal() {
     document.getElementById("playerModal").style.display = "none";
     document.getElementById("playerForm").reset();
 }
 
-function salvarJogador(e) {
-    e.preventDefault();
-    const idEditando = parseInt(document.getElementById("editandoId").value) || null;
-
-    const dadosForm = {
-        n: document.getElementById("addNome").value,
+// Lê o formulário como um jogador (sem mexer em nada): serve para mostrar o OVER, o valor e o salário enquanto se edita.
+function lerJogadorDoFormulario() {
+    const inteiro = id => { const n = parseInt(document.getElementById(id).value); return isNaN(n) ? null : n; };
+    const j = {
+        n: document.getElementById("addNome").value.trim(),
         nat: obterNacaoSelecionada(),
         c: document.getElementById("addClube").value.trim() || "-",
-        a: parseInt(document.getElementById("addIdade").value),
+        a: inteiro("addIdade"),
         pe: document.getElementById("addPe").value,
-        p: document.getElementById("addPos").value.toLowerCase().replace(/\s/g, ""),
-        men: parseInt(document.getElementById("addMen").value),
-        tal: parseInt(document.getElementById("addTalento").value) || null
+        p: document.getElementById("addPos").value.replace(/\s/g, "").toUpperCase(),
+        men: inteiro("addMen"),
+        tal: inteiro("addTalento"),
     };
-
-    const ehGoleiro = posicaoGrupo(dadosForm) === "G";
-    if (ehGoleiro) {
-        dadosForm.ref = parseInt(document.getElementById("addRef").value) || null;
-        dadosForm.pos_gk = parseInt(document.getElementById("addPosGk").value) || null;
-        dadosForm.aer = parseInt(document.getElementById("addAer").value) || null;
-        dadosForm.sai = parseInt(document.getElementById("addSai").value) || null;
-        dadosForm.tec = null; dadosForm.ata = null; dadosForm.def = null; dadosForm.fis = null;
+    if (posicaoGrupo(j) === "G") {
+        j.ref = inteiro("addRef"); j.pos_gk = inteiro("addPosGk"); j.aer = inteiro("addAer"); j.sai = inteiro("addSai");
+        j.tec = null; j.ata = null; j.def = null; j.fis = null;
     } else {
-        dadosForm.tec = parseInt(document.getElementById("addTec").value) || null;
-        dadosForm.ata = parseInt(document.getElementById("addAta").value) || null;
-        dadosForm.def = parseInt(document.getElementById("addDef").value) || null;
-        dadosForm.fis = parseInt(document.getElementById("addFis").value) || null;
-        dadosForm.ref = null; dadosForm.pos_gk = null; dadosForm.aer = null; dadosForm.sai = null;
+        j.tec = inteiro("addTec"); j.ata = inteiro("addAta"); j.def = inteiro("addDef"); j.fis = inteiro("addFis");
+        j.ref = null; j.pos_gk = null; j.aer = null; j.sai = null;
+    }
+    return j;
+}
+
+// O que entra na fórmula do valor (e, via OVER, do salário): se isto não mudou, não se mexe no valor nem no salário.
+function chaveDeCalculo(j) {
+    return [calcularOverallDinamico(j), j.tal, j.a, posicaoGrupo(j) === "G", j.fis, j.men].join("|");
+}
+
+function valorPelaFormula(j) {
+    if (j.a === null || j.tal === null) return null; // sem idade ou talento a fórmula não diz nada
+    return calcularValorMercado(j);
+}
+
+// Corre a cada mudança de atributo, idade, talento ou posição: mostra o OVER e, se o que entra na fórmula mudou,
+// refaz o valor e o salário (a não ser que tenham sido escritos à mão).
+function atualizarCalculosDoModal() {
+    const j = lerJogadorDoFormulario();
+    const over = calcularOverallDinamico(j);
+    document.getElementById("addOver").value = over === null ? "" : over;
+    overEditadoAMao = false;
+
+    const chave = chaveDeCalculo(j);
+    if (chave === chaveCalculoModal) return;
+    chaveCalculoModal = chave;
+    if (!valorEditadoAMao) {
+        const v = valorPelaFormula(j);
+        document.getElementById("addValor").value = v === null ? "" : v;
+    }
+    recalcularSalarioSeAutomatico(j);
+}
+
+function recalcularSalarioSeAutomatico(j) {
+    if (salarioEditadoAMao) return;
+    const s = calcularSalario({ ...(j || lerJogadorDoFormulario()), v: document.getElementById("addValor").value });
+    document.getElementById("addSal").value = s === null ? "" : s;
+}
+
+function aoEditarValor() {
+    valorEditadoAMao = true;
+    recalcularSalarioSeAutomatico();
+}
+
+function aoEditarSalario() {
+    salarioEditadoAMao = true;
+}
+
+function recalcularValorNoModal() {
+    valorEditadoAMao = false;
+    const v = valorPelaFormula(lerJogadorDoFormulario());
+    document.getElementById("addValor").value = v === null ? "" : v;
+    recalcularSalarioSeAutomatico();
+}
+
+function recalcularSalarioNoModal() {
+    salarioEditadoAMao = false;
+    recalcularSalarioSeAutomatico();
+}
+
+// Para o OVER escrito no modal: desloca os 5 atributos que contam (mantendo a diferença entre eles) até a fórmula dar
+// exactamente esse OVER. Onde falta um atributo, arranca-se do próprio OVER.
+const CAMPO_DO_PESO = { REF: "ref", POS: "pos_gk", AER: "aer", SAI: "sai", TEC: "tec", ATA: "ata", DEF: "def", FIS: "fis", MEN: "men" };
+const ID_DO_CAMPO = { tec: "addTec", ata: "addAta", def: "addDef", fis: "addFis", men: "addMen", ref: "addRef", pos_gk: "addPosGk", aer: "addAer", sai: "addSai" };
+
+function atributosParaOver(grupo, atuais, alvo) {
+    const pesos = OVER_WEIGHTS[grupo];
+    const campos = Object.keys(pesos).map(k => CAMPO_DO_PESO[k]);
+    const w = Object.values(pesos);
+    const limitar = x => Math.max(1, Math.min(99, x));
+    const over = vs => Math.round(vs.reduce((soma, v, i) => soma + v * w[i], 0));
+    const base = campos.map(c => { const v = parseInt(atuais[c]); return isNaN(v) ? alvo : limitar(v); });
+
+    // 1) o mesmo deslocamento em todos (o mais pequeno que chegue)
+    let melhor = base, melhorDif = Math.abs(over(base) - alvo);
+    for (let k = 1; k <= 98 && melhorDif > 0; k++) {
+        for (const d of [k, -k]) {
+            const cand = base.map(v => limitar(v + d));
+            const dif = Math.abs(over(cand) - alvo);
+            if (dif < melhorDif) { melhor = cand; melhorDif = dif; }
+        }
+    }
+    // 2) se algum atributo bateu em 1 ou 99 e ainda falta, afina de 1 em 1 no de maior peso que ainda pode mexer
+    let vs = melhor;
+    for (let i = 0; i < 400 && over(vs) !== alvo; i++) {
+        const sobe = over(vs) < alvo;
+        let escolhido = -1;
+        vs.forEach((v, k) => { if ((sobe ? v < 99 : v > 1) && (escolhido === -1 || w[k] > w[escolhido])) escolhido = k; });
+        if (escolhido === -1) break;
+        vs = vs.map((v, k) => (k === escolhido ? v + (sobe ? 1 : -1) : v));
+    }
+    const novos = {};
+    campos.forEach((c, i) => { novos[c] = vs[i]; });
+    return novos;
+}
+
+function marcarOverEditado() {
+    overEditadoAMao = true;
+}
+
+// Ao confirmar o OVER escrito no modal (sair do campo / Enter / Guardar): ajusta os atributos para o dar.
+function aplicarOverDigitado() {
+    if (!overEditadoAMao) return;
+    overEditadoAMao = false;
+    const alvo = parseInt(document.getElementById("addOver").value);
+    const j = lerJogadorDoFormulario();
+    const grupo = posicaoGrupo(j);
+    if (!grupo || isNaN(alvo)) { atualizarCalculosDoModal(); return; } // sem posição válida não há fórmula: volta ao que havia
+    const novos = atributosParaOver(grupo, j, Math.max(1, Math.min(99, alvo)));
+    Object.entries(novos).forEach(([campo, valor]) => { document.getElementById(ID_DO_CAMPO[campo]).value = valor; });
+    atualizarCalculosDoModal();
+}
+
+function salvarJogador(e) {
+    e.preventDefault();
+    aplicarOverDigitado(); // um OVER escrito e ainda não confirmado conta (ajusta os atributos antes de ler o formulário)
+    const idEditando = parseInt(document.getElementById("editandoId").value) || null;
+
+    const dadosForm = lerJogadorDoFormulario();
+    if (!dadosForm.n) {
+        alert("O jogador precisa de um nome.");
+        return;
+    }
+    if (!posicaoGrupo(dadosForm)) {
+        alert("Posição inválida. Usa G, Z, L, V, M, PE, PD ou CA (a primeira é a que conta para o OVER).");
+        return;
     }
 
-    // O valor de mercado é GERADO pela fórmula depois de todos os atributos
-    // estarem definidos (o campo no formulário está bloqueado). Se ainda não
-    // houver OVER/talento/idade suficientes, fica "-".
-    dadosForm.v = calcularValorMercado(dadosForm) ?? "-";
+    // Valor e salário: o que está nos campos (a fórmula, ou o que foi escrito à mão). Vazio = sem valor.
+    const valorTxt = document.getElementById("addValor").value;
+    const salarioTxt = document.getElementById("addSal").value;
+    dadosForm.v = valorTxt === "" ? "-" : Number(valorTxt);
+    dadosForm.sal = salarioTxt === "" ? null : Number(salarioTxt);
 
     if (idEditando) {
         const j = listaJogadores.find(p => p._id === idEditando);
+        if (!j) { fecharModal(); return; }
+        if (!j._manual && !j._original) j._original = copiarCamposEditaveis(j); // sem edição guardada, o jogador ainda é o da base
+        if (!j.id) j.id = gerarIdJogador(j.n); // só se faltar: o ID que já existe nunca muda
+
+        // O formulário limpa espaços e põe a posição em maiúsculas: se for só isso, o campo não foi mexido e fica como estava.
+        ["n", "nat", "c"].forEach(c => { if (typeof j[c] === "string" && j[c].trim() === dadosForm[c]) dadosForm[c] = j[c]; });
+        if ((j.p || "").replace(/\s/g, "").toUpperCase() === dadosForm.p) dadosForm.p = j.p;
+
+        const antes = copiarCamposEditaveis(j);
         Object.assign(j, dadosForm);
+        const mudaram = CAMPOS_EDITAVEIS.filter(c => !mesmoValor(antes[c], j[c]));
         marcarStatus(j);
         j._id = idEditando;
+        sincronizarCsvRaw(j, mudaram);
 
         if (j._manual) {
             salvarJogadoresManuaisNoStorage();
         } else {
-            salvarEdicaoNoStorage(j);
+            guardarEdicaoNoStorage(j);
         }
     } else {
         dadosForm.id = gerarIdJogador(dadosForm.n);
@@ -1183,7 +1428,31 @@ function salvarJogador(e) {
         salvarJogadoresManuaisNoStorage();
     }
 
-    aplicarFiltros();
+    aplicarFiltros(!!idEditando);
+    fecharModal();
+}
+
+// Volta o jogador ao que veio da base e apaga a edição guardada no browser.
+function reporJogadorOriginal() {
+    const id = parseInt(document.getElementById("editandoId").value) || null;
+    const j = id ? listaJogadores.find(p => p._id === id) : null;
+    if (!j || !j._original) return;
+    if (!confirm(`Repor "${j.n}" como veio da base? As alterações guardadas neste jogador perdem-se.`)) return;
+
+    const base = j._original;
+    const antes = copiarCamposEditaveis(j);
+    Object.assign(j, base);
+    const mudaram = CAMPOS_EDITAVEIS.filter(c => !mesmoValor(antes[c], j[c]));
+    delete j._original;
+    delete mapaEdicoesPorId[j.id];
+    delete mapaEdicoes[gerarIdentidade(base)];
+    gravarNoStorage(CHAVE_EDICOES, mapaEdicoesPorId);
+    gravarNoStorage(CHAVE_EDITS, mapaEdicoes);
+
+    marcarStatus(j);
+    j._id = id;
+    sincronizarCsvRaw(j, mudaram);
+    aplicarFiltros(true);
     fecharModal();
 }
 
