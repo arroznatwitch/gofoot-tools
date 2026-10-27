@@ -585,6 +585,114 @@
    "forca": 76.9,
    "elo_atual": 673.0
   },
+  "vitoria_sc": {
+   "elo": 720,
+   "fonte": "referencia",
+   "forca": 71.6,
+   "elo_atual": 628.0
+  },
+  "rio_ave": {
+   "elo": 610,
+   "fonte": "referencia",
+   "forca": 71.9,
+   "elo_atual": 614.0
+  },
+  "alverca_sad": {
+   "elo": 550,
+   "fonte": "referencia",
+   "forca": 69.7,
+   "elo_atual": 630.0
+  },
+  "famalicao": {
+   "elo": 640,
+   "fonte": "referencia",
+   "forca": 71.1,
+   "elo_atual": 636.0
+  },
+  "fc_porto": {
+   "elo": 824,
+   "fonte": "referencia",
+   "forca": 78.9,
+   "elo_atual": 680.0
+  },
+  "sporting_cp": {
+   "elo": 845,
+   "fonte": "referencia",
+   "forca": 77.7,
+   "elo_atual": 686.0
+  },
+  "estrela_da_amadora_sad": {
+   "elo": 560,
+   "fonte": "referencia",
+   "forca": 69.2,
+   "elo_atual": 616.0
+  },
+  "santa_clara": {
+   "elo": 610,
+   "fonte": "referencia",
+   "forca": 67.9,
+   "elo_atual": 639.0
+  },
+  "estoril_praia": {
+   "elo": 610,
+   "fonte": "referencia",
+   "forca": 70.3,
+   "elo_atual": 614.0
+  },
+  "academico_de_viseu": {
+   "elo": 520,
+   "fonte": "referencia",
+   "forca": 68.9,
+   "elo_atual": 625.0
+  },
+  "sc_braga": {
+   "elo": 770,
+   "fonte": "referencia",
+   "forca": 74.6,
+   "elo_atual": 656.0
+  },
+  "moreirense": {
+   "elo": 590,
+   "fonte": "referencia",
+   "forca": 69.9,
+   "elo_atual": 618.0
+  },
+  "benfica": {
+   "elo": 850,
+   "fonte": "referencia",
+   "forca": 77.1,
+   "elo_atual": 687.0
+  },
+  "casa_pia": {
+   "elo": 570,
+   "fonte": "referencia",
+   "forca": 70.9,
+   "elo_atual": 609.0
+  },
+  "nacional_da_madeira": {
+   "elo": 590,
+   "fonte": "referencia",
+   "forca": 70.1,
+   "elo_atual": 610.0
+  },
+  "gil_vicente": {
+   "elo": 640,
+   "fonte": "referencia",
+   "forca": 71.3,
+   "elo_atual": 633.0
+  },
+  "arouca": {
+   "elo": 570,
+   "fonte": "referencia",
+   "forca": 71.1,
+   "elo_atual": 632.0
+  },
+  "maritimo": {
+   "elo": 600,
+   "fonte": "referencia",
+   "forca": 67.7,
+   "elo_atual": 617.0
+  },
   "independiente_del_valle": {
    "elo": 694,
    "fonte": "simulado",

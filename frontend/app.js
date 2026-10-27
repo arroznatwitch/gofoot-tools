@@ -65,7 +65,7 @@ async function carregar(files) {
 }
 
 // Formato com teams.json / players.json / leagues.json / league_teams.json
-const IGNORAR_PAISES = ["portugal"]; // já tratado no patch portugal_2026
+const IGNORAR_PAISES = [];
 async function carregarLegado(files) {
     const teams = (await lerJson(files, "data/teams.json")).teams;
     const players = (await lerJson(files, "data/players.json"))?.players || [];
@@ -169,7 +169,7 @@ function abaClubes() {
         { t: "Clube", v: (c) => c.nome, h: (c) => `<img src="${escudo(c.id)}" alt="">${esc(c.nome)}${S.sujos.has(c.id) ? ' <span class="tag">editado</span>' : ""}` },
         { t: "Liga", v: (c) => liga(c.id)?.division_level ?? 99, h: (c) => esc(liga(c.id)?.name || "-") },
         { t: "Elo", num: 1, v: (c) => eloDe(c.id)?.elo ?? 0, h: (c) => (eloDe(c.id) ? quente(eloDe(c.id).elo, ...faixaElo()) : "-") },
-        { t: "Origem", v: (c) => eloDe(c.id)?.fonte || "", h: (c) => { const e = eloDe(c.id); return e ? `<span class="tag ${({ estimado: "est", simulado: "sim" })[e.fonte] || ""}">${e.fonte}</span>` : ""; } },
+        { t: "Origem", v: (c) => eloDe(c.id)?.fonte || "", h: (c) => { const e = eloDe(c.id); return e ? `<span class="tag ${({ estimado: "est", simulado: "sim", referencia: "sim" })[e.fonte] || ""}">${e.fonte}</span>` : ""; } },
         { t: "Elo jogo atual", num: 1, v: (c) => c.elo },
         { t: "Reputação", num: 1, v: (c) => c.reputacao, h: (c) => quente(c.reputacao, 0, 100) },
         { t: "Técnico", v: (c) => c.tecnico?.nome || "" },
@@ -249,7 +249,7 @@ function abaElo() {
         { t: "Clube", v: (c) => c.nome, h: (c) => `<img src="${escudo(c.id)}" alt="">${esc(c.nome)}` },
         { t: "Liga", v: (c) => liga(c.id)?.division_level ?? 99, h: (c) => esc(liga(c.id)?.name || "-") },
         { t: "Elo", num: 1, v: (c) => eloDe(c.id).elo, h: (c) => quente(eloDe(c.id).elo, ...faixaElo()) },
-        { t: "Origem", v: (c) => eloDe(c.id).fonte, h: (c) => { const e = eloDe(c.id); return `<span class="tag ${({ estimado: "est", simulado: "sim" })[e.fonte] || ""}">${e.fonte}</span>${e.ref ? " " + esc(e.ref) : ""}`; } },
+        { t: "Origem", v: (c) => eloDe(c.id).fonte, h: (c) => { const e = eloDe(c.id); return `<span class="tag ${({ estimado: "est", simulado: "sim", referencia: "sim" })[e.fonte] || ""}">${e.fonte}</span>${e.ref ? " " + esc(e.ref) : ""}`; } },
         { t: "Elo jogo atual", num: 1, v: (c) => c.elo },
         { t: "Reputação", num: 1, v: (c) => c.reputacao, h: (c) => quente(c.reputacao, 0, 100) },
         ...(conv ? [{ t: "Equivalente", num: 1, v: (c) => conv(eloDe(c.id).elo), h: (c) => conv(eloDe(c.id).elo) }] : [{ t: "Diferença", num: 1, v: (c) => eloDe(c.id).elo - c.elo }]),

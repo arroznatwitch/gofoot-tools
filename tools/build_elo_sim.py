@@ -5,7 +5,7 @@ Uso:
 
 Ideia: os clubes portugueses têm um Elo de referência (já trabalhado) e, neste patch, têm jogadores. Mede-se a
 força de cada clube (média do OVER dos 14 melhores jogadores), ajusta-se uma reta  Elo = a + b * força  nos
-clubes portugueses e aplica-se aos restantes. Portugal fica de fora do resultado (já está configurado).
+clubes portugueses e aplica-se aos restantes. Os portugueses ficam com o Elo de referência (fonte "referencia").
 
 Referência dos portugueses:
     ClubElo real (frontend/elo.json, clubes com fonte "clubelo"), se houver 6 ou mais ligações -> escala "clubelo"
@@ -60,7 +60,7 @@ def main():
         pt[chave(d["nome"])] = d
         pt_exato[chave(d["nome"], ruido=False)] = d
     elo = ler(a.elo)["clubes"] if os.path.exists(a.elo) else {}
-    anc_real, anc_jogo, sem = [], [], []
+    anc_real, anc_jogo, sem, ref_pt = [], [], [], {}
     for t in teams:
         if t["country_id"] != "portugal" or t["id"] not in forca:
             continue
@@ -69,6 +69,7 @@ def main():
         if not d:
             sem.append(t["nome"])
             continue
+        ref_pt[t["id"]] = d["elo"]
         anc_jogo.append((forca[t["id"]], d["elo"]))
         e = elo.get(d["id"])
         if e and e["fonte"] == "clubelo":
@@ -85,6 +86,9 @@ def main():
                     "top": TOP, "ref_pt": "ClubElo" if escala == "clubelo" else "elo do patch portugal_2026"},
            "clubes": {}}
     for t in teams:
+        if t["id"] in ref_pt:  # os portugueses ficam com o valor de referência
+            out["clubes"][t["id"]] = {"elo": round(ref_pt[t["id"]]), "fonte": "referencia", "forca": round(forca[t["id"]], 1), "elo_atual": t["elo"]}
+            continue
         if t["country_id"] == "portugal" or t["id"] not in forca:
             continue
         v = ka + kb * forca[t["id"]]
