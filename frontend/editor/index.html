@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoFoot Tools</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="container">
+        <header class="app-header">
+            <div class="app-brand">
+                <span class="app-logo">⚽</span>
+                <div>
+                    <h1 class="app-title">GoFoot Tools</h1>
+                    <p class="app-sub">Ferramenta não-oficial para criar patchs do GoFoot</p>
+                </div>
+            </div>
+            <a href="../index.html" class="host-badge" style="text-decoration:none">← Visualizador de patches</a>
+            <span class="host-badge" title="Site estático — sem servidor, sem base de dados online">
+                🟢 Ultima atualização: 16-10-2026 21:28
+            </span>
+        </header>
+
+        <nav class="tabs" id="tabs">
+            <button class="tab-btn active" data-aba="jogadores" onclick="trocarAba('jogadores')">👥 Jogadores</button>
+            <button class="tab-btn" data-aba="atualizar" onclick="trocarAba('atualizar')">🔄 Actualizar CSV</button>
+            <button class="tab-btn" data-aba="ligas" onclick="trocarAba('ligas')">🏆 Ligas</button>
+            <button class="tab-btn tab-dev" data-aba="dev" onclick="trocarAba('dev')">🛠️ Painel++</button>
+        </nav>
+
+        <!-- ================= ABA: JOGADORES ================= -->
+        <section class="aba" id="aba-jogadores">
+            <div class="top-bar">
+                <input type="text" id="searchInput" class="search-box" placeholder="Pesquisar jogador, nação, clube ou posição...">
+                <button class="btn" onclick="abrirModal()">+ Adicionar Jogador</button>
+                <button class="btn btn-info" onclick="document.getElementById('csvInput').click()">Importar Jogadores(.csv)</button>
+                <input type="file" id="csvInput" style="display: none;" accept=".csv" onchange="importarCsv(event)">
+            </div>
+
+            <div class="filter-bar">
+                <label><input type="checkbox" id="soIncompletos" onchange="alternarFiltroStatus('soIncompletos')"> Mostrar apenas incompletos</label>
+                <label><input type="checkbox" id="soCompletos" onchange="alternarFiltroStatus('soCompletos')"> Mostrar apenas completos</label>
+                <span class="stats-pill" id="statTotal">Total: 0</span>
+                <span class="stats-pill" id="statCompletos">Completos: 0</span>
+                <span class="stats-pill" id="statIncompletos">Incompletos: 0</span>
+            </div>
+
+            <div class="table-container">
+                <div class="loading-overlay" id="loadingOverlay">
+                    <div class="spinner"></div>
+                    <div id="loadingText">Importando base de dados...</div>
+                </div>
+
+                <div id="wrapLinha">
+                    <h3 class="table-titulo">Jogadores de Linha</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="col-acao"></th>
+                                <th class="th-sort col-nome" data-coluna="nome" onclick="ordenarPor('nome')">Jogador</th>
+                                <th class="th-sort" data-coluna="nacao" onclick="ordenarPor('nacao')">País</th>
+                                <th class="th-sort" data-coluna="clube" onclick="ordenarPor('clube')">Clube</th>
+                                <th class="th-sort" data-coluna="idade" onclick="ordenarPor('idade')">Idade</th>
+                                <th class="th-sort" data-coluna="pe" onclick="ordenarPor('pe')">Pé</th>
+                                <th class="th-sort" data-coluna="posicao" onclick="ordenarPor('posicao')">Posição</th>
+                                <th class="th-sort" data-coluna="geral" onclick="ordenarPor('geral')">Geral</th>
+                                <th class="th-sort" data-coluna="attr1" onclick="ordenarPor('attr1')">Técnica</th>
+                                <th class="th-sort" data-coluna="attr2" onclick="ordenarPor('attr2')">Ataque</th>
+                                <th class="th-sort" data-coluna="attr3" onclick="ordenarPor('attr3')">Defesa</th>
+                                <th class="th-sort" data-coluna="attr4" onclick="ordenarPor('attr4')">Físico</th>
+                                <th class="th-sort" data-coluna="mental" onclick="ordenarPor('mental')">Mental</th>
+                                <th class="th-sort" data-coluna="talento" onclick="ordenarPor('talento')">Talento</th>
+                                <th class="th-sort" data-coluna="valor" onclick="ordenarPor('valor')">Valor de Mercado</th>
+                                <th class="th-sort" data-coluna="salario" onclick="ordenarPor('salario')">Salário</th>
+                                <th class="th-sort" data-coluna="status" onclick="ordenarPor('status')">Status</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="playerTableBody"></tbody>
+                    </table>
+                </div>
+
+                <div id="wrapGoleiro" style="margin-top:24px;">
+                    <h3 class="table-titulo">Goleiros</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="col-acao"></th>
+                                <th class="th-sort col-nome" data-coluna="nome" onclick="ordenarPor('nome')">Jogador</th>
+                                <th class="th-sort" data-coluna="nacao" onclick="ordenarPor('nacao')">País</th>
+                                <th class="th-sort" data-coluna="clube" onclick="ordenarPor('clube')">Clube</th>
+                                <th class="th-sort" data-coluna="idade" onclick="ordenarPor('idade')">Idade</th>
+                                <th class="th-sort" data-coluna="pe" onclick="ordenarPor('pe')">Pé</th>
+                                <th class="th-sort" data-coluna="posicao" onclick="ordenarPor('posicao')">Posição</th>
+                                <th class="th-sort" data-coluna="geral" onclick="ordenarPor('geral')">Geral</th>
+                                <th class="th-sort" data-coluna="attr1" onclick="ordenarPor('attr1')">Reflexos</th>
+                                <th class="th-sort" data-coluna="attr2" onclick="ordenarPor('attr2')">Posicionamento</th>
+                                <th class="th-sort" data-coluna="attr3" onclick="ordenarPor('attr3')">Jogo Aéreo</th>
+                                <th class="th-sort" data-coluna="attr4" onclick="ordenarPor('attr4')">Saída de Bola</th>
+                                <th class="th-sort" data-coluna="mental" onclick="ordenarPor('mental')">Mental</th>
+                                <th class="th-sort" data-coluna="talento" onclick="ordenarPor('talento')">Talento</th>
+                                <th class="th-sort" data-coluna="valor" onclick="ordenarPor('valor')">Valor de Mercado</th>
+                                <th class="th-sort" data-coluna="salario" onclick="ordenarPor('salario')">Salário</th>
+                                <th class="th-sort" data-coluna="status" onclick="ordenarPor('status')">Status</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="gkTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="pagination-bar" id="paginationBar"></div>
+
+            <div class="bottom-bar">
+                <button class="btn btn-danger" onclick="limparTabela()">Limpar tabela</button>
+                <button class="btn btn-primary" onclick="exportarDados()">Exportar todos (.json)</button>
+                <button class="btn" style="background-color: #d29922; color: white; border: none;" onclick="exportarDadosFiltrados()">Exportar filtrados (.json)</button>
+                <button class="btn" style="background-color: #1f6feb; color: white; border: none;" onclick="document.getElementById('importInput').click()">Importar (.json)</button>
+                <input type="file" id="importInput" style="display: none;" accept=".json" multiple onchange="importarDados(event)">
+            </div>
+        </section>
+
+        <!-- ================= ABA: ACTUALIZAR CSV ================= -->
+        <section class="aba" id="aba-atualizar" hidden>
+            <div class="painel-card">
+                <h2 class="painel-titulo">🔄 Actualizar base CSV com o envio de equipas</h2>
+                <p class="painel-desc">
+                    Carrega o <code>players.csv</code> mestre e um ou vários <code>.json</code> de equipas (mesmo sem
+                    <code>id</code>). Cada jogador já traz o seu <code>team_id</code>, por isso podes seleccionar os
+                    ficheiros de várias equipas de uma vez. Atribui ID a quem não tiver, preenche os atributos/OVER de
+                    quem aparecer, e deixa o resto do CSV como está.
+                </p>
+                <div class="acoes-linha">
+                    <label class="btn" style="display:inline-block;">
+                        1. players.csv mestre
+                        <input type="file" id="csvMestreInput" style="display:none;" accept=".csv">
+                    </label>
+                    <label class="btn" style="display:inline-block;">
+                        2. equipa(s) (.json)
+                        <input type="file" id="equipaJsonInput" style="display:none;" accept=".json" multiple>
+                    </label>
+                    <button class="btn btn-primary" onclick="atualizarCsvComEquipa()">Actualizar e descarregar CSV</button>
+                    <span id="statusAtualizacaoCsv" class="status-texto"></span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= ABA: LIGAS ================= -->
+        <section class="aba" id="aba-ligas" hidden>
+            <div class="ligas-cabecalho">
+                <h2 class="painel-titulo">🏆 Ligas &amp; Países</h2>
+                <p class="painel-desc">
+                    Progresso dos elencos carregados. Um clube conta como equipa válida quando tem
+                    <b>20+ jogadores com todos os atributos + OVER</b>. As médias (OVR/ATA/MEI/DEF) são feitas
+                    pelo <b>melhor 11</b> (1 G · 2 L · 2 Z · 4 meio · 3 ataque), não pelo plantel todo.
+                    Clica num país para <b>esconder/mostrar</b> as ligas. O site já abre com os jogadores
+                    completos; para veres a tua base inteira, importa o <code>players.csv</code> na aba
+                    <b>Jogadores</b>.
+                </p>
+            </div>
+            <div id="paisesConteudo">
+                <p class="vazio-msg">Importa um <code>players.csv</code> para veres o progresso.</p>
+            </div>
+        </section>
+
+        <!-- ================= ABA: PAINEL++ (DEV) ================= -->
+        <section class="aba" id="aba-dev" hidden>
+            <div class="aviso-dev">
+                ⚠️ <b>Painel de desenvolvimento.</b> Estas ferramentas alteram a base de dados em massa.
+                <b>Não uses sem saber exactamente o que estás a fazer</b> — faz sempre uma cópia do teu
+                <code>players.csv</code> antes.
+            </div>
+
+            <div class="painel-card">
+                <h2 class="painel-titulo">🔑 Regenerar IDs (.csv)</h2>
+                <p class="painel-desc">
+                    Gera um ID único novo para <b>todos</b> os jogadores importados do <code>players.csv</code>
+                    (resolve IDs repetidos/antigos) e descarrega o <code>.csv</code> com todas as colunas preservadas.
+                    Importa primeiro a base na aba <b>Jogadores</b>.
+                </p>
+                <button class="btn btn-dev" onclick="regenerarIdsCsv()">🔑 Regenerar IDs e descarregar CSV</button>
+            </div>
+
+            <div class="painel-card">
+                <h2 class="painel-titulo">💰 Recalcular Valor de Mercado e Salário</h2>
+                <p class="painel-desc">
+                    Recalcula o <b>valor de mercado</b> (fórmula OVER · talento · idade · físico) e depois o
+                    <b>salário</b> (0,1% do valor recalculado, ×1.75 se OVER&gt;90, ×1.50 se 80-89, ×1.25 se
+                    75-79, ×1.00 se 0-74) dos jogadores importados do <code>players.csv</code>, num só passo.
+                    Substitui os valores actuais e descarrega logo o <code>.csv</code> actualizado (todas as
+                    colunas preservadas). Só afecta jogadores com OVER, talento e idade. Importa primeiro a base
+                    na aba <b>Jogadores</b>.
+                </p>
+                <button class="btn btn-dev" onclick="recalcularValorESalario()">💰 Recalcular ambos e descarregar CSV</button>
+            </div>
+
+            <div class="painel-card">
+                <h2 class="painel-titulo">🗑️ Apagar Jogadores de um Clube</h2>
+                <p class="painel-desc">
+                    Só aparecem clubes com <b>20+ jogadores completos</b> (atributos+OVER definido). Escolhe um e
+                    apaga <b>todos</b> os jogadores desse clube da lista carregada — útil para limpar um plantel
+                    já concluído antes de um novo merge. Só afecta a sessão actual, não mexe em ficheiros no disco.
+                </p>
+                <div class="acoes-linha">
+                    <select id="apagarClubeSelect" class="form-control" style="max-width:360px;"></select>
+                    <button class="btn btn-danger" onclick="apagarJogadoresDoClube()">🗑️ Apagar jogadores deste clube</button>
+                </div>
+                <div class="acoes-linha" style="margin-top:10px; border-top:1px solid #30363d; padding-top:10px;">
+                    <button class="btn btn-danger" onclick="apagarJogadoresDeTodosOsClubesCompletos()">🗑️ Apagar de TODOS os clubes completos de uma vez</button>
+                </div>
+            </div>
+
+            <div class="painel-card">
+                <h2 class="painel-titulo">🧹 Limpar Jogadores Sem OVER (optimizar)</h2>
+                <p class="painel-desc">
+                    Só aparecem clubes já <b>completos</b> (20+ com OVER). Escolhe um e apaga só os jogadores
+                    <b>sem OVER</b> desse clube (lixo/duplicados incompletos), mantendo os que já estão prontos —
+                    reduz o tamanho da base sem perder o plantel concluído.
+                </p>
+                <div class="acoes-linha">
+                    <select id="limparIncompletosSelect" class="form-control" style="max-width:360px;"></select>
+                    <button class="btn btn-danger" onclick="limparIncompletosDoClube()">🧹 Apagar jogadores sem OVER</button>
+                </div>
+                <div class="acoes-linha" style="margin-top:10px; border-top:1px solid #30363d; padding-top:10px;">
+                    <button class="btn btn-danger" onclick="limparIncompletosDeTodosOsClubes()">🧹 Limpar sem OVER de TODOS os clubes completos de uma vez</button>
+                </div>
+            </div>
+
+            <div class="painel-card">
+                <h2 class="painel-titulo">🔤 Traduzir Siglas (.csv)</h2>
+                <p class="painel-desc">
+                    Troca as <b>siglas</b> dos clubes na coluna <code>Club</code> do <code>players.csv</code> pelos nomes
+                    completos, segundo o mapa abaixo (um por linha: <code>SIGLA=Nome Completo</code>). Importa primeiro a
+                    base na aba <b>Jogadores</b>, revê o mapa, e descarrega o <code>.csv</code> traduzido.
+                </p>
+                <textarea id="siglasMapa" class="mapa-siglas" spellcheck="false" rows="12"></textarea>
+                <div class="acoes-linha" style="margin-top:10px;">
+                    <button class="btn btn-dev" onclick="traduzirSiglas()">🔤 Traduzir e descarregar CSV</button>
+                    <span id="statusTraduzirSiglas" class="status-texto"></span>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="playerModal" class="modal">
+        <div class="modal-content">
+            <h3 id="modalTitulo">Adicionar Novo Jogador</h3>
+            <form id="playerForm" onsubmit="salvarJogador(event)">
+                <div class="form-group">
+                    <label>ID <span class="label-nota">— único, não pode ser alterado</span></label>
+                    <input type="text" id="addId" class="form-control campo-id" placeholder="gerado ao guardar" readonly disabled>
+                </div>
+                <div class="form-group"><label>Nome</label><input type="text" id="addNome" class="form-control" required></div>
+                <div class="form-group">
+                    <label>Nação</label>
+                    <input type="text" id="addNat" class="form-control" list="listaNacoes" autocomplete="off" placeholder="Ex: Portugal">
+                    <datalist id="listaNacoes"></datalist>
+                </div>
+                <div class="form-group">
+                    <label>Clube</label>
+                    <input type="text" id="addClube" class="form-control" list="listaClubes" autocomplete="off">
+                    <datalist id="listaClubes"></datalist>
+                </div>
+                <div class="form-row">
+                    <div class="form-group"><label>Idade</label><input type="number" id="addIdade" class="form-control" min="14" max="55" required oninput="atualizarCalculosDoModal()"></div>
+                    <div class="form-group">
+                        <label>Pé Preferido</label>
+                        <select id="addPe" class="form-control" required>
+                            <option value="Direito">Direito</option>
+                            <option value="Esquerdo">Esquerdo</option>
+                            <option value="Ambidestro">Ambidestro</option>
+                            <option value="-">— (sem pé definido)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group"><label>Posições</label><input type="text" id="addPos" class="form-control" placeholder="Ex: G, L, Z, V, M, CA, PE e PD" required oninput="aoMudarPosicao()"></div>
+
+                <div id="camposLinha">
+                    <div class="form-row">
+                        <div class="form-group"><label>Técnica (1 a 99)</label><input type="number" id="addTec" class="form-control" min="1" max="99" oninput="atualizarCalculosDoModal()"></div>
+                        <div class="form-group"><label>Ataque (1 a 99)</label><input type="number" id="addAta" class="form-control" min="1" max="99" oninput="atualizarCalculosDoModal()"></div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group"><label>Defesa (1 a 99)</label><input type="number" id="addDef" class="form-control" min="1" max="99" oninput="atualizarCalculosDoModal()"></div>
+                        <div class="form-group"><label>Físico (1 a 99)</label><input type="number" id="addFis" class="form-control" min="1" max="99" oninput="atualizarCalculosDoModal()"></div>
+                    </div>
+                </div>
+
+                <div id="camposGoleiro" style="display:none;">
+                    <div class="form-row">
+                        <div class="form-group"><label>Reflexos (1 a 99)</label><input type="number" id="addRef" class="form-control" min="1" max="99" oninput="atualizarCalculosDoModal()"></div>
+                        <div class="form-group"><label>Posicionamento (1 a 99)</label><input type="number" id="addPosGk" class="form-control" min="1" max="99" oninput="atualizarCalculosDoModal()"></div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group"><label>Jogo Aéreo (1 a 99)</label><input type="number" id="addAer" class="form-control" min="1" max="99" oninput="atualizarCalculosDoModal()"></div>
+                        <div class="form-group"><label>Saída de Bola (1 a 99)</label><input type="number" id="addSai" class="form-control" min="1" max="99" oninput="atualizarCalculosDoModal()"></div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group"><label>Mental (1 a 99)</label><input type="number" id="addMen" class="form-control" min="1" max="99" required oninput="atualizarCalculosDoModal()"></div>
+                    <div class="form-group"><label>Talento / Potencial (1 a 99)</label><input type="number" id="addTalento" class="form-control" min="1" max="99" required oninput="atualizarCalculosDoModal()"></div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group"><label>Geral (OVER)</label><input type="number" id="addOver" class="form-control" min="1" max="99" oninput="marcarOverEditado()" onchange="aplicarOverDigitado()"></div>
+                    <div class="form-group"><label>Valor (€) <button type="button" class="btn-calc" onclick="recalcularValorNoModal()" title="Calcular pela fórmula">↻ auto</button></label><input type="number" id="addValor" class="form-control" min="0" step="1" oninput="aoEditarValor()"></div>
+                    <div class="form-group"><label>Salário (€) <button type="button" class="btn-calc" onclick="recalcularSalarioNoModal()" title="Calcular pela fórmula">↻ auto</button></label><input type="number" id="addSal" class="form-control" min="0" step="1" oninput="aoEditarSalario()"></div>
+                </div>
+                <p class="dica-modal">Se mudares o Geral (OVER), os atributos são ajustados para o dar. O valor e o salário seguem a fórmula até os escreveres à mão (<b>↻ auto</b> volta à fórmula).</p>
+
+                <input type="hidden" id="editandoId" value="">
+
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-repor" id="btnReporModal" onclick="reporJogadorOriginal()" title="Volta ao que veio da base e apaga as alterações guardadas" hidden>↺ Repor original</button>
+                    <button type="button" class="btn" onclick="fecharModal()">Cancelar</button>
+                    <button type="submit" class="btn btn-primary" id="btnSalvarModal">Salvar Jogador</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+    <script src="fm_players.js"></script>
+    <script src="leagues.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
