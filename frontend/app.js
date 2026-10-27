@@ -2,12 +2,13 @@
 // GoFoot Tools: abre um patch do GoFoot, mostra e edita os dados numa cópia em memória e exporta um .gdb.
 
 const POS = ["G", "Z", "LE", "LD", "V", "M", "PE", "PD", "CA"];
+const POS_LEGADO = ["G", "Z", "L", "V", "M", "P", "CA"]; // formato teams.json: L = lateral, P = ponta
 const ATTR_LINHA = ["TEC", "ATA", "DEF", "FIS", "MEN"];
 const ATTR_GR = ["REF", "POS", "AER", "SAI", "MEN"];
 
 const S = {
     nome: "", meta: null, files: new Map(), clubes: {}, comps: [], paises: [], estadios: [],
-    elo: null, imgs: {}, sujos: new Set(), ordem: {}, ligaDe: {}, original: {},
+    elo: null, sim: null, legado: null, jog: {}, ocultos: new Set(), imgs: {}, sujos: new Set(), ordem: {}, ligaDe: {}, original: {},
 };
 
 const $ = (s, r = document) => r.querySelector(s);
@@ -38,16 +39,21 @@ const lerJson = async (files, p) => (files.has(p) ? JSON.parse(await files.get(p
 async function carregar(files) {
     const meta = await lerJson(files, "patch.json");
     if (!meta) return alert("Isto não parece um patch do GoFoot: falta o patch.json.");
+    if (!files.has("data/teams.json") && !files.has("data/competitions.json")) return alert("Não encontrei clubes neste patch.");
     Object.values(S.imgs).forEach(URL.revokeObjectURL);
     S.files = files; S.meta = meta; S.nome = meta.title || meta.database_id;
     S.sujos = new Set(); S.imgs = {}; S.clubes = {}; S.original = {};
-    S.comps = (await lerJson(files, "data/competitions.json"))?.competitions || [];
+    S.legado = null; S.jog = {}; S.ocultos = new Set();
     S.paises = (await lerJson(files, "data/countries.json"))?.countries || [];
     S.estadios = (await lerJson(files, "data/stadiums.json"))?.stadiums || [];
-    for (const p of [...files.keys()].filter((k) => /^data\/clubs\/[^/]+\.json$/.test(k))) {
-        const c = await lerJson(files, p);
-        S.clubes[c.id] = c;
-        S.original[c.id] = JSON.stringify(c);
+    if (files.has("data/teams.json")) await carregarLegado(files);
+    else {
+        S.comps = (await lerJson(files, "data/competitions.json"))?.competitions || [];
+        for (const p of [...files.keys()].filter((k) => /^data\/clubs\/[^/]+\.json$/.test(k))) {
+            const c = await lerJson(files, p);
+            S.clubes[c.id] = c;
+            S.original[c.id] = JSON.stringify(c);
+        }
     }
     for (const [p, f] of files) if (/^images\/clubs\/.+\.png$/.test(p)) S.imgs[p] = URL.createObjectURL(f);
     S.ligaDe = {};
@@ -56,22 +62,49 @@ async function carregar(files) {
     desenharTudo();
 }
 
+// Formato com teams.json / players.json / leagues.json / league_teams.json
+const IGNORAR_PAISES = ["portugal"]; // já tratado no patch portugal_2026
+async function carregarLegado(files) {
+    const teams = (await lerJson(files, "data/teams.json")).teams;
+    const players = (await lerJson(files, "data/players.json"))?.players || [];
+    const coaches = (await lerJson(files, "data/coaches.json"))?.coaches || [];
+    const ligas = (await lerJson(files, "data/leagues.json"))?.leagues || [];
+    const maps = (await lerJson(files, "data/league_teams.json"))?.initial_mappings || [];
+    S.legado = { teams, players, resto: {} };
+    const tecnico = Object.fromEntries(coaches.map((k) => [k.id, k]));
+    for (const t of teams) {
+        S.jog[t.id] = [];
+        if (IGNORAR_PAISES.includes(t.country_id)) { S.ocultos.add(t.id); continue; }
+        t.tecnico = tecnico[t.coach_id] ? { nome: tecnico[t.coach_id].nome } : null;
+        S.clubes[t.id] = t;
+        S.original[t.id] = JSON.stringify(t);
+    }
+    for (const j of players) (S.jog[j.team_id] ||= []).push(j);
+    S.comps = ligas.map((l) => ({ ...l, teams: (maps.find((m) => m.league_id === l.id)?.teams || l.teams || []).filter((id) => S.clubes[id]) })).filter((l) => l.teams.length);
+}
+
 async function carregarElo() {
-    try { S.elo = await (await fetch("elo.json", { cache: "no-cache" })).json(); } catch { S.elo = null; }
+    const get = async (f) => { try { return await (await fetch(f, { cache: "no-cache" })).json(); } catch { return null; } };
+    const [elo, sim] = await Promise.all([get("elo.json"), get("elo_sim.json")]);
+    S.sim = sim;
+    S.elo = elo || sim ? { meta: elo?.meta || null, clubes: { ...(elo?.clubes || {}), ...(sim?.clubes || {}) } } : null;
 }
 
 // ---------- dados derivados ----------
 const eloDe = (id) => S.elo?.clubes?.[id] || null;
 const escudo = (id) => S.imgs[`images/clubs/${id}.png`] || S.imgs["images/clubs/no-logo.png"] || "";
 const liga = (id) => S.ligaDe[id];
+const posicoes = () => (S.legado ? POS_LEGADO : POS);
+const jogs = (c) => (S.legado ? S.jog[c.id] || [] : (c.jogadores ||= []));
 const forca = (j) => {
+    if (typeof j.OVER === "number") return j.OVER;
     const at = j.posicao === "G" ? ATTR_GR : ATTR_LINHA;
     const v = at.map((k) => j[k]).filter((x) => typeof x === "number");
     return v.length ? Math.round(v.reduce((a, b) => a + b, 0) / v.length) : null;
 };
 function todosJogadores() {
     const out = [];
-    for (const c of Object.values(S.clubes)) (c.jogadores || []).forEach((j, i) => out.push({ j, c, i }));
+    for (const c of Object.values(S.clubes)) jogs(c).forEach((j, i) => out.push({ j, c, i }));
     return out;
 }
 // reta  elo do jogo = a + b * elo ClubElo, ajustada aos clubes do patch
@@ -124,18 +157,20 @@ function abaClubes() {
         { t: "Clube", v: (c) => c.nome, h: (c) => `<img src="${escudo(c.id)}" alt="">${esc(c.nome)}${S.sujos.has(c.id) ? ' <span class="tag">editado</span>' : ""}` },
         { t: "Liga", v: (c) => liga(c.id)?.division_level ?? 99, h: (c) => esc(liga(c.id)?.name || "-") },
         { t: "Elo", num: 1, v: (c) => eloDe(c.id)?.elo ?? 0, h: (c) => (eloDe(c.id) ? eloDe(c.id).elo : "-") },
-        { t: "Origem", v: (c) => eloDe(c.id)?.fonte || "", h: (c) => { const e = eloDe(c.id); return e ? `<span class="tag ${e.fonte === "estimado" ? "est" : ""}">${e.fonte}</span>` : ""; } },
+        { t: "Origem", v: (c) => eloDe(c.id)?.fonte || "", h: (c) => { const e = eloDe(c.id); return e ? `<span class="tag ${({ estimado: "est", simulado: "sim" })[e.fonte] || ""}">${e.fonte}</span>` : ""; } },
         { t: "Elo jogo", num: 1, v: (c) => c.elo },
         { t: "Reputação", num: 1, v: (c) => c.reputacao },
         { t: "Técnico", v: (c) => c.tecnico?.nome || "" },
-        { t: "Jogadores", num: 1, v: (c) => (c.jogadores || []).length },
+        { t: "Jogadores", num: 1, v: (c) => jogs(c).length },
     ], lista, (c) => dialogoClube(c));
     el.innerHTML = `<h2>Clubes</h2><p class="sub">${Object.keys(S.clubes).length} clubes. Clica num clube para o editar.</p>
         <div class="bar"><input type="search" id="q-clubes" placeholder="Pesquisar clube" value="${esc(f.q)}">
-        <select id="l-clubes"><option value="">Todas as ligas</option>${ligas.map((c) => `<option value="${c.id}" ${c.id === f.l ? "selected" : ""}>${esc(c.name)}</option>`).join("")}</select></div>${t.html}`;
+        <select id="l-clubes"><option value="">Todas as ligas</option>${ligas.map((c) => `<option value="${c.id}" ${c.id === f.l ? "selected" : ""}>${esc(nomePais(c))} · ${esc(c.name)}</option>`).join("")}</select></div>${t.html}`;
     t.ligar(el);
     filtros(el, "clubes", "#q-clubes", "#l-clubes");
 }
+
+const nomePais = (c) => S.paises.find((p) => p.id === c.country_id)?.name || "";
 
 function filtros(el, nome, q, l) {
     S.filtro = S.filtro || {};
@@ -154,17 +189,17 @@ function abaJogadores() {
     const t = tabela("jogadores", [
         { t: "Nome", v: (x) => x.j.nome },
         { t: "Clube", v: (x) => x.c.nome },
-        { t: "Pos", v: (x) => POS.indexOf(x.j.posicao) },
+        { t: "Pos", v: (x) => posicoes().indexOf(x.j.posicao), h: (x) => esc(x.j.posicao) },
         { t: "Idade", num: 1, v: (x) => x.j.idade },
         { t: "Nac", v: (x) => x.j.nacionalidade || "" },
         { t: "Pé", v: (x) => x.j.pe || "" },
-        { t: "Força", num: 1, v: (x) => forca(x.j) ?? 0 },
+        { t: S.legado ? "OVER" : "Força", num: 1, v: (x) => forca(x.j) ?? 0 },
         { t: "TAL", num: 1, v: (x) => x.j.TAL ?? 0 },
         { t: "Contrato", num: 1, v: (x) => x.j.fimContrato ?? 0 },
     ], lista, (x) => dialogoJogador(x.c, x.i));
     el.innerHTML = `<h2>Jogadores</h2><p class="sub">${todos.length} jogadores.</p>
         <div class="bar"><input type="search" id="q-jogadores" placeholder="Pesquisar jogador" value="${esc(f.q)}">
-        <select id="l-jogadores"><option value="">Todas as posições</option>${POS.map((p) => `<option ${p === f.l ? "selected" : ""}>${p}</option>`).join("")}</select></div>${t.html}`;
+        <select id="l-jogadores"><option value="">Todas as posições</option>${posicoes().map((p) => `<option ${p === f.l ? "selected" : ""}>${p}</option>`).join("")}</select></div>${t.html}`;
     t.ligar(el);
     filtros(el, "jogadores", "#q-jogadores", "#l-jogadores");
 }
@@ -174,7 +209,7 @@ function abaLigas() {
     if (!S.meta) return semPatch(el);
     const id = S.filtro?.ligas?.l || S.comps[0]?.id;
     const comp = S.comps.find((c) => c.id === id);
-    const pais = (c) => S.paises.find((p) => p.id === c.country_id)?.name || "";
+    const pais = nomePais;
     const lista = (comp?.teams || []).map((t) => S.clubes[t]).filter(Boolean).sort((a, b) => (eloDe(b.id)?.elo ?? 0) - (eloDe(a.id)?.elo ?? 0));
     const t = tabela("ligas", [
         { t: "#", num: 1, v: (c) => lista.indexOf(c) + 1 },
@@ -193,22 +228,25 @@ function abaElo() {
     const el = $("#aba-elo");
     if (!S.meta) return semPatch(el);
     if (!S.elo) { el.innerHTML = `<h2>Elo</h2><p class="sub">Não encontrei o elo.json. Gera-o com <code>tools/build_elo.py</code> (ver Wiki).</p>`; return; }
-    const m = S.elo.meta, conv = retaJogo();
+    const sim = S.sim?.meta, so = Object.values(S.clubes).every((c) => eloDe(c.id)?.fonte !== "clubelo" && eloDe(c.id)?.fonte !== "estimado");
+    const conv = so && sim?.escala === "jogo" ? null : retaJogo();
+    const cont = (f) => Object.values(S.clubes).filter((c) => eloDe(c.id)?.fonte === f).length;
     const lista = Object.values(S.clubes).filter((c) => eloDe(c.id)).sort((a, b) => eloDe(b.id).elo - eloDe(a.id).elo);
     const t = tabela("elo", [
         { t: "#", num: 1, v: (c) => lista.indexOf(c) + 1 },
         { t: "Clube", v: (c) => c.nome, h: (c) => `<img src="${escudo(c.id)}" alt="">${esc(c.nome)}` },
         { t: "Liga", v: (c) => liga(c.id)?.division_level ?? 99, h: (c) => esc(liga(c.id)?.name || "-") },
         { t: "Elo", num: 1, v: (c) => eloDe(c.id).elo },
-        { t: "Origem", v: (c) => eloDe(c.id).fonte, h: (c) => { const e = eloDe(c.id); return `<span class="tag ${e.fonte === "estimado" ? "est" : ""}">${e.fonte}</span>${e.ref ? " " + esc(e.ref) : ""}`; } },
+        { t: "Origem", v: (c) => eloDe(c.id).fonte, h: (c) => { const e = eloDe(c.id); return `<span class="tag ${({ estimado: "est", simulado: "sim" })[e.fonte] || ""}">${e.fonte}</span>${e.ref ? " " + esc(e.ref) : ""}`; } },
         { t: "Elo jogo atual", num: 1, v: (c) => c.elo },
-        { t: "Equivalente", num: 1, v: (c) => (conv ? conv(eloDe(c.id).elo) : 0), h: (c) => (conv ? conv(eloDe(c.id).elo) : "-") },
+        ...(conv ? [{ t: "Equivalente", num: 1, v: (c) => conv(eloDe(c.id).elo), h: (c) => conv(eloDe(c.id).elo) }] : [{ t: "Diferença", num: 1, v: (c) => eloDe(c.id).elo - c.elo }]),
     ], lista, (c) => dialogoClube(c), 300);
     el.innerHTML = `<h2>Elo</h2><p class="sub">Elo ClubElo dos clubes do patch. Os estimados vêm da divisão e da reputação (ver Wiki).</p>
-        <div class="stats"><div><b>${m.reais}</b>no ClubElo</div><div><b>${m.estimados}</b>estimados</div><div><b>${esc(m.gerado)}</b>data dos dados</div></div>
-        <div class="bar"><button class="btn" id="aplicar-elo" ${conv ? "" : "disabled"}>Aplicar equivalente no jogo à cópia de trabalho</button></div>${t.html}`;
+        <div class="stats"><div><b>${cont("clubelo")}</b>no ClubElo</div><div><b>${cont("estimado")}</b>estimados</div><div><b>${cont("simulado")}</b>simulados</div></div>
+        ${sim && cont("simulado") ? `<p class="sub">Simulado a partir da força dos plantéis, calibrado em ${sim.ancoras} clubes portugueses (${esc(sim.ref_pt)}). Escala: ${sim.escala === "jogo" ? "do jogo, 0 a 1000" : "ClubElo"}. Desvio nos clubes de referência: ±${sim.desvio}.</p>` : ""}
+        <div class="bar">${conv ? '<button class="btn" id="aplicar-elo">Aplicar equivalente no jogo à cópia de trabalho</button>' : ""}</div>${t.html}`;
     t.ligar(el);
-    $("#aplicar-elo", el).onclick = () => {
+    if (conv) $("#aplicar-elo", el).onclick = () => {
         if (!confirm("Isto muda o campo elo de todos os clubes na cópia de trabalho (o patch original não é tocado). Continuar?")) return;
         for (const c of lista) { c.elo = conv(eloDe(c.id).elo); S.sujos.add(c.id); }
         desenharTudo();
@@ -239,15 +277,15 @@ function validar() {
         if (!emComp.has(c.id)) add("aviso", `${q}: não está inscrito em nenhuma competição`);
         if (!S.imgs[`images/clubs/${c.id}.png`]) add("aviso", `${q}: sem escudo`);
         if (!S.estadios.some((e) => e.id === c.stadium_id)) add("aviso", `${q}: estádio '${c.stadium_id}' não existe`);
-        const js = c.jogadores || [], nums = new Set();
+        const js = jogs(c), nums = new Set();
         if (js.length && js.filter((j) => j.posicao === "G").length < 2) add("aviso", `${q}: menos de 2 guarda-redes`);
         js.forEach((j) => {
             const w = `${q} / ${j.nome || "?"}`;
             if (!j.nome) add("erro", `${q}: jogador sem nome`);
-            if (!POS.includes(j.posicao)) add("erro", `${w}: posição inválida`);
+            if (!posicoes().includes(j.posicao)) add("erro", `${w}: posição inválida`);
             if (!(j.idade >= 15 && j.idade <= 45)) add("erro", `${w}: idade fora de 15 a 45`);
             for (const k of [...ATTR_LINHA, ...ATTR_GR, "TAL"]) if (j[k] != null && !(j[k] >= 1 && j[k] <= 99)) add("erro", `${w}: ${k} fora de 1 a 99`);
-            if (j.numero != null) { if (nums.has(j.numero)) add("erro", `${w}: número ${j.numero} repetido`); nums.add(j.numero); }
+            if (j.numero != null) { if (nums.has(j.numero)) add(S.legado ? "aviso" : "erro", `${w}: número ${j.numero} repetido`); nums.add(j.numero); }
         });
     }
     for (const c of S.comps) for (const t of c.teams || []) if (!S.clubes[t]) add("erro", `${c.name}: clube '${t}' não existe`);
@@ -257,8 +295,14 @@ function validar() {
 // ---------- exportar ----------
 async function exportar() {
     const zip = new JSZip(), raiz = zip.folder(S.meta.database_id || "patch");
-    for (const [p, f] of S.files) raiz.file(p, f);
-    for (const id of S.sujos) raiz.file(`data/clubs/${id}.json`, JSON.stringify(S.clubes[id], null, "\t"));
+    const legado = S.legado && S.sujos.size;
+    for (const [p, f] of S.files) if (!(legado && /^data\/(teams|players)\.json$/.test(p))) raiz.file(p, f);
+    if (legado) {
+        const teams = S.legado.teams.map(({ tecnico, ...t }) => t); // o técnico é só para mostrar
+        const players = Object.values(S.jog).flat();
+        raiz.file("data/teams.json", JSON.stringify({ teams }, null, "\t"));
+        raiz.file("data/players.json", JSON.stringify({ players }, null, "\t"));
+    } else for (const id of S.sujos) raiz.file(`data/clubs/${id}.json`, JSON.stringify(S.clubes[id], null, "\t"));
     const blob = await zip.generateAsync({ type: "blob", compression: "DEFLATE" });
     const a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
@@ -275,45 +319,45 @@ function campo(k, rot, v, tipo = "text", extra = "") {
 function marcar(c) { S.sujos.add(c.id); }
 
 function dialogoClube(c) {
-    const js = c.jogadores || [];
+    const js = jogs(c);
     form.innerHTML = `<h3>${esc(c.nome)}</h3><div class="grid">
         ${campo("nome", "Nome", c.nome, "text", "wide")}
         ${campo("reputacao", "Reputação (0-100)", c.reputacao, "number")}
         ${campo("elo", "Elo no jogo (0-1000)", c.elo, "number")}
         ${campo("corPrimaria", "Cor primária", c.corPrimaria, "color")}
         ${campo("corSecundaria", "Cor secundária", c.corSecundaria, "color")}
-        ${campo("tecnico", "Técnico", c.tecnico?.nome, "text", "wide")}</div>
+        ${S.legado ? "" : campo("tecnico", "Técnico", c.tecnico?.nome, "text", "wide")}</div>
         <h3 style="margin-top:18px">Plantel (${js.length})</h3>
         ${js.length ? `<div class="tablewrap" style="max-height:240px;overflow:auto"><table><tbody>${js.map((j, i) => `<tr class="click" data-i="${i}"><td>${esc(j.nome)}</td><td>${esc(j.posicao)}</td><td class="num">${j.idade}</td><td class="num">${forca(j) ?? ""}</td></tr>`).join("")}</tbody></table></div>` : `<p class="sub">Sem jogadores.</p>`}
-        <div class="actions"><button class="btn left" type="button" id="novo-j">Adicionar jogador</button><button class="btn" value="x">Cancelar</button><button class="btn primary" value="ok">Guardar</button></div>`;
+        <div class="actions">${S.legado ? '<span class="left"></span>' : '<button class="btn left" type="button" id="novo-j">Adicionar jogador</button>'}<button class="btn" value="x">Cancelar</button><button class="btn primary" value="ok">Guardar</button></div>`;
     const guardar = (fd) => {
         c.nome = fd.get("nome").trim() || c.nome;
         c.reputacao = +fd.get("reputacao"); c.elo = +fd.get("elo");
         c.corPrimaria = fd.get("corPrimaria"); c.corSecundaria = fd.get("corSecundaria");
-        if (c.tecnico) c.tecnico.nome = fd.get("tecnico"); else if (fd.get("tecnico")) c.tecnico = { nome: fd.get("tecnico") };
+        if (!S.legado) { if (c.tecnico) c.tecnico.nome = fd.get("tecnico"); else if (fd.get("tecnico")) c.tecnico = { nome: fd.get("tecnico") }; }
         if (JSON.stringify(c) !== S.original[c.id]) marcar(c);
     };
     const ir = (i) => () => { guardar(new FormData(form)); irPara(() => dialogoJogador(c, i)); };
     form.querySelectorAll("tr.click").forEach((r) => (r.onclick = ir(+r.dataset.i)));
-    $("#novo-j", form).onclick = ir(-1);
+    if ($("#novo-j", form)) $("#novo-j", form).onclick = ir(-1);
     abrir(guardar);
 }
 
 function dialogoJogador(c, i) {
-    const novo = i < 0, j = novo ? { nome: "", posicao: "M", idade: 22, pe: "D", nacionalidade: "pt" } : c.jogadores[i];
+    const lista = jogs(c), novo = i < 0, j = novo ? { nome: "", posicao: "M", idade: 22, pe: "D", nacionalidade: "pt" } : lista[i];
     const num = (k, r) => campo(k, r, j[k], "number");
     form.innerHTML = `<h3>${novo ? "Novo jogador" : esc(j.nome)} · ${esc(c.nome)}</h3><div class="grid">
         ${campo("nome", "Nome", j.nome, "text", "wide")}
-        <label>Posição<select name="posicao">${POS.map((p) => `<option ${p === j.posicao ? "selected" : ""}>${p}</option>`).join("")}</select></label>
+        <label>Posição<select name="posicao">${posicoes().map((p) => `<option ${p === j.posicao ? "selected" : ""}>${p}</option>`).join("")}</select></label>
         ${num("idade", "Idade")}
         <label>Pé<select name="pe">${["D", "E", "A"].map((p) => `<option ${p === j.pe ? "selected" : ""}>${p}</option>`).join("")}</select></label>
         ${campo("nacionalidade", "Nacionalidade", j.nacionalidade)}
         ${num("numero", "Número")}${num("fimContrato", "Fim do contrato")}
         ${num("TEC", "TEC")}${num("ATA", "ATA")}${num("DEF", "DEF")}${num("FIS", "FIS")}${num("MEN", "MEN")}
-        ${num("REF", "REF")}${num("POS", "POS")}${num("AER", "AER")}${num("SAI", "SAI")}${num("TAL", "TAL")}</div>
+        ${S.legado ? num("OVER", "OVER") : ""}${num("REF", "REF")}${num("POS", "POS")}${num("AER", "AER")}${num("SAI", "SAI")}${num("TAL", "TAL")}</div>
         <div class="actions">${novo ? "" : `<button class="btn left" type="button" id="apagar-j">Apagar</button>`}<button class="btn" value="x">Cancelar</button><button class="btn primary" value="ok">Guardar</button></div>`;
     const apagar = $("#apagar-j", form);
-    if (apagar) apagar.onclick = () => { if (confirm(`Apagar ${j.nome}?`)) { c.jogadores.splice(i, 1); marcar(c); dlg.close(); desenharTudo(); } };
+    if (apagar) apagar.onclick = () => { if (confirm(`Apagar ${j.nome}?`)) { lista.splice(i, 1); marcar(c); dlg.close(); desenharTudo(); } };
     abrir((fd) => {
         const o = { ...j };
         for (const [k, v] of fd) {
@@ -321,7 +365,7 @@ function dialogoJogador(c, i) {
             else if (v === "") delete o[k]; else o[k] = +v;
         }
         if (!o.nome) return;
-        if (novo) { c.jogadores = c.jogadores || []; c.jogadores.push(o); } else c.jogadores[i] = o;
+        if (novo) lista.push(o); else lista[i] = o;
         marcar(c);
     });
 }

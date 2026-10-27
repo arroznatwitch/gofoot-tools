@@ -59,6 +59,7 @@
                     <tr><td><code>data/stadiums.json</code></td><td>Estádios</td></tr>
                     <tr><td><code>images/</code></td><td>Escudos, logótipos, bandeiras</td></tr>
                 </table>
+                <p>O site também abre o formato mais antigo, com <code>data/teams.json</code>, <code>players.json</code>, <code>leagues.json</code> e <code>league_teams.json</code> (por exemplo o patch com Brasil e 12 países). Nesse formato os clubes de Portugal ficam de fora, porque já estão no patch <code>portugal_2026</code>, e não se podem adicionar jogadores novos. As posições são G, Z, L, V, M, P e CA.</p>
                 <p>A descrição completa de cada campo está no <code>GUIA-IA.md</code> que vem dentro do patch.</p>
 
                 <h3 id="w-abas">As abas</h3>
@@ -79,6 +80,13 @@
                     <li>Dentro da divisão, o clube sobe ou desce conforme a sua <b>reputação</b> no patch: <code>Elo = base + k × (reputação − reputação média da divisão)</code>. O <code>k</code> é medido nos clubes com Elo real.</li>
                     <li>A estimativa nunca se afasta mais de 120 pontos da base da divisão.</li>
                 </ol>
+                <p><b>Clubes simulados</b> (patches com jogadores, como o dos 13 países) não estão no ClubElo nem têm divisão que sirva de base. Para eles o Elo é simulado por comparação com Portugal:</p>
+                <ol>
+                    <li>A <b>força</b> de cada clube é a média do OVER dos 14 melhores jogadores.</li>
+                    <li>Nos clubes portugueses, que têm Elo de referência, ajusta-se uma reta <code>Elo = a + b × força</code>.</li>
+                    <li>A reta aplica-se a todos os outros clubes. Aparecem como <span class="tag sim">simulado</span>, com o Elo atual do patch ao lado para comparar.</li>
+                </ol>
+                <p>A referência portuguesa é o ClubElo, quando existir em <code>elo.json</code>, e senão o campo <code>elo</code> do <code>portugal_2026</code> (escala 0 a 1000, o Elo fica nessa escala). A reta é fiável dentro da gama de Portugal. Para clubes bem acima, como Real Madrid, o valor é extrapolado e fica limitado a 1000. O script é <code>tools/build_elo_sim.py</code>.</p>
                 <p>O campo <code>elo</code> do patch usa outra escala (0 a 1000) e serve ao jogo para decidir divisões e potes da taça. A aba Elo mostra o <b>equivalente no jogo</b>, calculado por uma reta ajustada aos valores atuais do patch, e tens um botão para o aplicar na cópia de trabalho. O patch original não muda.</p>
                 <p>Os números são gerados por <code>tools/build_elo.py</code> a partir do ranking do ClubElo e ficam em <code>elo.json</code>.</p>
 
@@ -99,7 +107,7 @@
                 <h3 id="w-faq">Perguntas frequentes</h3>
                 <p><b>Perdi as minhas edições ao recarregar a página.</b> As edições vivem só na memória. Exporta antes de fechar.</p>
                 <p><b>A aba Jogadores está vazia.</b> Há patches só com clubes, sem plantéis. É o caso do <code>portugal_2026</code>.</p>
-                <p><b>Um clube não tem Elo.</b> Só acontece se o <code>elo.json</code> foi gerado para outro patch. Volta a correr o <code>build_elo.py</code>.</p>
+                <p><b>Um clube não tem Elo.</b> Só acontece se o <code>elo.json</code> ou o <code>elo_sim.json</code> foi gerado para outro patch. Volta a correr o <code>build_elo.py</code> e depois o <code>build_elo_sim.py</code>.</p>
                 <p><b>Isto é oficial?</b> Não. É uma ferramenta feita por fãs, sem ligação ao GoFoot.</p>
             </article>
         </div>

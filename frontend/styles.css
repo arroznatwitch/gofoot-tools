@@ -34,6 +34,7 @@ tbody tr.click { cursor: pointer; }
 td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
 td img { width: 22px; height: 22px; object-fit: contain; vertical-align: middle; margin-right: 8px; }
 .tag { font-size: 12px; color: var(--muted); border: 1px solid var(--line); border-radius: 3px; padding: 0 6px; }
+.tag.sim { color: var(--accent); border-color: var(--accent); }
 .tag.est { color: var(--warn); border-color: var(--warn); }
 .empty { padding: 40px 16px; text-align: center; color: var(--muted); }
 .drop { border: 2px dashed var(--line); border-radius: 6px; padding: 48px 24px; text-align: center; background: var(--panel); }

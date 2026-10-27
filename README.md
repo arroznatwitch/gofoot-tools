@@ -29,7 +29,7 @@ Descarrega o CSV do ClubElo (`http://api.clubelo.com/AAAA-MM-DD`) e corre:
 python tools/build_elo.py --ranking ranking.csv --patch "Documentos/Gofoot/Patches/portugal_2026"
 ```
 
-Gera `frontend/elo.json`. Os restantes scripts em `tools/` são da base antiga em `players.csv` e já não alimentam o site.
+Gera `frontend/elo.json`. Para os patches com jogadores (formato `teams.json`) corre depois `tools/build_elo_sim.py --legacy <patch> --patch-pt <portugal_2026>`, que simula o Elo dos clubes a partir da força dos plantéis, calibrado nos clubes portugueses, e gera `frontend/elo_sim.json`. Os restantes scripts em `tools/` são da base antiga em `players.csv` e já não alimentam o site.
 
 ## Apoiar o GoFoot
 
