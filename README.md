@@ -10,17 +10,26 @@ Ferramenta não-oficial para criar e organizar bases de jogadores para o jogo **
 
 ## O que faz
 
-- Importa uma base de jogadores em `.csv`
-- Edição individual de atributos (técnica, ataque, defesa, físico, mental, pé preferido, valor de mercado)
-- Marca automaticamente jogadores com dados em falta como "Incompleto"
-- Exporta em `.json`, completo ou apenas os jogadores filtrados
+Abre um **patch** do GoFoot (pasta ou `.gdb`) no navegador, sem o alterar:
+
+- **Clubes, Jogadores, Ligas**: vê e edita os dados numa cópia em memória
+- **Elo**: ranking de força dos clubes com dados do [ClubElo](https://clubelo.com/Ranking); os clubes que lá não aparecem recebem uma estimativa pela divisão e reputação
+- **Validar e exportar**: verifica o patch e gera um `.gdb` novo
+- **Wiki**: explica o formato do patch, o Elo e como instalar
+
 ## Stack
 
-HTML, CSS e JavaScript puro (vanilla). [PapaParse](https://www.papaparse.com/) para o parsing do `.csv`.
+HTML, CSS e JavaScript puro, mais [JSZip](https://stuk.github.io/jszip/) para ler e gerar `.gdb`.
 
-## Ferramentas (`tools/`)
+## Elo (`tools/build_elo.py`)
 
-Scripts em Python para acrescentar ligas novas à base: descarregam os plantéis do Transfermarkt e os ratings da EA FC e preenchem apenas quem ainda não tem OVER. Também geram o `frontend/fm_players.js`, os jogadores completos que o site carrega ao abrir. Ver [tools/README.md](tools/README.md).
+Descarrega o CSV do ClubElo (`http://api.clubelo.com/AAAA-MM-DD`) e corre:
+
+```
+python tools/build_elo.py --ranking ranking.csv --patch "Documentos/Gofoot/Patches/portugal_2026"
+```
+
+Gera `frontend/elo.json`. Os restantes scripts em `tools/` são da base antiga em `players.csv` e já não alimentam o site.
 
 ## Apoiar o GoFoot
 
