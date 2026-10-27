@@ -48,7 +48,7 @@ d.rectangle([x, 424 * S, x + 150 * S, 430 * S], fill=CREME)
 d.text((x, 446 * S), "+112 equipas · 4 divisões · 3 taças", font=fonte("segoeuib.ttf", 28), fill=CREME)
 d.text((x, 488 * S), "Liga Portugal Betclic · Liga Portugal 2 · Liga 3 · Campeonato de Portugal", font=fonte("segoeui.ttf", 19), fill=(220, 235, 225))
 d.text((x, 518 * S), "Taça de Portugal · Taça da Liga · Supertaça Cândido de Oliveira", font=fonte("segoeui.ttf", 19), fill=(220, 235, 225))
-d.text((x, 650 * S), "Atualizado a 27/10/2026 · por ArrozNaTwitch", font=fonte("segoeui.ttf", 18), fill=(200, 220, 210))
+d.text((x, 650 * S), "por ArrozNaTwitch", font=fonte("segoeui.ttf", 18), fill=(200, 220, 210))
 
 # logos: grelha 4 + 3 à direita
 ex, ey, cel = 700, 120, 128
