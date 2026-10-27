@@ -35,7 +35,7 @@ async function abrirGdb(file) {
 }
 
 // um ficheiro é um Blob/File ou, no patch por defeito, o URL a descarregar só quando for preciso
-const textoDe = async (f) => (typeof f === "string" ? (await fetch(f)).text() : f.text());
+const textoDe = async (f) => (typeof f === "string" ? (await fetch(f, { cache: "no-cache" })).text() : f.text());
 const lerJson = async (files, p) => (files.has(p) ? JSON.parse(await textoDe(files.get(p))) : null);
 
 async function carregar(files) {
@@ -429,7 +429,7 @@ async function carregarPadrao() {
     const base = "patches/12_paises/";
     $("#patch-nome").textContent = "A carregar o patch de 12 ligas…";
     try {
-        const lista = await (await fetch(base + "manifest.json")).json();
+        const lista = await (await fetch(base + "manifest.json", { cache: "no-cache" })).json();
         const files = new Map(lista.map((p) => [p, base + p]));
         await carregar(files);
     } catch { $("#patch-nome").textContent = "Nenhum patch aberto"; }
