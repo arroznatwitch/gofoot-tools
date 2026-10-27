@@ -54,17 +54,18 @@ def main():
 
     # referência dos portugueses
     pt_dir = os.path.join(a.patch_pt, "data", "clubs")
-    pt = {}
+    pt, pt_exato = {}, {}
     for f in os.listdir(pt_dir):
         d = ler(os.path.join(pt_dir, f))
         pt[chave(d["nome"])] = d
+        pt_exato[chave(d["nome"], ruido=False)] = d
     elo = ler(a.elo)["clubes"] if os.path.exists(a.elo) else {}
     anc_real, anc_jogo, sem = [], [], []
     for t in teams:
         if t["country_id"] != "portugal" or t["id"] not in forca:
             continue
         k = chave(t["nome"])
-        d = pt.get(k) or next((v for kk, v in pt.items() if kk.startswith(k) or k.startswith(kk)), None)
+        d = pt_exato.get(chave(t["nome"], ruido=False)) or pt.get(k) or next((v for kk, v in pt.items() if kk.startswith(k) or k.startswith(kk)), None)
         if not d:
             sem.append(t["nome"])
             continue

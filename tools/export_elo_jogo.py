@@ -28,10 +28,11 @@ def main():
     if sim["meta"]["escala"] != "jogo":
         sys.exit("o elo_sim.json está na escala ClubElo; este export só atualiza o Elo do jogo (0 a 1000)")
     teams = json.load(open(os.path.join(a.legacy, "data", "teams.json"), encoding="utf-8"))
-    pt = {}
+    pt, pt_exato = {}, {}
     for f in os.listdir(os.path.join(a.patch_pt, "data", "clubs")):
         d = json.load(open(os.path.join(a.patch_pt, "data", "clubs", f), encoding="utf-8"))
         pt[chave(d["nome"])] = d["elo"]
+        pt_exato[chave(d["nome"], ruido=False)] = d["elo"]
     ligas = {}
     for l in json.load(open(os.path.join(a.legacy, "data", "leagues.json"), encoding="utf-8"))["leagues"]:
         ligas[l["id"]] = l
@@ -46,7 +47,7 @@ def main():
         antigo = t["elo"]
         if t["country_id"] == "portugal":
             k = chave(t["nome"])
-            novo = pt.get(k) or next((v for kk, v in pt.items() if kk.startswith(k) or k.startswith(kk)), None)
+            novo = pt_exato.get(chave(t["nome"], ruido=False)) or pt.get(k) or next((v for kk, v in pt.items() if kk.startswith(k) or k.startswith(kk)), None)
         else:
             novo = sim["clubes"].get(t["id"], {}).get("elo")
         if novo is None:

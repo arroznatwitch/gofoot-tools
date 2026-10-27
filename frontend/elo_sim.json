@@ -2,1371 +2,1371 @@
  "meta": {
   "escala": "jogo",
   "ancoras": 18,
-  "a": -1476.93,
-  "b": 29.38,
-  "desvio": 75.4,
+  "a": -1444.11,
+  "b": 29.2,
+  "desvio": 43.1,
   "top": 14,
   "ref_pt": "elo do patch portugal_2026"
  },
  "clubes": {
   "amazonas": {
-   "elo": 433,
+   "elo": 454,
    "fonte": "simulado",
    "forca": 65.0,
    "elo_atual": 423.0
   },
   "america_mineiro": {
-   "elo": 422,
+   "elo": 443,
    "fonte": "simulado",
    "forca": 64.6,
    "elo_atual": 492.0
   },
   "anapolis": {
-   "elo": 361,
+   "elo": 383,
    "fonte": "simulado",
    "forca": 62.6,
    "elo_atual": 423.0
   },
   "athletic_club": {
-   "elo": 462,
+   "elo": 483,
    "fonte": "simulado",
    "forca": 66.0,
    "elo_atual": 510.0
   },
   "atletico_goianiense": {
-   "elo": 464,
+   "elo": 485,
    "fonte": "simulado",
    "forca": 66.1,
    "elo_atual": 524.0
   },
   "atletico_mineiro": {
-   "elo": 749,
+   "elo": 769,
    "fonte": "simulado",
    "forca": 75.8,
    "elo_atual": 651.0
   },
   "atletico_paranaense": {
-   "elo": 617,
+   "elo": 637,
    "fonte": "simulado",
    "forca": 71.3,
    "elo_atual": 653.0
   },
   "avai": {
-   "elo": 466,
+   "elo": 487,
    "fonte": "simulado",
    "forca": 66.1,
    "elo_atual": 508.0
   },
   "bahia": {
-   "elo": 735,
+   "elo": 754,
    "fonte": "simulado",
    "forca": 75.3,
    "elo_atual": 650.0
   },
   "barra": {
-   "elo": 395,
+   "elo": 416,
    "fonte": "simulado",
    "forca": 63.7,
    "elo_atual": 423.0
   },
   "botafogo": {
-   "elo": 760,
+   "elo": 779,
    "fonte": "simulado",
    "forca": 76.1,
    "elo_atual": 641.0
   },
   "botafogo_pb": {
-   "elo": 437,
+   "elo": 458,
    "fonte": "simulado",
    "forca": 65.1,
    "elo_atual": 429.0
   },
   "botafogo_sp": {
-   "elo": 537,
+   "elo": 558,
    "fonte": "simulado",
    "forca": 68.6,
    "elo_atual": 510.0
   },
   "brusque": {
-   "elo": 403,
+   "elo": 425,
    "fonte": "simulado",
    "forca": 64.0,
    "elo_atual": 435.0
   },
   "caxias": {
-   "elo": 380,
+   "elo": 402,
    "fonte": "simulado",
    "forca": 63.2,
    "elo_atual": 431.0
   },
   "ceara": {
-   "elo": 523,
+   "elo": 543,
    "fonte": "simulado",
    "forca": 68.1,
    "elo_atual": 515.0
   },
   "chapecoense": {
-   "elo": 529,
+   "elo": 550,
    "fonte": "simulado",
    "forca": 68.3,
    "elo_atual": 618.0
   },
   "confianca": {
-   "elo": 351,
+   "elo": 372,
    "fonte": "simulado",
    "forca": 62.2,
    "elo_atual": 409.0
   },
   "corinthians": {
-   "elo": 634,
+   "elo": 654,
    "fonte": "simulado",
    "forca": 71.9,
    "elo_atual": 639.0
   },
   "coritiba": {
-   "elo": 686,
+   "elo": 706,
    "fonte": "simulado",
    "forca": 73.6,
    "elo_atual": 634.0
   },
   "crb": {
-   "elo": 516,
+   "elo": 537,
    "fonte": "simulado",
    "forca": 67.9,
    "elo_atual": 526.0
   },
   "criciuma": {
-   "elo": 579,
+   "elo": 600,
    "fonte": "simulado",
    "forca": 70.0,
    "elo_atual": 523.0
   },
   "cruzeiro": {
-   "elo": 716,
+   "elo": 735,
    "fonte": "simulado",
    "forca": 74.6,
    "elo_atual": 656.0
   },
   "cuiaba": {
-   "elo": 512,
+   "elo": 533,
    "fonte": "simulado",
    "forca": 67.7,
    "elo_atual": 520.0
   },
   "ferroviaria": {
-   "elo": 418,
+   "elo": 439,
    "fonte": "simulado",
    "forca": 64.5,
    "elo_atual": 441.0
   },
   "figueirense": {
-   "elo": 424,
+   "elo": 445,
    "fonte": "simulado",
    "forca": 64.7,
    "elo_atual": 432.0
   },
   "flamengo": {
-   "elo": 804,
+   "elo": 823,
    "fonte": "simulado",
    "forca": 77.6,
    "elo_atual": 680.0
   },
   "floresta": {
-   "elo": 466,
+   "elo": 487,
    "fonte": "simulado",
    "forca": 66.1,
    "elo_atual": 426.0
   },
   "fluminense": {
-   "elo": 789,
+   "elo": 808,
    "fonte": "simulado",
    "forca": 77.1,
    "elo_atual": 654.0
   },
   "fortaleza": {
-   "elo": 661,
+   "elo": 681,
    "fonte": "simulado",
    "forca": 72.8,
    "elo_atual": 529.0
   },
   "goias": {
-   "elo": 540,
+   "elo": 560,
    "fonte": "simulado",
    "forca": 68.6,
    "elo_atual": 517.0
   },
   "gremio": {
-   "elo": 703,
+   "elo": 723,
    "fonte": "simulado",
    "forca": 74.2,
    "elo_atual": 632.0
   },
   "guarani": {
-   "elo": 506,
+   "elo": 527,
    "fonte": "simulado",
    "forca": 67.5,
    "elo_atual": 437.0
   },
   "inter_de_limeira": {
-   "elo": 477,
+   "elo": 498,
    "fonte": "simulado",
    "forca": 66.5,
    "elo_atual": 431.0
   },
   "internacional": {
-   "elo": 756,
+   "elo": 775,
    "fonte": "simulado",
    "forca": 76.0,
    "elo_atual": 639.0
   },
   "itabaiana": {
-   "elo": 344,
+   "elo": 366,
    "fonte": "simulado",
    "forca": 62.0,
    "elo_atual": 408.0
   },
   "ituano": {
-   "elo": 504,
+   "elo": 525,
    "fonte": "simulado",
    "forca": 67.4,
    "elo_atual": 424.0
   },
   "juventude": {
-   "elo": 542,
+   "elo": 562,
    "fonte": "simulado",
    "forca": 68.7,
    "elo_atual": 528.0
   },
   "londrina": {
-   "elo": 481,
+   "elo": 502,
    "fonte": "simulado",
    "forca": 66.6,
    "elo_atual": 502.0
   },
   "maranhao": {
-   "elo": 464,
+   "elo": 485,
    "fonte": "simulado",
    "forca": 66.1,
    "elo_atual": 425.0
   },
   "maringa": {
-   "elo": 533,
+   "elo": 554,
    "fonte": "simulado",
    "forca": 68.4,
    "elo_atual": 439.0
   },
   "mirassol": {
-   "elo": 617,
+   "elo": 637,
    "fonte": "simulado",
    "forca": 71.3,
    "elo_atual": 643.0
   },
   "nautico": {
-   "elo": 449,
+   "elo": 470,
    "fonte": "simulado",
    "forca": 65.6,
    "elo_atual": 508.0
   },
   "novorizontino": {
-   "elo": 489,
+   "elo": 510,
    "fonte": "simulado",
    "forca": 66.9,
    "elo_atual": 539.0
   },
   "operario_pr": {
-   "elo": 451,
+   "elo": 473,
    "fonte": "simulado",
    "forca": 65.6,
    "elo_atual": 512.0
   },
   "palmeiras": {
-   "elo": 779,
+   "elo": 798,
    "fonte": "simulado",
    "forca": 76.8,
    "elo_atual": 670.0
   },
   "paysandu": {
-   "elo": 561,
+   "elo": 581,
    "fonte": "simulado",
    "forca": 69.4,
    "elo_atual": 427.0
   },
   "ponte_preta": {
-   "elo": 426,
+   "elo": 447,
    "fonte": "simulado",
    "forca": 64.8,
    "elo_atual": 478.0
   },
   "rb_bragantino": {
-   "elo": 703,
+   "elo": 723,
    "fonte": "simulado",
    "forca": 74.2,
    "elo_atual": 645.0
   },
   "remo": {
-   "elo": 630,
+   "elo": 650,
    "fonte": "simulado",
    "forca": 71.7,
    "elo_atual": 625.0
   },
   "santa_cruz": {
-   "elo": 550,
+   "elo": 571,
    "fonte": "simulado",
    "forca": 69.0,
    "elo_atual": 435.0
   },
   "santos": {
-   "elo": 749,
+   "elo": 769,
    "fonte": "simulado",
    "forca": 75.8,
    "elo_atual": 653.0
   },
   "sao_bernardo": {
-   "elo": 514,
+   "elo": 535,
    "fonte": "simulado",
    "forca": 67.8,
    "elo_atual": 515.0
   },
   "sao_paulo": {
-   "elo": 724,
+   "elo": 744,
    "fonte": "simulado",
    "forca": 74.9,
    "elo_atual": 643.0
   },
   "sport_recife": {
-   "elo": 636,
+   "elo": 656,
    "fonte": "simulado",
    "forca": 71.9,
    "elo_atual": 520.0
   },
   "vasco": {
-   "elo": 785,
+   "elo": 804,
    "fonte": "simulado",
    "forca": 77.0,
    "elo_atual": 653.0
   },
   "vila_nova": {
-   "elo": 516,
+   "elo": 537,
    "fonte": "simulado",
    "forca": 67.9,
    "elo_atual": 522.0
   },
   "vitoria": {
-   "elo": 657,
+   "elo": 677,
    "fonte": "simulado",
    "forca": 72.6,
    "elo_atual": 632.0
   },
   "volta_redonda": {
-   "elo": 510,
+   "elo": 531,
    "fonte": "simulado",
    "forca": 67.6,
    "elo_atual": 419.0
   },
   "ypiranga_rs": {
-   "elo": 475,
+   "elo": 495,
    "fonte": "simulado",
    "forca": 66.4,
    "elo_atual": 432.0
   },
   "holstein_kiel": {
-   "elo": 485,
+   "elo": 506,
    "fonte": "simulado",
    "forca": 66.8,
    "elo_atual": 571.0
   },
   "hannover_96": {
-   "elo": 569,
+   "elo": 589,
    "fonte": "simulado",
    "forca": 69.6,
    "elo_atual": 587.0
   },
   "spvgg_greuther_furth": {
-   "elo": 481,
+   "elo": 502,
    "fonte": "simulado",
    "forca": 66.6,
    "elo_atual": 567.0
   },
   "hamburger_sv": {
-   "elo": 810,
+   "elo": 829,
    "fonte": "simulado",
    "forca": 77.9,
    "elo_atual": 671.0
   },
   "borussia_dortmund": {
-   "elo": 879,
+   "elo": 898,
    "fonte": "simulado",
    "forca": 80.2,
    "elo_atual": 717.0
   },
   "vfl_wolfsburg": {
-   "elo": 686,
+   "elo": 706,
    "fonte": "simulado",
    "forca": 73.6,
    "elo_atual": 589.0
   },
   "sc_paderborn_07": {
-   "elo": 758,
+   "elo": 777,
    "fonte": "simulado",
    "forca": 76.1,
    "elo_atual": 669.0
   },
   "vfb_stuttgart": {
-   "elo": 846,
+   "elo": 865,
    "fonte": "simulado",
    "forca": 79.1,
    "elo_atual": 702.0
   },
   "fc_st_pauli": {
-   "elo": 598,
+   "elo": 619,
    "fonte": "simulado",
    "forca": 70.6,
    "elo_atual": 578.0
   },
   "fc_augsburg": {
-   "elo": 789,
+   "elo": 808,
    "fonte": "simulado",
    "forca": 77.1,
    "elo_atual": 682.0
   },
   "vfl_osnabruck": {
-   "elo": 445,
+   "elo": 466,
    "fonte": "simulado",
    "forca": 65.4,
    "elo_atual": 571.0
   },
   "sv_darmstadt_98": {
-   "elo": 502,
+   "elo": 523,
    "fonte": "simulado",
    "forca": 67.4,
    "elo_atual": 573.0
   },
   "bayer_04_leverkusen": {
-   "elo": 886,
+   "elo": 904,
    "fonte": "simulado",
    "forca": 80.4,
    "elo_atual": 711.0
   },
   "fc_energie_cottbus": {
-   "elo": 456,
+   "elo": 477,
    "fonte": "simulado",
    "forca": 65.8,
    "elo_atual": 573.0
   },
   "rb_leipzig": {
-   "elo": 827,
+   "elo": 846,
    "fonte": "simulado",
    "forca": 78.4,
    "elo_atual": 701.0
   },
   "sg_dynamo_dresden": {
-   "elo": 502,
+   "elo": 523,
    "fonte": "simulado",
    "forca": 67.4,
    "elo_atual": 570.0
   },
   "karlsruher_sc": {
-   "elo": 523,
+   "elo": 543,
    "fonte": "simulado",
    "forca": 68.1,
    "elo_atual": 566.0
   },
   "fc_bayern_munique": {
-   "elo": 968,
+   "elo": 986,
    "fonte": "simulado",
    "forca": 83.2,
    "elo_atual": 750.0
   },
   "sg_eintracht_frankfurt": {
-   "elo": 814,
+   "elo": 833,
    "fonte": "simulado",
    "forca": 78,
    "elo_atual": 680.0
   },
   "tsg_1899_hoffenheim": {
-   "elo": 743,
+   "elo": 762,
    "fonte": "simulado",
    "forca": 75.6,
    "elo_atual": 683.0
   },
   "sc_freiburg": {
-   "elo": 812,
+   "elo": 831,
    "fonte": "simulado",
    "forca": 77.9,
    "elo_atual": 700.0
   },
   "1fsv_mainz_05": {
-   "elo": 787,
+   "elo": 806,
    "fonte": "simulado",
    "forca": 77.1,
    "elo_atual": 688.0
   },
   "werder_bremen": {
-   "elo": 781,
+   "elo": 800,
    "fonte": "simulado",
    "forca": 76.9,
    "elo_atual": 677.0
   },
   "borussia_monchengladbach": {
-   "elo": 802,
+   "elo": 821,
    "fonte": "simulado",
    "forca": 77.6,
    "elo_atual": 669.0
   },
   "1fc_colonia": {
-   "elo": 779,
+   "elo": 798,
    "fonte": "simulado",
    "forca": 76.8,
    "elo_atual": 671.0
   },
   "schalke_04": {
-   "elo": 779,
+   "elo": 798,
    "fonte": "simulado",
    "forca": 76.8,
    "elo_atual": 672.0
   },
   "sv_07_elversberg": {
-   "elo": 777,
+   "elo": 796,
    "fonte": "simulado",
    "forca": 76.7,
    "elo_atual": 674.0
   },
   "1fc_nuremberg": {
-   "elo": 460,
+   "elo": 481,
    "fonte": "simulado",
    "forca": 65.9,
    "elo_atual": 588.0
   },
   "1fc_heidenheim_1846": {
-   "elo": 573,
+   "elo": 593,
    "fonte": "simulado",
    "forca": 69.8,
    "elo_atual": 584.0
   },
   "1fc_kaiserslautern": {
-   "elo": 506,
+   "elo": 527,
    "fonte": "simulado",
    "forca": 67.5,
    "elo_atual": 581.0
   },
   "hertha_berlim": {
-   "elo": 498,
+   "elo": 518,
    "fonte": "simulado",
    "forca": 67.2,
    "elo_atual": 596.0
   },
   "magdeburgo": {
-   "elo": 472,
+   "elo": 493,
    "fonte": "simulado",
    "forca": 66.4,
    "elo_atual": 581.0
   },
   "eintracht_braunschweig_tsv": {
-   "elo": 412,
+   "elo": 433,
    "fonte": "simulado",
    "forca": 64.3,
    "elo_atual": 565.0
   },
   "vfl_bochum": {
-   "elo": 523,
+   "elo": 543,
    "fonte": "simulado",
    "forca": 68.1,
    "elo_atual": 576.0
   },
   "arminia_bielefeld": {
-   "elo": 502,
+   "elo": 523,
    "fonte": "simulado",
    "forca": 67.4,
    "elo_atual": 576.0
   },
   "1fc_union_berlim": {
-   "elo": 781,
+   "elo": 800,
    "fonte": "simulado",
    "forca": 76.9,
    "elo_atual": 673.0
   },
   "independiente_del_valle": {
-   "elo": 674,
+   "elo": 694,
    "fonte": "simulado",
    "forca": 73.2,
    "elo_atual": 647.0
   },
   "tecnico_universitario": {
-   "elo": 561,
+   "elo": 581,
    "fonte": "simulado",
    "forca": 69.4,
    "elo_atual": 584.0
   },
   "deportivo_cuenca": {
-   "elo": 594,
+   "elo": 614,
    "fonte": "simulado",
    "forca": 70.5,
    "elo_atual": 596.0
   },
   "manta_fc": {
-   "elo": 571,
+   "elo": 591,
    "fonte": "simulado",
    "forca": 69.7,
    "elo_atual": 586.0
   },
   "libertad_fc": {
-   "elo": 535,
+   "elo": 556,
    "fonte": "simulado",
    "forca": 68.5,
    "elo_atual": 604.0
   },
   "mushuc_runa_sc": {
-   "elo": 565,
+   "elo": 585,
    "fonte": "simulado",
    "forca": 69.5,
    "elo_atual": 599.0
   },
   "guayaquil_city_fc": {
-   "elo": 573,
+   "elo": 593,
    "fonte": "simulado",
    "forca": 69.8,
    "elo_atual": 597.0
   },
   "cd_leones_del_norte": {
-   "elo": 531,
+   "elo": 552,
    "fonte": "simulado",
    "forca": 68.4,
    "elo_atual": 596.0
   },
   "cd_macara": {
-   "elo": 563,
+   "elo": 583,
    "fonte": "simulado",
    "forca": 69.4,
    "elo_atual": 621.0
   },
   "orense_sc": {
-   "elo": 563,
+   "elo": 583,
    "fonte": "simulado",
    "forca": 69.4,
    "elo_atual": 592.0
   },
   "delfin_sc": {
-   "elo": 546,
+   "elo": 566,
    "fonte": "simulado",
    "forca": 68.9,
    "elo_atual": 593.0
   },
   "cd_universidad_catolica": {
-   "elo": 586,
+   "elo": 606,
    "fonte": "simulado",
    "forca": 70.2,
    "elo_atual": 621.0
   },
   "sd_aucas": {
-   "elo": 571,
+   "elo": 591,
    "fonte": "simulado",
    "forca": 69.7,
    "elo_atual": 611.0
   },
   "cs_emelec": {
-   "elo": 615,
+   "elo": 635,
    "fonte": "simulado",
    "forca": 71.2,
    "elo_atual": 597.0
   },
   "barcelona_guayaquil_sc": {
-   "elo": 661,
+   "elo": 681,
    "fonte": "simulado",
    "forca": 72.8,
    "elo_atual": 609.0
   },
   "ldu_quito": {
-   "elo": 722,
+   "elo": 742,
    "fonte": "simulado",
    "forca": 74.9,
    "elo_atual": 625.0
   },
   "san_antonio_fc": {
-   "elo": 391,
+   "elo": 412,
    "fonte": "simulado",
    "forca": 63.6,
    "elo_atual": 490.0
   },
   "22_de_julio_fc": {
-   "elo": 326,
+   "elo": 347,
    "fonte": "simulado",
    "forca": 61.4,
    "elo_atual": 459.0
   },
   "ldu_de_portoviejo": {
-   "elo": 443,
+   "elo": 464,
    "fonte": "simulado",
    "forca": 65.4,
    "elo_atual": 500.0
   },
   "cd_el_nacional": {
-   "elo": 422,
+   "elo": 443,
    "fonte": "simulado",
    "forca": 64.6,
    "elo_atual": 481.0
   },
   "gualaceo_sc": {
-   "elo": 298,
+   "elo": 320,
    "fonte": "simulado",
    "forca": 60.4,
    "elo_atual": 506.0
   },
   "cumbaya_fc": {
-   "elo": 361,
+   "elo": 383,
    "fonte": "simulado",
    "forca": 62.6,
    "elo_atual": 500.0
   },
   "cd_santo_domingo_de_los_tsachilas": {
-   "elo": 313,
+   "elo": 335,
    "fonte": "simulado",
    "forca": 60.9,
    "elo_atual": 497.0
   },
   "cuenca_juniors": {
-   "elo": 370,
+   "elo": 391,
    "fonte": "simulado",
    "forca": 62.9,
    "elo_atual": 490.0
   },
   "vinotinto_fc": {
-   "elo": 489,
+   "elo": 510,
    "fonte": "simulado",
    "forca": 66.9,
    "elo_atual": 515.0
   },
   "atletico_futbol_club": {
-   "elo": 502,
+   "elo": 523,
    "fonte": "simulado",
    "forca": 67.4,
    "elo_atual": 514.0
   },
   "independiente_juniors": {
-   "elo": 462,
+   "elo": 483,
    "fonte": "simulado",
    "forca": 66,
    "elo_atual": 516.0
   },
   "ad_nueve_de_octubre": {
-   "elo": 483,
+   "elo": 504,
    "fonte": "simulado",
    "forca": 66.7,
    "elo_atual": 509.0
   },
   "cerro_largo_fc": {
-   "elo": 416,
+   "elo": 437,
    "fonte": "simulado",
    "forca": 64.4,
    "elo_atual": 565.0
   },
   "club_nacional": {
-   "elo": 699,
+   "elo": 719,
    "fonte": "simulado",
    "forca": 74.1,
    "elo_atual": 598.0
   },
   "albion_fc": {
-   "elo": 470,
+   "elo": 491,
    "fonte": "simulado",
    "forca": 66.3,
    "elo_atual": 562.0
   },
   "ca_boston_river": {
-   "elo": 475,
+   "elo": 495,
    "fonte": "simulado",
    "forca": 66.4,
    "elo_atual": 570.0
   },
   "ca_juventud": {
-   "elo": 594,
+   "elo": 614,
    "fonte": "simulado",
    "forca": 70.5,
    "elo_atual": 581.0
   },
   "ca_progreso": {
-   "elo": 439,
+   "elo": 460,
    "fonte": "simulado",
    "forca": 65.2,
    "elo_atual": 555.0
   },
   "cd_maldonado": {
-   "elo": 428,
+   "elo": 450,
    "fonte": "simulado",
    "forca": 64.9,
    "elo_atual": 590.0
   },
   "central_espanol_fc": {
-   "elo": 460,
+   "elo": 481,
    "fonte": "simulado",
    "forca": 65.9,
    "elo_atual": 561.0
   },
   "ca_cerro": {
-   "elo": 430,
+   "elo": 452,
    "fonte": "simulado",
    "forca": 64.9,
    "elo_atual": 566.0
   },
   "fc_danubio_montevideo": {
-   "elo": 420,
+   "elo": 441,
    "fonte": "simulado",
    "forca": 64.6,
    "elo_atual": 562.0
   },
   "defensor_sporting_club": {
-   "elo": 630,
+   "elo": 650,
    "fonte": "simulado",
    "forca": 71.7,
    "elo_atual": 564.0
   },
   "liverpool_fc_montevideo": {
-   "elo": 605,
+   "elo": 625,
    "fonte": "simulado",
    "forca": 70.9,
    "elo_atual": 589.0
   },
   "montevideo_city_torque": {
-   "elo": 546,
+   "elo": 566,
    "fonte": "simulado",
    "forca": 68.9,
    "elo_atual": 593.0
   },
   "montevideo_wanderers": {
-   "elo": 443,
+   "elo": 464,
    "fonte": "simulado",
    "forca": 65.4,
    "elo_atual": 573.0
   },
   "ca_penarol": {
-   "elo": 695,
+   "elo": 714,
    "fonte": "simulado",
    "forca": 73.9,
    "elo_atual": 608.0
   },
   "racing_club_montevideo": {
-   "elo": 449,
+   "elo": 470,
    "fonte": "simulado",
    "forca": 65.6,
    "elo_atual": 578.0
   },
   "fc_tokyo": {
-   "elo": 451,
+   "elo": 473,
    "fonte": "simulado",
    "forca": 65.6,
    "elo_atual": 594.0
   },
   "kashima_antlers": {
-   "elo": 445,
+   "elo": 466,
    "fonte": "simulado",
    "forca": 65.4,
    "elo_atual": 597.0
   },
   "kawasaki_frontale": {
-   "elo": 418,
+   "elo": 439,
    "fonte": "simulado",
    "forca": 64.5,
    "elo_atual": 582.0
   },
   "sanfrecce_hiroshima": {
-   "elo": 388,
+   "elo": 410,
    "fonte": "simulado",
    "forca": 63.5,
    "elo_atual": 607.0
   },
   "machida_zelvia": {
-   "elo": 426,
+   "elo": 447,
    "fonte": "simulado",
    "forca": 64.8,
    "elo_atual": 598.0
   },
   "kashiwa_reysol": {
-   "elo": 426,
+   "elo": 447,
    "fonte": "simulado",
    "forca": 64.8,
    "elo_atual": 595.0
   },
   "vissel_kobe": {
-   "elo": 439,
+   "elo": 460,
    "fonte": "simulado",
    "forca": 65.2,
    "elo_atual": 596.0
   },
   "gamba_osaka": {
-   "elo": 451,
+   "elo": 473,
    "fonte": "simulado",
    "forca": 65.6,
    "elo_atual": 576.0
   },
   "kyoto_sanga": {
-   "elo": 447,
+   "elo": 468,
    "fonte": "simulado",
    "forca": 65.5,
    "elo_atual": 572.0
   },
   "yokohama_f_marinos": {
-   "elo": 464,
+   "elo": 485,
    "fonte": "simulado",
    "forca": 66.1,
    "elo_atual": 585.0
   },
   "urawa_red_diamonds": {
-   "elo": 447,
+   "elo": 468,
    "fonte": "simulado",
    "forca": 65.5,
    "elo_atual": 579.0
   },
   "shimizu_spulse": {
-   "elo": 374,
+   "elo": 395,
    "fonte": "simulado",
    "forca": 63,
    "elo_atual": 568.0
   },
   "jef_united_chiba": {
-   "elo": 441,
+   "elo": 462,
    "fonte": "simulado",
    "forca": 65.3,
    "elo_atual": 556.0
   },
   "vvaren_nagasaki": {
-   "elo": 435,
+   "elo": 456,
    "fonte": "simulado",
    "forca": 65.1,
    "elo_atual": 563.0
   },
   "nagoya_grampus": {
-   "elo": 384,
+   "elo": 406,
    "fonte": "simulado",
    "forca": 63.4,
    "elo_atual": 571.0
   },
   "cerezo_osaka": {
-   "elo": 437,
+   "elo": 458,
    "fonte": "simulado",
    "forca": 65.1,
    "elo_atual": 578.0
   },
   "avispa_fukuoka": {
-   "elo": 454,
+   "elo": 475,
    "fonte": "simulado",
    "forca": 65.7,
    "elo_atual": 565.0
   },
   "mito_hollyhock": {
-   "elo": 405,
+   "elo": 427,
    "fonte": "simulado",
    "forca": 64.1,
    "elo_atual": 562.0
   },
   "fagiano_okayama": {
-   "elo": 409,
+   "elo": 431,
    "fonte": "simulado",
    "forca": 64.2,
    "elo_atual": 574.0
   },
   "tokyo_verdy": {
-   "elo": 470,
+   "elo": 491,
    "fonte": "simulado",
    "forca": 66.3,
    "elo_atual": 557.0
   },
   "deportes_limache": {
-   "elo": 483,
+   "elo": 504,
    "fonte": "simulado",
    "forca": 66.7,
    "elo_atual": 576.0
   },
   "deportes_concepcion": {
-   "elo": 441,
+   "elo": 462,
    "fonte": "simulado",
    "forca": 65.3,
    "elo_atual": 576.0
   },
   "coquimbo_unido": {
-   "elo": 707,
+   "elo": 727,
    "fonte": "simulado",
    "forca": 74.4,
    "elo_atual": 593.0
   },
   "csd_colocolo": {
-   "elo": 779,
+   "elo": 798,
    "fonte": "simulado",
    "forca": 76.8,
    "elo_atual": 600.0
   },
   "cd_ohiggins": {
-   "elo": 636,
+   "elo": 656,
    "fonte": "simulado",
    "forca": 71.9,
    "elo_atual": 581.0
   },
   "universidad_catolica": {
-   "elo": 678,
+   "elo": 698,
    "fonte": "simulado",
    "forca": 73.4,
    "elo_atual": 600.0
   },
   "universidad_de_chile": {
-   "elo": 699,
+   "elo": 719,
    "fonte": "simulado",
    "forca": 74.1,
    "elo_atual": 600.0
   },
   "audax_italiano": {
-   "elo": 682,
+   "elo": 702,
    "fonte": "simulado",
    "forca": 73.5,
    "elo_atual": 578.0
   },
   "cd_everton": {
-   "elo": 668,
+   "elo": 687,
    "fonte": "simulado",
    "forca": 73,
    "elo_atual": 585.0
   },
   "cd_cobresal": {
-   "elo": 426,
+   "elo": 447,
    "fonte": "simulado",
    "forca": 64.8,
    "elo_atual": 560.0
   },
   "cd_palestino": {
-   "elo": 523,
+   "elo": 543,
    "fonte": "simulado",
    "forca": 68.1,
    "elo_atual": 580.0
   },
   "cd_union_la_calera": {
-   "elo": 479,
+   "elo": 500,
    "fonte": "simulado",
    "forca": 66.6,
    "elo_atual": 565.0
   },
   "deportes_la_serena": {
-   "elo": 443,
+   "elo": 464,
    "fonte": "simulado",
    "forca": 65.4,
    "elo_atual": 567.0
   },
   "cd_huachipato": {
-   "elo": 516,
+   "elo": 537,
    "fonte": "simulado",
    "forca": 67.9,
    "elo_atual": 573.0
   },
   "cd_nublense": {
-   "elo": 548,
+   "elo": 568,
    "fonte": "simulado",
    "forca": 68.9,
    "elo_atual": 572.0
   },
   "universidad_de_concepcion": {
-   "elo": 552,
+   "elo": 573,
    "fonte": "simulado",
    "forca": 69.1,
    "elo_atual": 553.0
   },
   "cucuta_deportivo": {
-   "elo": 516,
+   "elo": 537,
    "fonte": "simulado",
    "forca": 67.9,
    "elo_atual": 584.0
   },
   "deportivo_pereira": {
-   "elo": 525,
+   "elo": 546,
    "fonte": "simulado",
    "forca": 68.1,
    "elo_atual": 571.0
   },
   "jaguares_de_cordoba": {
-   "elo": 508,
+   "elo": 529,
    "fonte": "simulado",
    "forca": 67.6,
    "elo_atual": 576.0
   },
   "internacional_de_bogota": {
-   "elo": 531,
+   "elo": 552,
    "fonte": "simulado",
    "forca": 68.4,
    "elo_atual": 588.0
   },
   "deportivo_cali": {
-   "elo": 607,
+   "elo": 627,
    "fonte": "simulado",
    "forca": 70.9,
    "elo_atual": 606.0
   },
   "atletico_bucaramanga": {
-   "elo": 548,
+   "elo": 568,
    "fonte": "simulado",
    "forca": 68.9,
    "elo_atual": 604.0
   },
   "atletico_nacional": {
-   "elo": 712,
+   "elo": 731,
    "fonte": "simulado",
    "forca": 74.5,
    "elo_atual": 627.0
   },
   "alianza_fc": {
-   "elo": 537,
+   "elo": 558,
    "fonte": "simulado",
    "forca": 68.6,
    "elo_atual": 582.0
   },
   "deportes_tolima": {
-   "elo": 550,
+   "elo": 571,
    "fonte": "simulado",
    "forca": 69,
    "elo_atual": 608.0
   },
   "independiente_santa_fe": {
-   "elo": 699,
+   "elo": 719,
    "fonte": "simulado",
    "forca": 74.1,
    "elo_atual": 614.0
   },
   "deportivo_pasto": {
-   "elo": 428,
+   "elo": 450,
    "fonte": "simulado",
    "forca": 64.9,
    "elo_atual": 585.0
   },
   "independiente_medellin": {
-   "elo": 705,
+   "elo": 725,
    "fonte": "simulado",
    "forca": 74.3,
    "elo_atual": 609.0
   },
   "cd_america_de_cali": {
-   "elo": 621,
+   "elo": 641,
    "fonte": "simulado",
    "forca": 71.4,
    "elo_atual": 614.0
   },
   "junior_fc": {
-   "elo": 672,
+   "elo": 691,
    "fonte": "simulado",
    "forca": 73.1,
    "elo_atual": 603.0
   },
   "millonarios_bogota": {
-   "elo": 680,
+   "elo": 700,
    "fonte": "simulado",
    "forca": 73.4,
    "elo_atual": 614.0
   },
   "once_caldas": {
-   "elo": 544,
+   "elo": 564,
    "fonte": "simulado",
    "forca": 68.8,
    "elo_atual": 601.0
   },
   "fortaleza_ceif": {
-   "elo": 460,
+   "elo": 481,
    "fonte": "simulado",
    "forca": 65.9,
    "elo_atual": 585.0
   },
   "rionegro_aguilas": {
-   "elo": 496,
+   "elo": 516,
    "fonte": "simulado",
    "forca": 67.1,
    "elo_atual": 597.0
   },
   "boyaca_chico_fc": {
-   "elo": 464,
+   "elo": 485,
    "fonte": "simulado",
    "forca": 66.1,
    "elo_atual": 578.0
   },
   "llaneros_fc": {
-   "elo": 519,
+   "elo": 539,
    "fonte": "simulado",
    "forca": 67.9,
    "elo_atual": 589.0
   },
   "racing_club": {
-   "elo": 781,
+   "elo": 800,
    "fonte": "simulado",
    "forca": 76.9,
    "elo_atual": 618.0
   },
   "estudiantes_de_la_plata": {
-   "elo": 672,
+   "elo": 691,
    "fonte": "simulado",
    "forca": 73.1,
    "elo_atual": 629.0
   },
   "river_plate": {
-   "elo": 756,
+   "elo": 775,
    "fonte": "simulado",
    "forca": 76,
    "elo_atual": 634.0
   },
   "defensa_y_justicia": {
-   "elo": 634,
+   "elo": 654,
    "fonte": "simulado",
    "forca": 71.9,
    "elo_atual": 622.0
   },
   "ca_independiente": {
-   "elo": 626,
+   "elo": 646,
    "fonte": "simulado",
    "forca": 71.6,
    "elo_atual": 622.0
   },
   "rosario_central": {
-   "elo": 814,
+   "elo": 833,
    "fonte": "simulado",
    "forca": 78,
    "elo_atual": 636.0
   },
   "aa_estudiantes_rio_cuarto": {
-   "elo": 391,
+   "elo": 412,
    "fonte": "simulado",
    "forca": 63.6,
    "elo_atual": 592.0
   },
   "aa_argentinos_juniors": {
-   "elo": 531,
+   "elo": 552,
    "fonte": "simulado",
    "forca": 68.4,
    "elo_atual": 632.0
   },
   "club_atletico_tigre": {
-   "elo": 498,
+   "elo": 518,
    "fonte": "simulado",
    "forca": 67.2,
    "elo_atual": 617.0
   },
   "ca_boca_juniors": {
-   "elo": 714,
+   "elo": 733,
    "fonte": "simulado",
    "forca": 74.6,
    "elo_atual": 645.0
   },
   "ca_san_lorenzo_de_almagro": {
-   "elo": 571,
+   "elo": 591,
    "fonte": "simulado",
    "forca": 69.7,
    "elo_atual": 612.0
   },
   "ca_talleres": {
-   "elo": 592,
+   "elo": 612,
    "fonte": "simulado",
    "forca": 70.4,
    "elo_atual": 609.0
   },
   "ca_lanus": {
-   "elo": 577,
+   "elo": 598,
    "fonte": "simulado",
    "forca": 69.9,
    "elo_atual": 627.0
   },
   "ca_barracas_central": {
-   "elo": 577,
+   "elo": 598,
    "fonte": "simulado",
    "forca": 69.9,
    "elo_atual": 613.0
   },
   "ca_belgrano": {
-   "elo": 649,
+   "elo": 669,
    "fonte": "simulado",
    "forca": 72.4,
    "elo_atual": 632.0
   },
   "ca_velez_sarsfield": {
-   "elo": 663,
+   "elo": 683,
    "fonte": "simulado",
    "forca": 72.9,
    "elo_atual": 627.0
   },
   "ca_gimnasia_y_esgrima_lp": {
-   "elo": 575,
+   "elo": 596,
    "fonte": "simulado",
    "forca": 69.9,
    "elo_atual": 626.0
   },
   "cs_independiente_rivadavia": {
-   "elo": 544,
+   "elo": 564,
    "fonte": "simulado",
    "forca": 68.8,
    "elo_atual": 633.0
   },
   "ca_huracan": {
-   "elo": 634,
+   "elo": 654,
    "fonte": "simulado",
    "forca": 71.9,
    "elo_atual": 621.0
   },
   "instituto_acc": {
-   "elo": 575,
+   "elo": 596,
    "fonte": "simulado",
    "forca": 69.9,
    "elo_atual": 632.0
   },
   "ca_newells_old_boys": {
-   "elo": 695,
+   "elo": 714,
    "fonte": "simulado",
    "forca": 73.9,
    "elo_atual": 614.0
   },
   "ca_platense": {
-   "elo": 647,
+   "elo": 666,
    "fonte": "simulado",
    "forca": 72.3,
    "elo_atual": 615.0
   },
   "ca_union_santa_fe": {
-   "elo": 571,
+   "elo": 591,
    "fonte": "simulado",
    "forca": 69.7,
    "elo_atual": 616.0
   },
   "ca_aldosivi": {
-   "elo": 418,
+   "elo": 439,
    "fonte": "simulado",
    "forca": 64.5,
    "elo_atual": 596.0
   },
   "ca_banfield": {
-   "elo": 548,
+   "elo": 568,
    "fonte": "simulado",
    "forca": 68.9,
    "elo_atual": 608.0
   },
   "ca_gimnasia_y_esgrima_mendoza": {
-   "elo": 412,
+   "elo": 433,
    "fonte": "simulado",
    "forca": 64.3,
    "elo_atual": 616.0
   },
   "club_atletico_tucuman": {
-   "elo": 420,
+   "elo": 441,
    "fonte": "simulado",
    "forca": 64.6,
    "elo_atual": 613.0
   },
   "cd_riestra": {
-   "elo": 384,
+   "elo": 406,
    "fonte": "simulado",
    "forca": 63.4,
    "elo_atual": 608.0
   },
   "ca_central_cordoba_sde": {
-   "elo": 353,
+   "elo": 374,
    "fonte": "simulado",
    "forca": 62.3,
    "elo_atual": 605.0
   },
   "ca_sarmiento": {
-   "elo": 416,
+   "elo": 437,
    "fonte": "simulado",
    "forca": 64.4,
    "elo_atual": 616.0
   },
   "racing_santander": {
-   "elo": 720,
+   "elo": 739,
    "fonte": "simulado",
    "forca": 74.8,
    "elo_atual": 669.0
@@ -1378,529 +1378,529 @@
    "elo_atual": 724.0
   },
   "malaga_cf": {
-   "elo": 659,
+   "elo": 679,
    "fonte": "simulado",
    "forca": 72.7,
    "elo_atual": 665.0
   },
   "deportivo_alaves": {
-   "elo": 739,
+   "elo": 758,
    "fonte": "simulado",
    "forca": 75.4,
    "elo_atual": 679.0
   },
   "barcelona": {
-   "elo": 915,
+   "elo": 933,
    "fonte": "simulado",
    "forca": 81.4,
    "elo_atual": 739.0
   },
   "getafe_cf": {
-   "elo": 739,
+   "elo": 758,
    "fonte": "simulado",
    "forca": 75.4,
    "elo_atual": 670.0
   },
   "rayo_vallecano": {
-   "elo": 798,
+   "elo": 817,
    "fonte": "simulado",
    "forca": 77.4,
    "elo_atual": 684.0
   },
   "elche_cf": {
-   "elo": 701,
+   "elo": 721,
    "fonte": "simulado",
    "forca": 74.1,
    "elo_atual": 671.0
   },
   "ca_osasuna": {
-   "elo": 808,
+   "elo": 827,
    "fonte": "simulado",
    "forca": 77.8,
    "elo_atual": 672.0
   },
   "atletico_madrid": {
-   "elo": 961,
+   "elo": 979,
    "fonte": "simulado",
    "forca": 83,
    "elo_atual": 713.0
   },
   "real_betis": {
-   "elo": 831,
+   "elo": 850,
    "fonte": "simulado",
    "forca": 78.6,
    "elo_atual": 698.0
   },
   "deportivo_la_coruna": {
-   "elo": 701,
+   "elo": 721,
    "fonte": "simulado",
    "forca": 74.1,
    "elo_atual": 673.0
   },
   "athletic_club_fc": {
-   "elo": 879,
+   "elo": 898,
    "fonte": "simulado",
    "forca": 80.2,
    "elo_atual": 684.0
   },
   "valencia_cf": {
-   "elo": 781,
+   "elo": 800,
    "fonte": "simulado",
    "forca": 76.9,
    "elo_atual": 678.0
   },
   "sevilla_fc": {
-   "elo": 754,
+   "elo": 773,
    "fonte": "simulado",
    "forca": 75.9,
    "elo_atual": 678.0
   },
   "rcd_espanyol": {
-   "elo": 756,
+   "elo": 775,
    "fonte": "simulado",
    "forca": 76,
    "elo_atual": 672.0
   },
   "levante_ud": {
-   "elo": 705,
+   "elo": 725,
    "fonte": "simulado",
    "forca": 74.3,
    "elo_atual": 674.0
   },
   "celta_de_vigo": {
-   "elo": 798,
+   "elo": 817,
    "fonte": "simulado",
    "forca": 77.4,
    "elo_atual": 681.0
   },
   "real_sociedad": {
-   "elo": 810,
+   "elo": 829,
    "fonte": "simulado",
    "forca": 77.9,
    "elo_atual": 681.0
   },
   "villarreal_cf": {
-   "elo": 825,
+   "elo": 844,
    "fonte": "simulado",
    "forca": 78.4,
    "elo_atual": 695.0
   },
   "arsenal_fc": {
-   "elo": 978,
+   "elo": 996,
    "fonte": "simulado",
    "forca": 83.6,
    "elo_atual": 774.0
   },
   "aston_villa": {
-   "elo": 829,
+   "elo": 848,
    "fonte": "simulado",
    "forca": 78.5,
    "elo_atual": 741.0
   },
   "bournemouth": {
-   "elo": 810,
+   "elo": 829,
    "fonte": "simulado",
    "forca": 77.9,
    "elo_atual": 731.0
   },
   "brentford_fc": {
-   "elo": 777,
+   "elo": 796,
    "fonte": "simulado",
    "forca": 76.7,
    "elo_atual": 738.0
   },
   "brighton_hove_albion": {
-   "elo": 798,
+   "elo": 817,
    "fonte": "simulado",
    "forca": 77.4,
    "elo_atual": 749.0
   },
   "chelsea": {
-   "elo": 882,
+   "elo": 900,
    "fonte": "simulado",
    "forca": 80.3,
    "elo_atual": 742.0
   },
   "coventry_city": {
-   "elo": 686,
+   "elo": 706,
    "fonte": "simulado",
    "forca": 73.6,
    "elo_atual": 721.0
   },
   "crystal_palace": {
-   "elo": 833,
+   "elo": 852,
    "fonte": "simulado",
    "forca": 78.6,
    "elo_atual": 727.0
   },
   "everton_fc": {
-   "elo": 796,
+   "elo": 815,
    "fonte": "simulado",
    "forca": 77.4,
    "elo_atual": 737.0
   },
   "fulham": {
-   "elo": 781,
+   "elo": 800,
    "fonte": "simulado",
    "forca": 76.9,
    "elo_atual": 722.0
   },
   "hull_city": {
-   "elo": 701,
+   "elo": 721,
    "fonte": "simulado",
    "forca": 74.1,
    "elo_atual": 722.0
   },
   "ipswich_town": {
-   "elo": 756,
+   "elo": 775,
    "fonte": "simulado",
    "forca": 76,
    "elo_atual": 722.0
   },
   "leeds": {
-   "elo": 779,
+   "elo": 798,
    "fonte": "simulado",
    "forca": 76.8,
    "elo_atual": 733.0
   },
   "liverpool_fc": {
-   "elo": 982,
+   "elo": 1000,
    "fonte": "simulado",
    "forca": 83.7,
    "elo_atual": 750.0
   },
   "manchester_city": {
-   "elo": 938,
+   "elo": 956,
    "fonte": "simulado",
    "forca": 82.2,
    "elo_atual": 770.0
   },
   "manchester_united": {
-   "elo": 890,
+   "elo": 908,
    "fonte": "simulado",
    "forca": 80.6,
    "elo_atual": 740.0
   },
   "newcastle": {
-   "elo": 856,
+   "elo": 875,
    "fonte": "simulado",
    "forca": 79.4,
    "elo_atual": 735.0
   },
   "nottingham_forest": {
-   "elo": 859,
+   "elo": 877,
    "fonte": "simulado",
    "forca": 79.5,
    "elo_atual": 727.0
   },
   "sunderland_afc": {
-   "elo": 775,
+   "elo": 794,
    "fonte": "simulado",
    "forca": 76.6,
    "elo_atual": 724.0
   },
   "tottenham_hotspur": {
-   "elo": 903,
+   "elo": 921,
    "fonte": "simulado",
    "forca": 81,
    "elo_atual": 731.0
   },
   "ac_milan": {
-   "elo": 854,
+   "elo": 873,
    "fonte": "simulado",
    "forca": 79.4,
    "elo_atual": 674.0
   },
   "ac_monza": {
-   "elo": 663,
+   "elo": 683,
    "fonte": "simulado",
    "forca": 72.9,
    "elo_atual": 639.0
   },
   "acf_fiorentina": {
-   "elo": 764,
+   "elo": 783,
    "fonte": "simulado",
    "forca": 76.3,
    "elo_atual": 653.0
   },
   "as_roma": {
-   "elo": 850,
+   "elo": 869,
    "fonte": "simulado",
    "forca": 79.2,
    "elo_atual": 688.0
   },
   "atalanta_bc": {
-   "elo": 829,
+   "elo": 848,
    "fonte": "simulado",
    "forca": 78.5,
    "elo_atual": 667.0
   },
   "bologna_fc_1909": {
-   "elo": 781,
+   "elo": 800,
    "fonte": "simulado",
    "forca": 76.9,
    "elo_atual": 659.0
   },
   "cagliari_calcio": {
-   "elo": 663,
+   "elo": 683,
    "fonte": "simulado",
    "forca": 72.9,
    "elo_atual": 651.0
   },
   "como_1907": {
-   "elo": 793,
+   "elo": 812,
    "fonte": "simulado",
    "forca": 77.3,
    "elo_atual": 683.0
   },
   "frosinone_calcio": {
-   "elo": 611,
+   "elo": 631,
    "fonte": "simulado",
    "forca": 71.1,
    "elo_atual": 645.0
   },
   "genoa": {
-   "elo": 695,
+   "elo": 714,
    "fonte": "simulado",
    "forca": 73.9,
    "elo_atual": 644.0
   },
   "inter_milan": {
-   "elo": 926,
+   "elo": 944,
    "fonte": "simulado",
    "forca": 81.8,
    "elo_atual": 696.0
   },
   "juventus": {
-   "elo": 865,
+   "elo": 883,
    "fonte": "simulado",
    "forca": 79.7,
    "elo_atual": 683.0
   },
   "parma_calcio_1913": {
-   "elo": 680,
+   "elo": 700,
    "fonte": "simulado",
    "forca": 73.4,
    "elo_atual": 638.0
   },
   "sassuolo": {
-   "elo": 701,
+   "elo": 721,
    "fonte": "simulado",
    "forca": 74.1,
    "elo_atual": 652.0
   },
   "ss_lazio": {
-   "elo": 806,
+   "elo": 825,
    "fonte": "simulado",
    "forca": 77.7,
    "elo_atual": 668.0
   },
   "ssc_napoli": {
-   "elo": 875,
+   "elo": 894,
    "fonte": "simulado",
    "forca": 80.1,
    "elo_atual": 676.0
   },
   "torino": {
-   "elo": 754,
+   "elo": 773,
    "fonte": "simulado",
    "forca": 75.9,
    "elo_atual": 650.0
   },
   "udinese_calcio": {
-   "elo": 689,
+   "elo": 708,
    "fonte": "simulado",
    "forca": 73.7,
    "elo_atual": 649.0
   },
   "us_lecce": {
-   "elo": 659,
+   "elo": 679,
    "fonte": "simulado",
    "forca": 72.7,
    "elo_atual": 636.0
   },
   "venezia": {
-   "elo": 668,
+   "elo": 687,
    "fonte": "simulado",
    "forca": 73,
    "elo_atual": 629.0
   },
   "aj_auxerre": {
-   "elo": 636,
+   "elo": 656,
    "fonte": "simulado",
    "forca": 71.9,
    "elo_atual": 652.0
   },
   "angers_sco": {
-   "elo": 600,
+   "elo": 621,
    "fonte": "simulado",
    "forca": 70.7,
    "elo_atual": 645.0
   },
   "as_monaco": {
-   "elo": 793,
+   "elo": 812,
    "fonte": "simulado",
    "forca": 77.3,
    "elo_atual": 685.0
   },
   "estac_troyes": {
-   "elo": 525,
+   "elo": 546,
    "fonte": "simulado",
    "forca": 68.1,
    "elo_atual": 642.0
   },
   "fc_lorient": {
-   "elo": 615,
+   "elo": 635,
    "fonte": "simulado",
    "forca": 71.2,
    "elo_atual": 660.0
   },
   "le_havre_ac": {
-   "elo": 590,
+   "elo": 610,
    "fonte": "simulado",
    "forca": 70.4,
    "elo_atual": 647.0
   },
   "le_mans_fc": {
-   "elo": 506,
+   "elo": 527,
    "fonte": "simulado",
    "forca": 67.5,
    "elo_atual": 649.0
   },
   "losc_lille": {
-   "elo": 779,
+   "elo": 798,
    "fonte": "simulado",
    "forca": 76.8,
    "elo_atual": 678.0
   },
   "ogc_nice": {
-   "elo": 775,
+   "elo": 794,
    "fonte": "simulado",
    "forca": 76.6,
    "elo_atual": 653.0
   },
   "olympique_lyon": {
-   "elo": 751,
+   "elo": 771,
    "fonte": "simulado",
    "forca": 75.9,
    "elo_atual": 682.0
   },
   "olympique_marseille": {
-   "elo": 762,
+   "elo": 781,
    "fonte": "simulado",
    "forca": 76.2,
    "elo_atual": 671.0
   },
   "paris_fc": {
-   "elo": 731,
+   "elo": 750,
    "fonte": "simulado",
    "forca": 75.1,
    "elo_atual": 668.0
   },
   "paris_saint_germain": {
-   "elo": 993,
+   "elo": 1000,
    "fonte": "simulado",
    "forca": 84.1,
    "elo_atual": 718.0
   },
   "rc_lens": {
-   "elo": 707,
+   "elo": 727,
    "fonte": "simulado",
    "forca": 74.4,
    "elo_atual": 684.0
   },
   "rc_strasbourg_alsace": {
-   "elo": 676,
+   "elo": 696,
    "fonte": "simulado",
    "forca": 73.3,
    "elo_atual": 668.0
   },
   "stade_brestois_29": {
-   "elo": 668,
+   "elo": 687,
    "fonte": "simulado",
    "forca": 73,
    "elo_atual": 661.0
   },
   "stade_rennais_fc": {
-   "elo": 758,
+   "elo": 777,
    "fonte": "simulado",
    "forca": 76.1,
    "elo_atual": 677.0
   },
   "toulouse_fc": {
-   "elo": 626,
+   "elo": 646,
    "fonte": "simulado",
    "forca": 71.6,
    "elo_atual": 665.0
   },
   "guarani_py": {
-   "elo": 605,
+   "elo": 625,
    "fonte": "simulado",
    "forca": 70.9,
    "elo_atual": 581.0
   },
   "san_lorenzo_py": {
-   "elo": 430,
+   "elo": 452,
    "fonte": "simulado",
    "forca": 64.9,
    "elo_atual": 543.0
   },
   "ameliano_py": {
-   "elo": 493,
+   "elo": 514,
    "fonte": "simulado",
    "forca": 67.1,
    "elo_atual": 572.0
   },
   "luqueno_py": {
-   "elo": 491,
+   "elo": 512,
    "fonte": "simulado",
    "forca": 67,
    "elo_atual": 556.0
   },
   "dos_de_mayo_py": {
-   "elo": 519,
+   "elo": 539,
    "fonte": "simulado",
    "forca": 67.9,
    "elo_atual": 574.0
   },
   "olimpia_py": {
-   "elo": 691,
+   "elo": 710,
    "fonte": "simulado",
    "forca": 73.8,
    "elo_atual": 597.0
   },
   "libertad_asuncion": {
-   "elo": 630,
+   "elo": 650,
    "fonte": "simulado",
    "forca": 71.7,
    "elo_atual": 584.0
   },
   "cerro_porteno_py": {
-   "elo": 651,
+   "elo": 671,
    "fonte": "simulado",
    "forca": 72.4,
    "elo_atual": 593.0
   },
   "nacional_asuncion": {
-   "elo": 523,
+   "elo": 543,
    "fonte": "simulado",
    "forca": 68.1,
    "elo_atual": 592.0
   },
   "trinidense_py": {
-   "elo": 504,
+   "elo": 525,
    "fonte": "simulado",
    "forca": 67.4,
    "elo_atual": 584.0
   },
   "recoleta_py": {
-   "elo": 523,
+   "elo": 543,
    "fonte": "simulado",
    "forca": 68.1,
    "elo_atual": 558.0
   },
   "rubio_nu_py": {
-   "elo": 487,
+   "elo": 508,
    "fonte": "simulado",
    "forca": 66.9,
    "elo_atual": 562.0
