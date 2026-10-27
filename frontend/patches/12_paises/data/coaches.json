@@ -1,0 +1,5682 @@
+{
+  "coaches": [
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-3-3"
+      ],
+      "formation": "4-3-3",
+      "id": "coach_amazonas",
+      "idade": 40.0,
+      "nacionalidade": "br",
+      "nome": "Rodrigo Santana",
+      "reputacao": 38.9,
+      "tactic_archetype": "tiki_taka",
+      "tactical_flexibility": "balanced",
+      "team_id": "amazonas",
+      "team_name": "Amazonas"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-3-3"
+      ],
+      "formation": "4-3-3",
+      "id": "coach_america_mineiro",
+      "idade": 40.0,
+      "nacionalidade": "br",
+      "nome": "Umberto Louzer",
+      "reputacao": 49.3,
+      "tactic_archetype": "tiki_taka",
+      "tactical_flexibility": "balanced",
+      "team_id": "america_mineiro",
+      "team_name": "América Mineiro"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-3-3"
+      ],
+      "formation": "4-3-3",
+      "id": "coach_anapolis",
+      "idade": 40.0,
+      "nacionalidade": "br",
+      "nome": "Luan Carlos",
+      "reputacao": 38.9,
+      "tactic_archetype": "tiki_taka",
+      "tactical_flexibility": "balanced",
+      "team_id": "anapolis",
+      "team_name": "Anápolis"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-3-3"
+      ],
+      "formation": "4-3-3",
+      "id": "coach_athletic_club",
+      "idade": 40.0,
+      "nacionalidade": "br",
+      "nome": "Alex de Souza",
+      "reputacao": 52.1,
+      "tactic_archetype": "tiki_taka",
+      "tactical_flexibility": "balanced",
+      "team_id": "athletic_club",
+      "team_name": "Athletic Club"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-3-3"
+      ],
+      "formation": "4-3-3",
+      "id": "coach_atletico_goianiense",
+      "idade": 40.0,
+      "nacionalidade": "br",
+      "nome": "Roger Silva",
+      "reputacao": 54.1,
+      "tactic_archetype": "tiki_taka",
+      "tactical_flexibility": "balanced",
+      "team_id": "atletico_goianiense",
+      "team_name": "Atlético Goianiense"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-3-3"
+      ],
+      "formation": "4-3-3",
+      "id": "coach_atletico_mineiro",
+      "idade": 40.0,
+      "nacionalidade": "ar",
+      "nome": "Eduardo Domínguez",
+      "reputacao": 73.1,
+      "tactic_archetype": "tiki_taka",
+      "tactical_flexibility": "balanced",
+      "team_id": "atletico_mineiro",
+      "team_name": "Atlético Mineiro"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-3-3"
+      ],
+      "formation": "4-3-3",
+      "id": "coach_atletico_paranaense",
+      "idade": 40.0,
+      "nacionalidade": "br",
+      "nome": "Odair Hellmann",
+      "reputacao": 73.4,
+      "tactic_archetype": "tiki_taka",
+      "tactical_flexibility": "balanced",
+      "team_id": "atletico_paranaense",
+      "team_name": "Athletico Paranaense"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-3-3"
+      ],
+      "formation": "4-3-3",
+      "id": "coach_avai",
+      "idade": 40.0,
+      "nacionalidade": "br",
+      "nome": "Allan Aal",
+      "reputacao": 51.7,
+      "tactic_archetype": "tiki_taka",
+      "tactical_flexibility": "balanced",
+      "team_id": "avai",
+      "team_name": "Avaí"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-3-3"
+      ],
+      "formation": "4-3-3",
+      "id": "coach_bahia",
+      "idade": 40.0,
+      "nacionalidade": "br",
+      "nome": "Rogério Ceni",
+      "reputacao": 73.1,
+      "tactic_archetype": "tiki_taka",
+      "tactical_flexibility": "balanced",
+      "team_id": "bahia",
+      "team_name": "Bahia"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-3-3"
+      ],
+      "formation": "4-3-3",
+      "id": "coach_barra",
+      "idade": 40.0,
+      "nacionalidade": "br",
+      "nome": "Evaristo Piza",
+      "reputacao": 38.9,
+      "tactic_archetype": "tiki_taka",
+      "tactical_flexibility": "balanced",
+      "team_id": "barra",
+      "team_name": "Barra"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-3-3"
+      ],
+      "formation": "4-3-3",
+      "id": "coach_botafogo",
+      "idade": 40.0,
+      "nacionalidade": "br",
+      "nome": "Rodrigo Bellão",
+      "reputacao": 71.6,
+      "tactic_archetype": "tiki_taka",
+      "tactical_flexibility": "balanced",
+      "team_id": "botafogo",
+      "team_name": "Botafogo"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-3-3"
+      ],
+      "formation": "4-3-3",
+      "id": "coach_botafogo_pb",
+      "idade": 40.0,
+      "nacionalidade": "br",
+      "nome": "Marcelo Fernandes",
+      "reputacao": 39.9,
+      "tactic_archetype": "tiki_taka",
+      "tactical_flexibility": "balanced",
+      "team_id": "botafogo_pb",
+      "team_name": "Botafogo-PB"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-3-3"
+      ],
+      "formation": "4-3-3",
+      "id": "coach_botafogo_sp",
+      "idade": 40.0,
+      "nacionalidade": "br",
+      "nome": "Cláudio Tencati",
+      "reputacao": 52.0,
+      "tactic_archetype": "tiki_taka",
+      "tactical_flexibility": "balanced",
+      "team_id": "botafogo_sp",
+      "team_name": "Botafogo-SP"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-3-3"
+      ],
+      "formation": "4-3-3",
+      "id": "coach_brusque",
+      "idade": 40.0,
+      "nacionalidade": "br",
+      "nome": "Higo Magalhães",
+      "reputacao": 40.8,
+      "tactic_archetype": "tiki_taka",
+      "tactical_flexibility": "balanced",
+      "team_id": "brusque",
+      "team_name": "Brusque"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-3-3"
+      ],
+      "formation": "4-3-3",
+      "id": "coach_caxias",
+      "idade": 40.0,
+      "nacionalidade": "br",
+      "nome": "William de Mattia",
+      "reputacao": 40.2,
+      "tactic_archetype": "tiki_taka",
+      "tactical_flexibility": "balanced",
+      "team_id": "caxias",
+      "team_name": "Caxias"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-3-3"
+      ],
+      "formation": "4-3-3",
+      "id": "coach_ceara",
+      "idade": 40.0,
+      "nacionalidade": "br",
+      "nome": "Daniel Paulista",
+      "reputacao": 52.8,
+      "tactic_archetype": "tiki_taka",
+      "tactical_flexibility": "balanced",
+      "team_id": "ceara",
+      "team_name": "Ceará"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-3-3"
+      ],
+      "formation": "4-3-3",
+      "id": "coach_chapecoense",
+      "idade": 40.0,
+      "nacionalidade": "br",
+      "nome": "Rafael Lacerda",
+      "reputacao": 68.2,
+      "tactic_archetype": "tiki_taka",
+      "tactical_flexibility": "balanced",
+      "team_id": "chapecoense",
+      "team_name": "Chapecoense"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-3-3"
+      ],
+      "formation": "4-3-3",
+      "id": "coach_confianca",
+      "idade": 40.0,
+      "nacionalidade": "br",
+      "nome": "Ricardo Resende",
+      "reputacao": 36.9,
+      "tactic_archetype": "tiki_taka",
+      "tactical_flexibility": "balanced",
+      "team_id": "confianca",
+      "team_name": "Confiança"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-3-3"
+      ],
+      "formation": "4-3-3",
+      "id": "coach_corinthians",
+      "idade": 40.0,
+      "nacionalidade": "br",
+      "nome": "Fernando Diniz",
+      "reputacao": 71.4,
+      "tactic_archetype": "tiki_taka",
+      "tactical_flexibility": "balanced",
+      "team_id": "corinthians",
+      "team_name": "Corinthians"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-3-3"
+      ],
+      "formation": "4-3-3",
+      "id": "coach_coritiba",
+      "idade": 40.0,
+      "nacionalidade": "br",
+      "nome": "Fernando Seabra",
+      "reputacao": 70.6,
+      "tactic_archetype": "tiki_taka",
+      "tactical_flexibility": "balanced",
+      "team_id": "coritiba",
+      "team_name": "Coritiba"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-3-3"
+      ],
+      "formation": "4-3-3",
+      "id": "coach_crb",
+      "idade": 40.0,
+      "nacionalidade": "br",
+      "nome": "Fábio Matias",
+      "reputacao": 54.3,
+      "tactic_archetype": "tiki_taka",
+      "tactical_flexibility": "balanced",
+      "team_id": "crb",
+      "team_name": "CRB"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-3-3"
+      ],
+      "formation": "4-3-3",
+      "id": "coach_criciuma",
+      "idade": 40.0,
+      "nacionalidade": "br",
+      "nome": "Eduardo Baptista",
+      "reputacao": 54.0,
+      "tactic_archetype": "tiki_taka",
+      "tactical_flexibility": "balanced",
+      "team_id": "criciuma",
+      "team_name": "Criciúma"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-3-3"
+      ],
+      "formation": "4-3-3",
+      "id": "coach_cruzeiro",
+      "idade": 40.0,
+      "nacionalidade": "pt",
+      "nome": "Artur Jorge",
+      "reputacao": 73.9,
+      "tactic_archetype": "tiki_taka",
+      "tactical_flexibility": "balanced",
+      "team_id": "cruzeiro",
+      "team_name": "Cruzeiro"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-3-3"
+      ],
+      "formation": "4-3-3",
+      "id": "coach_cuiaba",
+      "idade": 40.0,
+      "nacionalidade": "br",
+      "nome": "Eduardo Barros",
+      "reputacao": 53.5,
+      "tactic_archetype": "tiki_taka",
+      "tactical_flexibility": "balanced",
+      "team_id": "cuiaba",
+      "team_name": "Cuiabá"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-3-3"
+      ],
+      "formation": "4-3-3",
+      "id": "coach_ferroviaria",
+      "idade": 40.0,
+      "nacionalidade": "br",
+      "nome": "Rogério Corrêa",
+      "reputacao": 41.7,
+      "tactic_archetype": "tiki_taka",
+      "tactical_flexibility": "balanced",
+      "team_id": "ferroviaria",
+      "team_name": "Ferroviária"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-3-3"
+      ],
+      "formation": "4-3-3",
+      "id": "coach_figueirense",
+      "idade": 40.0,
+      "nacionalidade": "br",
+      "nome": "Raul Cabral",
+      "reputacao": 40.3,
+      "tactic_archetype": "tiki_taka",
+      "tactical_flexibility": "balanced",
+      "team_id": "figueirense",
+      "team_name": "Figueirense"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-3-3"
+      ],
+      "formation": "4-3-3",
+      "id": "coach_flamengo",
+      "idade": 40.0,
+      "nacionalidade": "pt",
+      "nome": "Leonardo Jardim",
+      "reputacao": 79.5,
+      "tactic_archetype": "tiki_taka",
+      "tactical_flexibility": "balanced",
+      "team_id": "flamengo",
+      "team_name": "Flamengo"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-3-3"
+      ],
+      "formation": "4-3-3",
+      "id": "coach_floresta",
+      "idade": 40.0,
+      "nacionalidade": "br",
+      "nome": "Leston Júnior",
+      "reputacao": 39.4,
+      "tactic_archetype": "tiki_taka",
+      "tactical_flexibility": "balanced",
+      "team_id": "floresta",
+      "team_name": "Floresta"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-3-3"
+      ],
+      "formation": "4-3-3",
+      "id": "coach_fluminense",
+      "idade": 40.0,
+      "nacionalidade": "br",
+      "nome": "Marcão",
+      "reputacao": 73.7,
+      "tactic_archetype": "tiki_taka",
+      "tactical_flexibility": "balanced",
+      "team_id": "fluminense",
+      "team_name": "Fluminense"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-3-3"
+      ],
+      "formation": "4-3-3",
+      "id": "coach_fortaleza",
+      "idade": 40.0,
+      "nacionalidade": "br",
+      "nome": "Paulo Autuori",
+      "reputacao": 54.8,
+      "tactic_archetype": "tiki_taka",
+      "tactical_flexibility": "balanced",
+      "team_id": "fortaleza",
+      "team_name": "Fortaleza"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-3-3"
+      ],
+      "formation": "4-3-3",
+      "id": "coach_goias",
+      "idade": 40.0,
+      "nacionalidade": "br",
+      "nome": "Mozart Santos",
+      "reputacao": 53.0,
+      "tactic_archetype": "tiki_taka",
+      "tactical_flexibility": "balanced",
+      "team_id": "goias",
+      "team_name": "Goiás"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-3-3"
+      ],
+      "formation": "4-3-3",
+      "id": "coach_gremio",
+      "idade": 40.0,
+      "nacionalidade": "pt",
+      "nome": "Luís Castro",
+      "reputacao": 70.3,
+      "tactic_archetype": "tiki_taka",
+      "tactical_flexibility": "balanced",
+      "team_id": "gremio",
+      "team_name": "Grêmio"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-3-3"
+      ],
+      "formation": "4-3-3",
+      "id": "coach_guarani",
+      "idade": 40.0,
+      "nacionalidade": "br",
+      "nome": "Élio Sizenando",
+      "reputacao": 41.0,
+      "tactic_archetype": "tiki_taka",
+      "tactical_flexibility": "balanced",
+      "team_id": "guarani",
+      "team_name": "Guarani"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-3-3"
+      ],
+      "formation": "4-3-3",
+      "id": "coach_inter_de_limeira",
+      "idade": 40.0,
+      "nacionalidade": "br",
+      "nome": "Matheus Costa",
+      "reputacao": 40.2,
+      "tactic_archetype": "tiki_taka",
+      "tactical_flexibility": "balanced",
+      "team_id": "inter_de_limeira",
+      "team_name": "Inter de Limeira"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-3-3"
+      ],
+      "formation": "4-3-3",
+      "id": "coach_internacional",
+      "idade": 40.0,
+      "nacionalidade": "uy",
+      "nome": "Paulo Pezzolano",
+      "reputacao": 71.3,
+      "tactic_archetype": "tiki_taka",
+      "tactical_flexibility": "balanced",
+      "team_id": "internacional",
+      "team_name": "Internacional"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-3-3"
+      ],
+      "formation": "4-3-3",
+      "id": "coach_itabaiana",
+      "idade": 40.0,
+      "nacionalidade": "br",
+      "nome": "Marcelo Chamusca",
+      "reputacao": 36.7,
+      "tactic_archetype": "tiki_taka",
+      "tactical_flexibility": "balanced",
+      "team_id": "itabaiana",
+      "team_name": "Itabaiana"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-3-3"
+      ],
+      "formation": "4-3-3",
+      "id": "coach_ituano",
+      "idade": 40.0,
+      "nacionalidade": "br",
+      "nome": "Mazola Júnior",
+      "reputacao": 39.1,
+      "tactic_archetype": "tiki_taka",
+      "tactical_flexibility": "balanced",
+      "team_id": "ituano",
+      "team_name": "Ituano"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-3-3"
+      ],
+      "formation": "4-3-3",
+      "id": "coach_juventude",
+      "idade": 40.0,
+      "nacionalidade": "br",
+      "nome": "Maurício Barbieri",
+      "reputacao": 54.7,
+      "tactic_archetype": "tiki_taka",
+      "tactical_flexibility": "balanced",
+      "team_id": "juventude",
+      "team_name": "Juventude"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-3-3"
+      ],
+      "formation": "4-3-3",
+      "id": "coach_londrina",
+      "idade": 40.0,
+      "nacionalidade": "br",
+      "nome": "Rogério Micale",
+      "reputacao": 50.9,
+      "tactic_archetype": "tiki_taka",
+      "tactical_flexibility": "balanced",
+      "team_id": "londrina",
+      "team_name": "Londrina"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-3-3"
+      ],
+      "formation": "4-3-3",
+      "id": "coach_maranhao",
+      "idade": 40.0,
+      "nacionalidade": "br",
+      "nome": "Jerson Testoni",
+      "reputacao": 39.2,
+      "tactic_archetype": "tiki_taka",
+      "tactical_flexibility": "balanced",
+      "team_id": "maranhao",
+      "team_name": "Maranhão"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-3-3"
+      ],
+      "formation": "4-3-3",
+      "id": "coach_maringa",
+      "idade": 40.0,
+      "nacionalidade": "br",
+      "nome": "Ivan Campanari",
+      "reputacao": 41.3,
+      "tactic_archetype": "tiki_taka",
+      "tactical_flexibility": "balanced",
+      "team_id": "maringa",
+      "team_name": "Maringá"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-3-3"
+      ],
+      "formation": "4-3-3",
+      "id": "coach_mirassol",
+      "idade": 40.0,
+      "nacionalidade": "br",
+      "nome": "Rafael Guanaes",
+      "reputacao": 72.0,
+      "tactic_archetype": "tiki_taka",
+      "tactical_flexibility": "balanced",
+      "team_id": "mirassol",
+      "team_name": "Mirassol"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-3-3"
+      ],
+      "formation": "4-3-3",
+      "id": "coach_nautico",
+      "idade": 40.0,
+      "nacionalidade": "br",
+      "nome": "Hélio dos Anjos",
+      "reputacao": 51.7,
+      "tactic_archetype": "tiki_taka",
+      "tactical_flexibility": "balanced",
+      "team_id": "nautico",
+      "team_name": "Náutico"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-3-3"
+      ],
+      "formation": "4-3-3",
+      "id": "coach_novorizontino",
+      "idade": 40.0,
+      "nacionalidade": "br",
+      "nome": "Enderson Moreira",
+      "reputacao": 56.4,
+      "tactic_archetype": "tiki_taka",
+      "tactical_flexibility": "balanced",
+      "team_id": "novorizontino",
+      "team_name": "Novorizontino"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-3-3"
+      ],
+      "formation": "4-3-3",
+      "id": "coach_operario_pr",
+      "idade": 40.0,
+      "nacionalidade": "br",
+      "nome": "Luizinho Lopes",
+      "reputacao": 52.3,
+      "tactic_archetype": "tiki_taka",
+      "tactical_flexibility": "balanced",
+      "team_id": "operario_pr",
+      "team_name": "Operário-PR"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-3-3"
+      ],
+      "formation": "4-3-3",
+      "id": "coach_palmeiras",
+      "idade": 40.0,
+      "nacionalidade": "pt",
+      "nome": "Abel Ferreira",
+      "reputacao": 80.0,
+      "tactic_archetype": "tiki_taka",
+      "tactical_flexibility": "balanced",
+      "team_id": "palmeiras",
+      "team_name": "Palmeiras"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-3-3"
+      ],
+      "formation": "4-3-3",
+      "id": "coach_paysandu",
+      "idade": 40.0,
+      "nacionalidade": "br",
+      "nome": "Júnior Rocha",
+      "reputacao": 39.6,
+      "tactic_archetype": "tiki_taka",
+      "tactical_flexibility": "balanced",
+      "team_id": "paysandu",
+      "team_name": "Paysandu"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-3-3"
+      ],
+      "formation": "4-3-3",
+      "id": "coach_ponte_preta",
+      "idade": 40.0,
+      "nacionalidade": "br",
+      "nome": "Márcio Zanardi",
+      "reputacao": 47.2,
+      "tactic_archetype": "tiki_taka",
+      "tactical_flexibility": "balanced",
+      "team_id": "ponte_preta",
+      "team_name": "Ponte Preta"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-3-3"
+      ],
+      "formation": "4-3-3",
+      "id": "coach_rb_bragantino",
+      "idade": 40.0,
+      "nacionalidade": "br",
+      "nome": "Vagner Mancini",
+      "reputacao": 72.3,
+      "tactic_archetype": "tiki_taka",
+      "tactical_flexibility": "balanced",
+      "team_id": "rb_bragantino",
+      "team_name": "Red Bull Bragantino"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-3-3"
+      ],
+      "formation": "4-3-3",
+      "id": "coach_remo",
+      "idade": 40.0,
+      "nacionalidade": "br",
+      "nome": "Léo Condé",
+      "reputacao": 69.3,
+      "tactic_archetype": "tiki_taka",
+      "tactical_flexibility": "balanced",
+      "team_id": "remo",
+      "team_name": "Remo"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-3-3"
+      ],
+      "formation": "4-3-3",
+      "id": "coach_santa_cruz",
+      "idade": 40.0,
+      "nacionalidade": "br",
+      "nome": "Cristian de Souza",
+      "reputacao": 40.8,
+      "tactic_archetype": "tiki_taka",
+      "tactical_flexibility": "balanced",
+      "team_id": "santa_cruz",
+      "team_name": "Santa Cruz"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-3-3"
+      ],
+      "formation": "4-3-3",
+      "id": "coach_santos",
+      "idade": 40.0,
+      "nacionalidade": "br",
+      "nome": "Cuca",
+      "reputacao": 73.5,
+      "tactic_archetype": "tiki_taka",
+      "tactical_flexibility": "balanced",
+      "team_id": "santos",
+      "team_name": "Santos"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-3-3"
+      ],
+      "formation": "4-3-3",
+      "id": "coach_sao_bernardo",
+      "idade": 40.0,
+      "nacionalidade": "br",
+      "nome": "Vinícius Bergantin",
+      "reputacao": 52.7,
+      "tactic_archetype": "tiki_taka",
+      "tactical_flexibility": "balanced",
+      "team_id": "sao_bernardo",
+      "team_name": "São Bernardo"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-3-3"
+      ],
+      "formation": "4-3-3",
+      "id": "coach_sao_paulo",
+      "idade": 40.0,
+      "nacionalidade": "br",
+      "nome": "Dorival Júnior",
+      "reputacao": 71.9,
+      "tactic_archetype": "tiki_taka",
+      "tactical_flexibility": "balanced",
+      "team_id": "sao_paulo",
+      "team_name": "São Paulo"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-3-3"
+      ],
+      "formation": "4-3-3",
+      "id": "coach_sport_recife",
+      "idade": 40.0,
+      "nacionalidade": "br",
+      "nome": "Gilmar Dal Pozzo",
+      "reputacao": 53.6,
+      "tactic_archetype": "tiki_taka",
+      "tactical_flexibility": "balanced",
+      "team_id": "sport_recife",
+      "team_name": "Sport Recife"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-3-3"
+      ],
+      "formation": "4-3-3",
+      "id": "coach_vasco",
+      "idade": 40.0,
+      "nacionalidade": "pt",
+      "nome": "Pedro Emanuel",
+      "reputacao": 73.5,
+      "tactic_archetype": "tiki_taka",
+      "tactical_flexibility": "balanced",
+      "team_id": "vasco",
+      "team_name": "Vasco da Gama"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-3-3"
+      ],
+      "formation": "4-3-3",
+      "id": "coach_vila_nova",
+      "idade": 40.0,
+      "nacionalidade": "br",
+      "nome": "Guto Ferreira",
+      "reputacao": 53.9,
+      "tactic_archetype": "tiki_taka",
+      "tactical_flexibility": "balanced",
+      "team_id": "vila_nova",
+      "team_name": "Vila Nova"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-3-3"
+      ],
+      "formation": "4-3-3",
+      "id": "coach_vitoria",
+      "idade": 40.0,
+      "nacionalidade": "br",
+      "nome": "Jair Ventura",
+      "reputacao": 70.4,
+      "tactic_archetype": "tiki_taka",
+      "tactical_flexibility": "balanced",
+      "team_id": "vitoria",
+      "team_name": "Vitória"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-3-3"
+      ],
+      "formation": "4-3-3",
+      "id": "coach_volta_redonda",
+      "idade": 40.0,
+      "nacionalidade": "br",
+      "nome": "Neto Colucci",
+      "reputacao": 38.3,
+      "tactic_archetype": "tiki_taka",
+      "tactical_flexibility": "balanced",
+      "team_id": "volta_redonda",
+      "team_name": "Volta Redonda"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-3-3"
+      ],
+      "formation": "4-3-3",
+      "id": "coach_ypiranga_rs",
+      "idade": 40.0,
+      "nacionalidade": "br",
+      "nome": "Gabardo Júnior",
+      "reputacao": 40.2,
+      "tactic_archetype": "tiki_taka",
+      "tactical_flexibility": "balanced",
+      "team_id": "ypiranga_rs",
+      "team_name": "Ypiranga-RS"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_holstein_kiel",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Tim Walter",
+      "reputacao": 61.2,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "holstein_kiel",
+      "team_name": "Holstein Kiel"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_hannover_96",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Sandro Wagner",
+      "reputacao": 63.6,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "hannover_96",
+      "team_name": "Hannover 96"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_spvgg_greuther_furth",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Heiko Vogel",
+      "reputacao": 60.5,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "spvgg_greuther_furth",
+      "team_name": "Greuther Fürth"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_hamburger_sv",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Merlin Polzin",
+      "reputacao": 76.1,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "hamburger_sv",
+      "team_name": "Hamburger SV"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_borussia_dortmund",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Niko Kovač",
+      "reputacao": 85.1,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "borussia_dortmund",
+      "team_name": "Borussia Dortmund"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_vfl_wolfsburg",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Tobias Strobl",
+      "reputacao": 63.9,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "vfl_wolfsburg",
+      "team_name": "VfL Wolfsburg"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_sc_paderborn_07",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Ralf Kettemann",
+      "reputacao": 75.9,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "sc_paderborn_07",
+      "team_name": "SC Paderborn 07"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_vfb_stuttgart",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Sebastian Hoeneß",
+      "reputacao": 80.8,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "vfb_stuttgart",
+      "team_name": "VfB Stuttgart"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_fc_st_pauli",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Marcel Rapp",
+      "reputacao": 62.2,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "fc_st_pauli",
+      "team_name": "FC St. Pauli"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_fc_augsburg",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Manuel Baum",
+      "reputacao": 77.8,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "fc_augsburg",
+      "team_name": "FC Augsburg"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_vfl_osnabruck",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Timo Schultz",
+      "reputacao": 61.1,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "vfl_osnabruck",
+      "team_name": "VfL Osnabrück"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_sv_darmstadt_98",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Florian Kohfeldt",
+      "reputacao": 61.4,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "sv_darmstadt_98",
+      "team_name": "SV Darmstadt 98"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_bayer_04_leverkusen",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Carles Martínez Novell",
+      "reputacao": 82.2,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "bayer_04_leverkusen",
+      "team_name": "Bayer 04 Leverkusen"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_fc_energie_cottbus",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Claus-Dieter Wollitz",
+      "reputacao": 61.4,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "fc_energie_cottbus",
+      "team_name": "Energie Cottbus"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_rb_leipzig",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Martín Demichelis",
+      "reputacao": 80.7,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "rb_leipzig",
+      "team_name": "RB Leipzig"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_sg_dynamo_dresden",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Thomas Stamm",
+      "reputacao": 61.0,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "sg_dynamo_dresden",
+      "team_name": "Dynamo Dresden"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_karlsruher_sc",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Maximilian Senft",
+      "reputacao": 60.4,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "karlsruher_sc",
+      "team_name": "Karlsruher SC"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_fc_bayern_munique",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Vincent Kompany",
+      "reputacao": 92.0,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "fc_bayern_munique",
+      "team_name": "Bayern München"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_sg_eintracht_frankfurt",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Adi Hütter",
+      "reputacao": 77.4,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "sg_eintracht_frankfurt",
+      "team_name": "Eintracht Frankfurt"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_tsg_1899_hoffenheim",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Christian Ilzer",
+      "reputacao": 77.9,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "tsg_1899_hoffenheim",
+      "team_name": "TSG Hoffenheim"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_sc_freiburg",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Julian Schuster",
+      "reputacao": 80.4,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "sc_freiburg",
+      "team_name": "SC Freiburg"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_1fsv_mainz_05",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Urs Fischer",
+      "reputacao": 78.7,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "1fsv_mainz_05",
+      "team_name": "1. FSV Mainz 05"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_werder_bremen",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Daniel Thioune",
+      "reputacao": 77.1,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "werder_bremen",
+      "team_name": "Werder Bremen"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_borussia_monchengladbach",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Alexander Blessin",
+      "reputacao": 75.9,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "borussia_monchengladbach",
+      "team_name": "Borussia Mönchengladbach"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_1fc_colonia",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "René Wagner",
+      "reputacao": 76.1,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "1fc_colonia",
+      "team_name": "1. FC Köln"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_schalke_04",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Miron Muslić",
+      "reputacao": 76.3,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "schalke_04",
+      "team_name": "Schalke 04"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_sv_07_elversberg",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Vincent Wagner",
+      "reputacao": 76.6,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "sv_07_elversberg",
+      "team_name": "SV Elversberg"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_1fc_nuremberg",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Miroslav Klose",
+      "reputacao": 63.7,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "1fc_nuremberg",
+      "team_name": "1. FC Nürnberg"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_1fc_heidenheim_1846",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Frank Schmidt",
+      "reputacao": 63.1,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "1fc_heidenheim_1846",
+      "team_name": "1. FC Heidenheim"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_1fc_kaiserslautern",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Torsten Lieberknecht",
+      "reputacao": 62.7,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "1fc_kaiserslautern",
+      "team_name": "1. FC Kaiserslautern"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_hertha_berlim",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Stefan Leitl",
+      "reputacao": 64.8,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "hertha_berlim",
+      "team_name": "Hertha BSC"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_magdeburgo",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Petrik Sander",
+      "reputacao": 62.7,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "magdeburgo",
+      "team_name": "1. FC Magdeburg"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_eintracht_braunschweig_tsv",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Lars Kornetka",
+      "reputacao": 60.2,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "eintracht_braunschweig_tsv",
+      "team_name": "Eintracht Braunschweig"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_vfl_bochum",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Uwe Rösler",
+      "reputacao": 61.8,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "vfl_bochum",
+      "team_name": "VfL Bochum"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_arminia_bielefeld",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Oliver Kirch",
+      "reputacao": 61.9,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "arminia_bielefeld",
+      "team_name": "Arminia Bielefeld"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_1fc_union_berlim",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Mauro Lustrinelli",
+      "reputacao": 76.4,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "1fc_union_berlim",
+      "team_name": "Union Berlin"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_vitoria_sc",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Tiago Margarido",
+      "reputacao": 69.6,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "vitoria_sc",
+      "team_name": "Vitória SC"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_rio_ave",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Vasco Seabra",
+      "reputacao": 67.6,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "rio_ave",
+      "team_name": "Rio Ave"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_alverca_sad",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Sérgio Ferreira",
+      "reputacao": 70.0,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "alverca_sad",
+      "team_name": "FC Alverca"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_famalicao",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Carlos Carvalhal",
+      "reputacao": 70.9,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "famalicao",
+      "team_name": "FC Famalicão"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_fc_porto",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Francesco Farioli",
+      "reputacao": 77.5,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "fc_porto",
+      "team_name": "FC Porto"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_sporting_cp",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Rui Borges",
+      "reputacao": 78.4,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "sporting_cp",
+      "team_name": "Sporting CP"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_estrela_da_amadora_sad",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Pepa",
+      "reputacao": 67.8,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "estrela_da_amadora_sad",
+      "team_name": "Estrela da Amadora"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_santa_clara",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Petit",
+      "reputacao": 71.3,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "santa_clara",
+      "team_name": "Santa Clara"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_estoril_praia",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Vasco Matos",
+      "reputacao": 67.6,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "estoril_praia",
+      "team_name": "Estoril Praia"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_academico_de_viseu",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Bruno Pinheiro",
+      "reputacao": 69.2,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "academico_de_viseu",
+      "team_name": "Académico de Viseu"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_sc_braga",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Carlos Vicens",
+      "reputacao": 73.9,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "sc_braga",
+      "team_name": "SC Braga"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_moreirense",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Vasco Botelho da Costa",
+      "reputacao": 68.2,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "moreirense",
+      "team_name": "Moreirense"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_benfica",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Marco Silva",
+      "reputacao": 78.5,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "benfica",
+      "team_name": "Benfica"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_casa_pia",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Filipe Coelho",
+      "reputacao": 66.8,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "casa_pia",
+      "team_name": "Casa Pia"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_nacional_da_madeira",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Alexandre Santos",
+      "reputacao": 66.9,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "nacional_da_madeira",
+      "team_name": "CD Nacional"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_gil_vicente",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Luís Pinto",
+      "reputacao": 70.4,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "gil_vicente",
+      "team_name": "Gil Vicente"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_arouca",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Vítor Severino",
+      "reputacao": 70.3,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "arouca",
+      "team_name": "FC Arouca"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_maritimo",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Mitchell van der Gaag",
+      "reputacao": 68.1,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "maritimo",
+      "team_name": "Marítimo"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_independiente_del_valle",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Joaquín Papa",
+      "reputacao": 72.5,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "independiente_del_valle",
+      "team_name": "Independiente del Valle"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_tecnico_universitario",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Ismael Blanco",
+      "reputacao": 63.1,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "tecnico_universitario",
+      "team_name": "Técnico Universitario"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_deportivo_cuenca",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Andrés Yllana",
+      "reputacao": 64.9,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "deportivo_cuenca",
+      "team_name": "Deportivo Cuenca"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_manta_fc",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Raúl Duarte",
+      "reputacao": 63.3,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "manta_fc",
+      "team_name": "Manta FC"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_libertad_fc",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Jorge Célico",
+      "reputacao": 66.1,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "libertad_fc",
+      "team_name": "Libertad FC"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_mushuc_runa_sc",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Paúl Vélez",
+      "reputacao": 65.3,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "mushuc_runa_sc",
+      "team_name": "Mushuc Runa"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_guayaquil_city_fc",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Pool Gavilánez",
+      "reputacao": 65.0,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "guayaquil_city_fc",
+      "team_name": "Guayaquil City"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_cd_leones_del_norte",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Matías Córdoba",
+      "reputacao": 64.9,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "cd_leones_del_norte",
+      "team_name": "Leones FC"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_cd_macara",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Guillermo Sanguinetti",
+      "reputacao": 68.7,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "cd_macara",
+      "team_name": "Macará"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_orense_sc",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Juan Pablo Buch",
+      "reputacao": 64.3,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "orense_sc",
+      "team_name": "Orense SC"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_delfin_sc",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Juan Carlos León",
+      "reputacao": 64.5,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "delfin_sc",
+      "team_name": "Delfín SC"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_cd_universidad_catolica",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Diego Martínez",
+      "reputacao": 68.6,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "cd_universidad_catolica",
+      "team_name": "Universidad Católica (ECU)"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_sd_aucas",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Norberto Araujo",
+      "reputacao": 67.1,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "sd_aucas",
+      "team_name": "SD Aucas"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_cs_emelec",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Ezequiel Medrán",
+      "reputacao": 65.0,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "cs_emelec",
+      "team_name": "CS Emelec"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_barcelona_guayaquil_sc",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Pablo Trobbiani",
+      "reputacao": 66.8,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "barcelona_guayaquil_sc",
+      "team_name": "Barcelona SC"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_ldu_quito",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Gustavo Álvarez",
+      "reputacao": 69.2,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "ldu_quito",
+      "team_name": "LDU Quito"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_san_antonio_fc",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Erik Urcelay",
+      "reputacao": 49.0,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "san_antonio_fc",
+      "team_name": "San Antonio FC"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_22_de_julio_fc",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Carlos Vera",
+      "reputacao": 44.4,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "22_de_julio_fc",
+      "team_name": "22 de Julio"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_ldu_de_portoviejo",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Javier Carvajal",
+      "reputacao": 50.5,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "ldu_de_portoviejo",
+      "team_name": "LDU Portoviejo"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_cd_el_nacional",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Juan Carlos Pérez",
+      "reputacao": 47.6,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "cd_el_nacional",
+      "team_name": "El Nacional"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_gualaceo_sc",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Carlos Borja",
+      "reputacao": 51.4,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "gualaceo_sc",
+      "team_name": "Gualaceo SC"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_cumbaya_fc",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Cristhian Castro",
+      "reputacao": 50.5,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "cumbaya_fc",
+      "team_name": "Cumbayá FC"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_cd_santo_domingo_de_los_tsachilas",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Juan Manuel Llop",
+      "reputacao": 50.1,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "cd_santo_domingo_de_los_tsachilas",
+      "team_name": "Santo Domingo"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_cuenca_juniors",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Leonardo Vanegas",
+      "reputacao": 48.9,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "cuenca_juniors",
+      "team_name": "Cuenca Juniors"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_vinotinto_fc",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Juan Grabowski",
+      "reputacao": 52.8,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "vinotinto_fc",
+      "team_name": "Vinotinto Ecuador"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_atletico_futbol_club",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Carlos Santamarina",
+      "reputacao": 52.6,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "atletico_futbol_club",
+      "team_name": "Atlético Rojiblanco"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_independiente_juniors",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Facundo González",
+      "reputacao": 52.8,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "independiente_juniors",
+      "team_name": "Independiente Juniors"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_ad_nueve_de_octubre",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Walter Aristizábal",
+      "reputacao": 51.9,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "ad_nueve_de_octubre",
+      "team_name": "9 de Octubre"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_cerro_largo_fc",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Danielo Núñez",
+      "reputacao": 60.2,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "cerro_largo_fc",
+      "team_name": "Cerro Largo"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_club_nacional",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Daniel Carreño",
+      "reputacao": 65.2,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "club_nacional",
+      "team_name": "Nacional"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_albion_fc",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Federico Nieves",
+      "reputacao": 59.8,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "albion_fc",
+      "team_name": "Albion FC"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_ca_boston_river",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Ignacio Ithurralde",
+      "reputacao": 61.0,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "ca_boston_river",
+      "team_name": "Boston River"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_ca_juventud",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Sergio Blanco",
+      "reputacao": 62.6,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "ca_juventud",
+      "team_name": "Juventud de Las Piedras"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_ca_progreso",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Tabaré Silva",
+      "reputacao": 58.7,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "ca_progreso",
+      "team_name": "Progreso"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_cd_maldonado",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Gabriel Di Noia",
+      "reputacao": 64.1,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "cd_maldonado",
+      "team_name": "Deportivo Maldonado"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_central_espanol_fc",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Antonio Pacheco",
+      "reputacao": 59.7,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "central_espanol_fc",
+      "team_name": "Central Español"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_ca_cerro",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Alejandro Cappuccio",
+      "reputacao": 60.3,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "ca_cerro",
+      "team_name": "CA Cerro"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_fc_danubio_montevideo",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Leonel Rocco",
+      "reputacao": 59.9,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "fc_danubio_montevideo",
+      "team_name": "Danubio"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_defensor_sporting_club",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Mauricio Larriera",
+      "reputacao": 60.1,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "defensor_sporting_club",
+      "team_name": "Defensor Sporting"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_liverpool_fc_montevideo",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Jorge Fossati",
+      "reputacao": 63.9,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "liverpool_fc_montevideo",
+      "team_name": "Liverpool (URU)"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_montevideo_city_torque",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Marcelo Méndez",
+      "reputacao": 64.4,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "montevideo_city_torque",
+      "team_name": "Montevideo City Torque"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_montevideo_wanderers",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Mathías Corujo",
+      "reputacao": 61.4,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "montevideo_wanderers",
+      "team_name": "Montevideo Wanderers"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_ca_penarol",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Diego Aguirre",
+      "reputacao": 66.7,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "ca_penarol",
+      "team_name": "Peñarol"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_racing_club_montevideo",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Cristian Chambian",
+      "reputacao": 62.3,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "racing_club_montevideo",
+      "team_name": "Racing (URU)"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_fc_tokyo",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Rikizo Matsuhashi",
+      "reputacao": 64.7,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "fc_tokyo",
+      "team_name": "FC Tokyo"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_kashima_antlers",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Toru Oniki",
+      "reputacao": 65.1,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "kashima_antlers",
+      "team_name": "Kashima Antlers"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_kawasaki_frontale",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Shigetoshi Hasebe",
+      "reputacao": 62.7,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "kawasaki_frontale",
+      "team_name": "Kawasaki Frontale"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_sanfrecce_hiroshima",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Bartosch Gaul",
+      "reputacao": 66.6,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "sanfrecce_hiroshima",
+      "team_name": "Sanfrecce Hiroshima"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_machida_zelvia",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Go Kuroda",
+      "reputacao": 65.3,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "machida_zelvia",
+      "team_name": "Machida Zelvia"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_kashiwa_reysol",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Ricardo Rodríguez",
+      "reputacao": 64.7,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "kashiwa_reysol",
+      "team_name": "Kashiwa Reysol"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_vissel_kobe",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Michael Skibbe",
+      "reputacao": 65.0,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "vissel_kobe",
+      "team_name": "Vissel Kobe"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_gamba_osaka",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Tomokazu Myojin",
+      "reputacao": 61.9,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "gamba_osaka",
+      "team_name": "Gamba Osaka"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_kyoto_sanga",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Ranko Popović",
+      "reputacao": 61.3,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "kyoto_sanga",
+      "team_name": "Kyoto Sanga"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_yokohama_f_marinos",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Steve Corica",
+      "reputacao": 63.3,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "yokohama_f_marinos",
+      "team_name": "Yokohama F. Marinos"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_urawa_red_diamonds",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Cho Kwi-jae",
+      "reputacao": 62.3,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "urawa_red_diamonds",
+      "team_name": "Urawa Red Diamonds"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_shimizu_spulse",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Takayuki Yoshida",
+      "reputacao": 60.6,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "shimizu_spulse",
+      "team_name": "Shimizu S-Pulse"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_jef_united_chiba",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Yoshiyuki Kobayashi",
+      "reputacao": 58.9,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "jef_united_chiba",
+      "team_name": "JEF United Chiba"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_vvaren_nagasaki",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Takuya Takagi",
+      "reputacao": 59.9,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "vvaren_nagasaki",
+      "team_name": "V-Varen Nagasaki"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_nagoya_grampus",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Mihailo Petrović",
+      "reputacao": 61.2,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "nagoya_grampus",
+      "team_name": "Nagoya Grampus"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_cerezo_osaka",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Pablo Machín",
+      "reputacao": 62.2,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "cerezo_osaka",
+      "team_name": "Cerezo Osaka"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_avispa_fukuoka",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Shinya Tsukahara",
+      "reputacao": 60.2,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "avispa_fukuoka",
+      "team_name": "Avispa Fukuoka"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_mito_hollyhock",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Daisuke Kimori",
+      "reputacao": 59.9,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "mito_hollyhock",
+      "team_name": "Mito HollyHock"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_fagiano_okayama",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Takashi Kiyama",
+      "reputacao": 61.6,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "fagiano_okayama",
+      "team_name": "Fagiano Okayama"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_tokyo_verdy",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Hiroshi Jofuku",
+      "reputacao": 59.1,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "tokyo_verdy",
+      "team_name": "Tokyo Verdy"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_deportes_limache",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Víctor Rivero",
+      "reputacao": 61.9,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "deportes_limache",
+      "team_name": "Deportes Limache"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_deportes_concepcion",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Fernando Díaz",
+      "reputacao": 61.9,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "deportes_concepcion",
+      "team_name": "Deportes Concepción"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_coquimbo_unido",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Hernán Caputto",
+      "reputacao": 64.4,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "coquimbo_unido",
+      "team_name": "Coquimbo Unido"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_csd_colocolo",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Fernando Ortiz",
+      "reputacao": 65.5,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "csd_colocolo",
+      "team_name": "Colo-Colo"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_cd_ohiggins",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Lucas Bovaglio",
+      "reputacao": 62.6,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "cd_ohiggins",
+      "team_name": "O'Higgins"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_universidad_catolica",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Daniel Garnero",
+      "reputacao": 65.4,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "universidad_catolica",
+      "team_name": "Universidad Católica (CHI)"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_universidad_de_chile",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Fernando Gago",
+      "reputacao": 65.5,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "universidad_de_chile",
+      "team_name": "Universidad de Chile"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_audax_italiano",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Patricio Graff",
+      "reputacao": 62.2,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "audax_italiano",
+      "team_name": "Audax Italiano"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_cd_everton",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Walter Ribonetto",
+      "reputacao": 63.3,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "cd_everton",
+      "team_name": "Everton de Viña del Mar"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_cd_cobresal",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Gustavo Huerta",
+      "reputacao": 59.6,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "cd_cobresal",
+      "team_name": "Cobresal"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_cd_palestino",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Guillermo Farré",
+      "reputacao": 62.5,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "cd_palestino",
+      "team_name": "Palestino"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_cd_union_la_calera",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "John Armijo",
+      "reputacao": 60.2,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "cd_union_la_calera",
+      "team_name": "Unión La Calera"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_deportes_la_serena",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Felipe Gutiérrez",
+      "reputacao": 60.5,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "deportes_la_serena",
+      "team_name": "Deportes La Serena"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_cd_huachipato",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Jaime García",
+      "reputacao": 61.4,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "cd_huachipato",
+      "team_name": "Huachipato"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_cd_nublense",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Juan José Ribera",
+      "reputacao": 61.3,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "cd_nublense",
+      "team_name": "Ñublense"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_universidad_de_concepcion",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Cristián Muñoz",
+      "reputacao": 58.5,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "universidad_de_concepcion",
+      "team_name": "Universidad de Concepción"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_cucuta_deportivo",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Nicolás Chiesa",
+      "reputacao": 63.1,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "cucuta_deportivo",
+      "team_name": "Cúcuta Deportivo"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_deportivo_pereira",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Alexis Márquez",
+      "reputacao": 61.2,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "deportivo_pereira",
+      "team_name": "Deportivo Pereira"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_jaguares_de_cordoba",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Julio Méndez",
+      "reputacao": 61.9,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "jaguares_de_cordoba",
+      "team_name": "Jaguares de Córdoba"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_internacional_de_bogota",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Ricardo Valiño",
+      "reputacao": 63.8,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "internacional_de_bogota",
+      "team_name": "Internacional de Bogotá"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_deportivo_cali",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Rafael Dudamel",
+      "reputacao": 66.4,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "deportivo_cali",
+      "team_name": "Deportivo Cali"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_atletico_bucaramanga",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Pablo Peirano",
+      "reputacao": 66.1,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "atletico_bucaramanga",
+      "team_name": "Atlético Bucaramanga"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_atletico_nacional",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Lucas González",
+      "reputacao": 69.5,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "atletico_nacional",
+      "team_name": "Atlético Nacional"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_alianza_fc",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Flabio Torres",
+      "reputacao": 62.9,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "alianza_fc",
+      "team_name": "Alianza FC"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_deportes_tolima",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Luis Fernando Suárez",
+      "reputacao": 66.7,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "deportes_tolima",
+      "team_name": "Deportes Tolima"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_independiente_santa_fe",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Pablo Repetto",
+      "reputacao": 67.6,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "independiente_santa_fe",
+      "team_name": "Independiente Santa Fe"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_deportivo_pasto",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "René Rosero",
+      "reputacao": 63.2,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "deportivo_pasto",
+      "team_name": "Deportivo Pasto"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_independiente_medellin",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Luis Amaranto Perea",
+      "reputacao": 66.9,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "independiente_medellin",
+      "team_name": "Independiente Medellín"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_cd_america_de_cali",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "David González",
+      "reputacao": 67.6,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "cd_america_de_cali",
+      "team_name": "América de Cali"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_junior_fc",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Sebastián Viera",
+      "reputacao": 65.9,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "junior_fc",
+      "team_name": "Junior FC"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_millonarios_bogota",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Alberto Gamero",
+      "reputacao": 67.6,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "millonarios_bogota",
+      "team_name": "Millonarios"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_once_caldas",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Carlos Valencia",
+      "reputacao": 65.7,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "once_caldas",
+      "team_name": "Once Caldas"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_fortaleza_ceif",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Diego Arias",
+      "reputacao": 63.2,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "fortaleza_ceif",
+      "team_name": "Fortaleza CEIF"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_rionegro_aguilas",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Flavio Robatto",
+      "reputacao": 65.1,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "rionegro_aguilas",
+      "team_name": "Águilas Doradas"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_boyaca_chico_fc",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Jhon Jaime Gómez",
+      "reputacao": 62.3,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "boyaca_chico_fc",
+      "team_name": "Boyacá Chicó"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_llaneros_fc",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "José Luis García",
+      "reputacao": 63.8,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "llaneros_fc",
+      "team_name": "Llaneros FC"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_racing_club",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Sebastián Romero",
+      "reputacao": 68.1,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "racing_club",
+      "team_name": "Racing Club"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_estudiantes_de_la_plata",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Alexander Medina",
+      "reputacao": 69.8,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "estudiantes_de_la_plata",
+      "team_name": "Estudiantes de La Plata"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_river_plate",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Leonardo Ponzio",
+      "reputacao": 70.7,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "river_plate",
+      "team_name": "River Plate"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_defensa_y_justicia",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Julio Vaccari",
+      "reputacao": 68.8,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "defensa_y_justicia",
+      "team_name": "Defensa y Justicia"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_ca_independiente",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Jadson Viera",
+      "reputacao": 68.9,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "ca_independiente",
+      "team_name": "Independiente"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_rosario_central",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Jorge Almirón",
+      "reputacao": 70.9,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "rosario_central",
+      "team_name": "Rosario Central"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_aa_estudiantes_rio_cuarto",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Rubén Forestello",
+      "reputacao": 64.2,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "aa_estudiantes_rio_cuarto",
+      "team_name": "Estudiantes de Río Cuarto"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_aa_argentinos_juniors",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Nicolás Diez",
+      "reputacao": 70.3,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "aa_argentinos_juniors",
+      "team_name": "Argentinos Juniors"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_club_atletico_tigre",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Diego Dabove",
+      "reputacao": 68.1,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "club_atletico_tigre",
+      "team_name": "Tigre"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_ca_boca_juniors",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Rodolfo Arruabarrena",
+      "reputacao": 72.2,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "ca_boca_juniors",
+      "team_name": "Boca Juniors"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_ca_san_lorenzo_de_almagro",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Rubén Darío Insúa",
+      "reputacao": 67.4,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "ca_san_lorenzo_de_almagro",
+      "team_name": "San Lorenzo"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_ca_talleres",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Omar De Felippe",
+      "reputacao": 66.8,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "ca_talleres",
+      "team_name": "Talleres"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_ca_lanus",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Mauricio Pellegrino",
+      "reputacao": 69.5,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "ca_lanus",
+      "team_name": "Lanús"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_ca_barracas_central",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Damián Ayude",
+      "reputacao": 67.5,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "ca_barracas_central",
+      "team_name": "Barracas Central"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_ca_belgrano",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Ricardo Zielinski",
+      "reputacao": 70.3,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "ca_belgrano",
+      "team_name": "Belgrano"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_ca_velez_sarsfield",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Guillermo Barros Schelotto",
+      "reputacao": 69.6,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "ca_velez_sarsfield",
+      "team_name": "Vélez Sarsfield"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_ca_gimnasia_y_esgrima_lp",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Ariel Pereyra",
+      "reputacao": 69.4,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "ca_gimnasia_y_esgrima_lp",
+      "team_name": "Gimnasia y Esgrima La Plata"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_cs_independiente_rivadavia",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Alfredo Berti",
+      "reputacao": 70.5,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "cs_independiente_rivadavia",
+      "team_name": "Independiente Rivadavia"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_ca_huracan",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Diego Martínez",
+      "reputacao": 68.7,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "ca_huracan",
+      "team_name": "Huracán"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_instituto_acc",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Diego Flores",
+      "reputacao": 70.3,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "instituto_acc",
+      "team_name": "Instituto"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_ca_newells_old_boys",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Frank Kudelka",
+      "reputacao": 67.5,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "ca_newells_old_boys",
+      "team_name": "Newell's Old Boys"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_ca_platense",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Martín Palermo",
+      "reputacao": 67.8,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "ca_platense",
+      "team_name": "Platense"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_ca_union_santa_fe",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Leonardo Madelón",
+      "reputacao": 67.8,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "ca_union_santa_fe",
+      "team_name": "Unión de Santa Fe"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_ca_aldosivi",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Javier Sanguinetti",
+      "reputacao": 64.9,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "ca_aldosivi",
+      "team_name": "Aldosivi"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_ca_banfield",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Pedro Troglio",
+      "reputacao": 66.7,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "ca_banfield",
+      "team_name": "Banfield"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_ca_gimnasia_y_esgrima_mendoza",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Darío Franco",
+      "reputacao": 67.9,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "ca_gimnasia_y_esgrima_mendoza",
+      "team_name": "Gimnasia y Esgrima Mendoza"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_club_atletico_tucuman",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Julio César Falcioni",
+      "reputacao": 67.4,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "club_atletico_tucuman",
+      "team_name": "Atlético Tucumán"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_cd_riestra",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Guillermo Duró",
+      "reputacao": 66.7,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "cd_riestra",
+      "team_name": "Deportivo Riestra"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_ca_central_cordoba_sde",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Sebastián Domínguez",
+      "reputacao": 66.2,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "ca_central_cordoba_sde",
+      "team_name": "Central Córdoba"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_ca_sarmiento",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Facundo Sava",
+      "reputacao": 67.8,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "ca_sarmiento",
+      "team_name": "Sarmiento"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_racing_santander",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "José Alberto López",
+      "reputacao": 75.9,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "racing_santander",
+      "team_name": "Racing Santander"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_real_madrid",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "José Mourinho",
+      "reputacao": 88.2,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "real_madrid",
+      "team_name": "Real Madrid"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_malaga_cf",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Juan Francisco Funes",
+      "reputacao": 75.3,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "malaga_cf",
+      "team_name": "Málaga"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_deportivo_alaves",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Quique Sánchez Flores",
+      "reputacao": 77.3,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "deportivo_alaves",
+      "team_name": "Alavés"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_barcelona",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Hansi Flick",
+      "reputacao": 90.4,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "barcelona",
+      "team_name": "Barcelona"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_getafe_cf",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "José Bordalás",
+      "reputacao": 76.0,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "getafe_cf",
+      "team_name": "Getafe"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_rayo_vallecano",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Beñat San José",
+      "reputacao": 78.2,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "rayo_vallecano",
+      "team_name": "Rayo Vallecano"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_elche_cf",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Martín Anselmi",
+      "reputacao": 76.2,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "elche_cf",
+      "team_name": "Elche"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_ca_osasuna",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Jagoba Arrasate",
+      "reputacao": 76.3,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "ca_osasuna",
+      "team_name": "Osasuna"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_atletico_madrid",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Diego Simeone",
+      "reputacao": 86.4,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "atletico_madrid",
+      "team_name": "Atlético de Madrid"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_real_betis",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Manuel Pellegrini",
+      "reputacao": 82.2,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "real_betis",
+      "team_name": "Real Betis"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_deportivo_la_coruna",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Antonio Hidalgo",
+      "reputacao": 76.4,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "deportivo_la_coruna",
+      "team_name": "Deportivo La Coruña"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_athletic_club_fc",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Edin Terzić",
+      "reputacao": 78.1,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "athletic_club_fc",
+      "team_name": "Athletic Club"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_valencia_cf",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Javier Aguirre",
+      "reputacao": 77.2,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "valencia_cf",
+      "team_name": "Valencia"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_sevilla_fc",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Luis García Plaza",
+      "reputacao": 77.2,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "sevilla_fc",
+      "team_name": "Sevilla"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_rcd_espanyol",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Manolo González",
+      "reputacao": 76.2,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "rcd_espanyol",
+      "team_name": "Espanyol"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_levante_ud",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Luís Castro",
+      "reputacao": 76.7,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "levante_ud",
+      "team_name": "Levante"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_celta_de_vigo",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Claudio Giráldez",
+      "reputacao": 77.7,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "celta_de_vigo",
+      "team_name": "Celta de Vigo"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_real_sociedad",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Pellegrino Matarazzo",
+      "reputacao": 77.7,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "real_sociedad",
+      "team_name": "Real Sociedad"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_villarreal_cf",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Iñigo Pérez",
+      "reputacao": 79.8,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "villarreal_cf",
+      "team_name": "Villarreal"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_arsenal_fc",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Mikel Arteta",
+      "reputacao": 91.6,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "arsenal_fc",
+      "team_name": "Arsenal"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_aston_villa",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Unai Emery",
+      "reputacao": 86.7,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "aston_villa",
+      "team_name": "Aston Villa"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_bournemouth",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Marco Rose",
+      "reputacao": 85.2,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "bournemouth",
+      "team_name": "Bournemouth"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_brentford_fc",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Keith Andrews",
+      "reputacao": 86.2,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "brentford_fc",
+      "team_name": "Brentford"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_brighton_hove_albion",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Fabian Hürzeler",
+      "reputacao": 87.9,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "brighton_hove_albion",
+      "team_name": "Brighton"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_chelsea",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Xabi Alonso",
+      "reputacao": 86.7,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "chelsea",
+      "team_name": "Chelsea"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_coventry_city",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Frank Lampard",
+      "reputacao": 83.7,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "coventry_city",
+      "team_name": "Coventry City"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_crystal_palace",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Pierre Sage",
+      "reputacao": 84.6,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "crystal_palace",
+      "team_name": "Crystal Palace"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_everton_fc",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "David Moyes",
+      "reputacao": 86.1,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "everton_fc",
+      "team_name": "Everton"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_fulham",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Álvaro Arbeloa",
+      "reputacao": 83.8,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "fulham",
+      "team_name": "Fulham"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_hull_city",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Sergej Jakirović",
+      "reputacao": 83.8,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "hull_city",
+      "team_name": "Hull City"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_ipswich_town",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Gary O'Neil",
+      "reputacao": 83.9,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "ipswich_town",
+      "team_name": "Ipswich Town"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_leeds",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Daniel Farke",
+      "reputacao": 85.4,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "leeds",
+      "team_name": "Leeds United"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_liverpool_fc",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Andoni Iraola",
+      "reputacao": 88.0,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "liverpool_fc",
+      "team_name": "Liverpool"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_manchester_city",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Enzo Maresca",
+      "reputacao": 91.1,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "manchester_city",
+      "team_name": "Manchester City"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_manchester_united",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Michael Carrick",
+      "reputacao": 86.4,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "manchester_united",
+      "team_name": "Manchester United"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_newcastle",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Matthias Jaissle",
+      "reputacao": 85.7,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "newcastle",
+      "team_name": "Newcastle"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_nottingham_forest",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Oliver Glasner",
+      "reputacao": 84.6,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "nottingham_forest",
+      "team_name": "Nottingham Forest"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_sunderland_afc",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Régis Le Bris",
+      "reputacao": 84.1,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "sunderland_afc",
+      "team_name": "Sunderland"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_tottenham_hotspur",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Roberto De Zerbi",
+      "reputacao": 85.1,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "tottenham_hotspur",
+      "team_name": "Tottenham"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_ac_milan",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Rúben Amorim",
+      "reputacao": 76.7,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "ac_milan",
+      "team_name": "Milan"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_ac_monza",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Ivan Jurić",
+      "reputacao": 71.3,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "ac_monza",
+      "team_name": "Monza"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_acf_fiorentina",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Paolo Vanoli",
+      "reputacao": 73.5,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "acf_fiorentina",
+      "team_name": "Fiorentina"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_as_roma",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Gian Piero Gasperini",
+      "reputacao": 78.7,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "as_roma",
+      "team_name": "Roma"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_atalanta_bc",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Maurizio Sarri",
+      "reputacao": 75.6,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "atalanta_bc",
+      "team_name": "Atalanta"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_bologna_fc_1909",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Raffaele Palladino",
+      "reputacao": 74.3,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "bologna_fc_1909",
+      "team_name": "Bologna"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_cagliari_calcio",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Fabio Pisacane",
+      "reputacao": 73.1,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "cagliari_calcio",
+      "team_name": "Cagliari"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_como_1907",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Cesc Fàbregas",
+      "reputacao": 77.9,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "como_1907",
+      "team_name": "Como"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_frosinone_calcio",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Massimiliano Alvini",
+      "reputacao": 72.2,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "frosinone_calcio",
+      "team_name": "Frosinone"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_genoa",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Daniele De Rossi",
+      "reputacao": 72.0,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "genoa",
+      "team_name": "Genoa"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_inter_milan",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Cristian Chivu",
+      "reputacao": 79.9,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "inter_milan",
+      "team_name": "Inter de Milão"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_juventus",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Luciano Spalletti",
+      "reputacao": 77.9,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "juventus",
+      "team_name": "Juventus"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_parma_calcio_1913",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Alberto Gilardino",
+      "reputacao": 71.2,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "parma_calcio_1913",
+      "team_name": "Parma"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_sassuolo",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Alberto Aquilani",
+      "reputacao": 73.3,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "sassuolo",
+      "team_name": "Sassuolo"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_ss_lazio",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Gennaro Gattuso",
+      "reputacao": 75.8,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "ss_lazio",
+      "team_name": "Lazio"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_ssc_napoli",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Massimiliano Allegri",
+      "reputacao": 76.8,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "ssc_napoli",
+      "team_name": "Napoli"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_torino",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Ignazio Abate",
+      "reputacao": 72.9,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "torino",
+      "team_name": "Torino"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_udinese_calcio",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Kosta Runjaić",
+      "reputacao": 72.8,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "udinese_calcio",
+      "team_name": "Udinese"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_us_lecce",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Eusebio Di Francesco",
+      "reputacao": 70.9,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "us_lecce",
+      "team_name": "Lecce"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_venezia",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Giovanni Stroppa",
+      "reputacao": 69.9,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "venezia",
+      "team_name": "Venezia"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_aj_auxerre",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Will Still",
+      "reputacao": 73.3,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "aj_auxerre",
+      "team_name": "Auxerre"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_angers_sco",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Stéphane Gilli",
+      "reputacao": 72.3,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "angers_sco",
+      "team_name": "Angers"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_as_monaco",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Filipe Luís",
+      "reputacao": 78.3,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "as_monaco",
+      "team_name": "Monaco"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_estac_troyes",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Stéphane Dumont",
+      "reputacao": 71.8,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "estac_troyes",
+      "team_name": "Troyes"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_fc_lorient",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Alexandre Dujeux",
+      "reputacao": 74.5,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "fc_lorient",
+      "team_name": "Lorient"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_le_havre_ac",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Didier Digard",
+      "reputacao": 72.6,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "le_havre_ac",
+      "team_name": "Le Havre"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_le_mans_fc",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Patrick Videira",
+      "reputacao": 72.8,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "le_mans_fc",
+      "team_name": "Le Mans"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_losc_lille",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Davide Ancelotti",
+      "reputacao": 77.2,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "losc_lille",
+      "team_name": "Lille"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_ogc_nice",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Olivier Pantaloni",
+      "reputacao": 73.4,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "ogc_nice",
+      "team_name": "Nice"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_olympique_lyon",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Paulo Fonseca",
+      "reputacao": 77.7,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "olympique_lyon",
+      "team_name": "Lyon"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_olympique_marseille",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Bruno Genesio",
+      "reputacao": 76.1,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "olympique_marseille",
+      "team_name": "Olympique de Marseille"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_paris_fc",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Liam Rosenior",
+      "reputacao": 75.7,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "paris_fc",
+      "team_name": "Paris FC"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_paris_saint_germain",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Luis Enrique",
+      "reputacao": 83.2,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "paris_saint_germain",
+      "team_name": "Paris Saint-Germain"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_rc_lens",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Yannick Cahuzac",
+      "reputacao": 78.0,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "rc_lens",
+      "team_name": "Lens"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_rc_strasbourg_alsace",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Hugo Oliveira",
+      "reputacao": 75.7,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "rc_strasbourg_alsace",
+      "team_name": "Strasbourg"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_stade_brestois_29",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Julien Lachuer",
+      "reputacao": 74.6,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "stade_brestois_29",
+      "team_name": "Brest"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_stade_rennais_fc",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Franck Haise",
+      "reputacao": 77.0,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "stade_rennais_fc",
+      "team_name": "Rennes"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_toulouse_fc",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Jens Berthel Askou",
+      "reputacao": 75.3,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "toulouse_fc",
+      "team_name": "Toulouse"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_guarani_py",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Francisco Arce",
+      "reputacao": 62.6,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "guarani_py",
+      "team_name": "Guaraní"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_san_lorenzo_py",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Pablo Fornasari",
+      "reputacao": 57.0,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "san_lorenzo_py",
+      "team_name": "San Lorenzo"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_ameliano_py",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Roberto Nanni",
+      "reputacao": 61.2,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "ameliano_py",
+      "team_name": "Sportivo Ameliano"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_luqueno_py",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Lucas Barrios",
+      "reputacao": 58.9,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "luqueno_py",
+      "team_name": "Sportivo Luqueño"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_dos_de_mayo_py",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Eduardo Ledesma",
+      "reputacao": 61.5,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "dos_de_mayo_py",
+      "team_name": "2 de Mayo"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_olimpia_py",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Pablo Sánchez",
+      "reputacao": 65.1,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "olimpia_py",
+      "team_name": "Olimpia"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_libertad_asuncion",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Nelson Haedo Valdez",
+      "reputacao": 63.1,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "libertad_asuncion",
+      "team_name": "Libertad"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_cerro_porteno_py",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Gustavo Costas",
+      "reputacao": 64.4,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "cerro_porteno_py",
+      "team_name": "Cerro Porteño"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_nacional_asuncion",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Víctor Bernay",
+      "reputacao": 64.3,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "nacional_asuncion",
+      "team_name": "Nacional"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_trinidense_py",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "José Arrúa",
+      "reputacao": 63.1,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "trinidense_py",
+      "team_name": "Sportivo Trinidense"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_recoleta_py",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Jorge González",
+      "reputacao": 59.2,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "recoleta_py",
+      "team_name": "Recoleta"
+    },
+    {
+      "career": [],
+      "career_status": "active",
+      "favorite_formations": [
+        "4-4-2"
+      ],
+      "formation": "4-4-2",
+      "id": "coach_rubio_nu_py",
+      "idade": 40.0,
+      "nacionalidade": "",
+      "nome": "Javier Torrente",
+      "reputacao": 59.8,
+      "tactic_archetype": "misto",
+      "tactical_flexibility": "balanced",
+      "team_id": "rubio_nu_py",
+      "team_name": "Rubio Ñu"
+    }
+  ]
+}

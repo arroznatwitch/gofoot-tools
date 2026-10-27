@@ -1,0 +1,1918 @@
+{
+  "stadiums": [
+    {
+      "capacidade": 10000.0,
+      "id": "stadium_amazonas",
+      "image": "stadium_amazonas.png",
+      "nome": "Carlos Zamith"
+    },
+    {
+      "capacidade": 23018.0,
+      "id": "stadium_america_mineiro",
+      "image": "stadium_america_mineiro.png",
+      "nome": "Independência"
+    },
+    {
+      "capacidade": 12875.0,
+      "id": "stadium_anapolis",
+      "image": "stadium_anapolis.png",
+      "nome": "Jonas Duarte"
+    },
+    {
+      "capacidade": 6324.0,
+      "id": "stadium_athletic_club",
+      "image": "stadium_athletic_club.png",
+      "nome": "Arena Sicredi"
+    },
+    {
+      "capacidade": 12500.0,
+      "id": "stadium_atletico_goianiense",
+      "image": "stadium_atletico_goianiense.png",
+      "nome": "Antônio Accioly"
+    },
+    {
+      "capacidade": 46000.0,
+      "id": "stadium_atletico_mineiro",
+      "image": "stadium_atletico_mineiro.png",
+      "nome": "Arena MRV"
+    },
+    {
+      "capacidade": 42400.0,
+      "id": "stadium_atletico_paranaense",
+      "image": "stadium_atletico_paranaense.png",
+      "nome": "Arena da Baixada"
+    },
+    {
+      "capacidade": 17800.0,
+      "id": "stadium_avai",
+      "image": "stadium_avai.png",
+      "nome": "Ressacada"
+    },
+    {
+      "capacidade": 50000.0,
+      "id": "stadium_bahia",
+      "image": "stadium_bahia.png",
+      "nome": "Arena Fonte Nova"
+    },
+    {
+      "capacidade": 5500.0,
+      "id": "stadium_barra",
+      "image": "stadium_barra.png",
+      "nome": "Arena Barra FC"
+    },
+    {
+      "capacidade": 46800.0,
+      "id": "stadium_botafogo",
+      "image": "stadium_botafogo.png",
+      "nome": "Nilton Santos"
+    },
+    {
+      "capacidade": 19000.0,
+      "id": "stadium_botafogo_pb",
+      "image": "stadium_botafogo_pb.png",
+      "nome": "Almeidão"
+    },
+    {
+      "capacidade": 25000.0,
+      "id": "stadium_botafogo_sp",
+      "image": "stadium_botafogo_sp.png",
+      "nome": "Santa Cruz"
+    },
+    {
+      "capacidade": 5000.0,
+      "id": "stadium_brusque",
+      "image": "stadium_brusque.png",
+      "nome": "Arena Simon"
+    },
+    {
+      "capacidade": 22132.0,
+      "id": "stadium_caxias",
+      "image": "stadium_caxias.png",
+      "nome": "Centenário"
+    },
+    {
+      "capacidade": 63903.0,
+      "id": "stadium_ceara",
+      "image": "stadium_ceara.png",
+      "nome": "Arena Castelão"
+    },
+    {
+      "capacidade": 22600.0,
+      "id": "stadium_chapecoense",
+      "image": "stadium_chapecoense.png",
+      "nome": "Arena Condá"
+    },
+    {
+      "capacidade": 15000.0,
+      "id": "stadium_confianca",
+      "image": "stadium_confianca.png",
+      "nome": "Batistão"
+    },
+    {
+      "capacidade": 48900.0,
+      "id": "stadium_corinthians",
+      "image": "stadium_corinthians.png",
+      "nome": "Neo Química Arena"
+    },
+    {
+      "capacidade": 40500.0,
+      "id": "stadium_coritiba",
+      "image": "stadium_coritiba.png",
+      "nome": "Couto Pereira"
+    },
+    {
+      "capacidade": 17126.0,
+      "id": "stadium_crb",
+      "image": "stadium_crb.png",
+      "nome": "Rei Pelé"
+    },
+    {
+      "capacidade": 19225.0,
+      "id": "stadium_criciuma",
+      "image": "stadium_criciuma.png",
+      "nome": "Heriberto Hülse"
+    },
+    {
+      "capacidade": 62000.0,
+      "id": "stadium_cruzeiro",
+      "image": "stadium_cruzeiro.png",
+      "nome": "Mineirão"
+    },
+    {
+      "capacidade": 44097.0,
+      "id": "stadium_cuiaba",
+      "image": "stadium_cuiaba.png",
+      "nome": "Arena Pantanal"
+    },
+    {
+      "capacidade": 20000.0,
+      "id": "stadium_ferroviaria",
+      "image": "stadium_ferroviaria.png",
+      "nome": "Fonte Luminosa"
+    },
+    {
+      "capacidade": 19584.0,
+      "id": "stadium_figueirense",
+      "image": "stadium_figueirense.png",
+      "nome": "Orlando Scarpelli"
+    },
+    {
+      "capacidade": 78800.0,
+      "id": "stadium_flamengo",
+      "image": "stadium_flamengo.png",
+      "nome": "Maracanã"
+    },
+    {
+      "capacidade": 10500.0,
+      "id": "stadium_floresta",
+      "image": "stadium_floresta.png",
+      "nome": "Domingão"
+    },
+    {
+      "capacidade": 78800.0,
+      "id": "stadium_fluminense",
+      "image": "stadium_fluminense.png",
+      "nome": "Maracanã"
+    },
+    {
+      "capacidade": 63903.0,
+      "id": "stadium_fortaleza",
+      "image": "stadium_fortaleza.png",
+      "nome": "Arena Castelão"
+    },
+    {
+      "capacidade": 14525.0,
+      "id": "stadium_goias",
+      "image": "stadium_goias.png",
+      "nome": "Serrinha"
+    },
+    {
+      "capacidade": 55700.0,
+      "id": "stadium_gremio",
+      "image": "stadium_gremio.png",
+      "nome": "Arena do Grêmio"
+    },
+    {
+      "capacidade": 20580.0,
+      "id": "stadium_guarani",
+      "image": "stadium_guarani.png",
+      "nome": "Brinco de Ouro"
+    },
+    {
+      "capacidade": 18000.0,
+      "id": "stadium_inter_de_limeira",
+      "image": "stadium_inter_de_limeira.png",
+      "nome": "Limeirão"
+    },
+    {
+      "capacidade": 50100.0,
+      "id": "stadium_internacional",
+      "image": "stadium_internacional.png",
+      "nome": "Beira-Rio"
+    },
+    {
+      "capacidade": 10000.0,
+      "id": "stadium_itabaiana",
+      "image": "stadium_itabaiana.png",
+      "nome": "Etelvino Mendonça"
+    },
+    {
+      "capacidade": 15600.0,
+      "id": "stadium_ituano",
+      "image": "stadium_ituano.png",
+      "nome": "Novelli Júnior"
+    },
+    {
+      "capacidade": 19924.0,
+      "id": "stadium_juventude",
+      "image": "stadium_juventude.png",
+      "nome": "Alfredo Jaconi"
+    },
+    {
+      "capacidade": 8000.0,
+      "id": "stadium_londrina",
+      "image": "stadium_londrina.png",
+      "nome": "VGD"
+    },
+    {
+      "capacidade": 40149.0,
+      "id": "stadium_maranhao",
+      "image": "stadium_maranhao.png",
+      "nome": "Castelão"
+    },
+    {
+      "capacidade": 16226.0,
+      "id": "stadium_maringa",
+      "image": "stadium_maringa.png",
+      "nome": "Willie Davids"
+    },
+    {
+      "capacidade": 15000.0,
+      "id": "stadium_mirassol",
+      "image": "stadium_mirassol.png",
+      "nome": "Maião"
+    },
+    {
+      "capacidade": 22856.0,
+      "id": "stadium_nautico",
+      "image": "stadium_nautico.png",
+      "nome": "Aflitos"
+    },
+    {
+      "capacidade": 12398.0,
+      "id": "stadium_novorizontino",
+      "image": "stadium_novorizontino.png",
+      "nome": "Jorjão"
+    },
+    {
+      "capacidade": 10632.0,
+      "id": "stadium_operario_pr",
+      "image": "stadium_operario_pr.png",
+      "nome": "Germano Krüger"
+    },
+    {
+      "capacidade": 43700.0,
+      "id": "stadium_palmeiras",
+      "image": "stadium_palmeiras.png",
+      "nome": "Nubank Parque"
+    },
+    {
+      "capacidade": 16200.0,
+      "id": "stadium_paysandu",
+      "image": "stadium_paysandu.png",
+      "nome": "Curuzu"
+    },
+    {
+      "capacidade": 17728.0,
+      "id": "stadium_ponte_preta",
+      "image": "stadium_ponte_preta.png",
+      "nome": "Moisés Lucarelli"
+    },
+    {
+      "capacidade": 12000.0,
+      "id": "stadium_rb_bragantino",
+      "image": "stadium_rb_bragantino.png",
+      "nome": "Cícero de Souza Marques"
+    },
+    {
+      "capacidade": 53635.0,
+      "id": "stadium_remo",
+      "image": "stadium_remo.png",
+      "nome": "Mangueirão"
+    },
+    {
+      "capacidade": 60044.0,
+      "id": "stadium_santa_cruz",
+      "image": "stadium_santa_cruz.png",
+      "nome": "Arruda"
+    },
+    {
+      "capacidade": 20400.0,
+      "id": "stadium_santos",
+      "image": "stadium_santos.png",
+      "nome": "Vila Belmiro"
+    },
+    {
+      "capacidade": 13440.0,
+      "id": "stadium_sao_bernardo",
+      "image": "stadium_sao_bernardo.png",
+      "nome": "1º de Maio"
+    },
+    {
+      "capacidade": 66800.0,
+      "id": "stadium_sao_paulo",
+      "image": "stadium_sao_paulo.png",
+      "nome": "Morumbis"
+    },
+    {
+      "capacidade": 26400.0,
+      "id": "stadium_sport_recife",
+      "image": "stadium_sport_recife.png",
+      "nome": "Ilha do Retiro"
+    },
+    {
+      "capacidade": 20400.0,
+      "id": "stadium_vasco",
+      "image": "stadium_vasco.png",
+      "nome": "São Januário"
+    },
+    {
+      "capacidade": 11788.0,
+      "id": "stadium_vila_nova",
+      "image": "stadium_vila_nova.png",
+      "nome": "OBA"
+    },
+    {
+      "capacidade": 30793.0,
+      "id": "stadium_vitoria",
+      "image": "stadium_vitoria.png",
+      "nome": "Barradão"
+    },
+    {
+      "capacidade": 18230.0,
+      "id": "stadium_volta_redonda",
+      "image": "stadium_volta_redonda.png",
+      "nome": "Raulino de Oliveira"
+    },
+    {
+      "capacidade": 22000.0,
+      "id": "stadium_ypiranga_rs",
+      "image": "stadium_ypiranga_rs.png",
+      "nome": "Colosso da Lagoa"
+    },
+    {
+      "id": "stadium_holstein_kiel",
+      "nome": "Holstein-Stadion",
+      "capacidade": 15034,
+      "image": ""
+    },
+    {
+      "id": "stadium_hannover_96",
+      "nome": "Heinz von Heiden Arena",
+      "capacidade": 49000,
+      "image": ""
+    },
+    {
+      "id": "stadium_spvgg_greuther_furth",
+      "nome": "Sportpark Ronhof Thomas Sommer",
+      "capacidade": 16626,
+      "image": ""
+    },
+    {
+      "id": "stadium_hamburger_sv",
+      "nome": "Volksparkstadion",
+      "capacidade": 57000,
+      "image": ""
+    },
+    {
+      "id": "stadium_borussia_dortmund",
+      "nome": "Signal Iduna Park",
+      "capacidade": 81365,
+      "image": ""
+    },
+    {
+      "id": "stadium_vfl_wolfsburg",
+      "nome": "Volkswagen Arena",
+      "capacidade": 30000,
+      "image": ""
+    },
+    {
+      "id": "stadium_sc_paderborn_07",
+      "nome": "Home Deluxe Arena",
+      "capacidade": 15000,
+      "image": ""
+    },
+    {
+      "id": "stadium_vfb_stuttgart",
+      "nome": "MHPArena",
+      "capacidade": 60058,
+      "image": ""
+    },
+    {
+      "id": "stadium_fc_st_pauli",
+      "nome": "Millerntor-Stadion",
+      "capacidade": 29546,
+      "image": ""
+    },
+    {
+      "id": "stadium_fc_augsburg",
+      "nome": "WWK Arena",
+      "capacidade": 30660,
+      "image": ""
+    },
+    {
+      "id": "stadium_vfl_osnabruck",
+      "nome": "Bremer Brücke",
+      "capacidade": 15741,
+      "image": ""
+    },
+    {
+      "id": "stadium_sv_darmstadt_98",
+      "nome": "Merck-Stadion am Böllenfalltor",
+      "capacidade": 17650,
+      "image": ""
+    },
+    {
+      "id": "stadium_bayer_04_leverkusen",
+      "nome": "BayArena",
+      "capacidade": 30210,
+      "image": ""
+    },
+    {
+      "id": "stadium_fc_energie_cottbus",
+      "nome": "LEAG Energie Stadion",
+      "capacidade": 22528,
+      "image": ""
+    },
+    {
+      "id": "stadium_rb_leipzig",
+      "nome": "Red Bull Arena",
+      "capacidade": 47800,
+      "image": ""
+    },
+    {
+      "id": "stadium_sg_dynamo_dresden",
+      "nome": "Rudolf-Harbig-Stadion",
+      "capacidade": 32249,
+      "image": ""
+    },
+    {
+      "id": "stadium_karlsruher_sc",
+      "nome": "BBBank Wildpark",
+      "capacidade": 34302,
+      "image": ""
+    },
+    {
+      "id": "stadium_fc_bayern_munique",
+      "nome": "Allianz Arena",
+      "capacidade": 75000,
+      "image": ""
+    },
+    {
+      "id": "stadium_sg_eintracht_frankfurt",
+      "nome": "Deutsche Bank Park",
+      "capacidade": 59500,
+      "image": ""
+    },
+    {
+      "id": "stadium_tsg_1899_hoffenheim",
+      "nome": "PreZero Arena",
+      "capacidade": 30150,
+      "image": ""
+    },
+    {
+      "id": "stadium_sc_freiburg",
+      "nome": "Europa-Park Stadion",
+      "capacidade": 34700,
+      "image": ""
+    },
+    {
+      "id": "stadium_1fsv_mainz_05",
+      "nome": "MEWA Arena",
+      "capacidade": 33305,
+      "image": ""
+    },
+    {
+      "id": "stadium_werder_bremen",
+      "nome": "Weserstadion",
+      "capacidade": 42100,
+      "image": ""
+    },
+    {
+      "id": "stadium_borussia_monchengladbach",
+      "nome": "Borussia-Park",
+      "capacidade": 54057,
+      "image": ""
+    },
+    {
+      "id": "stadium_1fc_colonia",
+      "nome": "RheinEnergieStadion",
+      "capacidade": 49698,
+      "image": ""
+    },
+    {
+      "id": "stadium_schalke_04",
+      "nome": "Veltins-Arena",
+      "capacidade": 62271,
+      "image": ""
+    },
+    {
+      "id": "stadium_sv_07_elversberg",
+      "nome": "Waldstadion an der Kaiserlinde",
+      "capacidade": 10000,
+      "image": ""
+    },
+    {
+      "id": "stadium_1fc_nuremberg",
+      "nome": "Max-Morlock-Stadion",
+      "capacidade": 49923,
+      "image": ""
+    },
+    {
+      "id": "stadium_1fc_heidenheim_1846",
+      "nome": "Voith-Arena",
+      "capacidade": 15000,
+      "image": ""
+    },
+    {
+      "id": "stadium_1fc_kaiserslautern",
+      "nome": "Fritz-Walter-Stadion",
+      "capacidade": 49327,
+      "image": ""
+    },
+    {
+      "id": "stadium_hertha_berlim",
+      "nome": "Olympiastadion Berlin",
+      "capacidade": 74649,
+      "image": ""
+    },
+    {
+      "id": "stadium_magdeburgo",
+      "nome": "Avnet Arena",
+      "capacidade": 30098,
+      "image": ""
+    },
+    {
+      "id": "stadium_eintracht_braunschweig_tsv",
+      "nome": "Eintracht-Stadion",
+      "capacidade": 23325,
+      "image": ""
+    },
+    {
+      "id": "stadium_vfl_bochum",
+      "nome": "Vonovia Ruhrstadion",
+      "capacidade": 26000,
+      "image": ""
+    },
+    {
+      "id": "stadium_arminia_bielefeld",
+      "nome": "Schüco-Arena",
+      "capacidade": 27332,
+      "image": ""
+    },
+    {
+      "id": "stadium_1fc_union_berlim",
+      "nome": "Stadion An der Alten Försterei",
+      "capacidade": 22012,
+      "image": ""
+    },
+    {
+      "id": "stadium_vitoria_sc",
+      "nome": "D. Afonso Henriques",
+      "capacidade": 30029,
+      "image": ""
+    },
+    {
+      "id": "stadium_rio_ave",
+      "nome": "Estádio dos Arcos",
+      "capacidade": 5300,
+      "image": ""
+    },
+    {
+      "id": "stadium_alverca_sad",
+      "nome": "Complexo Desportivo FC Alverca",
+      "capacidade": 6932,
+      "image": ""
+    },
+    {
+      "id": "stadium_famalicao",
+      "nome": "Municipal de Famalicão",
+      "capacidade": 5186,
+      "image": ""
+    },
+    {
+      "id": "stadium_fc_porto",
+      "nome": "Estádio do Dragão",
+      "capacidade": 50033,
+      "image": ""
+    },
+    {
+      "id": "stadium_sporting_cp",
+      "nome": "José Alvalade",
+      "capacidade": 52095,
+      "image": ""
+    },
+    {
+      "id": "stadium_estrela_da_amadora_sad",
+      "nome": "José Gomes",
+      "capacidade": 9288,
+      "image": ""
+    },
+    {
+      "id": "stadium_santa_clara",
+      "nome": "São Miguel",
+      "capacidade": 12500,
+      "image": ""
+    },
+    {
+      "id": "stadium_estoril_praia",
+      "nome": "António Coimbra da Mota",
+      "capacidade": 5094,
+      "image": ""
+    },
+    {
+      "id": "stadium_academico_de_viseu",
+      "nome": "Municipal do Fontelo",
+      "capacidade": 6912,
+      "image": ""
+    },
+    {
+      "id": "stadium_sc_braga",
+      "nome": "Municipal de Braga",
+      "capacidade": 30286,
+      "image": ""
+    },
+    {
+      "id": "stadium_moreirense",
+      "nome": "Comendador Joaquim de Almeida Freitas",
+      "capacidade": 6150,
+      "image": ""
+    },
+    {
+      "id": "stadium_benfica",
+      "nome": "Estádio da Luz",
+      "capacidade": 68100,
+      "image": ""
+    },
+    {
+      "id": "stadium_casa_pia",
+      "nome": "Municipal de Rio Maior",
+      "capacidade": 7000,
+      "image": ""
+    },
+    {
+      "id": "stadium_nacional_da_madeira",
+      "nome": "Estádio da Madeira",
+      "capacidade": 5200,
+      "image": ""
+    },
+    {
+      "id": "stadium_gil_vicente",
+      "nome": "Cidade de Barcelos",
+      "capacidade": 12046,
+      "image": ""
+    },
+    {
+      "id": "stadium_arouca",
+      "nome": "Municipal de Arouca",
+      "capacidade": 5000,
+      "image": ""
+    },
+    {
+      "id": "stadium_maritimo",
+      "nome": "Estádio do Marítimo",
+      "capacidade": 10600,
+      "image": ""
+    },
+    {
+      "id": "stadium_independiente_del_valle",
+      "nome": "Banco Guayaquil",
+      "capacidade": 12000,
+      "image": ""
+    },
+    {
+      "id": "stadium_tecnico_universitario",
+      "nome": "Bellavista Universidad Indoamérica",
+      "capacidade": 10978,
+      "image": ""
+    },
+    {
+      "id": "stadium_deportivo_cuenca",
+      "nome": "Alejandro Serrano Aguilar",
+      "capacidade": 14500,
+      "image": ""
+    },
+    {
+      "id": "stadium_manta_fc",
+      "nome": "Jocay",
+      "capacidade": 22000,
+      "image": ""
+    },
+    {
+      "id": "stadium_libertad_fc",
+      "nome": "Reina del Cisne",
+      "capacidade": 14935,
+      "image": ""
+    },
+    {
+      "id": "stadium_mushuc_runa_sc",
+      "nome": "Mushuc Runa COAC",
+      "capacidade": 8200,
+      "image": ""
+    },
+    {
+      "id": "stadium_guayaquil_city_fc",
+      "nome": "Christian Benítez Betancourt",
+      "capacidade": 10152,
+      "image": ""
+    },
+    {
+      "id": "stadium_cd_leones_del_norte",
+      "nome": "Olímpico de Ibarra",
+      "capacidade": 17300,
+      "image": ""
+    },
+    {
+      "id": "stadium_orense_sc",
+      "nome": "9 de Mayo",
+      "capacidade": 16456,
+      "image": ""
+    },
+    {
+      "id": "stadium_cd_universidad_catolica",
+      "nome": "Olímpico Atahualpa",
+      "capacidade": 38258,
+      "image": ""
+    },
+    {
+      "id": "stadium_sd_aucas",
+      "nome": "Gonzalo Pozo Ripalda",
+      "capacidade": 18799,
+      "image": ""
+    },
+    {
+      "id": "stadium_cs_emelec",
+      "nome": "George Capwell",
+      "capacidade": 39000,
+      "image": ""
+    },
+    {
+      "id": "stadium_barcelona_guayaquil_sc",
+      "nome": "Monumental Banco Pichincha",
+      "capacidade": 57267,
+      "image": ""
+    },
+    {
+      "id": "stadium_ldu_quito",
+      "nome": "Rodrigo Paz Delgado",
+      "capacidade": 41575,
+      "image": ""
+    },
+    {
+      "id": "stadium_22_de_julio_fc",
+      "nome": "Folke Anderson",
+      "capacidade": 14000,
+      "image": ""
+    },
+    {
+      "id": "stadium_ldu_de_portoviejo",
+      "nome": "Reales Tamarindos",
+      "capacidade": 21000,
+      "image": ""
+    },
+    {
+      "id": "stadium_gualaceo_sc",
+      "nome": "Gerardo León Pozo",
+      "capacidade": 2791,
+      "image": ""
+    },
+    {
+      "id": "stadium_cumbaya_fc",
+      "nome": "Olímpico Guillermo Albornoz",
+      "capacidade": 12000,
+      "image": ""
+    },
+    {
+      "id": "stadium_cd_santo_domingo_de_los_tsachilas",
+      "nome": "Etho Vega Baquero",
+      "capacidade": 10172,
+      "image": ""
+    },
+    {
+      "id": "stadium_vinotinto_fc",
+      "nome": "AFNA San Carlos",
+      "capacidade": 2000,
+      "image": ""
+    },
+    {
+      "id": "stadium_independiente_juniors",
+      "nome": "Chubb Arena",
+      "capacidade": 1000,
+      "image": ""
+    },
+    {
+      "id": "stadium_ad_nueve_de_octubre",
+      "nome": "Municipal de La Troncal",
+      "capacidade": 4000,
+      "image": ""
+    },
+    {
+      "id": "stadium_cerro_largo_fc",
+      "nome": "Arquitecto Antonio Ubilla",
+      "capacidade": 7000,
+      "image": ""
+    },
+    {
+      "id": "stadium_club_nacional",
+      "nome": "Gran Parque Central",
+      "capacidade": 34000,
+      "image": ""
+    },
+    {
+      "id": "stadium_albion_fc",
+      "nome": "Luis Franzini",
+      "capacidade": 16000,
+      "image": ""
+    },
+    {
+      "id": "stadium_ca_boston_river",
+      "nome": "Campeones Olímpicos",
+      "capacidade": 5124,
+      "image": ""
+    },
+    {
+      "id": "stadium_ca_juventud",
+      "nome": "Parque Artigas",
+      "capacidade": 6148,
+      "image": ""
+    },
+    {
+      "id": "stadium_ca_progreso",
+      "nome": "Abraham Paladino",
+      "capacidade": 3800,
+      "image": ""
+    },
+    {
+      "id": "stadium_cd_maldonado",
+      "nome": "Domingo Burgueño",
+      "capacidade": 22000,
+      "image": ""
+    },
+    {
+      "id": "stadium_central_espanol_fc",
+      "nome": "Parque Palermo",
+      "capacidade": 4072,
+      "image": ""
+    },
+    {
+      "id": "stadium_ca_cerro",
+      "nome": "Luis Tróccoli",
+      "capacidade": 25000,
+      "image": ""
+    },
+    {
+      "id": "stadium_fc_danubio_montevideo",
+      "nome": "Jardines del Hipódromo",
+      "capacidade": 16000,
+      "image": ""
+    },
+    {
+      "id": "stadium_liverpool_fc_montevideo",
+      "nome": "Alfredo Víctor Viera",
+      "capacidade": 10071,
+      "image": ""
+    },
+    {
+      "id": "stadium_montevideo_city_torque",
+      "nome": "Charrúa",
+      "capacidade": 11226,
+      "image": ""
+    },
+    {
+      "id": "stadium_ca_penarol",
+      "nome": "Campeón del Siglo",
+      "capacidade": 40700,
+      "image": ""
+    },
+    {
+      "id": "stadium_racing_club_montevideo",
+      "nome": "Parque Osvaldo Roberto",
+      "capacidade": 4500,
+      "image": ""
+    },
+    {
+      "id": "stadium_fc_tokyo",
+      "nome": "Ajinomoto Stadium",
+      "capacidade": 47851,
+      "image": ""
+    },
+    {
+      "id": "stadium_kashima_antlers",
+      "nome": "Mercari Stadium",
+      "capacidade": 39095,
+      "image": ""
+    },
+    {
+      "id": "stadium_kawasaki_frontale",
+      "nome": "Uvance Todoroki Stadium",
+      "capacidade": 26827,
+      "image": ""
+    },
+    {
+      "id": "stadium_sanfrecce_hiroshima",
+      "nome": "Edion Peace Wing Hiroshima",
+      "capacidade": 28407,
+      "image": ""
+    },
+    {
+      "id": "stadium_machida_zelvia",
+      "nome": "Machida GION Stadium",
+      "capacidade": 15320,
+      "image": ""
+    },
+    {
+      "id": "stadium_kashiwa_reysol",
+      "nome": "Sankyo Frontier Kashiwa Stadium",
+      "capacidade": 15109,
+      "image": ""
+    },
+    {
+      "id": "stadium_vissel_kobe",
+      "nome": "Noevir Stadium Kobe",
+      "capacidade": 27974,
+      "image": ""
+    },
+    {
+      "id": "stadium_gamba_osaka",
+      "nome": "Panasonic Stadium Suita",
+      "capacidade": 39694,
+      "image": ""
+    },
+    {
+      "id": "stadium_kyoto_sanga",
+      "nome": "Sanga Stadium by Kyocera",
+      "capacidade": 21269,
+      "image": ""
+    },
+    {
+      "id": "stadium_yokohama_f_marinos",
+      "nome": "Nissan Stadium",
+      "capacidade": 71624,
+      "image": ""
+    },
+    {
+      "id": "stadium_urawa_red_diamonds",
+      "nome": "Saitama Stadium 2002",
+      "capacidade": 62040,
+      "image": ""
+    },
+    {
+      "id": "stadium_shimizu_spulse",
+      "nome": "IAI Stadium Nihondaira",
+      "capacidade": 19594,
+      "image": ""
+    },
+    {
+      "id": "stadium_jef_united_chiba",
+      "nome": "Fukuda Denshi Arena",
+      "capacidade": 19470,
+      "image": ""
+    },
+    {
+      "id": "stadium_vvaren_nagasaki",
+      "nome": "Peace Stadium",
+      "capacidade": 20268,
+      "image": ""
+    },
+    {
+      "id": "stadium_nagoya_grampus",
+      "nome": "Toyota Stadium",
+      "capacidade": 42753,
+      "image": ""
+    },
+    {
+      "id": "stadium_cerezo_osaka",
+      "nome": "Yodoko Sakura Stadium",
+      "capacidade": 24481,
+      "image": ""
+    },
+    {
+      "id": "stadium_avispa_fukuoka",
+      "nome": "Best Denki Stadium",
+      "capacidade": 21546,
+      "image": ""
+    },
+    {
+      "id": "stadium_mito_hollyhock",
+      "nome": "Mito Shinkin Bank Stadium",
+      "capacidade": 17034,
+      "image": ""
+    },
+    {
+      "id": "stadium_fagiano_okayama",
+      "nome": "JFE Harenokuni Stadium",
+      "capacidade": 15479,
+      "image": ""
+    },
+    {
+      "id": "stadium_deportes_limache",
+      "nome": "Lucio Fariña",
+      "capacidade": 7700,
+      "image": ""
+    },
+    {
+      "id": "stadium_deportes_concepcion",
+      "nome": "Ester Roa",
+      "capacidade": 33000,
+      "image": ""
+    },
+    {
+      "id": "stadium_coquimbo_unido",
+      "nome": "Francisco Sánchez Rumoroso",
+      "capacidade": 20126,
+      "image": ""
+    },
+    {
+      "id": "stadium_csd_colocolo",
+      "nome": "Monumental David Arellano",
+      "capacidade": 43667,
+      "image": ""
+    },
+    {
+      "id": "stadium_cd_ohiggins",
+      "nome": "El Teniente",
+      "capacidade": 12476,
+      "image": ""
+    },
+    {
+      "id": "stadium_universidad_catolica",
+      "nome": "Claro Arena",
+      "capacidade": 20249,
+      "image": ""
+    },
+    {
+      "id": "stadium_universidad_de_chile",
+      "nome": "Estadio Nacional",
+      "capacidade": 48665,
+      "image": ""
+    },
+    {
+      "id": "stadium_audax_italiano",
+      "nome": "Bicentenario de La Florida",
+      "capacidade": 12275,
+      "image": ""
+    },
+    {
+      "id": "stadium_cd_everton",
+      "nome": "Sausalito",
+      "capacidade": 20298,
+      "image": ""
+    },
+    {
+      "id": "stadium_cd_cobresal",
+      "nome": "El Cobre",
+      "capacidade": 11230,
+      "image": ""
+    },
+    {
+      "id": "stadium_cd_palestino",
+      "nome": "Municipal de La Cisterna",
+      "capacidade": 7500,
+      "image": ""
+    },
+    {
+      "id": "stadium_cd_union_la_calera",
+      "nome": "Nicolás Chahuán",
+      "capacidade": 10130,
+      "image": ""
+    },
+    {
+      "id": "stadium_deportes_la_serena",
+      "nome": "La Portada",
+      "capacidade": 18500,
+      "image": ""
+    },
+    {
+      "id": "stadium_cd_huachipato",
+      "nome": "Huachipato-CAP Acero",
+      "capacidade": 10000,
+      "image": ""
+    },
+    {
+      "id": "stadium_cd_nublense",
+      "nome": "Nelson Oyarzún",
+      "capacidade": 12130,
+      "image": ""
+    },
+    {
+      "id": "stadium_cucuta_deportivo",
+      "nome": "General Santander",
+      "capacidade": 32163,
+      "image": ""
+    },
+    {
+      "id": "stadium_deportivo_pereira",
+      "nome": "Santiago de las Atalayas",
+      "capacidade": 10000,
+      "image": ""
+    },
+    {
+      "id": "stadium_jaguares_de_cordoba",
+      "nome": "Jaraguay",
+      "capacidade": 12000,
+      "image": ""
+    },
+    {
+      "id": "stadium_internacional_de_bogota",
+      "nome": "Metropolitano de Techo",
+      "capacidade": 10000,
+      "image": ""
+    },
+    {
+      "id": "stadium_deportivo_cali",
+      "nome": "Deportivo Cali",
+      "capacidade": 42000,
+      "image": ""
+    },
+    {
+      "id": "stadium_atletico_bucaramanga",
+      "nome": "Américo Montanini",
+      "capacidade": 28000,
+      "image": ""
+    },
+    {
+      "id": "stadium_atletico_nacional",
+      "nome": "Atanasio Girardot",
+      "capacidade": 44863,
+      "image": ""
+    },
+    {
+      "id": "stadium_alianza_fc",
+      "nome": "Armando Maestre Pavajeau",
+      "capacidade": 11000,
+      "image": ""
+    },
+    {
+      "id": "stadium_deportes_tolima",
+      "nome": "Manuel Murillo Toro",
+      "capacidade": 28100,
+      "image": ""
+    },
+    {
+      "id": "stadium_independiente_santa_fe",
+      "nome": "Nemesio Camacho El Campín",
+      "capacidade": 39512,
+      "image": ""
+    },
+    {
+      "id": "stadium_deportivo_pasto",
+      "nome": "Departamental Libertad",
+      "capacidade": 20665,
+      "image": ""
+    },
+    {
+      "id": "stadium_cd_america_de_cali",
+      "nome": "Pascual Guerrero",
+      "capacidade": 38588,
+      "image": ""
+    },
+    {
+      "id": "stadium_junior_fc",
+      "nome": "Romelio Martínez",
+      "capacidade": 8600,
+      "image": ""
+    },
+    {
+      "id": "stadium_once_caldas",
+      "nome": "Palogrande",
+      "capacidade": 31611,
+      "image": ""
+    },
+    {
+      "id": "stadium_rionegro_aguilas",
+      "nome": "Cincuentenario",
+      "capacidade": 4000,
+      "image": ""
+    },
+    {
+      "id": "stadium_boyaca_chico_fc",
+      "nome": "La Independencia",
+      "capacidade": 20630,
+      "image": ""
+    },
+    {
+      "id": "stadium_llaneros_fc",
+      "nome": "Bello Horizonte - Rey Pelé",
+      "capacidade": 15000,
+      "image": ""
+    },
+    {
+      "id": "stadium_racing_club",
+      "nome": "Presidente Perón",
+      "capacidade": 55880,
+      "image": ""
+    },
+    {
+      "id": "stadium_estudiantes_de_la_plata",
+      "nome": "Jorge Luis Hirschi",
+      "capacidade": 30000,
+      "image": ""
+    },
+    {
+      "id": "stadium_river_plate",
+      "nome": "Monumental",
+      "capacidade": 83196,
+      "image": ""
+    },
+    {
+      "id": "stadium_defensa_y_justicia",
+      "nome": "Norberto Tito Tomaghello",
+      "capacidade": 12000,
+      "image": ""
+    },
+    {
+      "id": "stadium_ca_independiente",
+      "nome": "Libertadores de América - Ricardo Enrique Bochini",
+      "capacidade": 52853,
+      "image": ""
+    },
+    {
+      "id": "stadium_rosario_central",
+      "nome": "Gigante de Arroyito",
+      "capacidade": 41654,
+      "image": ""
+    },
+    {
+      "id": "stadium_aa_estudiantes_rio_cuarto",
+      "nome": "Ciudad de Río Cuarto Antonio Candini",
+      "capacidade": 12000,
+      "image": ""
+    },
+    {
+      "id": "stadium_aa_argentinos_juniors",
+      "nome": "Diego Armando Maradona",
+      "capacidade": 25000,
+      "image": ""
+    },
+    {
+      "id": "stadium_club_atletico_tigre",
+      "nome": "José Dellagiovanna",
+      "capacidade": 26282,
+      "image": ""
+    },
+    {
+      "id": "stadium_ca_boca_juniors",
+      "nome": "La Bombonera",
+      "capacidade": 54000,
+      "image": ""
+    },
+    {
+      "id": "stadium_ca_san_lorenzo_de_almagro",
+      "nome": "Pedro Bidegain",
+      "capacidade": 39494,
+      "image": ""
+    },
+    {
+      "id": "stadium_ca_talleres",
+      "nome": "Mario Alberto Kempes",
+      "capacidade": 57000,
+      "image": ""
+    },
+    {
+      "id": "stadium_ca_lanus",
+      "nome": "Ciudad de Lanús - Néstor Díaz Pérez",
+      "capacidade": 47090,
+      "image": ""
+    },
+    {
+      "id": "stadium_ca_barracas_central",
+      "nome": "Claudio Chiqui Tapia",
+      "capacidade": 4400,
+      "image": ""
+    },
+    {
+      "id": "stadium_ca_belgrano",
+      "nome": "Julio César Villagra",
+      "capacidade": 30000,
+      "image": ""
+    },
+    {
+      "id": "stadium_ca_velez_sarsfield",
+      "nome": "José Amalfitani",
+      "capacidade": 49540,
+      "image": ""
+    },
+    {
+      "id": "stadium_ca_gimnasia_y_esgrima_lp",
+      "nome": "Juan Carmelo Zerillo",
+      "capacidade": 26544,
+      "image": ""
+    },
+    {
+      "id": "stadium_cs_independiente_rivadavia",
+      "nome": "Bautista Gargantini",
+      "capacidade": 24000,
+      "image": ""
+    },
+    {
+      "id": "stadium_ca_huracan",
+      "nome": "Tomás Adolfo Ducó",
+      "capacidade": 48314,
+      "image": ""
+    },
+    {
+      "id": "stadium_instituto_acc",
+      "nome": "Juan Domingo Perón",
+      "capacidade": 26535,
+      "image": ""
+    },
+    {
+      "id": "stadium_ca_newells_old_boys",
+      "nome": "Marcelo Bielsa",
+      "capacidade": 38095,
+      "image": ""
+    },
+    {
+      "id": "stadium_ca_platense",
+      "nome": "Ciudad de Vicente López",
+      "capacidade": 22530,
+      "image": ""
+    },
+    {
+      "id": "stadium_ca_union_santa_fe",
+      "nome": "15 de Abril",
+      "capacidade": 22852,
+      "image": ""
+    },
+    {
+      "id": "stadium_ca_aldosivi",
+      "nome": "José María Minella",
+      "capacidade": 35180,
+      "image": ""
+    },
+    {
+      "id": "stadium_ca_banfield",
+      "nome": "Florencio Sola",
+      "capacidade": 21820,
+      "image": ""
+    },
+    {
+      "id": "stadium_ca_gimnasia_y_esgrima_mendoza",
+      "nome": "Víctor Legrotaglie",
+      "capacidade": 11000,
+      "image": ""
+    },
+    {
+      "id": "stadium_club_atletico_tucuman",
+      "nome": "Monumental José Fierro",
+      "capacidade": 32700,
+      "image": ""
+    },
+    {
+      "id": "stadium_cd_riestra",
+      "nome": "Guillermo Laza",
+      "capacidade": 3000,
+      "image": ""
+    },
+    {
+      "id": "stadium_ca_central_cordoba_sde",
+      "nome": "Único Madre de Ciudades",
+      "capacidade": 34000,
+      "image": ""
+    },
+    {
+      "id": "stadium_ca_sarmiento",
+      "nome": "Eva Perón",
+      "capacidade": 19000,
+      "image": ""
+    },
+    {
+      "id": "stadium_racing_santander",
+      "nome": "El Sardinero",
+      "capacidade": 22308,
+      "image": ""
+    },
+    {
+      "id": "stadium_real_madrid",
+      "nome": "Santiago Bernabéu",
+      "capacidade": 83186,
+      "image": ""
+    },
+    {
+      "id": "stadium_malaga_cf",
+      "nome": "La Rosaleda",
+      "capacidade": 30044,
+      "image": ""
+    },
+    {
+      "id": "stadium_deportivo_alaves",
+      "nome": "Mendizorrotza",
+      "capacidade": 19840,
+      "image": ""
+    },
+    {
+      "id": "stadium_barcelona",
+      "nome": "Spotify Camp Nou",
+      "capacidade": 62652,
+      "image": ""
+    },
+    {
+      "id": "stadium_getafe_cf",
+      "nome": "Coliseum",
+      "capacidade": 16500,
+      "image": ""
+    },
+    {
+      "id": "stadium_rayo_vallecano",
+      "nome": "Estadio de Vallecas",
+      "capacidade": 14708,
+      "image": ""
+    },
+    {
+      "id": "stadium_elche_cf",
+      "nome": "Martínez Valero",
+      "capacidade": 31388,
+      "image": ""
+    },
+    {
+      "id": "stadium_ca_osasuna",
+      "nome": "El Sadar",
+      "capacidade": 23576,
+      "image": ""
+    },
+    {
+      "id": "stadium_atletico_madrid",
+      "nome": "Metropolitano",
+      "capacidade": 70813,
+      "image": ""
+    },
+    {
+      "id": "stadium_real_betis",
+      "nome": "La Cartuja",
+      "capacidade": 70000,
+      "image": ""
+    },
+    {
+      "id": "stadium_deportivo_la_coruna",
+      "nome": "Riazor",
+      "capacidade": 32660,
+      "image": ""
+    },
+    {
+      "id": "stadium_athletic_club_fc",
+      "nome": "San Mamés",
+      "capacidade": 53289,
+      "image": ""
+    },
+    {
+      "id": "stadium_valencia_cf",
+      "nome": "Mestalla",
+      "capacidade": 49430,
+      "image": ""
+    },
+    {
+      "id": "stadium_sevilla_fc",
+      "nome": "Ramón Sánchez-Pizjuán",
+      "capacidade": 43883,
+      "image": ""
+    },
+    {
+      "id": "stadium_rcd_espanyol",
+      "nome": "RCDE Stadium",
+      "capacidade": 37776,
+      "image": ""
+    },
+    {
+      "id": "stadium_levante_ud",
+      "nome": "Ciutat de València",
+      "capacidade": 26354,
+      "image": ""
+    },
+    {
+      "id": "stadium_celta_de_vigo",
+      "nome": "Balaídos",
+      "capacidade": 24870,
+      "image": ""
+    },
+    {
+      "id": "stadium_real_sociedad",
+      "nome": "Reale Arena",
+      "capacidade": 39313,
+      "image": ""
+    },
+    {
+      "id": "stadium_villarreal_cf",
+      "nome": "Estadio de la Cerámica",
+      "capacidade": 23008,
+      "image": ""
+    },
+    {
+      "id": "stadium_arsenal_fc",
+      "nome": "Emirates Stadium",
+      "capacidade": 60704,
+      "image": ""
+    },
+    {
+      "id": "stadium_aston_villa",
+      "nome": "Villa Park",
+      "capacidade": 36887,
+      "image": ""
+    },
+    {
+      "id": "stadium_bournemouth",
+      "nome": "Vitality Stadium",
+      "capacidade": 12357,
+      "image": ""
+    },
+    {
+      "id": "stadium_brentford_fc",
+      "nome": "Gtech Community Stadium",
+      "capacidade": 17250,
+      "image": ""
+    },
+    {
+      "id": "stadium_brighton_hove_albion",
+      "nome": "Amex Stadium",
+      "capacidade": 32176,
+      "image": ""
+    },
+    {
+      "id": "stadium_chelsea",
+      "nome": "Stamford Bridge",
+      "capacidade": 40044,
+      "image": ""
+    },
+    {
+      "id": "stadium_coventry_city",
+      "nome": "Coventry Building Society Arena",
+      "capacidade": 32609,
+      "image": ""
+    },
+    {
+      "id": "stadium_crystal_palace",
+      "nome": "Selhurst Park",
+      "capacidade": 25194,
+      "image": ""
+    },
+    {
+      "id": "stadium_everton_fc",
+      "nome": "Hill Dickinson Stadium",
+      "capacidade": 52769,
+      "image": ""
+    },
+    {
+      "id": "stadium_fulham",
+      "nome": "Craven Cottage",
+      "capacidade": 28107,
+      "image": ""
+    },
+    {
+      "id": "stadium_hull_city",
+      "nome": "MKM Stadium",
+      "capacidade": 24983,
+      "image": ""
+    },
+    {
+      "id": "stadium_ipswich_town",
+      "nome": "Portman Road",
+      "capacidade": 30056,
+      "image": ""
+    },
+    {
+      "id": "stadium_leeds",
+      "nome": "Elland Road",
+      "capacidade": 37633,
+      "image": ""
+    },
+    {
+      "id": "stadium_liverpool_fc",
+      "nome": "Anfield",
+      "capacidade": 61276,
+      "image": ""
+    },
+    {
+      "id": "stadium_manchester_city",
+      "nome": "Etihad Stadium",
+      "capacidade": 61038,
+      "image": ""
+    },
+    {
+      "id": "stadium_manchester_united",
+      "nome": "Old Trafford",
+      "capacidade": 74158,
+      "image": ""
+    },
+    {
+      "id": "stadium_newcastle",
+      "nome": "St James' Park",
+      "capacidade": 52729,
+      "image": ""
+    },
+    {
+      "id": "stadium_nottingham_forest",
+      "nome": "City Ground",
+      "capacidade": 31212,
+      "image": ""
+    },
+    {
+      "id": "stadium_sunderland_afc",
+      "nome": "Stadium of Light",
+      "capacidade": 48095,
+      "image": ""
+    },
+    {
+      "id": "stadium_tottenham_hotspur",
+      "nome": "Tottenham Hotspur Stadium",
+      "capacidade": 62850,
+      "image": ""
+    },
+    {
+      "id": "stadium_ac_milan",
+      "nome": "San Siro",
+      "capacidade": 75710,
+      "image": ""
+    },
+    {
+      "id": "stadium_ac_monza",
+      "nome": "Stadio Brianteo",
+      "capacidade": 17102,
+      "image": ""
+    },
+    {
+      "id": "stadium_acf_fiorentina",
+      "nome": "Stadio Artemio Franchi",
+      "capacidade": 43118,
+      "image": ""
+    },
+    {
+      "id": "stadium_as_roma",
+      "nome": "Stadio Olimpico",
+      "capacidade": 70634,
+      "image": ""
+    },
+    {
+      "id": "stadium_atalanta_bc",
+      "nome": "New Balance Arena",
+      "capacidade": 23439,
+      "image": ""
+    },
+    {
+      "id": "stadium_bologna_fc_1909",
+      "nome": "Stadio Renato Dall'Ara",
+      "capacidade": 38279,
+      "image": ""
+    },
+    {
+      "id": "stadium_cagliari_calcio",
+      "nome": "Unipol Domus",
+      "capacidade": 16416,
+      "image": ""
+    },
+    {
+      "id": "stadium_como_1907",
+      "nome": "Stadio Giuseppe Sinigaglia",
+      "capacidade": 13602,
+      "image": ""
+    },
+    {
+      "id": "stadium_frosinone_calcio",
+      "nome": "Stadio Benito Stirpe",
+      "capacidade": 16227,
+      "image": ""
+    },
+    {
+      "id": "stadium_genoa",
+      "nome": "Stadio Luigi Ferraris",
+      "capacidade": 33205,
+      "image": ""
+    },
+    {
+      "id": "stadium_juventus",
+      "nome": "Allianz Stadium",
+      "capacidade": 41507,
+      "image": ""
+    },
+    {
+      "id": "stadium_parma_calcio_1913",
+      "nome": "Stadio Ennio Tardini",
+      "capacidade": 22352,
+      "image": ""
+    },
+    {
+      "id": "stadium_sassuolo",
+      "nome": "Mapei Stadium",
+      "capacidade": 21515,
+      "image": ""
+    },
+    {
+      "id": "stadium_ssc_napoli",
+      "nome": "Stadio Diego Armando Maradona",
+      "capacidade": 54732,
+      "image": ""
+    },
+    {
+      "id": "stadium_torino",
+      "nome": "Stadio Olimpico Grande Torino",
+      "capacidade": 28177,
+      "image": ""
+    },
+    {
+      "id": "stadium_udinese_calcio",
+      "nome": "Bluenergy Stadium",
+      "capacidade": 25132,
+      "image": ""
+    },
+    {
+      "id": "stadium_us_lecce",
+      "nome": "Stadio Via del Mare",
+      "capacidade": 30354,
+      "image": ""
+    },
+    {
+      "id": "stadium_venezia",
+      "nome": "Stadio Pier Luigi Penzo",
+      "capacidade": 12048,
+      "image": ""
+    },
+    {
+      "id": "stadium_aj_auxerre",
+      "nome": "Stade de l'Abbé-Deschamps",
+      "capacidade": 17897,
+      "image": ""
+    },
+    {
+      "id": "stadium_angers_sco",
+      "nome": "Stade Raymond Kopa",
+      "capacidade": 19800,
+      "image": ""
+    },
+    {
+      "id": "stadium_as_monaco",
+      "nome": "Stade Louis II",
+      "capacidade": 16360,
+      "image": ""
+    },
+    {
+      "id": "stadium_estac_troyes",
+      "nome": "Stade de l'Aube",
+      "capacidade": 21877,
+      "image": ""
+    },
+    {
+      "id": "stadium_fc_lorient",
+      "nome": "Stade du Moustoir",
+      "capacidade": 18110,
+      "image": ""
+    },
+    {
+      "id": "stadium_le_havre_ac",
+      "nome": "Stade Océane",
+      "capacidade": 25181,
+      "image": ""
+    },
+    {
+      "id": "stadium_le_mans_fc",
+      "nome": "Stade Marie-Marvingt",
+      "capacidade": 25064,
+      "image": ""
+    },
+    {
+      "id": "stadium_losc_lille",
+      "nome": "Stade Pierre-Mauroy",
+      "capacidade": 50186,
+      "image": ""
+    },
+    {
+      "id": "stadium_ogc_nice",
+      "nome": "Allianz Riviera",
+      "capacidade": 36178,
+      "image": ""
+    },
+    {
+      "id": "stadium_olympique_lyon",
+      "nome": "Groupama Stadium",
+      "capacidade": 59186,
+      "image": ""
+    },
+    {
+      "id": "stadium_olympique_marseille",
+      "nome": "Stade Vélodrome",
+      "capacidade": 67394,
+      "image": ""
+    },
+    {
+      "id": "stadium_paris_fc",
+      "nome": "Stade Jean-Bouin",
+      "capacidade": 20000,
+      "image": ""
+    },
+    {
+      "id": "stadium_paris_saint_germain",
+      "nome": "Parc des Princes",
+      "capacidade": 47926,
+      "image": ""
+    },
+    {
+      "id": "stadium_rc_lens",
+      "nome": "Stade Bollaert-Delelis",
+      "capacidade": 38223,
+      "image": ""
+    },
+    {
+      "id": "stadium_rc_strasbourg_alsace",
+      "nome": "Stade de la Meinau",
+      "capacidade": 32000,
+      "image": ""
+    },
+    {
+      "id": "stadium_stade_brestois_29",
+      "nome": "Stade Francis-Le Blé",
+      "capacidade": 15220,
+      "image": ""
+    },
+    {
+      "id": "stadium_stade_rennais_fc",
+      "nome": "Roazhon Park",
+      "capacidade": 29778,
+      "image": ""
+    },
+    {
+      "id": "stadium_toulouse_fc",
+      "nome": "Stadium de Toulouse",
+      "capacidade": 33150,
+      "image": ""
+    },
+    {
+      "id": "stadium_guarani_py",
+      "nome": "Rogelio Silvino Livieri",
+      "capacidade": 8000,
+      "image": ""
+    },
+    {
+      "id": "stadium_san_lorenzo_py",
+      "nome": "Gunther Vogel",
+      "capacidade": 5000,
+      "image": ""
+    },
+    {
+      "id": "stadium_ameliano_py",
+      "nome": "Ameliano Villeta",
+      "capacidade": 7000,
+      "image": ""
+    },
+    {
+      "id": "stadium_luqueno_py",
+      "nome": "Feliciano Cáceres",
+      "capacidade": 24000,
+      "image": ""
+    },
+    {
+      "id": "stadium_dos_de_mayo_py",
+      "nome": "Río Parapití",
+      "capacidade": 25000,
+      "image": ""
+    },
+    {
+      "id": "stadium_olimpia_py",
+      "nome": "Manuel Ferreira",
+      "capacidade": 13500,
+      "image": ""
+    },
+    {
+      "id": "stadium_libertad_asuncion",
+      "nome": "La Huerta",
+      "capacidade": 14000,
+      "image": ""
+    },
+    {
+      "id": "stadium_cerro_porteno_py",
+      "nome": "General Pablo Rojas",
+      "capacidade": 45000,
+      "image": ""
+    },
+    {
+      "id": "stadium_nacional_asuncion",
+      "nome": "Arsenio Erico",
+      "capacidade": 7500,
+      "image": ""
+    },
+    {
+      "id": "stadium_trinidense_py",
+      "nome": "Martín Torres",
+      "capacidade": 3000,
+      "image": ""
+    },
+    {
+      "id": "stadium_recoleta_py",
+      "nome": "Ricardo Gregor",
+      "capacidade": 4000,
+      "image": ""
+    },
+    {
+      "id": "stadium_rubio_nu_py",
+      "nome": "La Arboleda",
+      "capacidade": 8000,
+      "image": ""
+    }
+  ]
+}

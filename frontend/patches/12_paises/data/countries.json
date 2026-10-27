@@ -1,0 +1,129 @@
+{
+  "countries": [
+    {
+      "confederation": "CONMEBOL",
+      "id": "brazil",
+      "iso2": "br",
+      "name": "Brasil"
+    },
+    {
+      "id": "germany",
+      "name": "Alemanha",
+      "iso2": "de",
+      "confederation": "UEFA",
+      "division_sizes": [
+        18,
+        18
+      ]
+    },
+    {
+      "id": "portugal",
+      "name": "Portugal",
+      "iso2": "pt",
+      "confederation": "UEFA",
+      "division_sizes": [
+        18
+      ]
+    },
+    {
+      "id": "ecuador",
+      "name": "Equador",
+      "iso2": "ec",
+      "confederation": "CONMEBOL",
+      "division_sizes": [
+        16,
+        12
+      ]
+    },
+    {
+      "id": "uruguay",
+      "name": "Uruguai",
+      "iso2": "uy",
+      "confederation": "CONMEBOL",
+      "division_sizes": [
+        16
+      ]
+    },
+    {
+      "id": "japan",
+      "name": "Japão",
+      "iso2": "jp",
+      "confederation": "AFC",
+      "division_sizes": [
+        20
+      ]
+    },
+    {
+      "id": "chile",
+      "name": "Chile",
+      "iso2": "cl",
+      "confederation": "CONMEBOL",
+      "division_sizes": [
+        16
+      ]
+    },
+    {
+      "id": "colombia",
+      "name": "Colômbia",
+      "iso2": "co",
+      "confederation": "CONMEBOL",
+      "division_sizes": [
+        20
+      ]
+    },
+    {
+      "id": "argentina",
+      "name": "Argentina",
+      "iso2": "ar",
+      "confederation": "CONMEBOL",
+      "division_sizes": [
+        30
+      ]
+    },
+    {
+      "id": "spain",
+      "name": "Espanha",
+      "iso2": "es",
+      "confederation": "UEFA",
+      "division_sizes": [
+        20
+      ]
+    },
+    {
+      "id": "england",
+      "name": "Inglaterra",
+      "iso2": "gb-eng",
+      "confederation": "UEFA",
+      "division_sizes": [
+        20
+      ]
+    },
+    {
+      "id": "italy",
+      "name": "Itália",
+      "iso2": "it",
+      "confederation": "UEFA",
+      "division_sizes": [
+        20
+      ]
+    },
+    {
+      "id": "france",
+      "name": "França",
+      "iso2": "fr",
+      "confederation": "UEFA",
+      "division_sizes": [
+        18
+      ]
+    },
+    {
+      "id": "paraguay",
+      "name": "Paraguai",
+      "iso2": "py",
+      "confederation": "CONMEBOL",
+      "division_sizes": [
+        12
+      ]
+    }
+  ]
+}

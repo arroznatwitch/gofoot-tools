@@ -34,7 +34,9 @@ async function abrirGdb(file) {
     await carregar(files);
 }
 
-const lerJson = async (files, p) => (files.has(p) ? JSON.parse(await files.get(p).text()) : null);
+// um ficheiro é um Blob/File ou, no patch por defeito, o URL a descarregar só quando for preciso
+const textoDe = async (f) => (typeof f === "string" ? (await fetch(f)).text() : f.text());
+const lerJson = async (files, p) => (files.has(p) ? JSON.parse(await textoDe(files.get(p))) : null);
 
 async function carregar(files) {
     const meta = await lerJson(files, "patch.json");
@@ -55,7 +57,7 @@ async function carregar(files) {
             S.original[c.id] = JSON.stringify(c);
         }
     }
-    for (const [p, f] of files) if (/^images\/clubs\/.+\.png$/.test(p)) S.imgs[p] = URL.createObjectURL(f);
+    for (const [p, f] of files) if (/^images\/clubs\/.+\.png$/.test(p)) S.imgs[p] = typeof f === "string" ? f : URL.createObjectURL(f);
     S.ligaDe = {};
     for (const c of S.comps) if (c.division_level) for (const t of c.teams || []) S.ligaDe[t] = c;
     $("#patch-nome").textContent = `${S.nome} · ${Object.keys(S.clubes).length} clubes`;
@@ -95,6 +97,16 @@ const eloDe = (id) => S.elo?.clubes?.[id] || null;
 const escudo = (id) => S.imgs[`images/clubs/${id}.png`] || S.imgs["images/clubs/no-logo.png"] || "";
 const liga = (id) => S.ligaDe[id];
 const posicoes = () => (S.legado ? POS_LEGADO : POS);
+// cor de 0 (vermelho) a 120 (verde) conforme a posição do valor entre min e max
+const quente = (v, min, max) => {
+    if (v == null || max <= min) return esc(v ?? "-");
+    const h = Math.round(120 * Math.max(0, Math.min(1, (v - min) / (max - min))));
+    return `<span class="heat" style="--h:${h}">${esc(v)}</span>`;
+};
+const faixaElo = () => {
+    const v = Object.values(S.clubes).map((c) => eloDe(c.id)?.elo).filter((x) => x != null);
+    return v.length ? [Math.min(...v), Math.max(...v)] : [0, 0];
+};
 const jogs = (c) => (S.legado ? S.jog[c.id] || [] : (c.jogadores ||= []));
 const forca = (j) => {
     if (typeof j.OVER === "number") return j.OVER;
@@ -156,10 +168,10 @@ function abaClubes() {
     const t = tabela("clubes", [
         { t: "Clube", v: (c) => c.nome, h: (c) => `<img src="${escudo(c.id)}" alt="">${esc(c.nome)}${S.sujos.has(c.id) ? ' <span class="tag">editado</span>' : ""}` },
         { t: "Liga", v: (c) => liga(c.id)?.division_level ?? 99, h: (c) => esc(liga(c.id)?.name || "-") },
-        { t: "Elo", num: 1, v: (c) => eloDe(c.id)?.elo ?? 0, h: (c) => (eloDe(c.id) ? eloDe(c.id).elo : "-") },
+        { t: "Elo", num: 1, v: (c) => eloDe(c.id)?.elo ?? 0, h: (c) => (eloDe(c.id) ? quente(eloDe(c.id).elo, ...faixaElo()) : "-") },
         { t: "Origem", v: (c) => eloDe(c.id)?.fonte || "", h: (c) => { const e = eloDe(c.id); return e ? `<span class="tag ${({ estimado: "est", simulado: "sim" })[e.fonte] || ""}">${e.fonte}</span>` : ""; } },
-        { t: "Elo jogo", num: 1, v: (c) => c.elo },
-        { t: "Reputação", num: 1, v: (c) => c.reputacao },
+        { t: "Elo jogo atual", num: 1, v: (c) => c.elo },
+        { t: "Reputação", num: 1, v: (c) => c.reputacao, h: (c) => quente(c.reputacao, 0, 100) },
         { t: "Técnico", v: (c) => c.tecnico?.nome || "" },
         { t: "Jogadores", num: 1, v: (c) => jogs(c).length },
     ], lista, (c) => dialogoClube(c));
@@ -214,9 +226,9 @@ function abaLigas() {
     const t = tabela("ligas", [
         { t: "#", num: 1, v: (c) => lista.indexOf(c) + 1 },
         { t: "Clube", v: (c) => c.nome, h: (c) => `<img src="${escudo(c.id)}" alt="">${esc(c.nome)}` },
-        { t: "Elo", num: 1, v: (c) => eloDe(c.id)?.elo ?? 0 },
+        { t: "Elo", num: 1, v: (c) => eloDe(c.id)?.elo ?? 0, h: (c) => (eloDe(c.id) ? quente(eloDe(c.id).elo, ...faixaElo()) : "-") },
         { t: "Origem", v: (c) => eloDe(c.id)?.fonte || "" },
-        { t: "Reputação", num: 1, v: (c) => c.reputacao },
+        { t: "Reputação", num: 1, v: (c) => c.reputacao, h: (c) => quente(c.reputacao, 0, 100) },
     ], lista, (c) => dialogoClube(c), 200);
     el.innerHTML = `<h2>Ligas</h2><p class="sub">Competições do patch e os clubes inscritos, por Elo.</p>
         <div class="bar"><select id="l-ligas">${S.comps.map((c) => `<option value="${c.id}" ${c.id === id ? "selected" : ""}>${esc(pais(c))} · ${esc(c.name)} (${(c.teams || []).length})</option>`).join("")}</select></div>${t.html}`;
@@ -236,9 +248,10 @@ function abaElo() {
         { t: "#", num: 1, v: (c) => lista.indexOf(c) + 1 },
         { t: "Clube", v: (c) => c.nome, h: (c) => `<img src="${escudo(c.id)}" alt="">${esc(c.nome)}` },
         { t: "Liga", v: (c) => liga(c.id)?.division_level ?? 99, h: (c) => esc(liga(c.id)?.name || "-") },
-        { t: "Elo", num: 1, v: (c) => eloDe(c.id).elo },
+        { t: "Elo", num: 1, v: (c) => eloDe(c.id).elo, h: (c) => quente(eloDe(c.id).elo, ...faixaElo()) },
         { t: "Origem", v: (c) => eloDe(c.id).fonte, h: (c) => { const e = eloDe(c.id); return `<span class="tag ${({ estimado: "est", simulado: "sim" })[e.fonte] || ""}">${e.fonte}</span>${e.ref ? " " + esc(e.ref) : ""}`; } },
         { t: "Elo jogo atual", num: 1, v: (c) => c.elo },
+        { t: "Reputação", num: 1, v: (c) => c.reputacao, h: (c) => quente(c.reputacao, 0, 100) },
         ...(conv ? [{ t: "Equivalente", num: 1, v: (c) => conv(eloDe(c.id).elo), h: (c) => conv(eloDe(c.id).elo) }] : [{ t: "Diferença", num: 1, v: (c) => eloDe(c.id).elo - c.elo }]),
     ], lista, (c) => dialogoClube(c), 300);
     el.innerHTML = `<h2>Elo</h2><p class="sub">Elo ClubElo dos clubes do patch. Os estimados vêm da divisão e da reputação (ver Wiki).</p>
@@ -295,6 +308,8 @@ function validar() {
 // ---------- exportar ----------
 async function exportar() {
     const zip = new JSZip(), raiz = zip.folder(S.meta.database_id || "patch");
+    $("#exp").textContent = "A preparar…";
+    await Promise.all([...S.files].filter(([, f]) => typeof f === "string").map(async ([p, f]) => S.files.set(p, await (await fetch(f)).blob())));
     const legado = S.legado && S.sujos.size;
     for (const [p, f] of S.files) if (!(legado && /^data\/(teams|players)\.json$/.test(p))) raiz.file(p, f);
     if (legado) {
@@ -410,4 +425,16 @@ $("#in-gdb").onchange = (e) => { if (e.target.files[0]) abrirGdb(e.target.files[
 window.addEventListener("beforeunload", (e) => { if (S.sujos.size) { e.preventDefault(); e.returnValue = ""; } });
 window.gofoot = { carregar, S }; // usado nos testes
 
-carregarElo().then(() => trocar(["clubes", "jogadores", "ligas", "elo", "exportar", "wiki"].includes(location.hash.slice(1)) ? location.hash.slice(1) : "clubes"));
+async function carregarPadrao() {
+    const base = "patches/12_paises/";
+    $("#patch-nome").textContent = "A carregar o patch de 12 ligas…";
+    try {
+        const lista = await (await fetch(base + "manifest.json")).json();
+        const files = new Map(lista.map((p) => [p, base + p]));
+        await carregar(files);
+    } catch { $("#patch-nome").textContent = "Nenhum patch aberto"; }
+}
+
+const abaInicial = ["clubes", "jogadores", "ligas", "elo", "exportar", "wiki"].includes(location.hash.slice(1)) ? location.hash.slice(1) : "clubes";
+$("#aba-clubes").innerHTML = '<p class="sub">A carregar o patch de 12 ligas…</p>';
+carregarElo().then(carregarPadrao).then(() => trocar(abaInicial));

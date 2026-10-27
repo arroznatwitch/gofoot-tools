@@ -63,7 +63,8 @@ def main():
     for t in teams:
         if t["country_id"] != "portugal" or t["id"] not in forca:
             continue
-        d = pt.get(chave(t["nome"]))
+        k = chave(t["nome"])
+        d = pt.get(k) or next((v for kk, v in pt.items() if kk.startswith(k) or k.startswith(kk)), None)
         if not d:
             sem.append(t["nome"])
             continue

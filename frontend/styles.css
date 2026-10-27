@@ -70,3 +70,4 @@ ul.issues li:last-child { border: 0; }
 .wiki td, .wiki th { white-space: normal; text-transform: none; font-size: 14px; letter-spacing: 0; cursor: default; position: static; }
 footer { text-align: center; color: var(--muted); font-size: 13px; padding: 24px; }
 @media (max-width: 720px) { main { padding: 16px; } .wiki { grid-template-columns: 1fr; } .wiki aside { position: static; } header, nav { padding-left: 16px; padding-right: 16px; } }
+.heat { display: inline-block; min-width: 38px; text-align: center; padding: 0 8px; border-radius: 3px; background: hsl(var(--h) 55% 42% / .3); }
