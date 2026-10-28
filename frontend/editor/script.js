@@ -260,6 +260,13 @@ const ligasExpandidas = new Set();      // ligas abertas (por defeito fechadas)
 function alternarPais(pais, aberto) { if (aberto) paisesColapsados.delete(pais); else paisesColapsados.add(pais); }
 function alternarLiga(chave, aberto) { if (aberto) ligasExpandidas.add(chave); else ligasExpandidas.delete(chave); }
 
+// Botão ⬇ de um clube (exporta só esse clube, no formato de ficheiro de clube do patch).
+function botaoExportarClube(clube, pais) {
+    const arg = (s) => `decodeURIComponent('${encodeURIComponent(s).replace(/'/g, "%27")}')`;
+    return `<button type="button" class="btn-clube-json" title="Exportar ${clube.replace(/"/g, "&quot;")} (.json, formato de clube do patch)"
+        onclick="event.stopPropagation(); event.preventDefault(); exportarClube(${arg(clube)}, ${arg(pais)});">⬇</button>`;
+}
+
 // Desenha o painel "Ligas & Países". Cada PAÍS é colapsável (esconde as ligas),
 // e cada liga é um accordion compacto que mostra a grelha de clubes com a média
 // de OVER/ATA/MEI/DEF do melhor 11.
@@ -292,6 +299,7 @@ function atualizarPainelPaises() {
                         <div class="chip-top">
                             <span class="clube-chip-nome" title="${clube}">${clube}</span>
                             <span class="clube-chip-count">${n} ✓</span>
+                            ${botaoExportarClube(clube, pais)}
                         </div>
                         <div class="chip-medias">
                             ${badgeMedia("OVR", a.over)}
@@ -304,6 +312,7 @@ function atualizarPainelPaises() {
                 return `<div class="clube-chip">
                     <span class="clube-chip-nome" title="${clube}">${clube}</span>
                     <span class="clube-chip-count">${n}/${MIN_JOGADORES_PARA_EQUIPA}</span>
+                    ${n ? botaoExportarClube(clube, pais) : ""}
                 </div>`;
             }).join("");
 
@@ -334,7 +343,7 @@ function atualizarPainelPaises() {
                 <summary class="pais-summary">
                     <span class="pais-nome">${bandeiraHtml(pais)} ${pais}</span>
                     <span class="pais-acoes">
-                        <button type="button" class="btn-exportar-pais" title="Exportar todos os jogadores das ligas de ${pais} (.json, para testes)"
+                        <button type="button" class="btn-exportar-pais" title="Exportar os clubes de ${pais}, um ficheiro por clube (.zip com data/clubs/)"
                             onclick="event.stopPropagation(); event.preventDefault(); exportarJogadoresDoPais('${paisEscapado}');">⬇️ Exportar</button>
                         <span class="chevron">▾</span>
                     </span>
@@ -344,26 +353,101 @@ function atualizarPainelPaises() {
     }).join("");
 }
 
-// Exporta (para testes) TODOS os jogadores carregados que pertencem a qualquer
-// clube das ligas de um país — junta as ligas todas desse país (ex: Série A/B/C
-// do Brasil) numa lista só. Sai no formato { "players": [...] }, como o GoFoot
-// espera (não um array solto), para poderes testar directamente no jogo.
-function exportarJogadoresDoPais(pais) {
+// Id do país como o GoFoot o usa em countries.json (os nomes do painel estão em português).
+const PAIS_ID_GOFOOT = {
+    "Brasil": "brazil", "Alemanha": "germany", "Argentina": "argentina", "Equador": "ecuador", "Japão": "japan",
+    "Colômbia": "colombia", "Espanha": "spain", "Inglaterra": "england", "Itália": "italy", "Portugal": "portugal",
+    "França": "france", "Uruguai": "uruguay", "Chile": "chile", "Paraguai": "paraguay",
+};
+const MAX_JOGADORES_CLUBE = 35; // limite do elenco no formato de patch
+
+// Um jogador no formato do ficheiro de clube (data/clubs/{id}.json → jogadores[]). Só entram os campos do
+// formato: o OVER, o valor e o salário são calculados pelo jogo, e não há avatar nem estatísticas de carreira.
+function montarJogadorClube(j) {
+    const g = posicaoGrupo(j);
+    const esq = j.pe === "Esquerdo";
+    const posicao = g === "L" ? (esq ? "LE" : "LD") : g === "PD" || g === "PE" ? g : g;
+    const num = (v) => (v === null || v === undefined || v === "-" || isNaN(v)) ? null : Math.max(1, Math.min(99, Math.round(Number(v))));
+    const out = {
+        id: j.id || gerarIdJogador(j.n),
+        nome: j.n || "",
+        posicao: posicao || "M",
+        idade: Math.max(15, Math.min(45, Math.round(Number(j.a)) || 25)),
+    };
+    const pe = PE_LETRA[j.pe];
+    if (pe) out.pe = pe;
+    const nat = resolverNacaoISO(j.nat);
+    if (nat) out.nacionalidade = nat;
+    const attrs = g === "G"
+        ? { REF: j.ref, POS: j.pos_gk, AER: j.aer, SAI: j.sai, MEN: j.men }
+        : { TEC: j.tec, ATA: j.ata, DEF: j.def, FIS: j.fis, MEN: j.men };
+    for (const [k, v] of Object.entries(attrs)) { const n = num(v); if (n !== null) out[k] = n; }
+    const tal = num(j.tal);
+    if (tal !== null) out.TAL = tal;
+    return out;
+}
+
+// Um clube no formato de patch (data/clubs/{id}.json), só com o que o painel conhece: id, nome, país e elenco.
+// Fica de fora tudo o que é da liga (competições, divisões) — o clube sai separado dela.
+function montarClubeGoFoot(clube, pais) {
+    const slug = slugifyClube(clube);
+    const jogadores = listaJogadores.filter(j => slugifyClube(j.c) === slug)
+        .sort((a, b) => (calcularOverallDinamico(b) || 0) - (calcularOverallDinamico(a) || 0))
+        .slice(0, MAX_JOGADORES_CLUBE);
+    if (!jogadores.length) return null;
+    return {
+        country_id: PAIS_ID_GOFOOT[pais] || slugifyClube(pais),
+        id: slug,
+        jogadores: jogadores.map(montarJogadorClube),
+        juniores: [],
+        nome: clube,
+        rival_ids: [],
+        titulos: [],
+    };
+}
+
+function baixarBlob(blob, nomeArquivo) {
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = nomeArquivo;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+}
+
+// Mesmo estilo dos ficheiros do patch: tabulações, uma chave por linha.
+const jsonClube = (c) => JSON.stringify(c, null, "\t");
+
+// Exporta UM clube: {id}.json no formato de ficheiro de clube, para ir para data/clubs/ de um patch.
+function exportarClube(clube, pais) {
+    const c = montarClubeGoFoot(clube, pais);
+    if (!c) { alert(`Não há jogadores carregados do clube ${clube}.`); return; }
+    baixarBlob(new Blob([jsonClube(c)], { type: "application/json;charset=utf-8" }), `${c.id}.json`);
+}
+
+// Exporta todos os clubes das ligas de um país, cada um no seu ficheiro, num .zip com a pasta data/clubs/.
+// É só descompactar por cima do patch: não leva competições nem divisões.
+async function exportarJogadoresDoPais(pais) {
     const ligas = LIGAS_DATA[pais];
     if (!ligas) return;
+    if (typeof JSZip === "undefined") { alert("A biblioteca de zip não carregou (precisa de internet)."); return; }
 
-    const clubesDoPais = Object.values(ligas).flat();
-    const slugsDoPais = new Set(clubesDoPais.map(slugifyClube));
-
-    const jogadoresDoPais = listaJogadores.filter(j => slugsDoPais.has(slugifyClube(j.c)));
-    if (!jogadoresDoPais.length) {
-        alert(`Não há jogadores carregados de nenhum clube das ligas de ${pais}.`);
-        return;
+    const nomes = [...new Set(Object.values(ligas).flat())];
+    const zip = new JSZip();
+    let clubes = 0, jogadores = 0;
+    for (const nome of nomes) {
+        const c = montarClubeGoFoot(nome, pais);
+        if (!c) continue;
+        zip.file(`data/clubs/${c.id}.json`, jsonClube(c));
+        clubes++; jogadores += c.jogadores.length;
     }
+    if (!clubes) { alert(`Não há jogadores carregados de nenhum clube das ligas de ${pais}.`); return; }
 
-    const nomeArquivo = `players_${slugifyClube(pais)}.json`;
-    baixarJSON({ players: jogadoresDoPais.map(montarExportGoFoot) }, nomeArquivo);
-    alert(`Exportados ${jogadoresDoPais.length.toLocaleString("pt-PT")} jogador(es) das ligas de ${pais} para "${nomeArquivo}".`);
+    const nomeArquivo = `clubes_${slugifyClube(pais)}.zip`;
+    baixarBlob(await zip.generateAsync({ type: "blob", compression: "DEFLATE" }), nomeArquivo);
+    alert(`Exportados ${clubes} clube(s) com ${jogadores.toLocaleString("pt-PT")} jogador(es) de ${pais} para "${nomeArquivo}" (um ficheiro por clube em data/clubs/).`);
 }
 
 // Troca de aba (puro DOM, sem rede — funciona em file:// e no GitHub Pages).

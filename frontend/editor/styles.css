@@ -574,6 +574,8 @@
             transition: 0.15s;
         }
         .btn-exportar-pais:hover { background-color: rgba(88,166,255,0.2); }
+        .btn-clube-json { background: none; border: 1px solid rgba(88,166,255,0.4); color: #58a6ff; border-radius: 4px; cursor: pointer; font-size: 11px; line-height: 1; padding: 2px 5px; margin-left: 6px; }
+        .btn-clube-json:hover { background-color: rgba(88,166,255,0.2); }
 
         /* Liga colapsável (accordion compacto) */
         .liga-acc {
