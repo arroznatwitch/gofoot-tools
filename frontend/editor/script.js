@@ -267,6 +267,13 @@ function botaoExportarClube(clube, pais) {
         onclick="event.stopPropagation(); event.preventDefault(); exportarClube(${arg(clube)}, ${arg(pais)});">⬇</button>`;
 }
 
+// Botão ⬇ de uma liga (exporta os clubes dessa liga, um ficheiro por clube, num .zip).
+function botaoExportarLiga(pais, nomeLiga) {
+    const arg = (s) => `decodeURIComponent('${encodeURIComponent(s).replace(/'/g, "%27")}')`;
+    return `<button type="button" class="btn-exportar-pais" title="Exportar os clubes de ${nomeLiga.replace(/"/g, "&quot;")} (.zip com data/clubs/)"
+        onclick="event.stopPropagation(); event.preventDefault(); exportarJogadoresDaLiga(${arg(pais)}, ${arg(nomeLiga)});">⬇️ Exportar</button>`;
+}
+
 // Desenha o painel "Ligas & Países". Cada PAÍS é colapsável (esconde as ligas),
 // e cada liga é um accordion compacto que mostra a grelha de clubes com a média
 // de OVER/ATA/MEI/DEF do melhor 11.
@@ -326,6 +333,7 @@ function atualizarPainelPaises() {
                     <summary class="liga-summary">
                         <span class="liga-nome">${nomeLiga}</span>
                         <span class="liga-meta">
+                            ${botaoExportarLiga(pais, nomeLiga)}
                             ${mediaLiga != null ? `<span class="liga-media">Média OVR ${mediaLiga}</span>` : ""}
                             <span class="liga-percent-badge">${validas}/${total} válidas · ${percent}%</span>
                             <span class="chevron">▾</span>
@@ -432,9 +440,18 @@ function exportarClube(clube, pais) {
 async function exportarJogadoresDoPais(pais) {
     const ligas = LIGAS_DATA[pais];
     if (!ligas) return;
-    if (typeof JSZip === "undefined") { alert("A biblioteca de zip não carregou (precisa de internet)."); return; }
+    await exportarClubesZip(pais, [...new Set(Object.values(ligas).flat())], `clubes_${slugifyClube(pais)}.zip`, `das ligas de ${pais}`);
+}
 
-    const nomes = [...new Set(Object.values(ligas).flat())];
+// Exporta só os clubes de UMA liga (mesmo formato: um ficheiro por clube em data/clubs/).
+async function exportarJogadoresDaLiga(pais, nomeLiga) {
+    const clubes = (LIGAS_DATA[pais] || {})[nomeLiga];
+    if (!clubes) return;
+    await exportarClubesZip(pais, [...new Set(clubes)], `clubes_${slugifyClube(pais)}_${slugifyClube(nomeLiga)}.zip`, `da liga ${nomeLiga}`);
+}
+
+async function exportarClubesZip(pais, nomes, nomeArquivo, origem) {
+    if (typeof JSZip === "undefined") { alert("A biblioteca de zip não carregou (precisa de internet)."); return; }
     const zip = new JSZip();
     let clubes = 0, jogadores = 0;
     for (const nome of nomes) {
@@ -443,11 +460,10 @@ async function exportarJogadoresDoPais(pais) {
         zip.file(`data/clubs/${c.id}.json`, jsonClube(c));
         clubes++; jogadores += c.jogadores.length;
     }
-    if (!clubes) { alert(`Não há jogadores carregados de nenhum clube das ligas de ${pais}.`); return; }
+    if (!clubes) { alert(`Não há jogadores carregados de nenhum clube ${origem}.`); return; }
 
-    const nomeArquivo = `clubes_${slugifyClube(pais)}.zip`;
     baixarBlob(await zip.generateAsync({ type: "blob", compression: "DEFLATE" }), nomeArquivo);
-    alert(`Exportados ${clubes} clube(s) com ${jogadores.toLocaleString("pt-PT")} jogador(es) de ${pais} para "${nomeArquivo}" (um ficheiro por clube em data/clubs/).`);
+    alert(`Exportados ${clubes} clube(s) com ${jogadores.toLocaleString("pt-PT")} jogador(es) ${origem} para "${nomeArquivo}" (um ficheiro por clube em data/clubs/).`);
 }
 
 // Troca de aba (puro DOM, sem rede — funciona em file:// e no GitHub Pages).
